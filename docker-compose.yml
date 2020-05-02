@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  web:
+    build: ./docker/web
+    ports:
+      - 8000:80
+    volumes:
+      - ./laravel:/var/www/html
+  db:
+    image: mysql:8.0.19
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=gather
+      - TZ='Asia/Tokyo'
+    ports:
+      - 3307:3306
+    volumes:
+      - ./docker/db/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf
+      - data:/var/lib/mysql
+
+volumes:
+  data:
