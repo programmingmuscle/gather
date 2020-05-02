@@ -1,0 +1,261 @@
+
+body {
+    font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+}
+
+.nav-link-login {
+    padding-right: 0!important;
+}
+
+.nav-link-account {
+    padding-right: 0!important;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    margin-top: 56px;
+    min-height: calc(100vh - 96px);
+}
+
+footer {
+    margin-top: auto;
+    padding: 8px 0px;
+}
+
+.top_body {
+    background-image: url(../images/top.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.top_wrapper {
+    background: rgba(0,0,0,0.5);
+}
+
+.top_content {
+    letter-spacing: .1rem;
+    color: #fff;
+    margin-top: 70px;
+}
+
+.top_sentence {
+    margin-top: 75px;
+}
+
+.title {
+    padding: 0 15px;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.content {
+    margin-top: .5rem;
+}
+
+.players-list-border {
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: .5rem;
+}
+
+.players-list {
+    padding-bottom: .5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.show_content {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.complete-button {
+    padding-top: 1rem;
+    text-align: right;
+}
+
+.follow-button {
+    color: #007bff;
+    border-color: #007bff;
+    font-size: .5rem;
+    padding: .25rem .3rem;
+    float: right;
+}
+
+.explain {
+    margin-top: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.explain-link {
+    padding-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem
+}
+
+.explain-link-destroy {
+    color: red;
+}
+
+.logout-link {
+    float: right;
+}
+
+.profile-image {
+    border-radius: 50%;
+    margin-right: .5rem;
+    width: 2.5rem;
+}
+
+.gender, .age {
+    display: inline-block;
+}
+
+.gender {
+    float: left;
+}
+
+.age {
+    margin-left: .5rem;
+}
+
+.error-message {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.error-target {
+    color:#721c24
+}
+
+@media (max-width: 666px) {
+    .dropdown-menu {
+        background-color: #28a745;
+        border: none;
+    }
+
+    .dropdown-menu>li>a {
+        color: rgba(255,255,255,.5);
+    }
+}
+
+@media (min-width: 667px) {
+    .dropdown-menu {
+        margin-top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .dropdown-menu>li>a {
+        color: #333;
+    }
+    
+    .dropdown-divider {
+        background-color: #e5e5e5;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .main {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-area {
+        min-height: calc(100vh - 96px);
+        border-left: 1px solid #EEEEEE;
+        border-right: 1px solid #EEEEEE;
+    }
+
+    .top_content {
+        margin-top: 100px;
+    }
+
+    .top_app-title {
+        font-size: 3rem;
+    }
+
+    .top_app-subtitle {
+        font-size: 2.25rem;
+        margin-top: 20px;
+    }
+
+    .top_sentence {
+        font-size: 1.1rem;
+        margin-top: 120px;
+    }
+
+    .players-list {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .show_content {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    
+    .navbar {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .main {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-area {
+        min-height: calc(100vh - 96px);
+        border-left: 1px solid #EEEEEE;
+        border-right: 1px solid #EEEEEE;
+    }
+
+    .title {
+        padding: 0 2rem;
+    }
+
+    .error-message {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .players-list {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .show_content {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
