@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Support\Facades\Auth;
+
 class RegisterController extends Controller
 {
     /*
@@ -27,7 +29,14 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo() {
+        if(! Auth::check()) {
+            return '/';
+        }
+        else {
+            return route('users.show', ['id' => Auth::id()]);
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -48,9 +57,23 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users',
             'password' => 'required|string|min:6|confirmed',
+        ],
+        [
+            'name.required' => '選手名を入力して下さい。',
+            'name.string' => '選手名は文字列として下さい。',
+            'name.max' => '選手名は191文字以内として下さい。',
+            'email.required' => 'メールアドレスを入力して下さい。',
+            'email.sring' => 'メールアドレスは文字列として下さい。',
+            'email.email' => 'メールアドレスに「@」を挿入して下さい。',
+            'email.max' => 'メールアドレスは191文字として下さい。',
+            'email.unique' => '入力されたメールアドレスは既に使用されています。',
+            'password.required' => 'パスワードを入力して下さい。',
+            'password.string' => 'パスワードは文字列として下さい。',
+            'password.min' => 'パスワードは6文字以上として下さい。',
+            'password.confirmed' => '確認用パスワードと一致していません。',
         ]);
     }
 

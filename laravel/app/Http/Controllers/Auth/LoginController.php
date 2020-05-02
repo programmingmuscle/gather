@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +29,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo() {
+        if(! Auth::check()) {
+            return '/';
+        }
+        else {
+            return route('users.show', ['id' => Auth::id()]);
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -36,4 +47,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+        ],
+        [
+            'email.required' => 'メールアドレスを入力して下さい。',
+            'password.required' => 'パスワードを入力して下さい。',
+        ]);
+    }
 }
+
+
