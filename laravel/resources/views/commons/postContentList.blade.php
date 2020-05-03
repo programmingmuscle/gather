@@ -1,6 +1,9 @@
 <ul class="list-unstyled">
     <li>
-        "【{{ $post->title }}】"
+        【{{ $post->title }}】
+    </li>
+    <li>
+        投稿日：{{ $post->created_at }}
     </li>
     <li>
         日時：{{ $post->date_time }}
