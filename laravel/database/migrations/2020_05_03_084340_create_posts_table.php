@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
             $table->string('expense');
             $table->string('ball');
             $table->string('deadline');
-            $table->string('people')->nullable();
+            $table->string('people');
             $table->string('remarks')->nullable();
             $table->timestamps();
 
