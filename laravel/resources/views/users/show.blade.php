@@ -21,7 +21,7 @@
                 <button class="btn follow-button">フォローする</button>
             @endif
 
-            @include ('commons.contentList')
+            @include ('commons.userContentList')
 
         </div>
     </div>
