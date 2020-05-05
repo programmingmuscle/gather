@@ -104,7 +104,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="introduction">自己紹介</label> 
+                        <label for="introduction">自己紹介</label>
+                        @if ($errors->has('introduction'))
+                            <div class="error-target">{{ $errors->first('introduction') }}</div>
+                        @endif
                         <textarea name="introduction" id="introduction" class="form-control">{{ $user->introduction }}</textarea>   
                     </div>
                     <div class="explain">上記内容に変更してよろしいでしょうか？</div>
