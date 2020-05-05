@@ -13,13 +13,13 @@
                         <a href="{{ route('users.show', ['id' => $post->user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($post->user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
                         <div class="media-body">
                             <div>
-                                <a href="{{ route('users.show', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
+                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
                                 
                                 @if (Auth::check() && ($post->user->id != Auth::id()))
                                     <button class="btn concern-button">気になる</button>
                                 @endif
 
-                                <a href="#">詳細</a>
+                                <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>
 
                             </div>
                             

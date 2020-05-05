@@ -81,4 +81,12 @@ class PostsController extends Controller
 
         return redirect()->route('users.show', ['id' => Auth::id()]);
     }
+
+    public function show($id) {
+        $post = Post::find($id);
+
+        return view('posts.show', [
+            'post' => $post,
+        ]);
+    }
 }
