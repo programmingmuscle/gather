@@ -11,64 +11,67 @@
                 <form method="POST" action="{{ route('posts.update', ['id' => $post->id]) }}">
                     {!! method_field('put') !!}
                     {{ csrf_field() }}
+                    <div class="form-group required-note">
+                        <span class="required">*</span>が付いている欄は必須項目
+                    </div>
                     <div class="form-group">
-                        <label for="title">タイトル（必須）</label>
+                        <label for="title">タイトル<span class="required">*</span></label>
                         @if ($errors->has('title'))
                             <div class="error-target">{{ $errors->first('title') }}</div>
                         @endif
                         <input type="text" name="title" value="{{ $post->title }}" id="title" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="date_time">日時（必須）</label>
+                        <label for="date_time">日時<span class="required">*</span></label>
                         @if ($errors->has('date_time'))
                             <div class="error-target">{{ $errors->first('date_time') }}</div>
                         @endif
                         <input type="text" name="date_time" value="{{ $post->date_time }}" id="date_time" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="place">場所（必須）</label>
+                        <label for="place">場所<span class="required">*</span></label>
                         @if ($errors->has('place'))
                             <div class="error-target">{{ $errors->first('place') }}</div>
                         @endif
                         <input type="text" name="place" value="{{ $post->place }}" id="place" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="address">住所（必須）</label>
+                        <label for="address">住所<span class="required">*</span></label>
                         @if ($errors->has('address'))
                             <div class="error-target">{{ $errors->first('address') }}</div>
                         @endif
                         <input type="text" name="address" value="{{ $post->address }}" id="address" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="reservation">場所利用予約（必須）</label>
+                        <label for="reservation">場所利用予約<span class="required">*</span></label>
                         @if ($errors->has('reservation'))
                             <div class="error-target">{{ $errors->first('reservation') }}</div>
                         @endif
                         <input type="text" name="reservation" value="{{ $post->reservation }}" id="reservation" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="expense">参加費用（必須）</label>
+                        <label for="expense">参加費用<span class="required">*</span></label>
                         @if ($errors->has('expense'))
                             <div class="error-target">{{ $errors->first('expense') }}</div>
                         @endif
                         <input type="text" name="expense" value="{{ $post->expense }}" id="expense" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="ball">使用球（必須）</label>
+                        <label for="ball">使用球<span class="required">*</span></label>
                         @if ($errors->has('ball'))
                             <div class="error-target">{{ $errors->first('ball') }}</div>
                         @endif
                         <input type="text" name="ball" value="{{ $post->ball }}" id="ball" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="deadline">応募締切（必須）</label>
+                        <label for="deadline">応募締切<span class="required">*</span></label>
                         @if ($errors->has('deadline'))
                             <div class="error-target">{{ $errors->first('deadline') }}</div>
                         @endif
                         <input type="text" name="deadline" value="{{ $post->deadline }}" id="deadline" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="people">募集人数（必須）</label>
+                        <label for="people">募集人数<span class="required">*</span></label>
                         @if ($errors->has('people'))
                             <div class="error-target">{{ $errors->first('people') }}</div>
                         @endif

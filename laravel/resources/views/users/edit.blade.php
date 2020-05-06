@@ -11,15 +11,18 @@
                 <form method="POST" action="{{ route('users.update', ['id' => Auth::id()]) }}">
                     {!! method_field('put') !!}
                     {{ csrf_field() }}
+                    <div class="form-group required-note">
+                        <span class="required">*</span>が付いている欄は必須項目
+                    </div>
                     <div class="form-group">
-                        <label for="name">選手名（必須）</label>
+                        <label for="name">選手名<span class="required">*</span></label>
                         @if ($errors->has('name'))
                             <div class="error-target">{{ $errors->first('name') }}</div>
                         @endif
                         <input type="text" name="name" value="{{ $user->name }}" id="name" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="email">メールアドレス（必須）</label>
+                        <label for="email">メールアドレス<span class="required">*</span></label>
                         @if ($errors->has('email'))
                             <div class="error-target">{{ $errors->first('email') }}</div>
                         @endif
@@ -112,7 +115,7 @@
                     </div>
                     <div class="explain">上記内容に変更してよろしいでしょうか？</div>
                     <div class="form-group">
-                        <label for="password">パスワード（必須）</label>
+                        <label for="password">パスワード<span class="required">*</span></label>
                         @if ($errors->has('password'))
                             <div class="error-target">{{ $errors->first('password') }}</div>
                         @endif

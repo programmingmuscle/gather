@@ -146,7 +146,15 @@ footer {
 }
 
 .error-target {
-    color:#721c24
+    color:#721c24;
+}
+
+.required {
+    color: red;
+}
+
+.required-note {
+    color: #7b7e82;
 }
 
 @media (max-width: 666px) {
