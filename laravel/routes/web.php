@@ -24,6 +24,7 @@ Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
 Route::group(['middleware' => ['auth']],function() {
     Route::resource('users', 'UsersController', ['only' => ['update', 'destroy', 'edit']]);
     Route::get('users/{user}/deleteWindow', 'UsersController@deleteWindow')->name('users.deleteWindow');
-    Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'update', 'destroy', 'edit']]);
+    Route::resource('posts', 'PostsController', ['only' => ['store', 'update', 'destroy', 'edit']]);
     Route::get('posts/{post}/deleteWindow', 'PostsController@deleteWindow')->name('posts.deleteWindow');
+    Route::get('posts/{user}/create', 'PostsController@create')->name('posts.create');
 });
