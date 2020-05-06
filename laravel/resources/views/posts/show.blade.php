@@ -11,8 +11,11 @@
             {{ $post->user->name }}
             
             @if (Auth::check() && ($post->user->id != Auth::id()))
-                <button class="btn follow-button">フォローする</button>
+                <button class="btn participate-button">参加する</button>
+                <button class="btn concern-button">気になる</button>
             @endif
+
+            <a href="{{ route('posts.edit', ['id' => $post->id]) }}">編集</a>
 
             @include ('commons.postContentList')
 

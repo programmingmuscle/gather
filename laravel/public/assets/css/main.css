@@ -86,9 +86,17 @@ footer {
     text-align: right;
 }
 
-.follow-button, .concern-button {
+.follow-button, .participate-button {
     color: #007bff;
     border-color: #007bff;
+    font-size: .5rem;
+    padding: .25rem .3rem;
+    float: right;
+}
+
+.concern-button {
+    color: #ffc107;
+    border-color: #ffc107;
     font-size: .5rem;
     padding: .25rem .3rem;
     float: right;
