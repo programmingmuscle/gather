@@ -15,7 +15,7 @@
                 <button class="btn concern-button">気になる</button>
             @endif
 
-            @if ($post->user->id == Auth::id()))
+            @if ($post->user->id == Auth::id())
                 <a href="{{ route('posts.edit', ['id' => $post->id]) }}">編集</a>
             @endif
 
