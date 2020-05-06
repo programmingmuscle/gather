@@ -8,6 +8,8 @@ use App\Post;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Hash;
+
 class PostsController extends Controller
 {
     public function index() {
@@ -88,6 +90,27 @@ class PostsController extends Controller
         return view('posts.show', [
             'post' => $post,
         ]);
+    }
+
+    public function deleteWindow($id) {
+        $post = Post::find($id);
+
+        return view('posts.deleteWindow', [
+            'post' => $post,
+        ]);
+    }
+
+    public function destroy(Request $request, $id) {
+        $post = Post::find($id);
+
+        if (Hash::check($request->password, $post->user->password)) {
+            $post->delete();
+
+            return redirect()->route('posts.index');
+        }
+        else {
+            return redirect()->route('posts.show', ['id' => $post->id]);
+        }
     }
 
     public function edit($id) {
