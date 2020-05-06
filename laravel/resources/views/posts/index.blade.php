@@ -20,7 +20,6 @@
                                 @endif
 
                                 <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>
-
                             </div>
                             
                             @include ('commons.postContentList')
