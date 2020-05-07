@@ -34,7 +34,7 @@
                         @if ($errors->has('residence'))
                             <div class="error-target">{{ $errors->first('residence') }}</div>
                         @endif
-                        <input type="text" name="residence" value="{{ $user->residence }}" id="residence" class="form-control">    
+                        <input type="text" name="residence" placeholder="※地名までとして下さい。" value="{{ $user->residence }}" id="residence" class="form-control">    
                     </div>
                     <div class="form-group">
                         <label for="gender">性別</label>

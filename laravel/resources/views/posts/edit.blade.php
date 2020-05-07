@@ -19,7 +19,7 @@
                         @if ($errors->has('title'))
                             <div class="error-target">{{ $errors->first('title') }}</div>
                         @endif
-                        <input type="text" name="title" value="{{ $post->title }}" id="title" class="form-control">
+                        <input type="text" name="title" placeholder="例：キャッチボールしませんか？" value="{{ $post->title }}" id="title" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="date_time">日時<span class="required">*</span></label>
@@ -33,14 +33,14 @@
                         @if ($errors->has('place'))
                             <div class="error-target">{{ $errors->first('place') }}</div>
                         @endif
-                        <input type="text" name="place" value="{{ $post->place }}" id="place" class="form-control">
+                        <input type="text" name="place" placeholder="例：○×□公園野球場" value="{{ $post->place }}" id="place" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="address">住所<span class="required">*</span></label>
                         @if ($errors->has('address'))
                             <div class="error-target">{{ $errors->first('address') }}</div>
                         @endif
-                        <input type="text" name="address" value="{{ $post->address }}" id="address" class="form-control">
+                        <input type="text" name="address" placeholder="※「場所」の住所を詳しく記載して下さい。" value="{{ $post->address }}" id="address" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="reservation">場所利用予約<span class="required">*</span></label>
@@ -54,7 +54,7 @@
                         @if ($errors->has('expense'))
                             <div class="error-target">{{ $errors->first('expense') }}</div>
                         @endif
-                        <input type="text" name="expense" value="{{ $post->expense }}" id="expense" class="form-control">
+                        <input type="text" name="expense" placeholder="例1：1,000円　例２：なし" value="{{ $post->expense }}" id="expense" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="ball">使用球<span class="required">*</span></label>
