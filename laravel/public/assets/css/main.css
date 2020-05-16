@@ -51,8 +51,17 @@ footer {
     margin-top: 70px;
 }
 
+.top_app-title {
+    font-size: 2.4rem;
+}
+
+.top_app-subtitle {
+    font-size: 1.7rem;
+}
+
 .top_sentence {
     margin-top: 75px;
+    font-size: 0.9rem;
 }
 
 .title {
@@ -61,16 +70,16 @@ footer {
     border-bottom: 1px solid #EEEEEE;
 }
 
-.content {
-    margin-top: .5rem;
-}
-
 .list-border {
     border-bottom: 1px solid #EEEEEE;
-    margin-bottom: .5rem;
+}
+
+.list-unstyled {
+    margin-bottom: 0;
 }
 
 .list {
+    padding-top: .5rem;
     padding-bottom: .5rem;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -157,6 +166,21 @@ footer {
     color: #7b7e82;
 }
 
+@media (min-width: 375px) {
+    .top_app-title {
+        font-size: 2.5rem;
+    }
+    
+    .top_app-subtitle {
+        font-size: 2rem;
+    }
+    
+    .top_sentence {
+        margin-top: 75px;
+        font-size: 1rem;
+    }
+}
+
 @media (max-width: 666px) {
     .dropdown-menu {
         background-color: #28a745;
@@ -197,12 +221,12 @@ footer {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-        border-left: 1px solid #EEEEEE;
-        border-right: 1px solid #EEEEEE;
     }
 
     .main-area {
         min-height: calc(100vh - 96px);
+        border-left: 1px solid #EEEEEE;
+        border-right: 1px solid #EEEEEE;
     }
 
     .top_content {
@@ -248,8 +272,6 @@ footer {
         width: 60%;
         margin-left: auto;
         margin-right: auto;
-        border-left: 1px solid #EEEEEE;
-        border-right: 1px solid #EEEEEE;
     }
 
     .title {
