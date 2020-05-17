@@ -110,13 +110,14 @@ class PostsController extends Controller
 
         $request->user()->posts()->create([
             'title' => $request->title,
-            'date_time' => $request->year . '/' . $request->month . '/' . $request->day . ' ' . $request->from_hour . ':' . $request->from_minute . '~' . $request->to_hour . ':' . $request->to_minute,
+            'date_time' => $request->year . '-' .  $request->month . '-' .  $request->day . ' ' . $request->from_hour . ':' . $request->from_minute,
+            'end_time' => $request->to_hour . ':' . $request->to_minute,
             'place' => $request->place,
             'address' => $request->address,
             'reservation' => $request->reservation,
             'expense' => $request->expense,
             'ball' => $request->ball,
-            'deadline' => $request->deadlineYear . '/' . $request->deadlineMonth . '/' . $request->deadlineDay . ' ' . $request->deadlineHour . ':' . $request->deadlineMinute,
+            'deadline' => $request->deadlineYear . '-' . $request->deadlineMonth . '-' . $request->deadlineDay . ' ' . $request->deadlineHour . ':' . $request->deadlineMinute,
             'people' => $request->people,
             'remarks' => $request->remarks,
         ]);
@@ -166,12 +167,14 @@ class PostsController extends Controller
 
     public function edit($id) {
         $post = Post::find($id);
-        $postDateTimeArray = preg_split("{[/\s:~]}", $post->date_time);
-        $postDeadlineArray = preg_split("{[/\s:]}", $post->deadline);
+        $postDateTimeArray = preg_split("{[-\s:]}", $post->date_time);
+        $postEndTimeArray = preg_split("{[:]}", $post->end_time);
+        $postDeadlineArray = preg_split("{[-\s:]}", $post->deadline);
 
         return view('posts.edit', [
             'post' => $post,
             'postDateTimeArray' => $postDateTimeArray,
+            'postEndTimeArray' => $postEndTimeArray,
             'postDeadlineArray' => $postDeadlineArray,
         ]);
     }
@@ -263,13 +266,14 @@ class PostsController extends Controller
         
         $post = Post::find($id);
         $post->title = $request->title;
-        $post->date_time = $request->year . '/' . $request->month . '/' . $request->day . ' ' . $request->from_hour . ':' . $request->from_minute . '~' . $request->to_hour . ':' . $request->to_minute;
+        $post->date_time = $request->year . '-' . $request->month . '-' . $request->day . ' ' . $request->from_hour . ':' . $request->from_minute;
+        $post->end_time = $request->to_hour . ':'. $request->to_minute;
         $post->place = $request->place;
         $post->address = $request->address;
         $post->reservation = $request->reservation;
         $post->expense = $request->expense;
         $post->ball = $request->ball;
-        $post->deadline = $request->deadlineYear . '/' . $request->deadlineMonth . '/' . $request->deadlineDay . ' ' . $request->deadlineHour . ':' . $request->deadlineMinute;
+        $post->deadline = $request->deadlineYear . '-' . $request->deadlineMonth . '-' . $request->deadlineDay . ' ' . $request->deadlineHour . ':' . $request->deadlineMinute;
         $post->people = $request->people;
         $post->remarks = $request->remarks;
         $post->save();
