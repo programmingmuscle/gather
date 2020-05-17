@@ -19,6 +19,7 @@ class PostTest extends TestCase
 
     use RefreshDatabase;
     
+    // 投稿作成時に係るエラー発生時の挙動をテスト
     public function testPostError()
     {
         $user = factory(User::class)->create();
