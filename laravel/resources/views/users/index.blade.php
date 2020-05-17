@@ -8,8 +8,8 @@
     @if (count($users) > 0)
         <ul class="list-unstyled">
             @foreach ($users as $user)
-                <div class="players-list-border">
-                    <li class="media players-list">
+                <div class="list-border">
+                    <li class="media list">
                         <a href="{{ route('users.show', ['id' => $user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
                         <div class="media-body">
                             <div>
@@ -21,7 +21,7 @@
 
                             </div>
                             
-                            @include ('commons.contentList')
+                            @include ('commons.userContentList')
 
                         </div>
                     </li>

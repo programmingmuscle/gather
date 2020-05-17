@@ -28,8 +28,9 @@
 							<div class="collapse navbar-collapse" id="nav-bar">
 								<ul class="navbar-nav ml-auto">
 									@if (Auth::check())
-										<li class="nav-item"><a href="#" class="nav-link">投稿一覧</a></li>
-										<li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">選手一覧</a></li>									
+										<li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link">投稿一覧</a></li>
+										<li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">選手一覧</a></li>
+										<li class="nav-item"><a href="{{ route('posts.create', ['id' => Auth::id()]) }}" class="nav-link">投稿作成</a></li>
 										<li class="nav-item dropdown">
 											<a href="#" class="nav-link nav-link-account dropdown-toggle" data-toggle="dropdown">マイアカウント</a>
 											<ul class="dropdown-menu dropdown-menu-right">
@@ -40,7 +41,7 @@
 											</ul>
 										</li>
 									@else
-										<li class="nav-item"><a href="#" class="nav-link">投稿一覧</a></li>
+										<li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link">投稿一覧</a></li>
 										<li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">選手一覧</a></li>										
 										<li class="nav-item"><a href="{{ route('signup.get') }}" class="nav-link">サインアップ</a></li>
 										<li class="nav-item"><a href="{{ route('login') }}" class="nav-link nav-link-login">ログイン</a></li>

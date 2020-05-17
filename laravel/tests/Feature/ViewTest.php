@@ -6,6 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
+use App\Post;
 use Illuminate\Support\Facades\Auth;
 
 class ViewTest extends TestCase
@@ -24,6 +25,7 @@ class ViewTest extends TestCase
     {
         // ユーザ作成
         $user = factory(User::class)->create();
+        $post = factory(Post::class)->create();
 
         // ホーム画面
         $response = $this->get('/');
@@ -51,8 +53,31 @@ class ViewTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('login');
 
-        // アカウント編集(要ログイン 未ログインの場合はログイン画面にリダイレクト)
+        // アカウント編集画面(要ログイン 未ログインの場合はログイン画面にリダイレクト)
         $response = $this->get(route('users.edit', ['id' => $user->id]));
+        $response->assertStatus(302);
+        $response->assertRedirect('login');
+
+        // 投稿一覧画面
+        $response = $this->get(route('posts.index'));
+        $response->assertStatus(200);
+
+        // 投稿詳細
+        $response = $this->get(route('posts.show', ['id' => $post->id]));
+        $response->assertStatus(200);
+
+        // 投稿削除画面(要ログイン 未ログインの場合はログイン画面にリダイレクト)
+        $response = $this->get(route('posts.deleteWindow', ['id' => $post->id]));
+        $response->assertStatus(302);
+        $response->assertRedirect('login');
+
+        // 投稿編集画面(要ログイン 未ログインの場合はログイン画面にリダイレクト)
+        $response = $this->get(route('posts.edit', ['id' => $post->id]));
+        $response->assertStatus(302);
+        $response->assertRedirect('login');
+
+        // 投稿作成画面(要ログイン 未ログインの場合はログイン画面にリダイレクト)
+        $response = $this->get(route('posts.create', ['id' => $user->id]));
         $response->assertStatus(302);
         $response->assertRedirect('login');
 
@@ -66,6 +91,7 @@ class ViewTest extends TestCase
     {
         // ユーザ作成
         $user = factory(User::class)->create();
+        $post = factory(Post::class)->create();
 
         // アカウント削除画面(要ログイン)
         $response = $this->actingAs($user)->get(route('users.deleteWindow', ['id' => Auth::id()]));
@@ -75,9 +101,21 @@ class ViewTest extends TestCase
         $response = $this->get(route('users.edit', ['id' => Auth::id()]));
         $response->assertStatus(200);
 
-        // ユーザ詳細(要ログイン ログインユーザ自身の詳細画面ではフォローボタンを表示しない)
+        // ユーザ詳細(要ログイン)
         $response = $this->get(route('users.show', ['id' => Auth::id()]));
         $response->assertStatus(200);
         $response->assertDontSee('フォローする');
+
+        // 投稿削除画面(要ログイン)
+        $response = $this->get(route('posts.deleteWindow', ['id' => $post->id]));
+        $response->assertStatus(200);
+
+        // 投稿編集画面(要ログイン)
+        $response = $this->get(route('posts.edit', ['id' => $post->id]));
+        $response->assertStatus(200);
+
+        // 投稿作成画面(要ログイン)
+        $response = $this->get(route('posts.create', ['id' => Auth::id()]));
+        $response->assertStatus(200);
     }
 }

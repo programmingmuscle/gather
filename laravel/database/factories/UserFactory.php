@@ -24,6 +24,6 @@ $factory->define(App\User::class, function (Faker $faker) {
         'age' => $faker->randomElement(['10代', '20代', '30代', '40代', '50代', '60代以上']),
         'experience' => $faker->randomElement(['5年未満', '5~10年', '10年以上']),
         'position' => $faker->randomElement(['投手', '捕手', '一塁手', '二塁手', '三塁手', '遊撃手', '左翼手', '中堅手', '右翼手', '内野全般', '外野全般']),
-        'introduction' => $faker->realText($faker->numberBetween(10,191)),
+        'introduction' => $faker->text($faker->numberBetween(10,191)),
     ];
 });

@@ -1,0 +1,61 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.3.15-apache-stretch-node-browsers
+    working_directory: ~/project/laravel
+    steps:
+      - checkout:
+          path: ~/project
+      - restore_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+      - run:
+          name: composer install
+          command: composer install
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths: vendor
+      - persist_to_workspace:
+          root: .
+          paths: .
+  test:
+    docker:
+      - image: circleci/php:7.3.15-apache-stretch-node-browsers
+      - image: circleci/mysql:8.0.19-ram
+        command: mysqld --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: circle_test
+          TZ: 'Asia/Tokyo'
+    working_directory: ~/project/laravel
+    steps:
+      - checkout:
+          path: ~/project
+      - attach_workspace:
+          at: .
+      - run:
+          name: copy env file
+          command: cp .env.circletesting .env.testing
+      - run:
+          name: laravel key generate for test env
+          command: php artisan key:generate --env=testing
+      - run:
+          name: pdo_mysql install
+          command: sudo docker-php-ext-install pdo_mysql
+      - run:
+          name: migrate
+          command: php artisan migrate --env=testing
+          requires:
+            - docker
+      - run:
+          name: unit test
+          command: vendor/bin/phpunit
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
