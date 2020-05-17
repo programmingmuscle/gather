@@ -40,6 +40,8 @@ jobs:
       - run:
           name: laravel key generate for test env
           command: php artisan key:generate --env=testing
+          requires:
+            - docker
       - run:
           name: pdo_mysql install
           command: sudo docker-php-ext-install pdo_mysql
