@@ -141,15 +141,26 @@ class PostsController extends Controller
     }
 
     public function destroy(Request $request, $id) {
+        $this->validate($request, [
+            'password' => [
+                'required',
+                function($attribute, $value, $fail) {
+                    if (!Hash::check($value, Auth::user()->password)) {
+                        $fail('パスワードが間違っています。');
+                    }
+                },
+            ],
+        ], 
+        [
+            'password.required' => 'パスワードを入力して下さい。',
+        ]);
+
         $post = Post::find($id);
 
-        if (Hash::check($request->password, $post->user->password)) {
+        if (Hash::check($request->password, Auth::user()->password)) {
             $post->delete();
 
             return redirect()->route('posts.index');
-        }
-        else {
-            return redirect()->route('posts.show', ['id' => $post->id]);
         }
     }
 

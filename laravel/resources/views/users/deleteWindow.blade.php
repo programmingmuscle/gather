@@ -13,7 +13,10 @@
                     {{ csrf_field() }}
                     <p>本当にアカウントを削除しますか？</p>
                     <div class="form-group">
-                        <label for="password">パスワード</label> 
+                        <label for="password">パスワード</label>
+                        @if ($errors->has('password'))
+                            <div class="error-target">{{ $errors->first('password') }}</div>
+                        @endif
                         <input type="password" name="password" id="password" class="form-control">    
                     </div>
                     <div class="complete-button form-group">
