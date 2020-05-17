@@ -40,14 +40,14 @@ jobs:
       - run:
           name: laravel key generate for test env
           command: php artisan key:generate --env=testing
-          requires:
-            - docker
       - run:
           name: pdo_mysql install
           command: sudo docker-php-ext-install pdo_mysql
       - run:
           name: migrate
           command: php artisan migrate --env=testing
+          requires:
+            - docker
       - run:
           name: unit test
           command: vendor/bin/phpunit
