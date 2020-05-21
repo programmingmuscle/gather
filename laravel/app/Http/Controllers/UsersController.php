@@ -24,10 +24,14 @@ class UsersController extends Controller
 
     public function show($id) {
         $user = User::find($id);
-
-        return view('users.show', [
+        
+        $data = [
             'user' => $user,
-        ]);
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
     }
 
     public function edit() {
@@ -123,5 +127,27 @@ class UsersController extends Controller
             $user->delete();
             return redirect('/');
         }
+    }
+
+    public function followers($id)
+    {
+        $user = User::find($id);
+        $followers = $user->followers()->orderBy('id', 'desc')->paginate(10);
+
+        return view('users.followers', [
+            'user' => $user,
+            'followers' => $followers,
+        ]);
+    }
+
+    public function followings($id)
+    {
+        $user = User::find($id);
+        $followings = $user->followings()->orderBy('id', 'desc')->paginate(10);
+
+        return view('users.followings', [
+            'user' => $user,
+            'followings' => $followings,
+        ]);
     }
 }

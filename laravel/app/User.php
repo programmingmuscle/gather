@@ -42,28 +42,28 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'user_follow', 'follow_id', 'user_id')->withTimestamps();
     }
 
-    public function is_following($userId) 
+    public function is_following($id) 
     {
-        return $this->followings()->where('follow_id', $userId)->exists();
+        return $this->followings()->where('follow_id', $id)->exists();
     }
 
-    public function follow($userId) 
+    public function follow($id) 
     {
-        $exist = $this->is_following($userId);
-        $its_me = $this->id == $userId;
+        $exist = $this->is_following($id);
+        $its_me = $this->id == $id;
 
         if (!$exist && !$its_me) {
-            $this->followings()->attach($userId);
+            $this->followings()->attach($id);
         }
     }
 
-    public function unfollow($userId)
+    public function unfollow($id)
     {
-        $exist = $this->is_following($userId);
-        $its_me = $this->id == $userId;
+        $exist = $this->is_following($id);
+        $its_me = $this->id == $id;
 
         if ($exist && !$its_me) {
-            $this->followings()->detach($userId);
+            $this->followings()->detach($id);
         }
     }
 }

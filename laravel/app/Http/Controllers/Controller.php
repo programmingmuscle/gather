@@ -10,4 +10,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function counts($user) {
+        $count_followings = $user->followings()->count();
+        $count_followers = $user->followers()->count();
+
+        return [
+            'count_followings' => $count_followings,
+            'count_followers' => $count_followers,
+        ];
+    }
 }
