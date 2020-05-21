@@ -99,11 +99,11 @@ class PostTest extends TestCase
         $response = $this->actingAs($user)->post(route('posts.store', [
             'title' => 'test',
             'year' => date('Y'),
-            'month' => '1',
-            'day' => '1',
-            'from_hour' => '0',
+            'month' => '01',
+            'day' => '01',
+            'from_hour' => '00',
             'from_minute' => '00',
-            'to_hour' => '0',
+            'to_hour' => '00',
             'to_minute' => '00',
             'place' => 'test',
             'address' => 'test',
@@ -111,9 +111,9 @@ class PostTest extends TestCase
             'expense' => 'test',
             'ball' => '軟式',
             'deadlineYear' => date('Y'),
-            'deadlineMonth' => '1',
-            'deadlineDay' => '1',
-            'deadlineHour' => '0',
+            'deadlineMonth' => '01',
+            'deadlineDay' => '01',
+            'deadlineHour' => '00',
             'deadlineMinute' => '00',
             'people' => '1人',
         ]));
@@ -124,13 +124,14 @@ class PostTest extends TestCase
 
         $this->assertDatabaseHas('posts', [
             'title' => 'test',
-            'date_time' => date('Y') . '/' . '1' . '/' . '1' . ' ' . '0' . ':' . '00' . '~' . '0' . ':' . '00',
+            'date_time' => date('Y') . '-' . '01' . '-' . '01' . ' ' . '00' . ':' . '00',
+            'end_time' => '00' . ':' . '00',
             'place' => 'test',
             'address' => 'test',
             'reservation' => '不要',
             'expense' => 'test',
             'ball' => '軟式',
-            'deadline' => date('Y') . '/' . '1' . '/' . '1' . ' ' . '0' . ':' . '00',
+            'deadline' => date('Y') . '-' . '01' . '-' . '01' . ' ' . '00' . ':' . '00',
             'people' => '1人',
         ]);
     }
