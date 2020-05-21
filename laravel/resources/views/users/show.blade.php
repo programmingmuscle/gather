@@ -18,12 +18,16 @@
             {{ $user->name }}
             
             @if (Auth::check() && ($user->id != Auth::id()))
-                <button class="btn follow-button">フォローする</button>
+                @include ('user_follow.follow_button')
             @endif
 
             @include ('commons.userContentList')
 
         </div>
+    </div>
+    <div class="text-center">
+        <a href="{{ route('users.followings', ['id' => $user->id]) }}">フォロー中：{{ $count_followings }}</a>
+        <a href="{{ route('users.followers', ['id' => $user->id]) }}">フォロワー：{{ $count_followers }}</a>
     </div>
     <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item"><a href="#" class="nav-link active">タイムライン</a></li>

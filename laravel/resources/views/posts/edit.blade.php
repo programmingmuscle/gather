@@ -32,22 +32,25 @@
                         <div class="form-group d-inline-block">
                             @if ($errors->has('month'))
                                 <div class="error-target">{{ $errors->first('month') }}</div>
-                            @endif                     
-                            {!! Form::selectRange('month', 1, 12, $postDateTimeArray[1], ['class' => 'form-control d-inline-block w-auto']) !!}月
+                            @endif       
+                            {!! Form::select('month', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'],
+                            $postDateTimeArray[1],['class' => 'form-control d-inline-block w-auto']) !!}月
                         </div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('day'))
-                                <div class="error-target">{{ $errors->first('month') }}</div>
-                            @endif                    
-                            {!! Form::selectRange('day', 1, 31, $postDateTimeArray[2], ['class' => 'form-control d-inline-block w-auto']) !!}日
+                                <div class="error-target">{{ $errors->first('day') }}</div>
+                            @endif
+                            {!! Form::select('day', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31'],
+                            $postDateTimeArray[2],['class' => 'form-control d-inline-block w-auto']) !!}日
                         </div>
                     </div>
                     <div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('from_hour'))
                                 <div class="error-target">{{ $errors->first('from_hour') }}</div>
-                            @endif                 
-                            {!! Form::selectRange('from_hour', 0, 23, $postDateTimeArray[3], ['class' => 'form-control d-inline-block w-auto']) !!}時
+                            @endif       
+                            {!! Form::select('from_hour', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23'],
+                            $postDateTimeArray[3],['class' => 'form-control d-inline-block w-auto']) !!}時
                         </div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('from_minute'))
@@ -61,14 +64,15 @@
                         @if ($errors->has('to_hour'))
                             <div class="error-target">{{ $errors->first('to_hour') }}</div>
                         @endif
-                        {!! Form::selectRange('to_hour', 0, 23, $postDateTimeArray[5], ['class' => 'form-control d-inline-block w-auto']) !!}時
+                        {!! Form::select('to_hour', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24'],
+                        $postEndTimeArray[0],['class' => 'form-control d-inline-block w-auto']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('to_minute'))
                             <div class="error-target">{{ $errors->first('to_minute') }}</div>
                         @endif
                         {!! Form::select('to_minute', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31', '32' => '32', '33' => '33', '34' => '34', '35' => '35', '36' => '36', '37' => '37', '38' => '38', '39' => '39', '40' => '40', '41' => '41', '42' => '42', '43'=> '43', '44' => '44', '45' => '45', '46' => '46', '47' => '47', '48' => '48', '49' => '49', '50' => '50', '51' => '51', '52' => '52', '53' => '53', '54' => '54', '55' => '55', '56' => '56', '57' => '57', '58' => '58', '59' => '59'],
-                        $postDateTimeArray[5],['class' => 'form-control d-inline-block w-auto']) !!}分まで
+                        $postEndTimeArray[1],['class' => 'form-control d-inline-block w-auto']) !!}分まで
                     </div>
                     <div class="form-group">
                         <label for="place">【場所】<span class="required">*</span></label>
@@ -116,21 +120,24 @@
                         <div class="form-group d-inline-block">
                             @if ($errors->has('deadlineMonth'))
                                 <div class="error-target">{{ $errors->first('deadlineMonth') }}</div>
-                            @endif                    
-                            {!! Form::selectRange('deadlineMonth', 1, 12, $postDeadlineArray[1], ['class' => 'form-control d-inline-block w-auto']) !!}月
+                            @endif
+                            {!! Form::select('deadlineMonth', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'],
+                            $postDeadlineArray[1],['class' => 'form-control d-inline-block w-auto']) !!}月 
                         </div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('deadlineDay'))
                                 <div class="error-target">{{ $errors->first('deadlineDay') }}</div>
                             @endif
-                            {!! Form::selectRange('deadlineDay', 1, 31, $postDeadlineArray[2], ['class' => 'form-control d-inline-block w-auto']) !!}日
+                            {!! Form::select('deadlineDay', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31'],
+                            $postDeadlineArray[2],['class' => 'form-control d-inline-block w-auto']) !!}日
                         </div>
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('deadlineHour'))
                             <div class="error-target">{{ $errors->first('deadlineHour') }}</div>
                         @endif
-                        {!! Form::selectRange('deadlineHour', 0, 23, $postDeadlineArray[3], ['class' => 'form-control d-inline-block w-auto']) !!}時
+                        {!! Form::select('deadlineHour', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24'],
+                        $postDeadlineArray[3],['class' => 'form-control d-inline-block w-auto']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('deadlineMinute'))

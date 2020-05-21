@@ -3,7 +3,7 @@
         【{{ $post->title }}】
     </li>
     <li>
-        日時：{{ $post->date_time }}
+        日時：{{ substr($post->date_time, 0, 16) . '~' . substr($post->end_time, 0, 5) }}
     </li>
     <li>
         場所：{{ $post->place }}
@@ -21,7 +21,7 @@
         使用球：{{ $post->ball }}
     </li>
     <li>
-        応募締切：{{ $post->deadline }}
+        応募締切：{{ substr($post->deadline, 0, 16) }}
     </li>
     <li>
         募集人数：{{ $post->people }}

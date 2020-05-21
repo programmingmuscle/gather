@@ -24,10 +24,14 @@ class UsersController extends Controller
 
     public function show($id) {
         $user = User::find($id);
-
-        return view('users.show', [
+        
+        $data = [
             'user' => $user,
-        ]);
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
     }
 
     public function edit() {
@@ -48,7 +52,14 @@ class UsersController extends Controller
                 'max:191',
                 Rule::unique('users')->ignore(Auth::id()),
             ],
-            'password' => 'required',
+            'password' => [
+                'required',
+                function($attribute, $value, $fail) {
+                    if (!Hash::check($value, Auth::user()->password)) {
+                        $fail('パスワードが間違っています。');
+                    }
+                },
+            ],
             'residence' => 'string|nullable|max:191',
             'gender' => 'string|nullable|max:191',
             'age' => 'string|nullable|max:191',
@@ -88,9 +99,6 @@ class UsersController extends Controller
             return redirect()->route('users.show', ['id' => Auth::id()]);
         }
 
-        else {
-            return redirect()->route('users.show', ['id' => Auth::id()]);
-        }
         
     }
 
@@ -99,14 +107,47 @@ class UsersController extends Controller
     }
 
     public function destroy(Request $request) {
+        $this->validate($request, [
+            'password' => [
+                'required',
+                function($attribute, $value, $fail) {
+                    if (!Hash::check($value, Auth::user()->password)) {
+                        $fail('パスワードが間違っています。');
+                    }
+                },
+            ],
+        ], 
+        [
+            'password.required' => 'パスワードを入力して下さい。',
+        ]);
+
         $user = Auth::user();
 
         if (Hash::check($request->password, $user->password)) {
             $user->delete();
             return redirect('/');
         }
-        else {
-            return redirect()->route('users.show', ['id' => Auth::id()]);
-        }   
+    }
+
+    public function followers($id)
+    {
+        $user = User::find($id);
+        $followers = $user->followers()->orderBy('id', 'desc')->paginate(10);
+
+        return view('users.followers', [
+            'user' => $user,
+            'followers' => $followers,
+        ]);
+    }
+
+    public function followings($id)
+    {
+        $user = User::find($id);
+        $followings = $user->followings()->orderBy('id', 'desc')->paginate(10);
+
+        return view('users.followings', [
+            'user' => $user,
+            'followings' => $followings,
+        ]);
     }
 }

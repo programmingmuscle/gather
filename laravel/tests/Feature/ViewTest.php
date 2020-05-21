@@ -66,6 +66,14 @@ class ViewTest extends TestCase
         $response = $this->get(route('posts.show', ['id' => $post->id]));
         $response->assertStatus(200);
 
+        // フォロー一覧画面
+        $response = $this->get(route('users.followings', ['id' => $user->id]));
+        $response->assertStatus(200);
+
+        // フォロワー一覧画面
+        $response = $this->get(route('users.followers', ['id' => $user->id]));
+        $response->assertStatus(200);
+
         // 投稿削除画面(要ログイン 未ログインの場合はログイン画面にリダイレクト)
         $response = $this->get(route('posts.deleteWindow', ['id' => $post->id]));
         $response->assertStatus(302);
@@ -101,7 +109,7 @@ class ViewTest extends TestCase
         $response = $this->get(route('users.edit', ['id' => Auth::id()]));
         $response->assertStatus(200);
 
-        // ユーザ詳細(要ログイン)
+        // ユーザ詳細(ログイン中であってもマイアカウント画面ではフォローボタンは表示されない)
         $response = $this->get(route('users.show', ['id' => Auth::id()]));
         $response->assertStatus(200);
         $response->assertDontSee('フォローする');
