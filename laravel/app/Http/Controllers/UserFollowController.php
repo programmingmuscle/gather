@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Post;
 
 class UserFollowController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store($id)
     {
         Auth::user()->follow($id);
         return back();
