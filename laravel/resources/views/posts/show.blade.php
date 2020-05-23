@@ -11,8 +11,8 @@
             {{ $post->user->name }}
             
             @if (Auth::check() && !($post->user->id == Auth::id()))
-                <button class="btn participate-button">参加する</button>
-
+               
+                @include ('participations.participate_button')
                 @include ('concerns.concern_button')
 
             @endif

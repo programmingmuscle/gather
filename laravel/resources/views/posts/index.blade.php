@@ -15,6 +15,7 @@
                             <div>
                                 <a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
                                 
+                                @include ('participations.participate_button')
                                 @include ('concerns.concern_button')
 
                                 <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>

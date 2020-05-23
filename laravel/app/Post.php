@@ -19,4 +19,9 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function participate_users()
+    {
+        return $this->belongToMany(User::class);
+    }
 }
