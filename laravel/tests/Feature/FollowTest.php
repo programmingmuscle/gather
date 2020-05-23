@@ -20,7 +20,7 @@ class FollowTest extends TestCase
     // テスト開始時に未済のマイグレーションを実行 終了時にデータを削除する
     use RefreshDatabase;
 
-    // フォローに成功するテスト
+    // フォロー機能実行後にフォロー取り止め機能を行い成功するテスト
     public function testFollow()
     {
         // サインアップする
@@ -40,8 +40,16 @@ class FollowTest extends TestCase
         // フォロー機能を実行
         $this->post(route('user.follow', ['id' => $user->id]));
 
-        // フォロー機能用のテーブルにてフォロー対象idの有無を確認することでフォロー機能実行の成否を判定
+        // user_followテーブルにてフォロー機能の対象としたidの有無を確認することでフォロー機能実行の成否を判定
         $this->assertDatabaseHas('user_follow', [
+            'follow_id' => $user->id,
+        ]);
+
+        // フォロー取り止め機能を実行
+        $this->delete(route('user.unfollow', ['follow_id' => $user->id]));
+
+        // user_followテーブルにてフォロー機能の対象としたidの有無を確認することでフォロー取り止め機能実行の成否を判定
+        $this->assertDatabaseMissing('user_follow', [
             'follow_id' => $user->id,
         ]);
     }
