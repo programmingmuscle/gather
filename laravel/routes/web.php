@@ -22,9 +22,11 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
 
-Route::group(['prefix' => 'users/{id}'], function() {    
-Route::get('followings', 'UsersController@followings')->name('users.followings');
-Route::get('followers', 'UsersController@followers')->name('users.followers');
+Route::group(['prefix' => 'users/{user}'], function() {    
+    Route::get('followings', 'UsersController@followings')->name('users.followings');
+    Route::get('followers', 'UsersController@followers')->name('users.followers');
+
+    Route::get('concerns', 'UsersController@concerns')->name('users.concerns');
 });
 
 Route::group(['middleware' => 'auth'],function() {
@@ -34,8 +36,13 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('posts/{post}/deleteWindow', 'PostsController@deleteWindow')->name('posts.deleteWindow');
     Route::get('posts/{user}/create', 'PostsController@create')->name('posts.create');
 
-    Route::group(['prefix' => 'users/{id}'], function() {
+    Route::group(['prefix' => 'users/{user}'], function() {
         Route::post('follow', 'UserFollowController@store')->name('user.follow');
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
+    });
+
+    Route::group(['prefix' => 'posts/{post}'], function() {
+        Route::post('concern', 'ConcernsController@store')->name('concerns.concern');
+        Route::delete('unconcern', 'ConcernsController@destroy')->name('concerns.unconcern');
     });
 });

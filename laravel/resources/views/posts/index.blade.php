@@ -15,9 +15,7 @@
                             <div>
                                 <a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
                                 
-                                @if (Auth::check() && ($post->user->id != Auth::id()))
-                                    <button class="btn concern-button">気になる</button>
-                                @endif
+                                @include ('concerns.concern_button')
 
                                 <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>
                             </div>

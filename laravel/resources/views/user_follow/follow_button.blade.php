@@ -1,4 +1,4 @@
-@if (Auth::id() != $user->id)
+@if (Auth::check() && ($user->id != Auth::id()))
     @if (Auth::user()->is_following($user->id))
         <form method="POST" action="{{ route('user.unfollow', ['id' => $user->id]) }}">
             {!! method_field('delete') !!}
@@ -15,5 +15,4 @@
             </div>
         </form>
     @endif
-    
 @endif

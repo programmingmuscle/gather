@@ -14,4 +14,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function concern_users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

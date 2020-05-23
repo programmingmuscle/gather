@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 
-class UserFollowController extends Controller
+class ConcernsController extends Controller
 {
     public function store($id)
     {
-        Auth::user()->follow($id);
+        Auth::user()->concern($id);
         return back();
     }
 
     public function destroy($id)
     {
-        Auth::user()->unfollow($id);
+        Auth::user()->unconcern($id);
         return back();
     }
 }
