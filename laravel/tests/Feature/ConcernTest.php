@@ -19,7 +19,7 @@ class ConcernTest extends TestCase
     // テスト開始時に未済のマイグレーションを実行 終了時にデータを削除する
     use RefreshDatabase;
 
-    // 気になるに成功するテスト
+    // 気になる機能実行後に気になる取り止め機能を行い成功するテスト
     public function testConcern()
     {
         // ユーザを作成
@@ -42,8 +42,16 @@ class ConcernTest extends TestCase
         // 気になる機能を実行
         $this->post(route('concerns.concern', ['id' => $post->id]));
 
-        // 気になる機能用のテーブルにて気になる対象idの有無を確認することで気になる機能実行の成否を判定
+        // Concernsテーブルにて気になる機能の対象としたidの有無を確認することで気になる機能実行の成否を判定
         $this->assertDatabaseHas('concerns', [
+            'post_id' => $post->id,
+        ]);
+
+        // 気になる取り止め機能を実行
+        $this->delete(route('concerns.unconcern', ['id' => $post->id]));
+
+        // concernsテーブルにて気になる機能の対象としたidの有無を確認することで気になる取り止め機能実行の成否を判定
+        $this->assertDatabaseMissing('concerns', [
             'post_id' => $post->id,
         ]);
     }
