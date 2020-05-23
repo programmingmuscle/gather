@@ -39,9 +39,10 @@ class ViewTest extends TestCase
         $response = $this->get('signup');
         $response->assertStatus(200);
 
-        // ユーザ一覧画面
+        // ユーザ一覧画面(未ログイン時はフォローボタンを表示しない)
         $response = $this->get('users');
         $response->assertStatus(200);
+        $response->assertDontSee('フォローする');
 
         // ユーザ詳細画面(未ログイン時はフォローボタンを表示しない)
         $response = $this->get(route('users.show', ['id' => $user->id]));
@@ -58,13 +59,15 @@ class ViewTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('login');
 
-        // 投稿一覧画面
+        // 投稿一覧画面(未ログイン時は気になるボタンを表示しない)
         $response = $this->get(route('posts.index'));
         $response->assertStatus(200);
+        $response->assertDontSee('気になる');
 
-        // 投稿詳細
+        // 投稿詳細(未ログイン時は気になるボタンを表示しない)
         $response = $this->get(route('posts.show', ['id' => $post->id]));
         $response->assertStatus(200);
+        $response->assertDontSee('気になる');
 
         // フォロー一覧画面
         $response = $this->get(route('users.followings', ['id' => $user->id]));

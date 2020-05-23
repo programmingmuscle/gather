@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -64,6 +65,38 @@ class User extends Authenticatable
 
         if ($exist && !$its_me) {
             $this->followings()->detach($id);
+        }
+    }
+
+    public function concerns()
+    {
+        return $this->belongsToMany(Post::class, 'concerns', 'user_id', 'post_id')->withTimestamps();
+    }
+
+    public function is_concerned($id)
+    {
+        return $this->concerns()->where('post_id', $id)->exists();
+    }
+
+    public function concern($id)
+    {
+        $post = Post::find($id);
+        $exist = $this->is_concerned($id);
+        $its_mine = Auth::id() == $post->user_id;
+
+        if (!$exist && !$its_mine) {
+            $this->concerns()->attach($id);
+        }
+    }
+
+    public function unconcern($id)
+    {
+        $post = Post::find($id);
+        $exist = $this->is_concerned($id);
+        $its_mine = Auth::id() == $post->user->id;
+
+        if ($exist && !$its_mine) {
+            $this->concerns()->detach($id);
         }
     }
 }

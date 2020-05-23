@@ -15,9 +15,7 @@
                             <div>
                                 <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
                                 
-                                @if (Auth::check() && ($user->id != Auth::id()))
                                     @include ('user_follow.follow_button')
-                                @endif
 
                             </div>
                             

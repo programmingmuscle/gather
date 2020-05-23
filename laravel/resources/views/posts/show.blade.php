@@ -10,9 +10,11 @@
         <div class="media-body">
             {{ $post->user->name }}
             
-            @if (Auth::check() && ($post->user->id != Auth::id()))
+            @if (Auth::check() && !($post->user->id == Auth::id()))
                 <button class="btn participate-button">参加する</button>
-                <button class="btn concern-button">気になる</button>
+
+                @include ('concerns.concern_button')
+
             @endif
 
             @if ($post->user->id == Auth::id())
