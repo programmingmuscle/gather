@@ -99,4 +99,36 @@ class User extends Authenticatable
             $this->concerns()->detach($id);
         }
     }
+
+    public function participations()
+    {
+        return $this->belongsToMany(Post::class, 'participations', 'user_id', 'post_id')->withTimestamps();
+    }
+
+    public function is_participating($id)
+    {
+        return $this->participations()->where('post_id', $id)->exists();
+    }
+
+    public function participate($id)
+    {
+        $post = Post::find($id);
+        $exist = $this->is_participating($id);
+        $its_mine = Auth::id() == $post->user->id;
+
+        if (!$exist && !$its_mine) {
+            $this->participations()->attach($id);
+        }
+    }
+
+    public function cancel($id)
+    {
+        $post = Post::find($id);
+        $exist = $this->is_participating($id);
+        $its_mine = Auth::id() == $post->user->id;
+
+        if ($exist && !$its_mine) {
+            $this->participations()->detach($id);
+        }
+    }
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 
-class ConcernTest extends TestCase
+class ParticipateTest extends TestCase
 {
     /**
      * A basic test example.
@@ -19,13 +19,13 @@ class ConcernTest extends TestCase
     // テスト開始時に未済のマイグレーションを実行 終了時にデータを削除する
     use RefreshDatabase;
 
-    // 気になる機能実行後に気になる取り止め機能を行い成功するテスト
-    public function testConcern()
+    // 参加する機能実行後に参加取り止め機能を行い成功するテスト
+    public function testParticipate()
     {
         // ユーザを作成
         $user = factory(User::class)->create();
 
-        // 気になる対象とする投稿を作成
+        // 参加する対象とする投稿を作成
         $post = factory(Post::class)->create();
 
         // サインアップする
@@ -39,19 +39,19 @@ class ConcernTest extends TestCase
         // ログイン状態をチェック ログイン状態であることを確認
         $this->assertTrue(Auth::check());
         
-        // 気になる機能を実行
-        $this->post(route('concerns.concern', ['id' => $post->id]));
+        // 参加する機能を実行
+        $this->post(route('participations.participate', ['id' => $post->id]));
 
-        // Concernsテーブルにて気になる機能の対象としたidの有無を確認することで気になる機能実行の成否を判定
-        $this->assertDatabaseHas('concerns', [
+        // participationsテーブルにて気になる機能の対象としたidの有無を確認することで気になる機能実行の成否を判定
+        $this->assertDatabaseHas('participations', [
             'post_id' => $post->id,
         ]);
 
-        // 気になる取り止め機能を実行
-        $this->delete(route('concerns.unconcern', ['id' => $post->id]));
+        // 参加する取り止め機能を実行
+        $this->delete(route('participations.cancel', ['id' => $post->id]));
 
-        // concernsテーブルにて気になる機能の対象としたidの有無を確認することで気になる取り止め機能実行の成否を判定
-        $this->assertDatabaseMissing('concerns', [
+        // participationsテーブルにて参加する機能の対象としたidの有無を確認することで参加取り止め機能実行の成否を判定
+        $this->assertDatabaseMissing('participations', [
             'post_id' => $post->id,
         ]);
     }

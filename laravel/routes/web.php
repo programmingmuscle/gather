@@ -25,8 +25,6 @@ Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
 Route::group(['prefix' => 'users/{user}'], function() {    
     Route::get('followings', 'UsersController@followings')->name('users.followings');
     Route::get('followers', 'UsersController@followers')->name('users.followers');
-
-    Route::get('concerns', 'UsersController@concerns')->name('users.concerns');
 });
 
 Route::group(['middleware' => 'auth'],function() {
@@ -44,5 +42,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::group(['prefix' => 'posts/{post}'], function() {
         Route::post('concern', 'ConcernsController@store')->name('concerns.concern');
         Route::delete('unconcern', 'ConcernsController@destroy')->name('concerns.unconcern');
+        Route::post('participate', 'ParticipationsController@store')->name('participations.participate');
+        Route::delete('cancel', 'ParticipationsController@destroy')->name('participations.cancel');
     });
 });
