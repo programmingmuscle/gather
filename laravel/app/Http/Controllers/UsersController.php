@@ -144,11 +144,11 @@ class UsersController extends Controller
     public function concerns($id)
     {
         $user = User::find($id);
-        $concerns = $user->concerns()->orderBy('id', 'desc')->paginate(10);
+        $posts = $user->concerns()->orderBy('id', 'desc')->paginate(10);
 
         $data = [
             'user' => $user,
-            'concerns' => $concerns,
+            'posts' => $posts,
         ];
 
         $data += $this->counts($user);
@@ -159,11 +159,11 @@ class UsersController extends Controller
     public function participations($id)
     {
         $user = User::find($id);
-        $participations = $user->participations()->orderBy('id', 'desc')->paginate(10);
+        $posts = $user->participations()->orderBy('id', 'desc')->paginate(10);
 
         $data = [
             'user' => $user,
-            'participations' => $participations,
+            'posts' => $posts,
         ];
 
         $data += $this->counts($user);
@@ -189,11 +189,11 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $feed_posts = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
+        $posts = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
 
         $data = [
             'user' => $user,
-            'feed_posts' => $feed_posts,
+            'posts' => $posts,
         ];
 
         $data += $this->counts($user);

@@ -36,22 +36,27 @@
         <li class="nav-item"><a href="{{ route('users.concerns', ['id' => $user->id]) }}" class="nav-link">気になる</a></li>
     </ul>
 
-    @if (count($feed_posts) > 0)
+    @if (count($posts) > 0)
         <ul class="list-unstyled">
-            @foreach ($feed_posts as $feed_post)
+            @foreach ($posts as $post)
                 <div class="list-border">
                     <li class="media list">
-                        <a href="{{ route('users.show', ['id' => $feed_post->user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($feed_post->user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
+                        <a href="{{ route('users.show', ['id' => $post->user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($post->user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
                         <div class="media-body">
                             <div>
-                                <a href="{{ route('users.show', ['id' => $feed_post->user->id]) }}">{{ $feed_post->user->name }}</a>
+                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
                                 
-                          
+                                @if (Auth::check() && ($post->user->id != Auth::id()))
+                                    
+                                    @include ('participations.participate_button')
+                                    @include ('concerns.concern_button')
 
-                                <a href="{{ route('users.show', ['id' => $feed_post->user->id]) }}">詳細</a>
+                                @endif
+
+                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}">詳細</a>
                             </div>
                             
-                            @include ('commons.feed_postContentList')
+                            @include ('commons.postContentList')
 
                         </div>
                     </li>
@@ -60,6 +65,6 @@
         </ul>
     @endif
 
-    {{ $feed_posts->links('pagination::bootstrap-4') }}
+    {{ $posts->links('pagination::bootstrap-4') }}
 
 @endsection

@@ -45,9 +45,6 @@
                         <div class="media-body">
                             <div>
                                 <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
-                                
-                                
-
                                 <a href="{{ route('users.show', ['id' => $user->id]) }}">詳細</a>
                             </div>
                             
