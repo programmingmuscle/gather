@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use App\Post;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
@@ -20,18 +22,6 @@ class UsersController extends Controller
         return view('users.index', [
             'users' => $users,
         ]);
-    }
-
-    public function show($id) {
-        $user = User::find($id);
-        
-        $data = [
-            'user' => $user,
-        ];
-
-        $data += $this->counts($user);
-
-        return view('users.show', $data);
     }
 
     public function edit() {
@@ -149,5 +139,65 @@ class UsersController extends Controller
             'user' => $user,
             'followings' => $followings,
         ]);
+    }
+
+    public function concerns($id)
+    {
+        $user = User::find($id);
+        $concerns = $user->concerns()->orderBy('id', 'desc')->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'concerns' => $concerns,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('tabs.concerns', $data);
+    }
+
+    public function participations($id)
+    {
+        $user = User::find($id);
+        $participations = $user->participations()->orderBy('id', 'desc')->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'participations' => $participations,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('tabs.participations', $data);
+    }
+
+    public function posts($id)
+    {
+        $user = User::find($id);
+        $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'posts' => $posts,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('tabs.posts', $data);        
+    }
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        $feed_posts = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'feed_posts' => $feed_posts,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
     }
 }

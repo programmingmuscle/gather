@@ -25,6 +25,9 @@ Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
 Route::group(['prefix' => 'users/{user}'], function() {    
     Route::get('followings', 'UsersController@followings')->name('users.followings');
     Route::get('followers', 'UsersController@followers')->name('users.followers');
+    Route::get('posts', 'UsersController@posts')->name('users.posts');
+    Route::get('concerns', 'UsersController@concerns')->name('users.concerns');
+    Route::get('participations', 'UsersController@participations')->name('users.participations');
 });
 
 Route::group(['middleware' => 'auth'],function() {

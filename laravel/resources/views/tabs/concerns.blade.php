@@ -30,28 +30,28 @@
         <a href="{{ route('users.followers', ['id' => $user->id]) }}">フォロワー：{{ $count_followers }}</a>
     </div>
     <ul class="nav nav-tabs justify-content-center">
-        <li class="nav-item"><a href="{{ route('users.show', ['id' => $user->id]) }}" class="nav-link active">タイムライン</a></li>
+        <li class="nav-item"><a href="{{ route('users.show', ['id' => $user->id]) }}" class="nav-link">タイムライン</a></li>
         <li class="nav-item"><a href="{{ route('users.posts', ['id' => $user->id]) }}" class="nav-link">投稿</a></li>
         <li class="nav-item"><a href="{{ route('users.participations', ['id' => $user->id]) }}" class="nav-link">参加</a></li>
-        <li class="nav-item"><a href="{{ route('users.concerns', ['id' => $user->id]) }}" class="nav-link">気になる</a></li>
+        <li class="nav-item"><a href="{{ route('users.concerns', ['id' => $user->id]) }}" class="nav-link active">気になる</a></li>
     </ul>
-
-    @if (count($feed_posts) > 0)
+    
+    @if (count($concerns) > 0)
         <ul class="list-unstyled">
-            @foreach ($feed_posts as $feed_post)
+            @foreach ($concerns as $concern)
                 <div class="list-border">
                     <li class="media list">
-                        <a href="{{ route('users.show', ['id' => $feed_post->user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($feed_post->user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
+                        <a href="{{ route('users.show', ['id' => $concern->user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($concern->user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
                         <div class="media-body">
                             <div>
-                                <a href="{{ route('users.show', ['id' => $feed_post->user->id]) }}">{{ $feed_post->user->name }}</a>
+                                <a href="{{ route('users.show', ['id' => $concern->user->id]) }}">{{ $concern->user->name }}</a>
                                 
-                          
+                                
 
-                                <a href="{{ route('users.show', ['id' => $feed_post->user->id]) }}">詳細</a>
+                                <a href="{{ route('users.show', ['id' => $concern->user->id]) }}">詳細</a>
                             </div>
                             
-                            @include ('commons.feed_postContentList')
+                            @include ('commons.concernContentList')
 
                         </div>
                     </li>
@@ -60,6 +60,6 @@
         </ul>
     @endif
 
-    {{ $feed_posts->links('pagination::bootstrap-4') }}
+    {{ $concerns->links('pagination::bootstrap-4') }}
 
 @endsection
