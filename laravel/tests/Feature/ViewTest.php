@@ -44,8 +44,23 @@ class ViewTest extends TestCase
         $response->assertStatus(200);
         $response->assertDontSee('フォローする');
 
-        // ユーザ詳細画面(未ログイン時はフォローボタンを表示しない)
+        // ユーザ詳細-タイムラインタブ画面(未ログイン時はフォローボタンを表示しない)
         $response = $this->get(route('users.show', ['id' => $user->id]));
+        $response->assertStatus(200);
+        $response->assertDontSee('フォローする');
+        
+        // ユーザ詳細-投稿タブ画面(未ログイン時はフォローボタンを表示しない)
+        $response = $this->get(route('users.posts', ['id' => $user->id]));
+        $response->assertStatus(200);
+        $response->assertDontSee('フォローする');
+
+        // ユーザ詳細-参加タブ画面(未ログイン時はフォローボタンを表示しない)
+        $response = $this->get(route('users.participations', ['id' => $user->id]));
+        $response->assertStatus(200);
+        $response->assertDontSee('フォローする');
+
+        // ユーザ詳細-気になるタブ画面(未ログイン時はフォローボタンを表示しない)
+        $response = $this->get(route('users.concerns', ['id' => $user->id]));
         $response->assertStatus(200);
         $response->assertDontSee('フォローする');
 
@@ -112,7 +127,7 @@ class ViewTest extends TestCase
         $response = $this->get(route('users.edit', ['id' => Auth::id()]));
         $response->assertStatus(200);
 
-        // ユーザ詳細(ログイン中であってもマイアカウント画面ではフォローボタンは表示されない)
+        // ユーザ詳細(ログイン中であっても自身のユーザ詳細ではフォローボタンは表示されない)
         $response = $this->get(route('users.show', ['id' => Auth::id()]));
         $response->assertStatus(200);
         $response->assertDontSee('フォローする');
