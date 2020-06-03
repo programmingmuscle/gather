@@ -53,7 +53,7 @@
 
                                 @endif
 
-                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}">詳細</a>
+                                <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>
                             </div>
                             
                             @include ('commons.postContentList')
