@@ -8,80 +8,76 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('posts.store') }}">
+                <form method="POST" action="{{ route('posts.store') }}" class="p-create-form">
                     {{ csrf_field() }}
                     <div class="form-group required-note">
                         <span class="required">*</span>が付いている欄は必須項目
                     </div>
                     <div class="form-group">
-                        <label for="title">【タイトル】<span class="required">*</span></label>
+                        <label for="title" id="title-error">【タイトル】<span class="required">*</span></label>
                         @if ($errors->has('title'))
                             <div class="error-target">{{ $errors->first('title') }}</div>
                         @endif
                         <input type="text" name="title" placeholder="例：キャッチボールしませんか？" value="{{ old('title') }}" id="title" class="form-control">
                     </div>
-                    <label class="d-block">【日時】<span class="required">*</span></label>
+                    <label class="d-block" id="date_time-error">【日時】<span class="required">*</span></label>
                     <div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('year'))
                                 <div class="error-target">{{ $errors->first('year') }}</div>
-                            @endif
-                            {!! Form::selectRange('year', date('Y'), date('Y')+1, old('year'), ['class' => 'form-control d-inline-block w-auto']) !!}年
-                        </div>
+                            @endif                           
+                            <select name="year" id="year" class="form-control d-inline-block w-auto"></select>                           
+                        </div>年
                         <div class="form-group d-inline-block">
                             @if ($errors->has('month'))
                                 <div class="error-target">{{ $errors->first('month') }}</div>
-                            @endif                     
-                            {!! Form::select('month', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'],
-                            old('month'),['class' => 'form-control d-inline-block w-auto']) !!}月
-                        </div>
+                            @endif
+                            <select name="month" id="month" class="form-control d-inline-block w-auto"></select>
+                        </div>月
                         <div class="form-group d-inline-block">
                             @if ($errors->has('day'))
-                                <div class="error-target">{{ $errors->first('month') }}</div>
-                            @endif                    
-                            {!! Form::select('day', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31'],
-                            old('day'),['class' => 'form-control d-inline-block w-auto']) !!}日
-                        </div>
+                                <div class="error-target">{{ $errors->first('day') }}</div>
+                            @endif
+                            <select name="day" id="day" class="form-control d-inline-block w-auto"></select>
+                        </div>日
                     </div>
                     <div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('from_hour'))
                                 <div class="error-target">{{ $errors->first('from_hour') }}</div>
-                            @endif                 
-                            {!! Form::select('from_hour', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23'],
-                            old('from_hour'),['class' => 'form-control d-inline-block w-auto']) !!}時
+                            @endif
+                            {!! Form::selectRange('from_hour', 0, 12, old('from_hour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'from_hour']) !!}時
                         </div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('from_minute'))
                                 <div class="error-target">{{ $errors->first('from_minute') }}</div>
                             @endif
                             {!! Form::select('from_minute', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31', '32' => '32', '33' => '33', '34' => '34', '35' => '35', '36' => '36', '37' => '37', '38' => '38', '39' => '39', '40' => '40', '41' => '41', '42' => '42', '43'=> '43', '44' => '44', '45' => '45', '46' => '46', '47' => '47', '48' => '48', '49' => '49', '50' => '50', '51' => '51', '52' => '52', '53' => '53', '54' => '54', '55' => '55', '56' => '56', '57' => '57', '58' => '58', '59' => '59'],
-                            old('from_minute'),['class' => 'form-control d-inline-block w-auto']) !!}分から
+                            old('from_minute'),['class' => 'form-control d-inline-block w-auto', 'id' => 'from_minute']) !!}分から
                         </div>
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('to_hour'))
                             <div class="error-target">{{ $errors->first('to_hour') }}</div>
                         @endif
-                        {!! Form::select('to_hour', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24'],
-                        old('to_hour'),['class' => 'form-control d-inline-block w-auto']) !!}時
+                        {!! Form::selectRange('to_hour', 0, 12, old('to_hour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'to_hour']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('to_minute'))
                             <div class="error-target">{{ $errors->first('to_minute') }}</div>
                         @endif
                         {!! Form::select('to_minute', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31', '32' => '32', '33' => '33', '34' => '34', '35' => '35', '36' => '36', '37' => '37', '38' => '38', '39' => '39', '40' => '40', '41' => '41', '42' => '42', '43'=> '43', '44' => '44', '45' => '45', '46' => '46', '47' => '47', '48' => '48', '49' => '49', '50' => '50', '51' => '51', '52' => '52', '53' => '53', '54' => '54', '55' => '55', '56' => '56', '57' => '57', '58' => '58', '59' => '59'],
-                        old('to_minute'),['class' => 'form-control d-inline-block w-auto']) !!}分まで
+                        old('to_minute'),['class' => 'form-control d-inline-block w-auto', 'id' => 'to_minute']) !!}分まで
                     </div>
                     <div class="form-group">
-                        <label for="place">【場所】<span class="required">*</span></label>
+                        <label for="place" id="place-error">【場所】<span class="required">*</span></label>
                         @if ($errors->has('place'))
                             <div class="error-target">{{ $errors->first('place') }}</div>
                         @endif
                         <input type="text" name="place" placeholder="例：○×□公園野球場" value="{{ old('place') }}" id="place" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="address">【住所】<span class="required">*</span></label>
+                        <label for="address" id="address-error">【住所】<span class="required">*</span></label>
                         @if ($errors->has('address'))
                             <div class="error-target">{{ $errors->first('address') }}</div>
                         @endif
@@ -95,7 +91,7 @@
                         {!! Form::select('reservation', ['不要' => '不要', '予約済み' => '予約済み', '未予約' => '未予約'], old('reservation'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        <label for="expense">【参加費用】<span class="required">*</span></label>
+                        <label for="expense" id="expense-error">【参加費用】<span class="required">*</span></label>
                         @if ($errors->has('expense'))
                             <div class="error-target">{{ $errors->first('expense') }}</div>
                         @endif
@@ -108,42 +104,39 @@
                         @endif
                         {!! Form::select('ball', ['軟式' => '軟式', '硬式' => '硬式'], old('ball'), ['class' => 'form-control']) !!}
                     </div>                    
-                    <label class="d-block">【応募締切】<span class="required">*</span></label>
+                    <label class="d-block" id="deadline-error">【応募締切】<span class="required">*</span></label>
                     <div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('deadlineYear'))
                                 <div class="error-target">{{ $errors->first('deadlineYear') }}</div>
                             @endif
-                            {!! Form::selectRange('deadlineYear', date('Y'), date('Y')+1, old('deadlineYear'), ['class' => 'form-control d-inline-block w-auto']) !!}年
-                        </div>
+                            <select name="deadlineYear" id="dYear" class="form-control d-inline-block w-auto"></select>
+                        </div>年
                         <div class="form-group d-inline-block">
                             @if ($errors->has('deadlineMonth'))
                                 <div class="error-target">{{ $errors->first('deadlineMonth') }}</div>
-                            @endif                    
-                            {!! Form::select('deadlineMonth', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'],
-                            old('deadlineMonth'),['class' => 'form-control d-inline-block w-auto']) !!}月
-                        </div>
+                            @endif
+                            <select name="deadlineMonth" id="dMonth" class="form-control d-inline-block w-auto"></select>                                                       
+                        </div>月
                         <div class="form-group d-inline-block">
                             @if ($errors->has('deadlineDay'))
                                 <div class="error-target">{{ $errors->first('deadlineDay') }}</div>
                             @endif
-                            {!! Form::select('deadlineDay', ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31'],
-                            old('deadlineDay'),['class' => 'form-control d-inline-block w-auto']) !!}日
-                        </div>
+                            <select name="deadlineDay" id="dDay" class="form-control d-inline-block w-auto"></select>
+                        </div>日
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('deadlineHour'))
                             <div class="error-target">{{ $errors->first('deadlineHour') }}</div>
                         @endif
-                        {!! Form::select('deadlineHour', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24'],
-                        old('deadlineHour'),['class' => 'form-control d-inline-block w-auto']) !!}時
+                        {!! Form::selectRange('deadlineHour', 0, 12, old('deadlineHour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'dHour']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('deadlineMinute'))
                             <div class="error-target">{{ $errors->first('deadlineMinute') }}</div>
                         @endif
                         {!! Form::select('deadlineMinute', ['00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' =>'05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31', '32' => '32', '33' => '33', '34' => '34', '35' => '35', '36' => '36', '37' => '37', '38' => '38', '39' => '39', '40' => '40', '41' => '41', '42' => '42', '43'=> '43', '44' => '44', '45' => '45', '46' => '46', '47' => '47', '48' => '48', '49' => '49', '50' => '50', '51' => '51', '52' => '52', '53' => '53', '54' => '54', '55' => '55', '56' => '56', '57' => '57', '58' => '58', '59' => '59'],
-                        old('deadlineMinute'), ['class' => 'form-control d-inline-block w-auto']) !!}分
+                        old('deadlineMinute'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'dMinute']) !!}分
                     </div>
                     <div class="form-group">
                         <label for="people">【募集人数】<span class="required">*</span></label>
