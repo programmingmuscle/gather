@@ -109,11 +109,17 @@ $('.p-create-form').on('submit', (e) => {
     const dDate = new Date(deadline);
 
     if(date >= date_to) {
-        e.preventDefault();
+      e.preventDefault();
 
-        $('.remove-error-date_time').remove();
+      $('#remove-error-content').remove();
 
-        $('<div class="error-target remove-error-date_time">終了時間は開催時間より後の時間で設定してください。</div>').insertAfter('#date_time-error');
+      $('.remove-error-date_time').remove();
+
+      $('<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>').prependTo('#content');
+      
+      $('<div class="error-target remove-error-date_time">終了時間は開催時間より後の時間で設定して下さい。</div>').insertAfter('#date_time-error');
+
+      $('html, body').animate({ scrollTop: 0 }, 600);
     } else {
         $('.remove-error-date_time').remove();
     }
@@ -121,9 +127,15 @@ $('.p-create-form').on('submit', (e) => {
     if(date <= dDate) {
         e.preventDefault();
 
+        $('#remove-error-content').remove();
+
         $('.remove-error-deadline').remove();
 
+        $('<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>').prependTo('#content');
+
         $('<div class="error-target remove-error-deadline">応募締切は開催日時より前の日時で設定して下さい。</div>').insertAfter('#deadline-error');
+
+        $('html, body').animate({ scrollTop: 0 }, 600);
     } else {
         $('.remove-error-deadline').remove();
     }
@@ -132,9 +144,15 @@ $('.p-create-form').on('submit', (e) => {
 
         e.preventDefault();
 
+        $('#remove-error-content').remove();
+
         $('.remove-error-title').remove();
 
+        $('<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>').prependTo('#content');
+
         $('<div class="error-target remove-error-title">タイトルを入力して下さい。</div>').insertAfter('#title-error');
+
+        $('html, body').animate({ scrollTop: 0 }, 600);
     } else {
         $('.remove-error-title').remove();
     }
@@ -143,9 +161,15 @@ $('.p-create-form').on('submit', (e) => {
 
         e.preventDefault();
 
+        $('#remove-error-content').remove();
+
         $('.remove-error-place').remove();
 
+        $('<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>').prependTo('#content');
+
         $('<div class="error-target remove-error-place">場所を入力して下さい。</div>').insertAfter('#place-error');
+        
+        $('html, body').animate({ scrollTop: 0 }, 600);
     } else {
         $('.remove-error-place').remove();
     }
@@ -154,9 +178,15 @@ $('.p-create-form').on('submit', (e) => {
 
         e.preventDefault();
 
+        $('#remove-error-content').remove();
+
         $('.remove-error-address').remove();
 
+        $('<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>').prependTo('#content');
+
         $('<div class="error-target remove-error-address">住所を入力して下さい。</div>').insertAfter('#address-error');
+
+        $('html, body').animate({ scrollTop: 0 }, 600);
     } else {
         $('.remove-error-address').remove();
     }
@@ -165,9 +195,15 @@ $('.p-create-form').on('submit', (e) => {
 
         e.preventDefault();
 
+        $('#remove-error-content').remove();
+
         $('.remove-error-expense').remove();
 
+        $('<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>').prependTo('#content');
+
         $('<div class="error-target remove-error-expense">参加費用を入力して下さい。</div>').insertAfter('#expense-error');
+
+        $('html, body').animate({ scrollTop: 0 }, 600);
     } else {
         $('.remove-error-expense').remove();
     }
