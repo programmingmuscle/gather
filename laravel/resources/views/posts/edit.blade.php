@@ -1,4 +1,4 @@
-@extends ('layouts.eMainArea')
+@extends ('layouts.postsEditMainArea')
 
 @section ('title')
     投稿編集
@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('posts.update', ['id' => $post->id]) }}" class="e-p-create-form">
+                <form method="POST" action="{{ route('posts.update', ['id' => $post->id]) }}" class="p-edit-form">
                     {!! method_field('put') !!}
                     {{ csrf_field() }}
                     <div class="form-group required-note">
@@ -47,7 +47,7 @@
                             @if ($errors->has('from_hour'))
                                 <div class="error-target">{{ $errors->first('from_hour') }}</div>
                             @endif
-                            {!! Form::selectRange('from_hour', 0, 12, $postDateTimeArray[3], ['class' => 'form-control d-inline-block w-auto', 'id' => 'eFrom_hour']) !!}時
+                            {!! Form::selectRange('from_hour', 0, 24, $postDateTimeArray[3], ['class' => 'form-control d-inline-block w-auto', 'id' => 'eFrom_hour']) !!}時
                         </div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('from_minute'))
@@ -61,7 +61,7 @@
                         @if ($errors->has('to_hour'))
                             <div class="error-target">{{ $errors->first('to_hour') }}</div>
                         @endif
-                        {!! Form::selectRange('to_hour', 0, 12, $postEndTimeArray[0], ['class' => 'form-control d-inline-block w-auto', 'id' => 'eTo_hour']) !!}時
+                        {!! Form::selectRange('to_hour', 0, 24, $postEndTimeArray[0], ['class' => 'form-control d-inline-block w-auto', 'id' => 'eTo_hour']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('to_minute'))
@@ -130,7 +130,7 @@
                         @if ($errors->has('deadlineHour'))
                             <div class="error-target">{{ $errors->first('deadlineHour') }}</div>
                         @endif
-                        {!! Form::selectRange('deadlineHour', 0, 12, $postDeadlineArray[3], ['class' => 'form-control d-inline-block w-auto', 'id' => 'edHour']) !!}時
+                        {!! Form::selectRange('deadlineHour', 0, 24, $postDeadlineArray[3], ['class' => 'form-control d-inline-block w-auto', 'id' => 'edHour']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('deadlineMinute'))

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('users.update', ['id' => Auth::id()]) }}">
+                <form method="POST" action="{{ route('users.update', ['id' => Auth::id()]) }}" class="u-edit-form">
                     {!! method_field('put') !!}
                     {{ csrf_field() }}
                     <div class="form-group required-note">
@@ -115,7 +115,7 @@
                     </div>
                     <div class="explain">上記内容に変更してよろしいでしょうか？</div>
                     <div class="form-group">
-                        <label for="password">パスワード<span class="required">*</span></label>
+                        <label for="password" id="password-error">パスワード<span class="required">*</span></label>
                         @if ($errors->has('password'))
                             <div class="error-target">{{ $errors->first('password') }}</div>
                         @endif
