@@ -6,9 +6,9 @@
 
 @section ('mainArea_content')
     <div class="media show_content">
-        <img class="profile-image" src="{{ Gravatar::src($post->user->email), 50}}" alt="ユーザのプロフィール画像です。">
+        <a href="{{ route('users.show', ['id' => $post->user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($post->user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
         <div class="media-body">
-            {{ $post->user->name }}
+        <a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
             
             @if (Auth::check() && !($post->user->id == Auth::id()))
                
