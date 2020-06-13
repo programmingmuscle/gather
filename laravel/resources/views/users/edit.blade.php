@@ -8,11 +8,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('users.update', ['id' => Auth::id()]) }}" class="u-edit-form">
+                <form method="POST" action="{{ route('users.update', ['id' => Auth::id()]) }}" class="u-edit-form"  enctype="multipart/form-data">
                     {!! method_field('put') !!}
                     {{ csrf_field() }}
                     <div class="form-group required-note">
                         <span class="required">*</span>が付いている欄は必須項目
+                    </div>
+                    <div class="form-group">
+                        <label for="profile_image">プロフィール画像</label>
+                        
+                            @if ('$is_image')
+                                <figure id="remove_profile_images">
+                                    <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @endif
+                        
+                        @if ($errors->has('profile_image'))
+                            <div class="error-target">{{ $errors->first('profile_image') }}</div>
+                        @endif
+                        <label for="profile_image" class="btn btn-success">
+                            画像を選択
+                            <input type="file" onchange="previewFile()" name="profile_image" id="profile_image" style="display:none">
+                        </label>
                     </div>
                     <div class="form-group">
                         <label for="name">選手名<span class="required">*</span></label>

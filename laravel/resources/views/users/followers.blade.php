@@ -5,21 +5,27 @@
 @endsection
 
 @section ('mainArea_content')
-    @if (count($followers) > 0)
+    @if (count($users) > 0)
         <ul class="list-unstyled">
-            @foreach ($followers as $follower)
+            @foreach ($users as $user)
                 <div class="list-border">
                     <li class="media list">
-                        <a href="{{ route('users.show', ['id' => $follower->id]) }}"><img class="profile-image" src="{{ Gravatar::src($follower->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
+                        <a href="{{ route('users.show', ['id' => $user->id]) }}">
+                        @if ('$is_image')
+                            <figure>
+                                <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                            </figure>
+                        @endif
+                        </a>
                         <div class="media-body">
                             <div>
-                                <a href="{{ route('users.show', ['id' => $follower->id]) }}">{{ $follower->name }}</a>
+                                <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
                                 
-                                @if (Auth::check() && ($follower->id != Auth::id()))
+                                
                                     @include ('user_follow.follow_button')
-                                @endif
+                                
 
-                                <a href="{{ route('users.show', ['id' => $follower->id]) }}">詳細</a>
+                                
                             </div>
                             
                             @include ('commons.userContentList')
@@ -31,6 +37,6 @@
         </ul>
     @endif
 
-    {{ $followers->links('pagination::bootstrap-4') }}
+    {{ $users->links('pagination::bootstrap-4') }}
 
 @endsection

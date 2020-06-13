@@ -13,7 +13,11 @@
 @section ('mainArea_content')
 
     <div class="media show_content">
-        <img class="profile-image" src="{{ Gravatar::src($user->email), 50}}" alt="ユーザのプロフィール画像です。">
+    @if ('$is_image')
+        <figure>
+            <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+        </figure>
+    @endif
         <div class="media-body">
             {{ $user->name }}
             
@@ -41,10 +45,16 @@
             @foreach ($posts as $post)
                 <div class="list-border">
                     <li class="media list">
-                        <a href="{{ route('users.show', ['id' => $user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
+                        
+                        @if ('$is_image')
+                            <figure>
+                                <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                            </figure>
+                        @endif
+                        
                         <div class="media-body">
                             <div>
-                                <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
+                                {{ $user->name }}
                                 <a href="{{ route('users.show', ['id' => $user->id]) }}">詳細</a>
                             </div>
                             

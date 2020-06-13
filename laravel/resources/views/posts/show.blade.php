@@ -6,7 +6,13 @@
 
 @section ('mainArea_content')
     <div class="media show_content">
-        <a href="{{ route('users.show', ['id' => $post->user->id]) }}"><img class="profile-image" src="{{ Gravatar::src($post->user->email), 50}}" alt="ユーザのプロフィール画像です。"></a>
+        <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
+            @if ('$is_image')
+                <figure>
+                    <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                </figure>
+            @endif
+        </a>
         <div class="media-body">
         <a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
             

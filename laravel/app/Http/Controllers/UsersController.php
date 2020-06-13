@@ -14,21 +14,35 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Validation\Rule;
 
+use Illuminate\Support\Facades\Storage;
+
 class UsersController extends Controller
 {
     public function index() {
         $users = User::orderBy('id', 'desc')->paginate(10);
 
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
+
         return view('users.index', [
             'users' => $users,
+            'is_image' => $is_image,
         ]);
     }
 
     public function edit() {
         $user = Auth::user();
 
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
+
         return view('users.edit', [
             'user' => $user,
+            'is_image' => $is_image,
         ]);
     }
 
@@ -56,6 +70,7 @@ class UsersController extends Controller
             'experience' => 'string|nullable|max:191',
             'position' => 'string|nullable|max:191',
             'introduction' => 'string|nullable|max:191',
+            'profile_image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:191',
         ], 
         [
             'name.required' => '選手名を入力して下さい。',
@@ -64,7 +79,7 @@ class UsersController extends Controller
             'email.required' => 'メールアドレスを入力して下さい。',
             'email.sring' => 'メールアドレスは文字列として下さい。',
             'email.email' => 'メールアドレスに「@」を挿入して下さい。',
-            'email.max' => 'メールアドレスは191文字として下さい。',
+            'email.max' => 'メールアドレスは191文字以内として下さい。',
             'email.unique' => '入力されたメールアドレスは既に使用されています。',
             'password.required' => 'パスワードを入力して下さい。',
             'gender.string' => '性別は文字列として下さい。',
@@ -82,10 +97,11 @@ class UsersController extends Controller
         $user = Auth::user();
         
         if (Hash::check($request->password, $user->password)) {
-            $form = $request->except(['password']);
+            $form = $request->except(['password', 'profile_image']);
             unset($form['_token']);
             $user->fill($form)->save();
-            
+            $request->profile_image->storeAs('public/profile_images', Auth::id() . '.jpg');
+
             return redirect()->route('users.show', ['id' => Auth::id()]);
         }
 
@@ -122,22 +138,30 @@ class UsersController extends Controller
     public function followers($id)
     {
         $user = User::find($id);
-        $followers = $user->followers()->orderBy('id', 'desc')->paginate(10);
+        $users = $user->followers()->orderBy('id', 'desc')->paginate(10);
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
 
         return view('users.followers', [
-            'user' => $user,
-            'followers' => $followers,
+            'users' => $users,
+            'is_image' => $is_image,
         ]);
     }
 
     public function followings($id)
     {
         $user = User::find($id);
-        $followings = $user->followings()->orderBy('id', 'desc')->paginate(10);
+        $users = $user->followings()->orderBy('id', 'desc')->paginate(10);
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
 
         return view('users.followings', [
-            'user' => $user,
-            'followings' => $followings,
+            'users' => $users,
+            'is_image' => $is_image,
         ]);
     }
 
@@ -145,10 +169,15 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->concerns()->orderBy('id', 'desc')->paginate(10);
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
+            'is_image' => $is_image,
         ];
 
         $data += $this->counts($user);
@@ -160,10 +189,15 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->participations()->orderBy('id', 'desc')->paginate(10);
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
+            'is_image' => $is_image,
         ];
 
         $data += $this->counts($user);
@@ -175,10 +209,15 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
+            'is_image' => $is_image,
         ];
 
         $data += $this->counts($user);
@@ -190,10 +229,15 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
+        $is_image = false;
+        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
+            $is_image = true;
+        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
+            'is_image' => $is_image,
         ];
 
         $data += $this->counts($user);

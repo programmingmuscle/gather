@@ -131,10 +131,11 @@ footer {
     float: right;
 }
 
-.profile-image {
+.profile_image {
     border-radius: 50%;
     margin-right: .5rem;
-    width: 2.5rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .gender, .age {
