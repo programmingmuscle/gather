@@ -46,7 +46,7 @@
                             @if ($errors->has('from_hour'))
                                 <div class="error-target">{{ $errors->first('from_hour') }}</div>
                             @endif
-                            {!! Form::selectRange('from_hour', 0, 12, old('from_hour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'from_hour']) !!}時
+                            {!! Form::selectRange('from_hour', 0, 24, old('from_hour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'from_hour']) !!}時
                         </div>
                         <div class="form-group d-inline-block">
                             @if ($errors->has('from_minute'))
@@ -60,7 +60,7 @@
                         @if ($errors->has('to_hour'))
                             <div class="error-target">{{ $errors->first('to_hour') }}</div>
                         @endif
-                        {!! Form::selectRange('to_hour', 0, 12, old('to_hour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'to_hour']) !!}時
+                        {!! Form::selectRange('to_hour', 0, 24, old('to_hour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'to_hour']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('to_minute'))
@@ -129,7 +129,7 @@
                         @if ($errors->has('deadlineHour'))
                             <div class="error-target">{{ $errors->first('deadlineHour') }}</div>
                         @endif
-                        {!! Form::selectRange('deadlineHour', 0, 12, old('deadlineHour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'dHour']) !!}時
+                        {!! Form::selectRange('deadlineHour', 0, 24, old('deadlineHour'), ['class' => 'form-control d-inline-block w-auto', 'id' => 'dHour']) !!}時
                     </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('deadlineMinute'))
