@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPathToUsersTable extends Migration
+class AddProfileImageToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddPathToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('path');
+            $table->string('profile_image')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddPathToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('path');
+            $table->dropColumn('profile_image');
         });
     }
 }
