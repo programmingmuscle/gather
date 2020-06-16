@@ -11,11 +11,15 @@
                 <div class="list-border">
                     <li class="media list">
                         <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
-                        @if ('$is_image')
-                            <figure>
-                                <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                            </figure>
-                        @endif
+                            @if ($post->user->profile_image != '')
+                                <figure>
+                                    <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @else
+                                <figure id="remove_profile_images">
+                                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @endif
                         </a>
                         <div class="media-body">
                             <div>

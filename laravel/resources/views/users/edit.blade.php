@@ -17,9 +17,13 @@
                     <div class="form-group">
                         <label for="profile_image">プロフィール画像</label>
                         
-                            @if ('$is_image')
+                            @if ($user->profile_image != '')
                                 <figure id="remove_profile_images">
                                     <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @else
+                                <figure id="remove_profile_images">
+                                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                 </figure>
                             @endif
                         

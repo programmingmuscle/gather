@@ -13,11 +13,15 @@
 @section ('mainArea_content')
 
     <div class="media show_content">
-    @if ('$is_image')
-        <figure>
-            <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-        </figure>
-    @endif
+        @if ($user->profile_image != '')
+            <figure>
+                <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+            </figure>
+        @else
+            <figure id="remove_profile_images">
+                <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+            </figure>
+        @endif
         <div class="media-body">
             {{ $user->name }}
             
@@ -45,10 +49,14 @@
             @foreach ($posts as $post)
                 <div class="list-border">
                     <li class="media list">
-                        <a href="{{ route('users.show', ['id' => $post->id]) }}">
-                        @if ('$is_image')
+                        <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
+                        @if ($post->user->profile_image != '')
                             <figure>
                                 <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                            </figure>
+                        @else
+                            <figure id="remove_profile_images">
+                                <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                             </figure>
                         @endif
                         </a>
@@ -63,7 +71,7 @@
 
                                 @endif
 
-                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}">詳細</a>
+                                <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>
                             </div>
                             
                             @include ('commons.postContentList')

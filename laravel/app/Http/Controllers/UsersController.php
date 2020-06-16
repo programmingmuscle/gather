@@ -21,14 +21,8 @@ class UsersController extends Controller
     public function index() {
         $users = User::orderBy('id', 'desc')->paginate(10);
 
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
-
         return view('users.index', [
             'users' => $users,
-            'is_image' => $is_image,
         ]);
     }
 
@@ -100,7 +94,9 @@ class UsersController extends Controller
             $form = $request->except(['password', 'profile_image']);
             unset($form['_token']);
             $user->fill($form)->save();
-            $request->profile_image->storeAs('public/profile_images', Auth::id() . '.jpg');
+            $path = $request->profile_image->storeAs('public/profile_images', Auth::id() . '.jpg');
+            $user->profile_image = $path;
+            $user->save();
 
             return redirect()->route('users.show', ['id' => Auth::id()]);
         }
