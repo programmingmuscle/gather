@@ -29,14 +29,8 @@ class UsersController extends Controller
     public function edit() {
         $user = Auth::user();
 
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
-
         return view('users.edit', [
             'user' => $user,
-            'is_image' => $is_image,
         ]);
     }
 
@@ -94,9 +88,11 @@ class UsersController extends Controller
             $form = $request->except(['password', 'profile_image']);
             unset($form['_token']);
             $user->fill($form)->save();
-            $path = $request->profile_image->storeAs('public/profile_images', Auth::id() . '.jpg');
-            $user->profile_image = $path;
-            $user->save();
+            if ($request->profile_image != '') {
+                $path = $request->profile_image->storeAs('public/profile_images', Auth::id() . '.jpg');
+                $user->profile_image = $path;
+                $user->save();
+            }
 
             return redirect()->route('users.show', ['id' => Auth::id()]);
         }
@@ -135,14 +131,9 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $users = $user->followers()->orderBy('id', 'desc')->paginate(10);
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
 
         return view('users.followers', [
             'users' => $users,
-            'is_image' => $is_image,
         ]);
     }
 
@@ -150,14 +141,9 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $users = $user->followings()->orderBy('id', 'desc')->paginate(10);
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
 
         return view('users.followings', [
             'users' => $users,
-            'is_image' => $is_image,
         ]);
     }
 
@@ -165,15 +151,10 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->concerns()->orderBy('id', 'desc')->paginate(10);
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
-            'is_image' => $is_image,
         ];
 
         $data += $this->counts($user);
@@ -185,15 +166,10 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->participations()->orderBy('id', 'desc')->paginate(10);
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
-            'is_image' => $is_image,
         ];
 
         $data += $this->counts($user);
@@ -205,15 +181,10 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
-            'is_image' => $is_image,
         ];
 
         $data += $this->counts($user);
@@ -221,19 +192,35 @@ class UsersController extends Controller
         return view('tabs.posts', $data);        
     }
 
-    public function show($id)
+    /*public function show($id)
     {
         $user = User::find($id);
         $posts = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
-        $is_image = false;
-        if(Storage::disk('local')->exists('public/profile_images/'. Auth::id() . '.jpg')) {
-            $is_image = true;
-        }
 
         $data = [
             'user' => $user,
             'posts' => $posts,
-            'is_image' => $is_image,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
+    } */
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        $timelines = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
+        $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
+        $participations = $user->participations()->orderBy('id', 'desc')->paginate(10);
+        $concerns = $user->concerns()->orderBy('id', 'desc')->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'timelines' => $timelines,
+            'posts' => $posts,
+            'participations' => $participations,
+            'concerns' => $concerns,
         ];
 
         $data += $this->counts($user);
