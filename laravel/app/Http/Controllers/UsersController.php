@@ -165,66 +165,6 @@ class UsersController extends Controller
         ]);
     }
 
-    public function concerns($id)
-    {
-        $user = User::find($id);
-        $posts = $user->concerns()->orderBy('id', 'desc')->paginate(10);
-
-        $data = [
-            'user' => $user,
-            'posts' => $posts,
-        ];
-
-        $data += $this->counts($user);
-
-        return view('tabs.concerns', $data);
-    }
-
-    public function participations($id)
-    {
-        $user = User::find($id);
-        $posts = $user->participations()->orderBy('id', 'desc')->paginate(10);
-
-        $data = [
-            'user' => $user,
-            'posts' => $posts,
-        ];
-
-        $data += $this->counts($user);
-
-        return view('tabs.participations', $data);
-    }
-
-    public function posts($id)
-    {
-        $user = User::find($id);
-        $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
-
-        $data = [
-            'user' => $user,
-            'posts' => $posts,
-        ];
-
-        $data += $this->counts($user);
-
-        return view('tabs.posts', $data);        
-    }
-
-    /*public function show($id)
-    {
-        $user = User::find($id);
-        $posts = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
-
-        $data = [
-            'user' => $user,
-            'posts' => $posts,
-        ];
-
-        $data += $this->counts($user);
-
-        return view('users.show', $data);
-    } */
-
     public function show($id)
     {
         $user = User::find($id);
