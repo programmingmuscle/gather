@@ -11,6 +11,10 @@ header {
     z-index: 10;
 }
 
+.container {
+    max-width: none;
+}
+
 .nav-link-login {
     padding-right: 0!important;
 }
@@ -76,6 +80,13 @@ footer {
 
 .list-unstyled {
     margin-bottom: 0;
+}
+
+.search-box {
+    padding-left: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #EEEEEE;
 }
 
 .list {
@@ -302,6 +313,10 @@ footer {
         margin-top: 120px;
     }
 
+    .search-box {
+        padding-left: 1rem;
+    }
+
     .list {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -336,6 +351,10 @@ footer {
     .error-message {
         padding-left: 2rem;
         padding-right: 2rem;
+    }
+
+    .search-box {
+        padding-left: 2rem;
     }
 
     .list {

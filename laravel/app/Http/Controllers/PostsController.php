@@ -12,11 +12,36 @@ use Illuminate\Support\Facades\Hash;
 
 class PostsController extends Controller
 {
-    public function index() {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+    public function index(Request $request) {
+        $query = Post::query();
+
+        $keyword = $request->input('keyword');
+
+        if (!empty($keyword)) {
+            $posts = $query
+                    ->where('title', 'like', '%' . $keyword . '%')
+                    ->orwhere('date_time', 'like', '%' . $keyword . '%')
+                    ->orwhere('place', 'like', '%' . $keyword . '%')
+                    ->orwhere('address', 'like', '%' . $keyword . '%')
+                    ->orwhere('reservation', 'like', '%' . $keyword . '%')
+                    ->orwhere('expense', 'like', '%' . $keyword . '%')
+                    ->orwhere('ball', 'like', '%' . $keyword . '%')
+                    ->orwhere('people', 'like', '%' . $keyword . '%')
+                    ->orwhere('remarks', 'like', '%' . $keyword . '%')
+                    ->orderBy('id', 'disc')
+                    ->paginate(10);
+            $posts = Post::whereHas('user', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->orderBy('id', 'disc')->paginate(10);
+            
+        } else {
+            $posts = Post::orderBy('id', 'disc')->paginate(10);
+        }
 
         return view('posts.index', [
-            'posts' => $posts]);
+            'posts' => $posts,
+            'keyword' => $keyword,
+    ]);
     }
 
     public function create() {
