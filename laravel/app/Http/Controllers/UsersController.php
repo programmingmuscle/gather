@@ -112,7 +112,7 @@ class UsersController extends Controller
                 $user->save();
             }
 
-            return redirect()->route('users.show', ['id' => Auth::id()]);
+            return redirect()->route('users.show', ['id' => Auth::id()])->with('success', 'アカウントを編集しました。');
         }
 
         
@@ -141,7 +141,7 @@ class UsersController extends Controller
 
         if (Hash::check($request->password, $user->password)) {
             $user->delete();
-            return redirect('/');
+            return redirect('/')->with('success', 'アカウントを削除しました。');
         }
     }
 

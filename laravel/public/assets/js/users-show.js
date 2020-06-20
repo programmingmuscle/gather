@@ -16,3 +16,5 @@ $('.tabs-menu a').on('click', (e) => {
 });
 
 showTab('#tabs-timelines');
+
+$('.flash_message').fadeOut(5000);

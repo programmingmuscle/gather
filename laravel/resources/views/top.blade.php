@@ -6,6 +6,11 @@
 @endsection
 
 @section ('content')
+    @if (session('success'))
+        <div class="alert alert-success flash_message" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="top_content text-center">
         <h1 class="top_app-title">GATHER!</h1>
         <h2 class="top_app-subtitle">~Let's play baseball~</h2>

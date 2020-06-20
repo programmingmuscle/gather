@@ -147,7 +147,9 @@ class PostsController extends Controller
             'remarks' => $request->remarks,
         ]);
 
-        return redirect()->route('users.show', ['id' => Auth::id()]);
+        $post = Post::orderBy('id', 'disc')->first();
+
+        return redirect()->route('posts.show', ['id' => $post->id])->with('success', '投稿を作成しました。');
     }
 
     public function show($id) {
@@ -186,7 +188,7 @@ class PostsController extends Controller
         if (Hash::check($request->password, Auth::user()->password)) {
             $post->delete();
 
-            return redirect()->route('posts.index');
+            return redirect()->route('users.show', ['id' => Auth::id()])->with('success', '投稿を削除しました。');
         }
     }
 
@@ -303,6 +305,6 @@ class PostsController extends Controller
         $post->remarks = $request->remarks;
         $post->save();
 
-        return redirect()->route('posts.show', ['id' => $post->id]);
+        return redirect()->route('posts.show', ['id' => $post->id])->with('success', '投稿を編集しました。');
     }
 }

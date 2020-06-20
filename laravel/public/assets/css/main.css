@@ -11,6 +11,12 @@ header {
     z-index: 10;
 }
 
+.flash_message {
+    z-index: 99;
+    position: fixed;
+    width: 100%;
+}
+
 .container {
     max-width: none;
 }
@@ -283,6 +289,10 @@ footer {
         padding-right: 0;
     }
 
+    .flash_message {
+        width: 80%;
+    }
+
     .main {
         width: 80%;
         margin-left: auto;
@@ -336,6 +346,10 @@ footer {
         margin-right: auto;
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .flash_message {
+        width: 60%;
     }
 
     .main {
