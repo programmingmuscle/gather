@@ -36,14 +36,14 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <label for="name">選手名<span class="required">*</span></label>
+                        <label for="name" id="name-error">選手名<span class="required">*</span></label>
                         @if ($errors->has('name'))
                             <div class="error-target">{{ $errors->first('name') }}</div>
                         @endif
                         <input type="text" name="name" value="{{ $user->name }}" id="name" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="email">メールアドレス<span class="required">*</span></label>
+                        <label for="email" id="email-error">メールアドレス<span class="required">*</span></label>
                         @if ($errors->has('email'))
                             <div class="error-target">{{ $errors->first('email') }}</div>
                         @endif
