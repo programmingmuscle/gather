@@ -111,7 +111,7 @@
                         @endif
                         <select name="position" id="position" class="form-control">
                             @if ($user->position != null)
-                                <option value="{{ $user->positon }}">{{ $user->position }}</option>
+                                <option value="{{ $user->position }}">{{ $user->position }}</option>
                             @endif
                             <option value=""></option>
                             <option value="投手">投手</option>
