@@ -23,7 +23,8 @@
     @if (count($users) > 0)
         <ul class="list-unstyled">
             @foreach ($users as $user)
-                <div class="list-border">
+                <div class="list-border detail">
+                    <a href="{{ route('users.show', ['id' => $user->id]) }}" style="display:none"></a>
                     <li class="media list">
                         <a href="{{ route('users.show', ['id' => $user->id]) }}">
 
