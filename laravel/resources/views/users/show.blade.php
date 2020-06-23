@@ -48,7 +48,8 @@
             @if (count($timelines) > 0)
                 <ul class="list-unstyled">
                     @foreach ($timelines as $timeline)
-                        <div class="list-border">
+                        <div class="list-border post_detail">
+                            <a href="{{ route('posts.show', ['id' => $timeline->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $timeline->user->id]) }}">
                                     @if ($timeline->user->profile_image != '')
@@ -60,96 +61,83 @@
                                 <div class="media-body">
                                     <div>
                                         <a href="{{ route('users.show', ['id' => $timeline->user->id]) }}">{{ $timeline->user->name }}</a>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            【{{ $timeline->title }}】
+                                        </li>                                        
+                                        <li>
+                                            日時：{{ substr($timeline->date_time, 0, 16) . '~' . substr($timeline->end_time, 0, 5) }}
+                                        </li>
+                                        <li>
+                                            場所：{{ $timeline->place }}
+                                        </li>
+                                        <li>
+                                            住所：{{ $timeline->address }}
+                                        </li>
+                                        <li>
+                                            場所予約：{{ $timeline->reservation }}
+                                        </li>
+                                        <li>
+                                            参加費用：{{ $timeline->expense }}
+                                        </li>
+                                        <li>
+                                            使用球：{{ $timeline->ball }}
+                                        </li>
+                                        <li>
+                                            応募締切：{{ substr($timeline->deadline, 0, 16) }}
+                                        </li>
+                                        <li>
+                                            募集人数：{{ $timeline->people }}
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        {{ $timeline->remarks }}
+                                    </p>
+                                    @if (Auth::check() && ($timeline->user->id != Auth::id()))     
                                         
-                                        @if (Auth::check() && ($timeline->user->id != Auth::id()))
-                                            
-                                        
-                                            @if (Auth::user()->is_participating($timeline->id))
-                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}">
-                                                    {!! method_field('delete') !!}
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button">
-                                                    </div>
-                                                </form>
-                                            @else
-                                                <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}">
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button">
-                                                    </div>
-                                                </form>
-                                            @endif  
-                                        
-                                            @if (Auth::user()->is_concerned($timeline->id))
-                                                <form method="POST" action="{{ route('concerns.unconcern', ['id' => $timeline->id]) }}">
-                                                    {!! method_field('delete') !!}
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="気になる" class="btn concern-button">
-                                                    </div>
-                                                </form>
-                                            @else
-                                                <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}">
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="気になる" class="btn concern-button">
-                                                    </div>
-                                                </form>
-                                            @endif
-
+                                        @if (Auth::user()->is_participating($timeline->id))
+                                            <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}">
+                                                {!! method_field('delete') !!}
+                                                {{ csrf_field() }}
+                                                <input type="submit" value="参加する" class="btn participate-button">
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}">
+                                                {{ csrf_field() }}
+                                                <input type="submit" value="参加する" class="btn participate-button">
+                                            </form>
+                                        @endif  
+                                    
+                                        @if (Auth::user()->is_concerned($timeline->id))
+                                            <form method="POST" action="{{ route('concerns.unconcern', ['id' => $timeline->id]) }}">
+                                                {!! method_field('delete') !!}
+                                                {{ csrf_field() }}
+                                                <input type="submit" value="気になる" class="btn concern-button">
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}">
+                                                {{ csrf_field() }}
+                                                <input type="submit" value="気になる" class="btn concern-button">
+                                            </form>
                                         @endif
 
-                                        <a href="{{ route('posts.show', ['id' => $timeline->id]) }}">詳細</a>
-                                    </div>
+                                    @endif
                                     
-                                    <ul class="list-unstyled">
-                                    <li>
-                                        【{{ $timeline->title }}】
-                                    </li>
-                                    <li>
-                                        日時：{{ substr($timeline->date_time, 0, 16) . '~' . substr($timeline->end_time, 0, 5) }}
-                                    </li>
-                                    <li>
-                                        場所：{{ $timeline->place }}
-                                    </li>
-                                    <li>
-                                        住所：{{ $timeline->address }}
-                                    </li>
-                                    <li>
-                                        場所予約：{{ $timeline->reservation }}
-                                    </li>
-                                    <li>
-                                        参加費用：{{ $timeline->expense }}
-                                    </li>
-                                    <li>
-                                        使用球：{{ $timeline->ball }}
-                                    </li>
-                                    <li>
-                                        応募締切：{{ substr($timeline->deadline, 0, 16) }}
-                                    </li>
-                                    <li>
-                                        募集人数：{{ $timeline->people }}
-                                    </li>
-                                </ul>
-                                <p>
-                                    {{ $timeline->remarks }}
-                                </p>
-
                                 </div>
                             </li>
-                        </div>
+                        </div>                               
                     @endforeach
                 </ul>
+                {{ $timelines->links('pagination::bootstrap-4') }}
             @endif
-
-            {{ $timelines->links('pagination::bootstrap-4') }}
         </section>
         <section id="tabs-posts">
             @if (count($posts) > 0)
                 <ul class="list-unstyled">
                     @foreach ($posts as $post)
-                        <div class="list-border">
+                        <div class="list-border post_detail">
+                            <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 
                                 @if ($post->user->profile_image != '')
@@ -165,7 +153,6 @@
                                 <div class="media-body">
                                     <div>
                                         {{ $user->name }}
-                                        <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>
                                     </div>
                                     
                                     <ul class="list-unstyled">
@@ -206,15 +193,15 @@
                         </div>
                     @endforeach
                 </ul>
+                {{ $posts->links('pagination::bootstrap-4') }}
             @endif
-
-            {{ $posts->links('pagination::bootstrap-4') }}
         </section>
         <section id="tabs-participations">
             @if (count($participations) > 0)
                 <ul class="list-unstyled">
                     @foreach ($participations as $participation)
-                        <div class="list-border">
+                        <div class="list-border post_detail">
+                            <a href="{{ route('posts.show', ['id' => $participation->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $participation->user->id]) }}">
                                 @if ($participation->user->profile_image != '')
@@ -270,7 +257,6 @@
 
                                         @endif
 
-                                        <a href="{{ route('posts.show', ['id' => $participation->id]) }}">詳細</a>
                                     </div>
                                     
                                     <ul class="list-unstyled">
@@ -311,15 +297,15 @@
                         </div>
                     @endforeach
                 </ul>
+                {{ $participations->links('pagination::bootstrap-4') }}
             @endif
-
-            {{ $participations->links('pagination::bootstrap-4') }}
         </section>
         <section id="tabs-concerns">
             @if (count($concerns) > 0)
                 <ul class="list-unstyled">
                     @foreach ($concerns as $concern)
-                        <div class="list-border">
+                        <div class="list-border post_detail">
+                            <a href="{{ route('posts.show', ['id' => $concern->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $concern->user->id]) }}">
                                 @if ($concern->user->profile_image != '')
@@ -355,7 +341,7 @@
                                                 </form>
                                             @endif  
                                             @if (Auth::check() && !($concern->user->id == Auth::id()))
-                                                @if (Auth::user()->is_concerned($participation->id))
+                                                @if (Auth::user()->is_concerned($concern->id))
                                                     <form method="POST" action="{{ route('concerns.unconcern', ['id' => $concern->id]) }}">
                                                         {!! method_field('delete') !!}
                                                         {{ csrf_field() }}
@@ -374,7 +360,6 @@
                                             @endif
                                         @endif
 
-                                        <a href="{{ route('posts.show', ['id' => $concern->id]) }}">詳細</a>
                                     </div>
                                     
                                     <ul class="list-unstyled">
@@ -415,9 +400,8 @@
                         </div>
                     @endforeach
                 </ul>
-            @endif
-
-            {{ $concerns->links('pagination::bootstrap-4') }}
+                {{ $concerns->links('pagination::bootstrap-4') }}
+            @endif 
         </section>
     </section>
 

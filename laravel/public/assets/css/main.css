@@ -238,6 +238,11 @@ footer {
     display: none;
 }
 
+.post_detail:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;

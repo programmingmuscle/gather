@@ -18,3 +18,10 @@ $('.tabs-menu a').on('click', (e) => {
 showTab('#tabs-timelines');
 
 $('.flash_message').fadeOut(5000);
+
+$('.post_detail').on('click', (e) => {
+    const url = $(e.currentTarget).children('a').attr('href');
+    console.log(url);
+    window.location.href = url;
+    
+});

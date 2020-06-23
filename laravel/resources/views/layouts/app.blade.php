@@ -62,7 +62,7 @@
 
 		@yield ('/top_body&/top_wrapper')	
 
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="{{ asset('/assets/js/top.js') }}"></script>
 		<script src="{{ asset('/assets/js/signup.js') }}"></script>
 		<script src="{{ asset('/assets/js/login.js') }}"></script>
