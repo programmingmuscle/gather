@@ -48,7 +48,7 @@
             @if (count($timelines) > 0)
                 <ul class="list-unstyled">
                     @foreach ($timelines as $timeline)
-                        <div class="list-border post_detail">
+                        <div class="list-border detail">
                             <a href="{{ route('posts.show', ['id' => $timeline->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $timeline->user->id]) }}">
@@ -136,7 +136,7 @@
             @if (count($posts) > 0)
                 <ul class="list-unstyled">
                     @foreach ($posts as $post)
-                        <div class="list-border post_detail">
+                        <div class="list-border detail">
                             <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 
@@ -200,7 +200,7 @@
             @if (count($participations) > 0)
                 <ul class="list-unstyled">
                     @foreach ($participations as $participation)
-                        <div class="list-border post_detail">
+                        <div class="list-border detail">
                             <a href="{{ route('posts.show', ['id' => $participation->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $participation->user->id]) }}">
@@ -304,7 +304,7 @@
             @if (count($concerns) > 0)
                 <ul class="list-unstyled">
                     @foreach ($concerns as $concern)
-                        <div class="list-border post_detail">
+                        <div class="list-border detail">
                             <a href="{{ route('posts.show', ['id' => $concern->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $concern->user->id]) }}">
