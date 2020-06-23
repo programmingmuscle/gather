@@ -21,7 +21,8 @@
     @if (count($posts) > 0)
         <ul class="list-unstyled">
             @foreach ($posts as $post)
-                <div class="list-border">
+                <div class="list-border detail">
+                    <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
                     <li class="media list">
                         <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
                             @if ($post->user->profile_image != '')
@@ -41,7 +42,6 @@
                                 @include ('participations.participate_button')
                                 @include ('concerns.concern_button')
 
-                                <a href="{{ route('posts.show', ['id' => $post->id]) }}">詳細</a>
                             </div>
                             
                             @include ('commons.postContentList')

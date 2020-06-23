@@ -69,7 +69,7 @@
 		<script src="{{ asset('/assets/js/users-index.js') }}"></script>
 		<script src="{{ asset('/assets/js/users-show.js') }}"></script>
 		<script src="{{ asset('/assets/js/users-edit.js') }}"></script>
-
+		<script src="{{ asset('/assets/js/posts-index.js') }}"></script>
 		<script src="{{ asset('/assets/js/posts-create.js') }}"></script>
 		<script src="{{ asset('/assets/js/posts-show.js') }}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
