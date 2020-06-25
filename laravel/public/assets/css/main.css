@@ -185,18 +185,6 @@ footer {
     color: #7b7e82;
 }
 
-.tabs-menu {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-  
-.tabs-menu li {
-    float: left;
-    border-bottom: 1px solid #EEEEEE;
-    transition: all .15s;
-}
-
 .timelines {
     width: 30%;
 }
@@ -207,6 +195,18 @@ footer {
 
 .concerns {
     width:30%;
+}
+
+.tabs-menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+.tabs-menu li {
+    float: left;
+    border-bottom: 1px solid #EEEEEE;
+    transition: all .15s;
 }
 
 .tabs-menu a {
@@ -241,6 +241,26 @@ footer {
 .detail:hover {
     background-color: #f0f0f0;
     cursor: pointer;
+}
+
+.edit-button {    
+    color: #557F95;
+    border-color: #557F95;
+    padding: .25rem 1rem;
+    margin-right: 1rem;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.edit-button:hover {
+    background-color: #f0f0f0;
+    color: #557F95;
+}
+
+.edit-button-position {
+    text-align: right;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    display: inline-block;
 }
 
 @media (min-width: 375px) {
