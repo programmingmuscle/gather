@@ -22,6 +22,7 @@
                 
     @if (count($users) > 0)
         <ul class="list-unstyled">
+
             @foreach ($users as $user)
                 <div class="list-border detail">
                     <a href="{{ route('users.show', ['id' => $user->id]) }}" style="display:none"></a>
@@ -40,19 +41,23 @@
 
                         </a>
                         <div class="media-body">
-                            <div>
-                                <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
-                                
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('users.show', ['id' => $user->id]) }}" class="name-position d-inline-block">{{ $user->name }}</a>
+                                <div class="button-position">
+
                                     @include ('user_follow.follow_button')
 
-                            </div>
+                                </div>
                             
-                            @include ('commons.userContentList')
+                            </div>
 
+                            @include ('commons.userContentList')
+                            
                         </div>
                     </li>
                 </div>
             @endforeach
+
         </ul>
     @endif
 

@@ -22,17 +22,17 @@
                         @endif
                         </a>
                         <div class="media-body">
-                            <div>
-                                <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
-                                
-                                
-                                    @include ('user_follow.follow_button')
-                                
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('users.show', ['id' => $user->id]) }}" class="name-position d-inline-block">{{ $user->name }}</a>
+                                <div class="button-position">
 
-                                
+                                    @include ('user_follow.follow_button')
+
+                                </div>
+
                             </div>
-                            
-                            @include ('commons.userContentList')
+
+                                @include ('commons.userContentList')
 
                         </div>
                     </li>

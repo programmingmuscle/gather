@@ -36,15 +36,24 @@
                             @endif
                         </a>
                         <div class="media-body">
-                            <div>
-                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
-                                
-                                @include ('participations.participate_button')
-                                @include ('concerns.concern_button')
+                            <div class="d-flex justify-content-between">              
+                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position d-inline-block">{{ $post->user->name }}</a>
 
+                                @if ($post->user->id == Auth::id())
+                                    <div class="button-position">
+                                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
+                                    </div>
+                                @endif               
                             </div>
-                            
+
                             @include ('commons.postContentList')
+                            
+                            @if (Auth::check() && !($post->user->id == Auth::id()))
+                                <div class="button-position ml-3">
+                                    @include ('participations.participate_button')
+                                    @include ('concerns.concern_button')
+                                </div>
+                            @endif
 
                         </div>
                     </li>

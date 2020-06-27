@@ -23,11 +23,14 @@
             </figure>
         @endif
         <div class="media-body">
-            {{ $user->name }}
-            
-            @if (Auth::check() && ($user->id != Auth::id()))
-                @include ('user_follow.follow_button')
-            @endif
+            <div class="d-flex justify-content-between">
+                <div class="name-position d-inline-block">{{ $user->name }}</div>
+                <div class="button-position">
+
+                    @include ('user_follow.follow_button')
+
+                </div>
+            </div>
 
             @include ('commons.userContentList')
 
@@ -59,69 +62,81 @@
                                     @endif
                                 </a>
                                 <div class="media-body">
-                                    <div>
-                                        <a href="{{ route('users.show', ['id' => $timeline->user->id]) }}">{{ $timeline->user->name }}</a>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{{ route('users.show', ['id' => $timeline->user->id]) }}" class="name-position d-inline-block">{{ $timeline->user->name }}</a>
+
+                                        @if ($timeline->user->id == Auth::id())
+                                            <div class="button-position">
+                                                <a href="{{ route('posts.edit', ['id' => $timeline->id]) }}" class="edit-button btn">投稿を編集</a>
+                                            </div>
+                                        @endif 
+
                                     </div>
                                     <ul class="list-unstyled">
                                         <li>
                                             【{{ $timeline->title }}】
-                                        </li>                                        
-                                        <li>
-                                            日時：{{ substr($timeline->date_time, 0, 16) . '~' . substr($timeline->end_time, 0, 5) }}
-                                        </li>
-                                        <li>
-                                            場所：{{ $timeline->place }}
-                                        </li>
-                                        <li>
-                                            住所：{{ $timeline->address }}
-                                        </li>
-                                        <li>
-                                            場所予約：{{ $timeline->reservation }}
-                                        </li>
-                                        <li>
-                                            参加費用：{{ $timeline->expense }}
-                                        </li>
-                                        <li>
-                                            使用球：{{ $timeline->ball }}
-                                        </li>
-                                        <li>
-                                            応募締切：{{ substr($timeline->deadline, 0, 16) }}
-                                        </li>
-                                        <li>
-                                            募集人数：{{ $timeline->people }}
-                                        </li>
+                                        </li>      
+                                        <div class="ml-3">
+                                            <li>
+                                                日時：{{ substr($timeline->date_time, 0, 16) . '~' . substr($timeline->end_time, 0, 5) }}
+                                            </li>
+                                            <li>
+                                                場所：{{ $timeline->place }}
+                                            </li>
+                                            <li>
+                                                住所：{{ $timeline->address }}
+                                            </li>
+                                            <li>
+                                                場所予約：{{ $timeline->reservation }}
+                                            </li>
+                                            <li>
+                                                参加費用：{{ $timeline->expense }}
+                                            </li>
+                                            <li>
+                                                使用球：{{ $timeline->ball }}
+                                            </li>
+                                            <li>
+                                                応募締切：{{ substr($timeline->deadline, 0, 16) }}
+                                            </li>
+                                            <li>
+                                                募集人数：{{ $timeline->people }}
+                                            </li>
+                                        </div>
                                     </ul>
                                     <p>
                                         {{ $timeline->remarks }}
                                     </p>
-                                    @if (Auth::check() && ($timeline->user->id != Auth::id()))     
-                                        
-                                        @if (Auth::user()->is_participating($timeline->id))
-                                            <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}">
-                                                {!! method_field('delete') !!}
-                                                {{ csrf_field() }}
-                                                <input type="submit" value="参加する" class="btn participate-button">
-                                            </form>
-                                        @else
-                                            <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}">
-                                                {{ csrf_field() }}
-                                                <input type="submit" value="参加する" class="btn participate-button">
-                                            </form>
-                                        @endif  
-                                    
-                                        @if (Auth::user()->is_concerned($timeline->id))
-                                            <form method="POST" action="{{ route('concerns.unconcern', ['id' => $timeline->id]) }}">
-                                                {!! method_field('delete') !!}
-                                                {{ csrf_field() }}
-                                                <input type="submit" value="気になる" class="btn concern-button">
-                                            </form>
-                                        @else
-                                            <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}">
-                                                {{ csrf_field() }}
-                                                <input type="submit" value="気になる" class="btn concern-button">
-                                            </form>
-                                        @endif
 
+                                    @if (Auth::check() && ($timeline->user->id != Auth::id()))     
+                                        <div class="button-position ml-3">
+
+                                            @if (Auth::user()->is_participating($timeline->id))
+                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                    {!! method_field('delete') !!}
+                                                    {{ csrf_field() }}
+                                                    <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
+                                                </form>
+                                            @else
+                                                <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                    {{ csrf_field() }}
+                                                    <input type="submit" value="参加する" class="btn participate-button d-inline-block">
+                                                </form>
+                                            @endif  
+                                        
+                                            @if (Auth::user()->is_concerned($timeline->id))
+                                                <form method="POST" action="{{ route('concerns.unconcern', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                    {!! method_field('delete') !!}
+                                                    {{ csrf_field() }}
+                                                    <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
+                                                </form>
+                                            @else
+                                                <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                    {{ csrf_field() }}
+                                                    <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                </form>
+                                            @endif
+
+                                        </div>
                                     @endif
                                     
                                 </div>
@@ -133,56 +148,68 @@
             @endif
         </section>
         <section id="tabs-posts">
+
             @if (count($posts) > 0)
                 <ul class="list-unstyled">
+
                     @foreach ($posts as $post)
                         <div class="list-border detail">
                             <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
                             <li class="media list">
-                                
-                                @if ($post->user->profile_image != '')
-                                    <figure>
-                                        <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                    </figure>
-                                @else
-                                    <figure id="remove_profile_images">
-                                        <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                    </figure>
-                                @endif
-                                
+                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
+
+                                    @if ($post->user->profile_image != '')
+                                        <figure>
+                                            <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </figure>
+                                    @else
+                                        <figure id="remove_profile_images">
+                                            <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </figure>
+                                    @endif
+
+                                </a>
                                 <div class="media-body">
-                                    <div>
-                                        {{ $user->name }}
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position d-inline-block">{{ $post->user->name }}</a>
+                                        
+                                        @if ($post->user->id == Auth::id())
+                                            <div class="button-position">
+                                                <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
+                                            </div>
+                                        @endif
+
                                     </div>
-                                    
                                     <ul class="list-unstyled">
                                         <li>
                                             【{{ $post->title }}】
                                         </li>
-                                        <li>
-                                            日時：{{ substr($post->date_time, 0, 16) . '~' . substr($post->end_time, 0, 5) }}
-                                        </li>
-                                        <li>
-                                            場所：{{ $post->place }}
-                                        </li>
-                                        <li>
-                                            住所：{{ $post->address }}
-                                        </li>
-                                        <li>
-                                            場所予約：{{ $post->reservation }}
-                                        </li>
-                                        <li>
-                                            参加費用：{{ $post->expense }}
-                                        </li>
-                                        <li>
-                                            使用球：{{ $post->ball }}
-                                        </li>
-                                        <li>
-                                            応募締切：{{ substr($post->deadline, 0, 16) }}
-                                        </li>
-                                        <li>
-                                            募集人数：{{ $post->people }}
-                                        </li>
+                                        <div class="ml-3">
+                                            <li>
+                                                日時：{{ substr($post->date_time, 0, 16) . '~' . substr($post->end_time, 0, 5) }}
+                                            </li>
+                                            <li>
+                                                場所：{{ $post->place }}
+                                            </li>
+                                            <li>
+                                                住所：{{ $post->address }}
+                                            </li>
+                                            <li>
+                                                場所予約：{{ $post->reservation }}
+                                            </li>
+                                            <li>
+                                                参加費用：{{ $post->expense }}
+                                            </li>
+                                            <li>
+                                                使用球：{{ $post->ball }}
+                                            </li>
+                                            <li>
+                                                応募締切：{{ substr($post->deadline, 0, 16) }}
+                                            </li>
+                                            <li>
+                                                募集人数：{{ $post->people }}
+                                            </li>
+                                        </div>
                                     </ul>
                                     <p>
                                         {{ $post->remarks }}
@@ -192,216 +219,237 @@
                             </li>
                         </div>
                     @endforeach
+
                 </ul>
                 {{ $posts->links('pagination::bootstrap-4') }}
             @endif
+
         </section>
         <section id="tabs-participations">
+
             @if (count($participations) > 0)
                 <ul class="list-unstyled">
+
                     @foreach ($participations as $participation)
                         <div class="list-border detail">
                             <a href="{{ route('posts.show', ['id' => $participation->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $participation->user->id]) }}">
-                                @if ($participation->user->profile_image != '')
-                                    <figure>
-                                        <img src="/storage/profile_images/{{ $participation->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                    </figure>
-                                @else
-                                    <figure id="remove_profile_images">
-                                        <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                    </figure>
-                                @endif
+
+                                    @if ($participation->user->profile_image != '')
+                                        <figure>
+                                            <img src="/storage/profile_images/{{ $participation->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </figure>
+                                    @else
+                                        <figure id="remove_profile_images">
+                                            <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </figure>
+                                    @endif
+
                                 </a>
                                 <div class="media-body">
-                                    <div>
-                                        <a href="{{ route('users.show', ['id' => $participation->user->id]) }}">{{ $participation->user->name }}</a>
+                                    <a href="{{ route('users.show', ['id' => $participation->user->id]) }}" class="name-position d-inline-block">{{ $participation->user->name }}</a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            【{{ $participation->title }}】
+                                        </li>
+                                        <div class="ml-3">
+                                            <li>
+                                                日時：{{ substr($participation->date_time, 0, 16) . '~' . substr($participation->end_time, 0, 5) }}
+                                            </li>
+                                            <li>
+                                                場所：{{ $participation->place }}
+                                            </li>
+                                            <li>
+                                                住所：{{ $participation->address }}
+                                            </li>
+                                            <li>
+                                                場所予約：{{ $participation->reservation }}
+                                            </li>
+                                            <li>
+                                                参加費用：{{ $participation->expense }}
+                                            </li>
+                                            <li>
+                                                使用球：{{ $participation->ball }}
+                                            </li>
+                                            <li>
+                                                応募締切：{{ substr($participation->deadline, 0, 16) }}
+                                            </li>
+                                            <li>
+                                                募集人数：{{ $participation->people }}
+                                            </li>
+                                        </div>
+                                    </ul>
+                                    <p>
+                                        {{ $participation->remarks }}
+                                    </p>
+                                    @if (Auth::check() && ($participation->user->id != Auth::id()))
                                         
-                                        @if (Auth::check() && ($participation->user->id != Auth::id()))
-                                            
+                                        <div class="button-position ml-3">
                                             @if (Auth::user()->is_participating($participation->id))
-                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $participation->id]) }}">
+                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $participation->id]) }}" class="d-inline-block">
                                                     {!! method_field('delete') !!}
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button">
+                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
                                                     </div>
                                                 </form>
                                             @else
                                                 <form method="POST" action="{{ route('participations.participate', ['id' => $participation->id]) }}">
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button">
+                                                        <input type="submit" value="参加する" class="btn participate-button d-inline-block">
                                                     </div>
                                                 </form>
-                                            @endif  
+                                            @endif 
+
                                             @if (Auth::check() && !($participation->user->id == Auth::id()))
+                                                
                                                 @if (Auth::user()->is_concerned($participation->id))
-                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $participation->id]) }}">
+                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $participation->id]) }}" class="d-inline-block">
                                                         {!! method_field('delete') !!}
                                                         {{ csrf_field() }}
                                                         <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn concern-button">
+                                                            <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
                                                         </div>
                                                     </form>
                                                 @else
-                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $participation->id]) }}">
+                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $participation->id]) }}" class="d-inline-block">
                                                         {{ csrf_field() }}
                                                         <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn concern-button">
+                                                            <input type="submit" value="気になる" class="btn concern-button d-inline-block">
                                                         </div>
                                                     </form>
-                                                @endif  
+                                                @endif
+
                                             @endif
 
-                                        @endif
-
-                                    </div>
-                                    
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            【{{ $participation->title }}】
-                                        </li>
-                                        <li>
-                                            日時：{{ substr($participation->date_time, 0, 16) . '~' . substr($participation->end_time, 0, 5) }}
-                                        </li>
-                                        <li>
-                                            場所：{{ $participation->place }}
-                                        </li>
-                                        <li>
-                                            住所：{{ $participation->address }}
-                                        </li>
-                                        <li>
-                                            場所予約：{{ $participation->reservation }}
-                                        </li>
-                                        <li>
-                                            参加費用：{{ $participation->expense }}
-                                        </li>
-                                        <li>
-                                            使用球：{{ $participation->ball }}
-                                        </li>
-                                        <li>
-                                            応募締切：{{ substr($participation->deadline, 0, 16) }}
-                                        </li>
-                                        <li>
-                                            募集人数：{{ $participation->people }}
-                                        </li>
-                                    </ul>
-                                    <p>
-                                        {{ $participation->remarks }}
-                                    </p>
+                                        </div>
+                                    @endif
 
                                 </div>
                             </li>
                         </div>
                     @endforeach
+
                 </ul>
                 {{ $participations->links('pagination::bootstrap-4') }}
             @endif
+
         </section>
         <section id="tabs-concerns">
+
             @if (count($concerns) > 0)
                 <ul class="list-unstyled">
+
                     @foreach ($concerns as $concern)
                         <div class="list-border detail">
                             <a href="{{ route('posts.show', ['id' => $concern->id]) }}" style="display:none"></a>
                             <li class="media list">
                                 <a href="{{ route('users.show', ['id' => $concern->user->id]) }}">
-                                @if ($concern->user->profile_image != '')
-                                    <figure>
-                                        <img src="/storage/profile_images/{{ $concern->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                    </figure>
-                                @else
-                                    <figure id="remove_profile_images">
-                                        <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                    </figure>
-                                @endif
+                                
+                                    @if ($concern->user->profile_image != '')
+                                        <figure>
+                                            <img src="/storage/profile_images/{{ $concern->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </figure>
+                                    @else
+                                        <figure id="remove_profile_images">
+                                            <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </figure>
+                                    @endif
+
                                 </a>
                                 <div class="media-body">
-                                    <div>
-                                        <a href="{{ route('users.show', ['id' => $concern->user->id]) }}">{{ $concern->user->name }}</a>
-                                        
-                                        @if (Auth::check() && ($concern->user->id != Auth::id()))
-                                            
-                                            @if (Auth::user()->is_participating($concern->id))
-                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $concern->id]) }}">
-                                                    {!! method_field('delete') !!}
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button">
-                                                    </div>
-                                                </form>
-                                            @else
-                                                <form method="POST" action="{{ route('participations.participate', ['id' => $concern->id]) }}">
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button">
-                                                    </div>
-                                                </form>
-                                            @endif  
-                                            @if (Auth::check() && !($concern->user->id == Auth::id()))
-                                                @if (Auth::user()->is_concerned($concern->id))
-                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $concern->id]) }}">
-                                                        {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn concern-button">
-                                                        </div>
-                                                    </form>
-                                                @else
-                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $concern->id]) }}">
-                                                        {{ csrf_field() }}
-                                                        <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn concern-button">
-                                                        </div>
-                                                    </form>
-                                                @endif  
-                                            @endif
-                                        @endif
-
-                                    </div>
-                                    
+                                    <a href="{{ route('users.show', ['id' => $concern->user->id]) }}" class="name-position d-inline-block">{{ $concern->user->name }}</a>
                                     <ul class="list-unstyled">
                                         <li>
                                             【{{ $concern->title }}】
                                         </li>
-                                        <li>
-                                            日時：{{ substr($concern->date_time, 0, 16) . '~' . substr($concern->end_time, 0, 5) }}
-                                        </li>
-                                        <li>
-                                            場所：{{ $concern->place }}
-                                        </li>
-                                        <li>
-                                            住所：{{ $concern->address }}
-                                        </li>
-                                        <li>
-                                            場所予約：{{ $concern->reservation }}
-                                        </li>
-                                        <li>
-                                            参加費用：{{ $concern->expense }}
-                                        </li>
-                                        <li>
-                                            使用球：{{ $concern->ball }}
-                                        </li>
-                                        <li>
-                                            応募締切：{{ substr($concern->deadline, 0, 16) }}
-                                        </li>
-                                        <li>
-                                            募集人数：{{ $concern->people }}
-                                        </li>
+                                        <div class="ml-3">
+                                            <li>
+                                                日時：{{ substr($concern->date_time, 0, 16) . '~' . substr($concern->end_time, 0, 5) }}
+                                            </li>
+                                            <li>
+                                                場所：{{ $concern->place }}
+                                            </li>
+                                            <li>
+                                                住所：{{ $concern->address }}
+                                            </li>
+                                            <li>
+                                                場所予約：{{ $concern->reservation }}
+                                            </li>
+                                            <li>
+                                                参加費用：{{ $concern->expense }}
+                                            </li>
+                                            <li>
+                                                使用球：{{ $concern->ball }}
+                                            </li>
+                                            <li>
+                                                応募締切：{{ substr($concern->deadline, 0, 16) }}
+                                            </li>
+                                            <li>
+                                                募集人数：{{ $concern->people }}
+                                            </li>
+                                        </div>
                                     </ul>
                                     <p>
                                         {{ $concern->remarks }}
                                     </p>
+                                    
+                                    @if (Auth::check() && ($concern->user->id != Auth::id()))
+
+                                        <div class="button-position ml-3">
+
+                                            @if (Auth::user()->is_participating($concern->id))
+                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                    {!! method_field('delete') !!}
+                                                    {{ csrf_field() }}
+                                                    <div class="form-group">
+                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
+                                                    </div>
+                                                </form>
+                                            @else
+                                                <form method="POST" action="{{ route('participations.participate', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                    {{ csrf_field() }}
+                                                    <div class="form-group">
+                                                        <input type="submit" value="参加する" class="btn participate-button d-inline-block">
+                                                    </div>
+                                                </form>
+                                            @endif  
+
+                                            @if (Auth::check() && !($concern->user->id == Auth::id()))
+                                                
+                                                @if (Auth::user()->is_concerned($concern->id))
+                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                        {!! method_field('delete') !!}
+                                                        {{ csrf_field() }}
+                                                        <div class="form-group">
+                                                            <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
+                                                        </div>
+                                                    </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                        {{ csrf_field() }}
+                                                        <div class="form-group">
+                                                            <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                        </div>
+                                                    </form>
+                                                @endif  
+
+                                            @endif
+
+                                        </div>
+                                    @endif
 
                                 </div>
                             </li>
                         </div>
                     @endforeach
+
                 </ul>
                 {{ $concerns->links('pagination::bootstrap-4') }}
             @endif 
+
         </section>
     </section>
 
