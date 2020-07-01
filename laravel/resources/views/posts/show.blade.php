@@ -22,7 +22,7 @@
                 <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position d-inline-block">{{ $post->user->name }}</a>
 
                 @if ($post->user->id == Auth::id())
-                    <div class="button-position">
+                    <div class="button-position button-float">
                         <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
                     </div>
                 @endif               

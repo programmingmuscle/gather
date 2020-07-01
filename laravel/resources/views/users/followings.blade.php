@@ -23,8 +23,8 @@
                         </a>
                         <div class="media-body">
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('users.show', ['id' => $user->id]) }}" class="name-position d-inline-block">{{ $user->name }}</a>
-                                <div class="button-position">
+                                <a href="{{ route('users.show', ['id' => $user->id]) }}" class="name-position name-float d-inline-block">{{ $user->name }}</a>
+                                <div class="button-position button-float">
 
                                     @include ('user_follow.follow_button')
 

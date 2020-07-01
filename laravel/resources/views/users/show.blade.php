@@ -13,6 +13,7 @@
 @section ('mainArea_content')
 
     <div class="media show_content">
+
         @if ($user->profile_image != '')
             <figure>
                 <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
@@ -22,10 +23,11 @@
                 <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
             </figure>
         @endif
+        
         <div class="media-body">
-            <div class="d-flex justify-content-between">
-                <div class="name-position d-inline-block">{{ $user->name }}</div>
-                <div class="button-position">
+            <div class="clearfix">
+                <div class="name-position name-float d-inline-block">{{ $user->name }}</div>
+                <div class="button-position button-float">
 
                     @include ('user_follow.follow_button')
 
@@ -62,15 +64,14 @@
                                     @endif
                                 </a>
                                 <div class="media-body">
-                                    <div class="d-flex justify-content-between">
-                                        <a href="{{ route('users.show', ['id' => $timeline->user->id]) }}" class="name-position d-inline-block">{{ $timeline->user->name }}</a>
+                                    <div class="clearfix">
+                                        <a href="{{ route('users.show', ['id' => $timeline->user->id]) }}" class="name-position name-float d-inline-block">{{ $timeline->user->name }}</a>
 
                                         @if ($timeline->user->id == Auth::id())
-                                            <div class="button-position">
+                                            <div class="button-position button-float">
                                                 <a href="{{ route('posts.edit', ['id' => $timeline->id]) }}" class="edit-button btn">投稿を編集</a>
                                             </div>
                                         @endif 
-
                                     </div>
                                     <ul class="list-unstyled">
                                         <li>
@@ -80,11 +81,17 @@
                                             <li>
                                                 日時：{{ substr($timeline->date_time, 0, 16) . '~' . substr($timeline->end_time, 0, 5) }}
                                             </li>
-                                            <li>
-                                                場所：{{ $timeline->place }}
+                                            <li class="d-inline-block place">
+                                                場所：
                                             </li>
-                                            <li>
-                                                住所：{{ $timeline->address }}
+                                            <li class="d-inline-block place-content">
+                                                {{ $timeline->place }}
+                                            </li>
+                                            <li class="d-inline-block address">
+                                                住所：
+                                            </li>
+                                            <li class="d-inline-block address-content">
+                                                {{ $timeline->address }}
                                             </li>
                                             <li>
                                                 場所予約：{{ $timeline->reservation }}
@@ -170,11 +177,11 @@
 
                                 </a>
                                 <div class="media-body">
-                                    <div class="d-flex justify-content-between">
-                                        <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position d-inline-block">{{ $post->user->name }}</a>
+                                    <div class="clearfix">
+                                        <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position name-float d-inline-block">{{ $post->user->name }}</a>
                                         
                                         @if ($post->user->id == Auth::id())
-                                            <div class="button-position">
+                                            <div class="button-position button-float">
                                                 <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
                                             </div>
                                         @endif
@@ -188,11 +195,17 @@
                                             <li>
                                                 日時：{{ substr($post->date_time, 0, 16) . '~' . substr($post->end_time, 0, 5) }}
                                             </li>
-                                            <li>
-                                                場所：{{ $post->place }}
+                                            <li class="d-inline-block place">
+                                                場所：
                                             </li>
-                                            <li>
-                                                住所：{{ $post->address }}
+                                            <li class="d-inline-block place-content">
+                                                {{ $post->place }}
+                                            </li>
+                                            <li class="d-inline-block address">
+                                                住所：
+                                            </li>
+                                            <li class="d-inline-block address-content">
+                                                {{ $post->address }}
                                             </li>
                                             <li>
                                                 場所予約：{{ $post->reservation }}
@@ -257,11 +270,17 @@
                                             <li>
                                                 日時：{{ substr($participation->date_time, 0, 16) . '~' . substr($participation->end_time, 0, 5) }}
                                             </li>
-                                            <li>
-                                                場所：{{ $participation->place }}
+                                            <li class="d-inline-block place">
+                                                場所：
                                             </li>
-                                            <li>
-                                                住所：{{ $participation->address }}
+                                            <li class="d-inline-block place-content">
+                                                {{ $participation->place }}
+                                            </li>
+                                            <li class="d-inline-block address">
+                                                住所：
+                                            </li>
+                                            <li class="d-inline-block address-content">
+                                                {{ $participation->address }}
                                             </li>
                                             <li>
                                                 場所予約：{{ $participation->reservation }}
@@ -369,11 +388,17 @@
                                             <li>
                                                 日時：{{ substr($concern->date_time, 0, 16) . '~' . substr($concern->end_time, 0, 5) }}
                                             </li>
-                                            <li>
-                                                場所：{{ $concern->place }}
+                                            <li class="d-inline-block place">
+                                                場所：
                                             </li>
-                                            <li>
-                                                住所：{{ $concern->address }}
+                                            <li class="d-inline-block place-content">
+                                                {{ $concern->place }}
+                                            </li>
+                                            <li class="d-inline-block address">
+                                                住所：
+                                            </li>
+                                            <li class="d-inline-block address-content">
+                                                {{ $concern->address }}
                                             </li>
                                             <li>
                                                 場所予約：{{ $concern->reservation }}

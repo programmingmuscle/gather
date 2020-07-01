@@ -6,11 +6,17 @@
             <li>
                 日時：{{ substr($post->date_time, 0, 16) . '~' . substr($post->end_time, 0, 5) }}
             </li>
-            <li>
-                場所：{{ $post->place }}
+            <li class="d-inline-block place">
+                場所：
             </li>
-            <li>
-                住所：{{ $post->address }}
+            <li class="d-inline-block place-content">
+                {{ $post->place }}
+            </li>
+            <li class="d-inline-block address">
+                住所：
+            </li>
+            <li class="d-inline-block address-content">
+                {{ $post->address }}
             </li>
             <li>
                 場所予約：{{ $post->reservation }}
