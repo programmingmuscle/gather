@@ -45,6 +45,54 @@
       createOption('eMonth', 1, 12, postDateTimeArray[1]);
       createOption('eDay', 1, daysOfYear[thisMonth - 1], postDateTimeArray[2]);
   })();
+
+  (function() {
+    const isLeapYear = year => (year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0);
+    const countDaysOfFeb = year => isLeapYear(year) ? 29 : 28;
+    const createOption = (id, startNum, endNum, current) => {
+      const selectDom = document.getElementById(id);
+      let optionDom = '';
+      for (let i = startNum; i <= endNum; i++) {
+        if (i == current) {
+          option = '<option value="' + i + '" selected>' + i + '</option>';
+        } else {
+          option = '<option value="' + i + '">' + i + '</option>';
+        }
+        optionDom += option;
+      }
+      selectDom.insertAdjacentHTML('beforeend', optionDom);
+    }
+  
+    const yearBox = document.getElementById('eTo_Year');
+    const monthBox = document.getElementById('eTo_Month');
+    const dayBox = document.getElementById('eTo_Day');
+  
+    const today = new Date();
+    const thisYear = today.getFullYear();
+    const thisMonth = today.getMonth() + 1;
+  
+    let daysOfYear= [31, countDaysOfFeb(thisYear), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  
+    monthBox.addEventListener('change', (e) => {
+          dayBox.innerHTML = '';
+          const selectedMonth = e.target.value;
+          createOption('eTo_Day', 1, daysOfYear[selectedMonth - 1], 1);
+      });
+  
+      yearBox.addEventListener('change', e => {
+          monthBox.innerHTML = '';
+          dayBox.innerHTML = '';
+          const updatedYear = e.target.value;
+          daysOfYear = [31, countDaysOfFeb(updatedYear), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  
+          createOption('eTo_Month', 1, 12, 1);
+          createOption('eTo_Day', 1, daysOfYear[0], 1);
+      });
+      
+      createOption('eTo_Year', thisYear, thisYear + 1, postDateTimeArray[0]);
+      createOption('eTo_Month', 1, 12, postDateTimeArray[1]);
+      createOption('eTo_Day', 1, daysOfYear[thisMonth - 1], postDateTimeArray[2]);
+  })();
   
   (function() {
     const isLeapYear = year => (year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0);
@@ -100,7 +148,7 @@
       const address = $('#address').val();
       const expense = $('#expense').val();
       const date_time = ($('#eYear').val() + '/' + $('#eMonth').val() + '/' + $('#eDay').val() + ' ' + $('#eFrom_hour').val() + ':' + $('#eFrom_minute').val());
-      const date_time_to = ($('#eYear').val() + '/' + $('#eMonth').val() + '/' + $('#eDay').val() + ' ' + $('#eTo_hour').val() + ':' + $('#eTo_minute').val());
+      const date_time_to = ($('#eTo_Year').val() + '/' + $('#eTo_Month').val() + '/' + $('#eTo_Day').val() + ' ' + $('#eTo_hour').val() + ':' + $('#eTo_minute').val());
       const deadline = ($('#edYear').val() + '/' + $('#edMonth').val() + '/' + $('#edDay').val() + ' ' + $('#edHour').val() + ':' + $('#edMinute').val());
       const date = new Date(date_time);
       const date_to = new Date(date_time_to);

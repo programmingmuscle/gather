@@ -57,6 +57,26 @@
                             $postDateTimeArray[4],['class' => 'form-control d-inline-block w-auto', 'id' => 'eFrom_minute']) !!}分から
                         </div>
                     </div>
+                    <div>
+                        <div class="form-group d-inline-block">
+                            @if ($errors->has('to_year'))
+                                <div class="error-target">{{ $errors->first('to_year') }}</div>
+                            @endif                           
+                            <select name="to_year" id="eTo_Year" class="form-control d-inline-block w-auto"></select>                           
+                        </div>年
+                        <div class="form-group d-inline-block">
+                            @if ($errors->has('to_month'))
+                                <div class="error-target">{{ $errors->first('to_month') }}</div>
+                            @endif
+                            <select name="to_month" id="eTo_Month" class="form-control d-inline-block w-auto"></select>
+                        </div>月
+                        <div class="form-group d-inline-block">
+                            @if ($errors->has('to_day'))
+                                <div class="error-target">{{ $errors->first('to_day') }}</div>
+                            @endif
+                            <select name="to_day" id="eTo_Day" class="form-control d-inline-block w-auto"></select>
+                        </div>日
+                    </div>
                     <div class="form-group d-inline-block">
                         @if ($errors->has('to_hour'))
                             <div class="error-target">{{ $errors->first('to_hour') }}</div>

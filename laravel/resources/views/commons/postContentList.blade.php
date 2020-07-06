@@ -3,8 +3,11 @@
         【{{ $post->title }}】
     </li>
         <div class="ml-3">
-            <li>
-                日時：{{ substr($post->date_time, 0, 16) . '~' . substr($post->end_time, 0, 5) }}
+            <li class="end_time-float">
+                日時：{{ $post->date_time }}
+            </li>
+            <li class="end_time">
+                {{ '~' . ' ' . $post->end_time }}
             </li>
             <li class="d-inline-block place">
                 場所：
@@ -28,7 +31,7 @@
                 使用球：{{ $post->ball }}
             </li>
             <li>
-                応募締切：{{ substr($post->deadline, 0, 16) }}
+                応募締切：{{ $post->deadline }}
             </li>
             <li>
                 募集人数：{{ $post->people }}

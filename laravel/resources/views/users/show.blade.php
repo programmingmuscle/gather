@@ -78,9 +78,14 @@
                                             【{{ $timeline->title }}】
                                         </li>      
                                         <div class="ml-3">
-                                            <li>
-                                                日時：{{ substr($timeline->date_time, 0, 16) . '~' . substr($timeline->end_time, 0, 5) }}
-                                            </li>
+                                            <div class="clearfix">
+                                                <li class="end_time-float d-inline-block">
+                                                    日時：{{ $timeline->date_time }}
+                                                </li>
+                                                <li class="end_time d-inline-block">
+                                                    {{ '~' . ' ' . $timeline->end_time }}
+                                                </li>
+                                            </div>
                                             <li class="d-inline-block place">
                                                 場所：
                                             </li>
@@ -103,7 +108,7 @@
                                                 使用球：{{ $timeline->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ substr($timeline->deadline, 0, 16) }}
+                                                応募締切：{{ $timeline->deadline }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $timeline->people }}
@@ -193,7 +198,10 @@
                                         </li>
                                         <div class="ml-3">
                                             <li>
-                                                日時：{{ substr($post->date_time, 0, 16) . '~' . substr($post->end_time, 0, 5) }}
+                                                日時：{{ $post->date_time }}
+                                            </li>
+                                            <li>
+                                                {{ '~' . ' ' . $post->end_time }}
                                             </li>
                                             <li class="d-inline-block place">
                                                 場所：
@@ -217,7 +225,7 @@
                                                 使用球：{{ $post->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ substr($post->deadline, 0, 16) }}
+                                                応募締切：{{ $post->deadline }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $post->people }}
@@ -268,7 +276,10 @@
                                         </li>
                                         <div class="ml-3">
                                             <li>
-                                                日時：{{ substr($participation->date_time, 0, 16) . '~' . substr($participation->end_time, 0, 5) }}
+                                                日時：{{ $participation->date_time }}
+                                            </li>
+                                            <li>
+                                                {{ '~' . ' ' . $participation->end_time }}
                                             </li>
                                             <li class="d-inline-block place">
                                                 場所：
@@ -292,7 +303,7 @@
                                                 使用球：{{ $participation->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ substr($participation->deadline, 0, 16) }}
+                                                応募締切：{{ $participation->deadline }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $participation->people }}
@@ -386,7 +397,10 @@
                                         </li>
                                         <div class="ml-3">
                                             <li>
-                                                日時：{{ substr($concern->date_time, 0, 16) . '~' . substr($concern->end_time, 0, 5) }}
+                                                日時：{{ $concern->date_time }}
+                                            </li>
+                                            <li>
+                                                {{ '~' . ' ' . $concern->end_time }}
                                             </li>
                                             <li class="d-inline-block place">
                                                 場所：
@@ -410,7 +424,7 @@
                                                 使用球：{{ $concern->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ substr($concern->deadline, 0, 16) }}
+                                                応募締切：{{ $concern->deadline }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $concern->people }}

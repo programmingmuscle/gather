@@ -321,6 +321,10 @@ footer {
     float:left;
 }
 
+.end_time {
+    margin-left: 3rem;
+}
+
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;
@@ -333,6 +337,17 @@ footer {
     .top_sentence {
         margin-top: 75px;
         font-size: 1rem;
+    }
+}
+
+@media (min-width: 568px) {
+    .end_time-float {
+        float: left;
+        margin-right: 0.25rem;
+    }
+
+    .end_time {
+        margin-left: 0;
     }
 }
 
