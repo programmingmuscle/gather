@@ -197,10 +197,10 @@
                                             【{{ $post->title }}】
                                         </li>
                                         <div class="ml-3">
-                                            <li>
+                                            <li class="end_time-float">
                                                 日時：{{ $post->date_time }}
                                             </li>
-                                            <li>
+                                            <li class="end_time">
                                                 {{ '~' . ' ' . $post->end_time }}
                                             </li>
                                             <li class="d-inline-block place">
@@ -275,10 +275,10 @@
                                             【{{ $participation->title }}】
                                         </li>
                                         <div class="ml-3">
-                                            <li>
+                                            <li class="end_time-float">
                                                 日時：{{ $participation->date_time }}
                                             </li>
-                                            <li>
+                                            <li class="end_time">
                                                 {{ '~' . ' ' . $participation->end_time }}
                                             </li>
                                             <li class="d-inline-block place">
@@ -396,10 +396,10 @@
                                             【{{ $concern->title }}】
                                         </li>
                                         <div class="ml-3">
-                                            <li>
+                                            <li class="end_time-float">
                                                 日時：{{ $concern->date_time }}
                                             </li>
-                                            <li>
+                                            <li class="end_time">
                                                 {{ '~' . ' ' . $concern->end_time }}
                                             </li>
                                             <li class="d-inline-block place">
