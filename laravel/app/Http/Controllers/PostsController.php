@@ -95,15 +95,15 @@ class PostsController extends Controller
             'from_minute.required' => '開始時間（分）を入力して下さい。',
             'from_minute.string' => '開始時間（分）は文字列として下さい。',
             'from_minute.max' => '開始時間（分）は191文字以内として下さい。',
-            'to_year.required' => '開催年を入力して下さい。',
-            'to_year.string' => '開催年は文字列として下さい。',
-            'to_year.max' => '開催年は191文字以内として下さい。',
-            'to_month.required' => '開催月を入力して下さい。',
-            'to_month.string' => '開催月は文字列として下さい。',
-            'to_month.max' => '開催月は191文字以内として下さい。',
-            'to_day.required' => '開催日を入力して下さい。',
-            'to_day.string' => '開催日は文字列として下さい。',
-            'to_day.max' => '開催日は191文字以内として下さい。',
+            'to_year.required' => '終了年を入力して下さい。',
+            'to_year.string' => '終了年は文字列として下さい。',
+            'to_year.max' => '終了年は191文字以内として下さい。',
+            'to_month.required' => '終了月を入力して下さい。',
+            'to_month.string' => '終了月は文字列として下さい。',
+            'to_month.max' => '終了月は191文字以内として下さい。',
+            'to_day.required' => '終了日を入力して下さい。',
+            'to_day.string' => '終了日は文字列として下さい。',
+            'to_day.max' => '終了日は191文字以内として下さい。',
             'to_hour.required' => '終了時間を入力して下さい。',
             'to_hour.string' => '終了時間は文字列として下さい。',
             'to_hour.max' => '終了時間は191文字以内として下さい。',
@@ -150,7 +150,7 @@ class PostsController extends Controller
         $request->user()->posts()->create([
             'title' => $request->title,
             'date_time' => $request->year . '/' .  $request->month . '/' .  $request->day . ' ' . $request->from_hour . ':' . $request->from_minute,
-            'end_time' => $requesrt->to_year . '/' . $requesr->to_month . '/' . $request->to_day . ' ' . $request->to_hour . ':' . $request->to_minute,
+            'end_time' => $request->to_year . '/' . $request->to_month . '/' . $request->to_day . ' ' . $request->to_hour . ':' . $request->to_minute,
             'place' => $request->place,
             'address' => $request->address,
             'reservation' => $request->reservation,
@@ -209,7 +209,7 @@ class PostsController extends Controller
     public function edit($id) {
         $post = Post::find($id);
         $postDateTimeArray = preg_split("{[/\s:]}", $post->date_time);
-        $postEndTimeArray = preg_split("{[:]}", $post->end_time);
+        $postEndTimeArray = preg_split("{[/\s:]}", $post->end_time);
         $postDeadlineArray = preg_split("{[/\s:]}", $post->deadline);
 
         return view('posts.edit', [
