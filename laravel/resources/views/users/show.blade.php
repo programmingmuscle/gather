@@ -115,7 +115,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p>
+                                    <p class="ml-3">
                                         {{ $timeline->remarks }}
                                     </p>
 
@@ -232,7 +232,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p>
+                                    <p class="ml-3">
                                         {{ $post->remarks }}
                                     </p>
 
@@ -310,7 +310,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p>
+                                    <p class="ml-3">
                                         {{ $participation->remarks }}
                                     </p>
                                     @if (Auth::check() && ($participation->user->id != Auth::id()))
@@ -431,7 +431,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p>
+                                    <p class="ml-3">
                                         {{ $concern->remarks }}
                                     </p>
                                     
