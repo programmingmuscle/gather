@@ -22,25 +22,16 @@ class ConcernTest extends TestCase
     // 気になる機能実行後に気になる取り止め機能を行い成功するテスト
     public function testConcern()
     {
+        // 気になる対象とする投稿を作成
+        $post = factory(Post::class)->create([
+            'title' => 'test',
+        ]);
+
         // ユーザを作成
         $user = factory(User::class)->create();
-
-        // 気になる対象とする投稿を作成
-        $post = factory(Post::class)->create();
-
-        // サインアップする
-        $this->post(route('signup.post', [
-            'name' => 'test',
-            'email' => 'aaa@bbb.com',
-            'password' => 'testPassword',
-            'password_confirmation' => 'testPassword',
-        ]));
-
-        // ログイン状態をチェック ログイン状態であることを確認
-        $this->assertTrue(Auth::check());
         
-        // 気になる機能を実行
-        $this->post(route('concerns.concern', ['id' => $post->id]));
+        // $userでログインして気になる機能を実行
+        $this->actingAs($user)->post(route('concerns.concern', ['id' => $post->id]));
 
         // Concernsテーブルにて気になる機能の対象としたidの有無を確認することで気になる機能実行の成否を判定
         $this->assertDatabaseHas('concerns', [
