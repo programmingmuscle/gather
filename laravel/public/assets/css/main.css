@@ -209,6 +209,15 @@ footer {
     width: calc(100% - 3rem);
 }
 
+.address {
+    width: 3rem;
+    float: left;
+}
+
+.address-content {
+    width: calc(100% - 3rem);
+}
+
 .explain {
     margin-top: 2rem;
     text-align: center;
