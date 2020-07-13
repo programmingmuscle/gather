@@ -145,7 +145,7 @@ class PostsController extends Controller
             'people.max' => '募集人数は191文字以内として下さい。',
             'remarks.string' => '備考は文字列として下さい。',
             'remarks.max' => '備考は191文字以内として下さい。',
-        ]);     
+        ]);
 
         $request->user()->posts()->create([
             'title' => $request->title,
