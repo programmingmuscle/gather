@@ -30,12 +30,8 @@ class RegisterController extends Controller
      * @var string
      */
     protected function redirectTo() {
-        if(! Auth::check()) {
-            return '/';
-        }
-        else {
-            return route('users.show', ['id' => Auth::id()]);
-        }
+        session()->flash('success', 'サインアップしました。');
+        return route('users.show', ['id' => Auth::id()]);   
     }
 
     /**

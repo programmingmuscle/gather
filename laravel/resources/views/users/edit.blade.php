@@ -8,21 +8,42 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('users.update', ['id' => Auth::id()]) }}">
+                <form method="POST" action="{{ route('users.update', ['id' => Auth::id()]) }}" class="u-edit-form"  enctype="multipart/form-data">
                     {!! method_field('put') !!}
                     {{ csrf_field() }}
                     <div class="form-group required-note">
                         <span class="required">*</span>が付いている欄は必須項目
                     </div>
                     <div class="form-group">
-                        <label for="name">選手名<span class="required">*</span></label>
+                        <label for="profile_image">プロフィール画像</label>
+                        
+                            @if ($user->profile_image != '')
+                                <figure id="remove_profile_images">
+                                    <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @else
+                                <figure id="remove_profile_images">
+                                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @endif
+                        
+                        @if ($errors->has('profile_image'))
+                            <div class="error-target">{{ $errors->first('profile_image') }}</div>
+                        @endif
+                        <label for="profile_image" class="btn btn-success">
+                            画像を選択
+                            <input type="file" onchange="previewFile()" name="profile_image" id="profile_image" style="display:none">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" id="name-error">選手名<span class="required">*</span></label>
                         @if ($errors->has('name'))
                             <div class="error-target">{{ $errors->first('name') }}</div>
                         @endif
                         <input type="text" name="name" value="{{ $user->name }}" id="name" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="email">メールアドレス<span class="required">*</span></label>
+                        <label for="email" id="email-error">メールアドレス<span class="required">*</span></label>
                         @if ($errors->has('email'))
                             <div class="error-target">{{ $errors->first('email') }}</div>
                         @endif
@@ -90,7 +111,7 @@
                         @endif
                         <select name="position" id="position" class="form-control">
                             @if ($user->position != null)
-                                <option value="{{ $user->positon }}">{{ $user->position }}</option>
+                                <option value="{{ $user->position }}">{{ $user->position }}</option>
                             @endif
                             <option value=""></option>
                             <option value="投手">投手</option>
@@ -115,7 +136,7 @@
                     </div>
                     <div class="explain">上記内容に変更してよろしいでしょうか？</div>
                     <div class="form-group">
-                        <label for="password">パスワード<span class="required">*</span></label>
+                        <label for="password" id="password-error">パスワード<span class="required">*</span></label>
                         @if ($errors->has('password'))
                             <div class="error-target">{{ $errors->first('password') }}</div>
                         @endif

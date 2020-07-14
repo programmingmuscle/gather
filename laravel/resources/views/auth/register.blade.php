@@ -8,31 +8,31 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('signup.post') }}">
+                <form method="POST" action="{{ route('signup.post') }}" class="signup-form">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="name">選手名</label> 
+                        <label for="name" id="name-error">選手名</label> 
                         @if ($errors->has('name'))
                             <div class="error-target">{{ $errors->first('name') }}</div>
                         @endif
                         <input type="text" name="name" value="{{ old('name') }}" id="name" class="form-control">    
                     </div>
                     <div class="form-group">
-                        <label for="email">メールアドレス</label> 
+                        <label for="email" id="email-error">メールアドレス</label> 
                         @if ($errors->has('email'))
                             <div class="error-target">{{ $errors->first('email') }}</div>
                         @endif
                         <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control">    
                     </div>
                     <div class="form-group">
-                        <label for="password">パスワード（６文字以上）</label>
+                        <label for="password" id="password-error" class="passwordLength-error">パスワード（６文字以上）</label>
                         @if ($errors->has('password'))
                             <div class="error-target">{{ $errors->first('password') }}</div>
                         @endif
                         <input type="password" name="password" id="password" class="form-control">    
                     </div>
                     <div class="form-group">
-                        <label for="password_confirmation">確認用パスワード</label> 
+                        <label for="password_confirmation" id="password_confirmation-error">確認用パスワード</label> 
                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">    
                     </div>
                     <div class="complete-button form-group">

@@ -1,14 +1,17 @@
 <ul class="list-unstyled">
-    <li>
-        居住地：{{ $user->residence }}
+    <li class="d-inline-block residence">
+        居住地：
     </li>
-    <li class="gender">
+    <li class="d-inline-block residence-content">
+        {{ $user->residence }}
+    </li>  
+    <li>
         性別：{{ $user->gender }}
     </li>
-    <li class="age">
+    <li>
         年齢：{{ $user->age }}
     </li>
-    <li class="experience">
+    <li>
         野球歴：{{ $user->experience }}
     </li>
     <li>

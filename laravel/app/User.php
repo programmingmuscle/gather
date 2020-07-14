@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','residence','gender','age','experience','position','introduction', 
+        'name', 'email', 'password','residence','gender','age','experience','position','introduction', 'profile_image',
     ];
 
     /**
@@ -130,5 +130,13 @@ class User extends Authenticatable
         if ($exist && !$its_mine) {
             $this->participations()->detach($id);
         }
+    }
+
+    public function feed_posts()
+    {
+        $follow_user_ids = $this->followings()->pluck('users.id')->toArray();
+        $follow_user_ids[] = $this->id;
+        
+        return Post::whereIn('user_id', $follow_user_ids);
     }
 }

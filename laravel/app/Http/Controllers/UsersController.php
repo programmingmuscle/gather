@@ -6,32 +6,42 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use App\Post;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Validation\Rule;
 
+use Illuminate\Support\Facades\Storage;
+
 class UsersController extends Controller
 {
-    public function index() {
-        $users = User::orderBy('id', 'desc')->paginate(10);
+    public function index(Request $request) {
+        $query = User::query();
+
+        $keyword = $request->input('keyword');
+
+        if (!empty($keyword)) {
+            $users = $query
+                    ->where('name', 'like', '%' . $keyword . '%')
+                    ->orWhere('residence', 'like', '%' . $keyword . '%')
+                    ->orWhere('gender', 'like' , '%' . $keyword . '%')
+                    ->orWhere('age', 'like' , '%' . $keyword . '%')
+                    ->orWhere('experience', 'like' , '%' . $keyword . '%')
+                    ->orWhere('position', 'like' , '%' . $keyword . '%')
+                    ->orWhere('introduction', 'like', '%' . $keyword . '%')
+                    ->orderBy('id', 'disc')
+                    ->paginate(10);
+        } else {
+            $users = User::orderBy('id', 'desc')->paginate(10);
+        }
 
         return view('users.index', [
             'users' => $users,
+            'keyword' => $keyword,
         ]);
-    }
-
-    public function show($id) {
-        $user = User::find($id);
-        
-        $data = [
-            'user' => $user,
-        ];
-
-        $data += $this->counts($user);
-
-        return view('users.show', $data);
     }
 
     public function edit() {
@@ -66,6 +76,7 @@ class UsersController extends Controller
             'experience' => 'string|nullable|max:191',
             'position' => 'string|nullable|max:191',
             'introduction' => 'string|nullable|max:191',
+            'profile_image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:191',
         ], 
         [
             'name.required' => '選手名を入力して下さい。',
@@ -74,7 +85,7 @@ class UsersController extends Controller
             'email.required' => 'メールアドレスを入力して下さい。',
             'email.sring' => 'メールアドレスは文字列として下さい。',
             'email.email' => 'メールアドレスに「@」を挿入して下さい。',
-            'email.max' => 'メールアドレスは191文字として下さい。',
+            'email.max' => 'メールアドレスは191文字以内として下さい。',
             'email.unique' => '入力されたメールアドレスは既に使用されています。',
             'password.required' => 'パスワードを入力して下さい。',
             'gender.string' => '性別は文字列として下さい。',
@@ -92,11 +103,16 @@ class UsersController extends Controller
         $user = Auth::user();
         
         if (Hash::check($request->password, $user->password)) {
-            $form = $request->except(['password']);
+            $form = $request->except(['password', 'profile_image']);
             unset($form['_token']);
             $user->fill($form)->save();
-            
-            return redirect()->route('users.show', ['id' => Auth::id()]);
+            if ($request->profile_image != '') {
+                $path = $request->profile_image->storeAs('public/profile_images', Auth::id() . '.jpg');
+                $user->profile_image = $path;
+                $user->save();
+            }
+
+            return redirect()->route('users.show', ['id' => Auth::id()])->with('success', 'アカウントを編集しました。');
         }
 
         
@@ -125,29 +141,48 @@ class UsersController extends Controller
 
         if (Hash::check($request->password, $user->password)) {
             $user->delete();
-            return redirect('/');
+            return redirect('/')->with('success', 'アカウントを削除しました。');
         }
     }
 
     public function followers($id)
     {
         $user = User::find($id);
-        $followers = $user->followers()->orderBy('id', 'desc')->paginate(10);
+        $users = $user->followers()->orderBy('id', 'desc')->paginate(10);
 
         return view('users.followers', [
-            'user' => $user,
-            'followers' => $followers,
+            'users' => $users,
         ]);
     }
 
     public function followings($id)
     {
         $user = User::find($id);
-        $followings = $user->followings()->orderBy('id', 'desc')->paginate(10);
+        $users = $user->followings()->orderBy('id', 'desc')->paginate(10);
 
         return view('users.followings', [
-            'user' => $user,
-            'followings' => $followings,
+            'users' => $users,
         ]);
+    }
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        $timelines = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
+        $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
+        $participations = $user->participations()->orderBy('id', 'desc')->paginate(10);
+        $concerns = $user->concerns()->orderBy('id', 'desc')->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'timelines' => $timelines,
+            'posts' => $posts,
+            'participations' => $participations,
+            'concerns' => $concerns,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
     }
 }

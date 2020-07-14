@@ -30,12 +30,14 @@ class LoginController extends Controller
      * @var string
      */
     protected function redirectTo() {
-        if(! Auth::check()) {
-            return '/';
-        }
-        else {
-            return route('users.show', ['id' => Auth::id()]);
-        }
+        session()->flash('success', 'ログインしました。');
+        return route('users.show', ['id' => Auth::id()]);
+    }
+
+    public function logout() {
+        Auth::logout();
+        session()->flash('success', 'ログアウトしました。');
+        return redirect('/');
     }
 
     /**

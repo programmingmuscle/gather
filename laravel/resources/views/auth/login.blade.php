@@ -8,17 +8,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form method="POST" action="{{ route('login.post') }}">
+                <form method="POST" action="{{ route('login.post') }}" class="login-form">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="email">メールアドレス</label> 
+                        <label for="email" id="email-error">メールアドレス</label> 
                         @if ($errors->has('email'))
                             <div class="error-target">{{ $errors->first('email') }}</div>
                         @endif
                         <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control">    
                     </div>
                     <div class="form-group">
-                        <label for="password">パスワード</label>
+                        <label for="password" id="password-error">パスワード</label>
                         @if ($errors->has('password'))
                             <div class="error-target">{{ $errors->first('password') }}</div>
                         @endif

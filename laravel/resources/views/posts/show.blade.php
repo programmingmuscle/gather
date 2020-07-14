@@ -6,22 +6,37 @@
 
 @section ('mainArea_content')
     <div class="media show_content">
-        <img class="profile-image" src="{{ Gravatar::src($post->user->email), 50}}" alt="ユーザのプロフィール画像です。">
+        <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
+            @if ($post->user->profile_image != '')
+                <figure>
+                    <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                </figure>
+            @else
+                <figure id="remove_profile_images">
+                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                </figure>
+            @endif
+        </a>
         <div class="media-body">
-            {{ $post->user->name }}
-            
-            @if (Auth::check() && !($post->user->id == Auth::id()))
-               
-                @include ('participations.participate_button')
-                @include ('concerns.concern_button')
+            <div class="d-flex justify-content-between">              
+                <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position d-inline-block">{{ $post->user->name }}</a>
 
-            @endif
-
-            @if ($post->user->id == Auth::id())
-                <a href="{{ route('posts.edit', ['id' => $post->id]) }}">編集</a>
-            @endif
+                @if ($post->user->id == Auth::id())
+                    <div class="button-position button-float">
+                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
+                    </div>
+                @endif               
+                
+            </div>
 
             @include ('commons.postContentList')
+            
+            @if (Auth::check() && !($post->user->id == Auth::id()))
+                <div class="button-position ml-3">
+                    @include ('participations.participate_button')
+                    @include ('concerns.concern_button')
+                </div>
+            @endif
 
         </div>
     </div>
