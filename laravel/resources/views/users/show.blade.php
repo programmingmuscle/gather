@@ -19,7 +19,7 @@
                 <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
             </figure>
         @else
-            <figure id="remove_profile_images">
+            <figure>
                 <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
             </figure>
         @endif
@@ -60,6 +60,10 @@
                                     @if ($timeline->user->profile_image != '')
                                         <figure>
                                             <img src="/storage/profile_images/{{ $timeline->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </figure>
+                                    @else
+                                        <figure>
+                                            <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                         </figure>
                                     @endif
                                 </a>
@@ -175,7 +179,7 @@
                                             <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
                                         </figure>
                                     @else
-                                        <figure id="remove_profile_images">
+                                        <figure>
                                             <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                         </figure>
                                     @endif
@@ -262,7 +266,7 @@
                                             <img src="/storage/profile_images/{{ $participation->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
                                         </figure>
                                     @else
-                                        <figure id="remove_profile_images">
+                                        <figure>
                                             <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                         </figure>
                                     @endif
@@ -383,7 +387,7 @@
                                             <img src="/storage/profile_images/{{ $concern->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
                                         </figure>
                                     @else
-                                        <figure id="remove_profile_images">
+                                        <figure>
                                             <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                         </figure>
                                     @endif

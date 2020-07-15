@@ -30,7 +30,7 @@
                                     <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
                                 </figure>
                             @else
-                                <figure id="remove_profile_images">
+                                <figure>
                                     <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                 </figure>
                             @endif
