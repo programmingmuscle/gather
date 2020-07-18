@@ -64,6 +64,7 @@
                             @endforeach
 
                         </ul>
+                        <a href="{{ route('posts.participateUsers', ['id' => $post->id]) }}" class="d-inline-block pt-3">参加者一覧</a>へ
                     </div>
 
                 @endif

@@ -27,6 +27,10 @@ Route::group(['prefix' => 'users/{user}'], function() {
     Route::get('followers', 'UsersController@followers')->name('users.followers');
 });
 
+Route::group(['prefix' => 'posts/{post}'], function() {
+    Route::get('participateUsers', 'PostsController@participateUsers')->name('posts.participateUsers');
+});
+
 Route::group(['middleware' => 'auth'],function() {
     Route::resource('users', 'UsersController', ['only' => ['update', 'destroy', 'edit']]);
     Route::get('users/{user}/deleteWindow', 'UsersController@deleteWindow')->name('users.deleteWindow');

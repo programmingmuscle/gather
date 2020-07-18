@@ -335,4 +335,14 @@ class PostsController extends Controller
 
         return redirect()->route('posts.show', ['id' => $post->id])->with('success', '投稿を編集しました。');
     }
+
+    public function participateUsers($id)
+    {
+        $post = Post::find($id);
+        $users = $post->participate_users()->orderBy('id', 'desc')->paginate(10);
+
+        return view('posts.participate_users', [
+            'users' => $users,
+        ]);
+    }
 }
