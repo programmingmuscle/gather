@@ -63,7 +63,7 @@
 		@yield ('/top_body&/top_wrapper')	
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="{{ asset('/assets/js/top.js') }}"></script>
+		<script src="{{ asset('/assets/js/flash_message.js') }}"></script>
 		<script src="{{ asset('/assets/js/signup.js') }}"></script>
 		<script src="{{ asset('/assets/js/login.js') }}"></script>
 		<script src="{{ asset('/assets/js/users-index.js') }}"></script>
@@ -71,7 +71,6 @@
 		<script src="{{ asset('/assets/js/users-edit.js') }}"></script>
 		<script src="{{ asset('/assets/js/posts-index.js') }}"></script>
 		<script src="{{ asset('/assets/js/posts-create.js') }}"></script>
-		<script src="{{ asset('/assets/js/posts-show.js') }}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
