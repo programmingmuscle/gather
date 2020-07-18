@@ -20,13 +20,8 @@ class Post extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function concern_users()
-    {
-        return $this->belongsToMany(User::class);
-    }
-
     public function participate_users()
     {
-        return $this->belongToMany(User::class);
+        return $this->belongsToMany(User::class, 'participations', 'post_id', 'user_id')->withTimestamps();
     }
 }
