@@ -168,9 +168,11 @@ class PostsController extends Controller
 
     public function show($id) {
         $post = Post::find($id);
+        $users = $post->participate_users()->orderBy('id', 'desc')->get();
 
         return view('posts.show', [
             'post' => $post,
+            'users' => $users,
         ]);
     }
 

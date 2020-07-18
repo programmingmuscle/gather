@@ -7,15 +7,13 @@
 @section ('mainArea_content')
     <div class="media show_content">
         <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
+
             @if ($post->user->profile_image != '')
-                <figure>
-                    <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                </figure>
+                <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
             @else
-                <figure id="remove_profile_images">
-                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                </figure>
+                <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
             @endif
+
         </a>
         <div class="media-body">
             <div class="d-flex justify-content-between">              
@@ -38,6 +36,34 @@
                 </div>
             @endif
 
+            <div class="ml-3">参加者</div>
+
+                @if (count($users) > 0)          
+                    <ul class="list-unstyled ml-3">
+
+                        @foreach ($users as $user)
+                            <li class="mb-1">
+
+                                    @if ($user->profile_image != '')
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}">
+                                            <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </a>
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
+                                        <br>
+                                    @else
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}">
+                                            <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </a>
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
+                                        <br>
+                                    @endif
+
+                            </li>
+                        @endforeach
+
+                    </ul>
+                @endif
+            
         </div>
     </div>
 @endsection
