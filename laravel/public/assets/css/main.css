@@ -334,6 +334,21 @@ footer {
     margin-left: 3rem;
 }
 
+.accordion-title {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.accordion-title:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.accordion-content {
+    display: none;
+}
+
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;
