@@ -38,6 +38,6 @@
             </li>
         </div>
 </ul>
-<p class="ml-3">
+<p class="ml-3 mt-3">
     {{ $post->remarks }}
 </p>

@@ -169,10 +169,12 @@ class PostsController extends Controller
     public function show($id) {
         $post = Post::find($id);
         $users = $post->participate_users()->orderBy('id', 'desc')->get();
+        $messages = $post->messages()->orderBy('id', 'desc')->paginate(10);
 
         return view('posts.show', [
             'post' => $post,
             'users' => $users,
+            'messages' => $messages,
         ]);
     }
 

@@ -107,7 +107,24 @@ footer {
     margin-right: 1rem;
 }
 
+.message_content {
+    padding-top: .5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    color: #696969;
+    text-align: center;
+}
+
+.message-color {
+    color:#696969;
+}
+
 .complete-button {
+    padding-top: 1rem;
+    text-align: right;
+}
+
+.message-button {
     padding-top: 1rem;
     text-align: right;
 }
@@ -326,6 +343,16 @@ footer {
     word-break: break-all;
 }
 
+.message-position {
+    padding-top: 13px;
+    padding-bottom: 13px;
+    word-break: break-all;
+}
+
+.message-position-float {
+    float: left;
+}
+
 .name-float {
     float:left;
 }
@@ -347,6 +374,20 @@ footer {
 
 .accordion-content {
     display: none;
+}
+
+.message-box {
+    padding: .5rem 1rem;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.message-word-break {
+    word-break: break-all;
+}
+
+.message-time-float {
+    float:right;
 }
 
 @media (min-width: 375px) {
@@ -445,16 +486,17 @@ footer {
         margin-top: 120px;
     }
 
-    .search-box {
-        padding-left: 1rem;
-    }
-
     .list {
         margin-left: 1rem;
         margin-right: 1rem;
     }
 
     .show_content {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .message_content {
         margin-left: 1rem;
         margin-right: 1rem;
     }
@@ -493,12 +535,22 @@ footer {
         padding-left: 2rem;
     }
 
+    .message-box {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
     .list {
         margin-left: 2rem;
         margin-right: 2rem;
     }
 
     .show_content {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .message_content {
         margin-left: 2rem;
         margin-right: 2rem;
     }

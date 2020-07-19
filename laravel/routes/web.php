@@ -48,5 +48,6 @@ Route::group(['middleware' => 'auth'],function() {
         Route::delete('unconcern', 'ConcernsController@destroy')->name('concerns.unconcern');
         Route::post('participate', 'ParticipationsController@store')->name('participations.participate');
         Route::delete('cancel', 'ParticipationsController@destroy')->name('participations.cancel');
+        Route::post('messages', 'MessagesController@store')->name('messages.store');
     });
 });
