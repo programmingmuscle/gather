@@ -170,11 +170,13 @@ class PostsController extends Controller
         $post = Post::find($id);
         $users = $post->participate_users()->orderBy('id', 'desc')->get();
         $messages = $post->messages()->orderBy('id', 'desc')->paginate(10);
+        $count_participate_users = $post->participate_users()->count();
 
         return view('posts.show', [
             'post' => $post,
             'users' => $users,
             'messages' => $messages,
+            'count_participate_users' => $count_participate_users,
         ]);
     }
 
