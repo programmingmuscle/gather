@@ -74,21 +74,28 @@
     </div>
     <form method="POST" action="{{ route('messages.store', ['id' => $post->id]) }}">
         {{ csrf_field() }}
-        <div class="media message-box">
-            <a href="{{ route('users.show', ['id' => Auth::id()]) }}">
-                @if (Auth::user()->profile_image != '')
-                    <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                @else
-                   <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                @endif
-            </a>
-            <div class="media-body">
-                <textarea name="content" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！"></textarea>
-                <div class="message-button">
-                    <input type="submit" value="送信" class="btn btn-success">
-                </div>
+
+        @if (Auth::check())
+            <div class="media message-box">
+                    <a href="{{ route('users.show', ['id' => Auth::id()]) }}">
+                        @if (Auth::user()->profile_image != '')
+                            <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                        @else
+                        <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                        @endif
+                    </a>
+                    <div class="media-body">
+                        <textarea name="content" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！"></textarea>
+                        <div class="message-button">
+                            <input type="submit" value="送信" class="btn btn-success">
+                        </div>
+                    </div>
             </div>
-        </div>    
+        @else
+            <div class="message-box">
+                <p class="text-center mb-0"><a href="{{ route('login') }}">ログイン</a>してメッセージを送信</p>
+            </div>
+        @endif
     </form>
 
     @if (count($messages) > 0)
