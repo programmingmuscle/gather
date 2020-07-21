@@ -72,7 +72,7 @@
             
         </div>
     </div>
-    <form method="POST" action="{{ route('messages.store', ['id' => $post->id]) }}">
+    <form method="POST" action="{{ route('messages.store', ['id' => $post->id]) }}" class="message-form">
         {{ csrf_field() }}
 
         @if (Auth::check())
@@ -85,7 +85,11 @@
                         @endif
                     </a>
                     <div class="media-body">
-                        <textarea name="content" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！"></textarea>
+                        <div id="messageContent-error"></div>
+                        @if ($errors->has('content'))
+                            <div class="error-target">{{ $errors->first('content') }}</div>
+                        @endif
+                        <textarea name="content" id="messageContent" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！">{{ old('content') }}</textarea>
                         <div class="message-button">
                             <input type="submit" value="送信" class="btn btn-success">
                         </div>
@@ -102,7 +106,7 @@
         <ul class="list-unstyled">
 
             @foreach ($messages as $message)
-                <div class="list-border detail">
+                <div class="list-border">
                     <li class="media list">
                         <a href="{{ route('users.show', ['id' => $message->user->id]) }}">
                             

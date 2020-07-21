@@ -17,9 +17,9 @@ class MessagesController extends Controller
             'content' => 'required|string|max:191',
         ], 
         [
-            'content.required' => 'タイトルを入力して下さい。',
-            'content.string' => 'タイトルは文字列として下さい。',
-            'content.max' => 'タイトルは191文字以内として下さい。',
+            'content.required' => '空のメッセージは送信できません。',
+            'content.string' => 'メッセージは文字列として下さい。',
+            'content.max' => 'メッセージは191文字以内として下さい。',
         ]);
 
         $message = new Message;
