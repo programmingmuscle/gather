@@ -28,14 +28,11 @@
             </div>
 
             @include ('commons.postContentList')           
-            
-            <div class="button-position ml-3 mb-3">
 
-                @include ('participations.participate_button')
+            @include ('participations.participate_button')
 
-                @include ('concerns.concern_button')
-                
-            </div>
+            @include ('concerns.concern_button')
+
             <div class="accordion">
                 <div class="ml-3 mb-3 accordion-title dropdown-toggle">参加者<span class="badge badge-primary badge-pill">{{ $count_participate_users }}</span></div>
 

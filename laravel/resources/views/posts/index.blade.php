@@ -46,15 +46,12 @@
                                 @endif               
                             </div>
 
-                            @include ('commons.postContentList')
+                            @include ('commons.postContentList')                            
 
-                            <div class="button-position ml-3">
+                            @include ('participations.participate_button')
 
-                                @include ('participations.participate_button')
-
-                                @include ('concerns.concern_button')
-                                
-                            </div>
+                            @include ('concerns.concern_button')
+                            
                         </div>
                     </li>
                 </div>
