@@ -123,28 +123,42 @@
                                         {{ $timeline->remarks }}
                                     </p>
 
-                                    @if (Auth::check() && ($timeline->user->id != Auth::id()))     
+                                    @if ($timeline->user->id != Auth::id())     
                                         <div class="button-position ml-3">
 
-                                            @if (Auth::user()->is_participating($timeline->id))
-                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}" class="d-inline-block">
-                                                    {!! method_field('delete') !!}
-                                                    {{ csrf_field() }}
-                                                    <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
-                                                </form>
+                                            @if (Auth::check())
+                                                @if (Auth::user()->is_participating($timeline->id))
+                                                    <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                        {!! method_field('delete') !!}
+                                                        {{ csrf_field() }}
+                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
+                                                    </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                        {{ csrf_field() }}
+                                                        <input type="submit" value="参加する" class="btn participate-button d-inline-block">
+                                                    </form>
+                                                @endif
                                             @else
                                                 <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}" class="d-inline-block">
                                                     {{ csrf_field() }}
                                                     <input type="submit" value="参加する" class="btn participate-button d-inline-block">
                                                 </form>
-                                            @endif  
+                                            @endif
                                         
-                                            @if (Auth::user()->is_concerned($timeline->id))
-                                                <form method="POST" action="{{ route('concerns.unconcern', ['id' => $timeline->id]) }}" class="d-inline-block">
-                                                    {!! method_field('delete') !!}
-                                                    {{ csrf_field() }}
-                                                    <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
-                                                </form>
+                                            @if (Auth::check())
+                                                @if (Auth::user()->is_concerned($timeline->id))
+                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                        {!! method_field('delete') !!}
+                                                        {{ csrf_field() }}
+                                                        <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
+                                                    </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                        {{ csrf_field() }}
+                                                        <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                    </form>
+                                                @endif
                                             @else
                                                 <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}" class="d-inline-block">
                                                     {{ csrf_field() }}
@@ -239,7 +253,13 @@
                                     <p class="ml-3">
                                         {{ $post->remarks }}
                                     </p>
+                                    <div class="button-position ml-3">
 
+                                        @include ('participations.participate_button')
+
+                                        @include ('concerns.concern_button')
+
+                                    </div>
                                 </div>
                             </li>
                         </div>
@@ -317,45 +337,47 @@
                                     <p class="ml-3">
                                         {{ $participation->remarks }}
                                     </p>
-                                    @if (Auth::check() && ($participation->user->id != Auth::id()))
-                                        
+
+                                    @if ($participation->user->id != Auth::id())                       
                                         <div class="button-position ml-3">
-                                            @if (Auth::user()->is_participating($participation->id))
-                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $participation->id]) }}" class="d-inline-block">
-                                                    {!! method_field('delete') !!}
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
+                                            @if (Auth::check())
+                                                @if (Auth::user()->is_participating($participation->id))
+                                                    <form method="POST" action="{{ route('participations.cancel', ['id' => $participation->id]) }}" class="d-inline-block">
+                                                        {!! method_field('delete') !!}
+                                                        {{ csrf_field() }}
                                                         <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('participations.participate', ['id' => $participation->id]) }}">
+                                                        {{ csrf_field() }}
+                                                        <input type="submit" value="参加する" class="btn participate-button d-inline-block">                                                        
+                                                    </form>
+                                                @endif
                                             @else
                                                 <form method="POST" action="{{ route('participations.participate', ['id' => $participation->id]) }}">
                                                     {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button d-inline-block">
-                                                    </div>
+                                                    <input type="submit" value="参加する" class="btn participate-button d-inline-block">                                                        
                                                 </form>
-                                            @endif 
+                                            @endif
 
-                                            @if (Auth::check() && !($participation->user->id == Auth::id()))
-                                                
+                                            @if (Auth::check())
                                                 @if (Auth::user()->is_concerned($participation->id))
                                                     <form method="POST" action="{{ route('concerns.unconcern', ['id' => $participation->id]) }}" class="d-inline-block">
                                                         {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
-                                                        </div>
+                                                        {{ csrf_field() }}                                                        
+                                                        <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">                                                        
                                                     </form>
                                                 @else
                                                     <form method="POST" action="{{ route('concerns.concern', ['id' => $participation->id]) }}" class="d-inline-block">
-                                                        {{ csrf_field() }}
-                                                        <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn concern-button d-inline-block">
-                                                        </div>
+                                                        {{ csrf_field() }}                                                       
+                                                        <input type="submit" value="気になる" class="btn concern-button d-inline-block">                                                       
                                                     </form>
                                                 @endif
-
+                                            @else
+                                                <form method="POST" action="{{ route('concerns.concern', ['id' => $participation->id]) }}" class="d-inline-block">
+                                                    {{ csrf_field() }}                                                       
+                                                    <input type="submit" value="気になる" class="btn concern-button d-inline-block">                                                       
+                                                </form>
                                             @endif
 
                                         </div>
@@ -439,46 +461,47 @@
                                         {{ $concern->remarks }}
                                     </p>
                                     
-                                    @if (Auth::check() && ($concern->user->id != Auth::id()))
-
+                                    @if ($concern->user->id != Auth::id())
                                         <div class="button-position ml-3">
 
-                                            @if (Auth::user()->is_participating($concern->id))
-                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                    {!! method_field('delete') !!}
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
-                                                    </div>
-                                                </form>
+                                            @if (Auth::check())
+                                                @if (Auth::user()->is_participating($concern->id))
+                                                    <form method="POST" action="{{ route('participations.cancel', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                        {!! method_field('delete') !!}
+                                                        {{ csrf_field() }}                                                   
+                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">                                                   
+                                                    </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('participations.participate', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                        {{ csrf_field() }}                                                    
+                                                        <input type="submit" value="参加する" class="btn participate-button d-inline-block">                                                    
+                                                    </form>
+                                                @endif
                                             @else
                                                 <form method="POST" action="{{ route('participations.participate', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group">
-                                                        <input type="submit" value="参加する" class="btn participate-button d-inline-block">
-                                                    </div>
+                                                    {{ csrf_field() }}                                                    
+                                                    <input type="submit" value="参加する" class="btn participate-button d-inline-block">                                                    
                                                 </form>
-                                            @endif  
-
-                                            @if (Auth::check() && !($concern->user->id == Auth::id()))
-                                                
+                                            @endif                             
+                                            
+                                            @if (Auth::check())
                                                 @if (Auth::user()->is_concerned($concern->id))
                                                     <form method="POST" action="{{ route('concerns.unconcern', ['id' => $concern->id]) }}" class="d-inline-block">
                                                         {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
-                                                        </div>
+                                                        {{ csrf_field() }}                                                   
+                                                        <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
                                                     </form>
                                                 @else
                                                     <form method="POST" action="{{ route('concerns.concern', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                        {{ csrf_field() }}
-                                                        <div class="form-group">
-                                                            <input type="submit" value="気になる" class="btn concern-button d-inline-block">
-                                                        </div>
+                                                        {{ csrf_field() }}                                                    
+                                                        <input type="submit" value="気になる" class="btn concern-button d-inline-block">                                                    
                                                     </form>
-                                                @endif  
-
+                                                @endif
+                                            @else
+                                                <form method="POST" action="{{ route('concerns.concern', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                    {{ csrf_field() }}                                                    
+                                                    <input type="submit" value="気になる" class="btn concern-button d-inline-block">                                                    
+                                                </form>
                                             @endif
 
                                         </div>

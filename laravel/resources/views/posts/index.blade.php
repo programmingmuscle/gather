@@ -47,14 +47,14 @@
                             </div>
 
                             @include ('commons.postContentList')
-                            
-                            @if (Auth::check() && !($post->user->id == Auth::id()))
-                                <div class="button-position ml-3">
-                                    @include ('participations.participate_button')
-                                    @include ('concerns.concern_button')
-                                </div>
-                            @endif
 
+                            <div class="button-position ml-3">
+
+                                @include ('participations.participate_button')
+
+                                @include ('concerns.concern_button')
+                                
+                            </div>
                         </div>
                     </li>
                 </div>

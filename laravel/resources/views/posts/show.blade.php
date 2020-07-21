@@ -27,15 +27,15 @@
                 
             </div>
 
-            @include ('commons.postContentList')
+            @include ('commons.postContentList')           
             
-            @if (Auth::check() && !($post->user->id == Auth::id()))
-                <div class="button-position ml-3 mb-3">
-                    @include ('participations.participate_button')
-                    @include ('concerns.concern_button')
-                </div>
-            @endif
+            <div class="button-position ml-3 mb-3">
 
+                @include ('participations.participate_button')
+
+                @include ('concerns.concern_button')
+                
+            </div>
             <div class="accordion">
                 <div class="ml-3 mb-3 accordion-title dropdown-toggle">参加者<span class="badge badge-primary badge-pill">{{ $count_participate_users }}</span></div>
 
