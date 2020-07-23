@@ -18,6 +18,6 @@
         ポジション：{{ $user->position }}
     </li>
 </ul>
-<p>
+<p class="mt-3">    
     {{ $user->introduction }}
 </p>

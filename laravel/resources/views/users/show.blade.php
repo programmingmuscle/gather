@@ -119,7 +119,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p class="ml-3">
+                                    <p class="ml-3 mt-3">
                                         {{ $timeline->remarks }}
                                     </p>
 
@@ -250,7 +250,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p class="ml-3">
+                                    <p class="ml-3 mt-3">
                                         {{ $post->remarks }}
                                     </p>
                                     <div class="button-position ml-3">
@@ -334,7 +334,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p class="ml-3">
+                                    <p class="ml-3 mt-3">
                                         {{ $participation->remarks }}
                                     </p>
 
@@ -457,7 +457,7 @@
                                             </li>
                                         </div>
                                     </ul>
-                                    <p class="ml-3">
+                                    <p class="ml-3 mt-3">
                                         {{ $concern->remarks }}
                                     </p>
                                     
