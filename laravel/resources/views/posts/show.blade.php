@@ -5,6 +5,28 @@
 @endsection
 
 @section ('mainArea_content')
+
+    @if (session('participate-flashmessage'))
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">参加しました</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>当ページにて投稿者にメッセージを送信し当日の予定を調整しましょう！</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="media show_content">
         <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
 

@@ -48,3 +48,7 @@ $('.message-form').on('submit', (e) => {
         $('.remove-error-messageContentStr').remove();
     }
 });
+
+$(window).on('load', () => {
+    $('.modal').modal('show');
+});

@@ -14,7 +14,7 @@ class ParticipationsController extends Controller
     {  
         $post = Post::find($id);
         Auth::user()->participate($id);
-        return redirect()->route('posts.show', ['id' => $post->id]);
+        return redirect()->route('posts.show', ['id' => $post->id])->with('participate-flashmessage', '参加しました');
     }
 
     public function destroy($id)
