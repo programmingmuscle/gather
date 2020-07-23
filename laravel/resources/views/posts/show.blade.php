@@ -34,7 +34,11 @@
             @include ('concerns.concern_button')
 
             <div class="accordion">
-                <div class="ml-3 mb-3 mt-3 accordion-title dropdown-toggle">参加者<span class="badge badge-primary badge-pill">{{ $count_participate_users }}</span></div>
+                @if (count($users) > 0)
+                    <div class="ml-3 mb-3 mt-3 accordion-title dropdown-toggle">参加者<span class="badge badge-primary badge-pill">{{ $count_participate_users }}</span></div>
+                @else
+                    <div class="ml-3 mb-3 mt-3">参加者<span class="badge badge-secondary badge-pill">{{ $count_participate_users }}</span></div>
+                @endif
 
                 @if (count($users) > 0)
                     <div class="ml-3 accordion-content">
