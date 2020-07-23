@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Post;
+
 use Illuminate\Support\Facades\Auth;
 
 class ParticipationsController extends Controller
 {
     public function store($id)
-    {
+    {  
+        $post = Post::find($id);
         Auth::user()->participate($id);
-        return back();
+        return redirect()->route('posts.show', ['id' => $post->id]);
     }
 
     public function destroy($id)
