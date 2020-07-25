@@ -34,7 +34,7 @@
                 応募締切：{{ $post->deadline }}
             </li>
             <li>
-                募集人数：{{ $post->people }}
+                募集人数：{{ $post->participate_users()->count() . '/' . $post->people }}人
             </li>
         </div>
 </ul>
