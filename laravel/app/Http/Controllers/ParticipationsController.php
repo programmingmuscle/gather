@@ -20,6 +20,6 @@ class ParticipationsController extends Controller
     public function destroy($id)
     {
         Auth::user()->cancel($id);
-        return back();
+        return back()->with('success', '参加を取り止めました。');
     }
 }
