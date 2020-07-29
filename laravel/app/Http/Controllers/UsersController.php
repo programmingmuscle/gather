@@ -166,10 +166,10 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $timelines = $user->feed_posts()->orderBy('id', 'desc')->paginate(10);
-        $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
-        $participations = $user->participations()->orderBy('id', 'desc')->paginate(10);
-        $concerns = $user->concerns()->orderBy('id', 'desc')->paginate(10);
+        $timelines = $user->feed_posts()->orderBy('updated_at', 'desc')->paginate(10);
+        $posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(10);
+        $participations = $user->participations()->orderBy('updated_at', 'desc')->paginate(10);
+        $concerns = $user->concerns()->orderBy('updated_at', 'desc')->paginate(10);
         $now = date('Y/n/d G:i');
 
         $data = [

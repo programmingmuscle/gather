@@ -35,7 +35,7 @@ class PostsController extends Controller
             })->orderBy('id', 'disc')->paginate(10);
             
         } else {
-            $posts = Post::orderBy('id', 'disc')->paginate(10);
+            $posts = Post::orderBy('updated_at', 'disc')->paginate(10);
         }
 
         $now = date('Y/n/d G:i');
