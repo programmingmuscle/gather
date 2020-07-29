@@ -17,14 +17,14 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('title');
-            $table->string('date_time');
-            $table->string('end_time');
+            $table->dateTime('date_time');
+            $table->dateTime('end_time');
             $table->string('place');
             $table->string('address');
             $table->string('reservation');
             $table->string('expense');
             $table->string('ball');
-            $table->string('deadline');
+            $table->dateTime('deadline');
             $table->string('people');
             $table->string('remarks')->nullable();
             $table->timestamps();
