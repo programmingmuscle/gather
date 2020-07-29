@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\User;
 
-use App\Post;
-
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
@@ -172,6 +170,7 @@ class UsersController extends Controller
         $posts = $user->posts()->orderBy('id', 'desc')->paginate(10);
         $participations = $user->participations()->orderBy('id', 'desc')->paginate(10);
         $concerns = $user->concerns()->orderBy('id', 'desc')->paginate(10);
+        $now = date('Y/n/d G:i');
 
         $data = [
             'user' => $user,
@@ -179,6 +178,7 @@ class UsersController extends Controller
             'posts' => $posts,
             'participations' => $participations,
             'concerns' => $concerns,
+            'now' => $now,
         ];
 
         $data += $this->counts($user);
