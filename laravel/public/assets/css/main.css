@@ -176,9 +176,8 @@ footer {
     text-decoration: line-through;
 }
 
-.full-note {
+.full-note , .deadline-note {
     color: #721c24;
-    margin-left: 2rem;
     margin-bottom: 0;
 }
 

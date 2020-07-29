@@ -150,7 +150,7 @@
                                 {{ $message->content }}
                             </p>
                             <div class="message-time-float d-inline-block message-color">
-                                {{ $message->created_at }}
+                                {{ $message->created_at->format('Y/n/d G:i') }}
                             </div>
                         </div>
                     </li>
