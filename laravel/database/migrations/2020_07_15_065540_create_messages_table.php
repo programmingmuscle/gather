@@ -17,6 +17,8 @@ class CreateMessagesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('post_id')->unsigned()->index();
+            $table->string('user_name');
+            $table->string('user_profile_image')->nullable();
             $table->string('content');
             $table->timestamps();
 
