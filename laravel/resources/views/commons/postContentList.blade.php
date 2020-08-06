@@ -4,10 +4,10 @@
     </li>
     <div class="ml-3">
         <li class="end_time-float">
-            日時：{{ date('Y/n/d G:i', strtotime($post->date_time)) }}
+            日時：{{ date('Y/n/j G:i', strtotime($post->date_time)) }}
         </li>
         <li class="end_time">
-            {{ '~' . ' ' . date('Y/n/d G:i', strtotime($post->end_time)) }}
+            {{ '~' . ' ' . date('Y/n/j G:i', strtotime($post->end_time)) }}
         </li>
         <li class="d-inline-block place">
             場所：
@@ -31,7 +31,7 @@
             使用球：{{ $post->ball }}
         </li>
         <li>
-            応募締切：{{ date('Y/n/d G:i', strtotime($post->deadline)) }}
+            応募締切：{{ date('Y/n/j G:i', strtotime($post->deadline)) }}
         </li>
         <li>
             募集人数：{{ $post->participate_users()->count() . '/' . $post->people }}人

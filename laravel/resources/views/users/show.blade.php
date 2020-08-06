@@ -83,10 +83,10 @@
                                         </li>      
                                         <div class="ml-3">
                                             <li class="end_time-float">
-                                                日時：{{ date('Y/n/d G:i', strtotime($timeline->date_time)) }}
+                                                日時：{{ date('Y/n/j G:i', strtotime($timeline->date_time)) }}
                                             </li>
                                             <li class="end_time">
-                                                {{ '~' . ' ' . date('Y/n/d G:i', strtotime($timeline->end_time)) }}
+                                                {{ '~' . ' ' . date('Y/n/j G:i', strtotime($timeline->end_time)) }}
                                             </li>
                                             <li class="d-inline-block place">
                                                 場所：
@@ -110,7 +110,7 @@
                                                 使用球：{{ $timeline->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ date('Y/n/d G:i', strtotime($timeline->deadline)) }}
+                                                応募締切：{{ date('Y/n/j G:i', strtotime($timeline->deadline)) }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $timeline->participate_users()->count() . '/' . $timeline->people }}人
@@ -241,10 +241,10 @@
                                         </li>
                                         <div class="ml-3">
                                             <li class="end_time-float">
-                                                日時：{{ date('Y/n/d G:i', strtotime($post->date_time)) }}
+                                                日時：{{ date('Y/n/j G:i', strtotime($post->date_time)) }}
                                             </li>
                                             <li class="end_time">
-                                                {{ '~' . ' ' . date('Y/n/d G:i', strtotime($post->end_time)) }}
+                                                {{ '~' . ' ' . date('Y/n/j G:i', strtotime($post->end_time)) }}
                                             </li>
                                             <li class="d-inline-block place">
                                                 場所：
@@ -268,7 +268,7 @@
                                                 使用球：{{ $post->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ date('Y/n/d G:i', strtotime($post->deadline)) }}
+                                                応募締切：{{ date('Y/n/j G:i', strtotime($post->deadline)) }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $post->participate_users()->count() . '/' . $post->people }}人
@@ -323,10 +323,10 @@
                                         </li>
                                         <div class="ml-3">
                                             <li class="end_time-float">
-                                                日時：{{ date('Y/n/d G:i', strtotime($participation->date_time)) }}
+                                                日時：{{ date('Y/n/j G:i', strtotime($participation->date_time)) }}
                                             </li>
                                             <li class="end_time">
-                                                {{ '~' . ' ' . date('Y/n/d G:i', strtotime($participation->end_time)) }}
+                                                {{ '~' . ' ' . date('Y/n/j G:i', strtotime($participation->end_time)) }}
                                             </li>
                                             <li class="d-inline-block place">
                                                 場所：
@@ -350,7 +350,7 @@
                                                 使用球：{{ $participation->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ date('Y/n/d G:i', strtotime($participation->deadline)) }}
+                                                応募締切：{{ date('Y/n/j G:i', strtotime($participation->deadline)) }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $participation->participate_users()->count() . '/' . $participation->people }}人
@@ -474,10 +474,10 @@
                                         </li>
                                         <div class="ml-3">
                                             <li class="end_time-float">
-                                                日時：{{ date('Y/n/d G:i', strtotime($concern->date_time)) }}
+                                                日時：{{ date('Y/n/j G:i', strtotime($concern->date_time)) }}
                                             </li>
                                             <li class="end_time">
-                                                {{ '~' . ' ' . date('Y/n/d G:i', strtotime($concern->end_time)) }}
+                                                {{ '~' . ' ' . date('Y/n/j G:i', strtotime($concern->end_time)) }}
                                             </li>
                                             <li class="d-inline-block place">
                                                 場所：
@@ -501,7 +501,7 @@
                                                 使用球：{{ $concern->ball }}
                                             </li>
                                             <li>
-                                                応募締切：{{ date('Y/n/d G:i', strtotime($concern->deadline)) }}
+                                                応募締切：{{ date('Y/n/j G:i', strtotime($concern->deadline)) }}
                                             </li>
                                             <li>
                                                 募集人数：{{ $concern->participate_users()->count() . '/' . $concern->people }}人
