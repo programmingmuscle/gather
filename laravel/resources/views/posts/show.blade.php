@@ -126,41 +126,16 @@
     </form>
 
     @if (count($messages) > 0)
-        <ul class="list-unstyled">
-
-            @foreach ($messages as $message)
-                <div class="list-border">
-                    <li class="media list">
-                        <a href="{{ route('users.show', ['id' => $message->user->id]) }}">
-                            
-                            @if ($message->user->profile_image != '')
-                                <figure>
-                                    <img src="/storage/profile_images/{{ $message->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                </figure>
-                            @else
-                                <figure>
-                                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                </figure>
-                            @endif
-                            
-                        </a>
-                        <div class="media-body">              
-                            <a href="{{ route('users.show', ['id' => $message->user->id]) }}" class="message-position d-inline-block">{{ $message->user->name }}</a>
-                            <p class="message-word-break">
-                                {{ $message->content }}
-                            </p>
-                            <div class="message-time-float d-inline-block message-color">
-                                {{ $message->created_at->format('Y/n/d G:i') }}
-                            </div>
-                        </div>
-                    </li>
-                </div>
-            @endforeach
-
+        <ul class="list-unstyled message-data ajax"  data-id="{{ $post->id }}">
         </ul>
     @else
         <p class="message_content">メッセージはこちらに表示されます</p>
     @endif
 
     {{ $messages->links('pagination::bootstrap-4') }}
+
+    @section ('js')
+        <script src="{{ asset('/assets/js/posts-show.js') }}"></script>
+    @endsection
+
 @endsection

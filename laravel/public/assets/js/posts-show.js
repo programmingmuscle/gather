@@ -52,3 +52,106 @@ $('.message-form').on('submit', (e) => {
 $(window).on('load', () => {
     $('.modal').modal('show');
 });
+
+$(function() {
+    get_data();
+});
+
+function get_data() {
+    const id = $('.ajax').data('id');
+    $.ajax({
+        type: 'GET',
+        url: "/result/ajax/" + id,
+        dataType: "json",
+        success: data => {
+            console.log(data);
+            $('.message-list').remove();
+            for (let i = 0; i < data.messages.length; i++) {
+                if (data.messages[i].user_profile_image != undefined) {
+                    let user_profile_image = `
+                        <figure>
+                            <img src="/storage/profile_images/${data.messages[i].user_id}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                        </figure>
+                    `;
+                    let created_at = new Date(data.messages[i].created_at);
+                    let year = created_at.getFullYear();
+                    let month = created_at.getMonth() + 1;
+                    let monthNumber = Number(month);
+                    let date = created_at.getDate();
+                    let dateNumber = Number(date);
+                    let hour = created_at.getHours();
+                    let hourNumber = Number(hour);
+                    let minute = created_at.getMinutes();
+                    let created_atFormat = `${year}/${monthNumber}/${dateNumber} ${hourNumber}:${minute}`;
+                    console.log(created_atFormat);
+                    let html = `
+                        <div class="list-border message-list">
+                            <li class="media list">
+                                <a href="/users/${data.messages[i].user_id}">
+                                    ${user_profile_image}
+                                </a>
+                                <div class="media-body">              
+                                <a href="/users/${data.messages[i].user_id}" class="message-position d-inline-block">${data.messages[i].user_name}</a>
+                                    <p class="message-word-break">
+                                        ${data.messages[i].content}
+                                    </p>
+                                    <div class="message-time-float d-inline-block message-color">
+                                        ${created_atFormat}
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                    `;
+                    console.log(html);
+                    $('.message-data').append(html);
+                } else {
+                    let user_profile_image = `
+                        <figure>
+                            <img src="/assets/images/noimage.jpeg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                        </figure>
+                        `;
+                        let created_at = new Date(data.messages[i].created_at);
+                        let year = created_at.getFullYear();
+                        let month = created_at.getMonth() + 1;
+                        let monthNumber = Number(month);
+                        let date = created_at.getDate();
+                        let dateNumber = Number(date);
+                        let hour = created_at.getHours();
+                        let hourNumber = Number(hour);
+                        let minute = created_at.getMinutes();
+                        let created_atFormat = `${year}/${monthNumber}/${dateNumber} ${hourNumber}:${minute}`;
+                        console.log(created_atFormat);
+                        let html = `
+                        <div class="list-border message-list">
+                            <li class="media list">
+                                <a href="/users/${data.messages[i].user_id}">
+                                    ${user_profile_image}
+                                </a>                                
+                                <div class="media-body">              
+                                <a href="/users/${data.messages[i].user_id}" class="message-position d-inline-block">${data.messages[i].user_name}</a>
+                                    <p class="message-word-break">
+                                        ${data.messages[i].content}
+                                    </p>
+                                    <div class="message-time-float d-inline-block message-color">
+                                        ${created_atFormat}
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                    `;
+                    console.log(html);
+                    $('.message-data').append(html);
+                }
+            }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            alert("データの取得に失敗しました。");
+            console.log("ajax通信に失敗しました");
+            console.log("jqXHR          : " + jqXHR.status);
+            console.log("textStatus     : " + textStatus);
+            console.log("errorThrown    : " + errorThrown.message);
+            console.log("URL            : " + url);
+        }
+    });
+    setTimeout("get_data()", 5000);
+}
