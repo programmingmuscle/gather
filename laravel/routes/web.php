@@ -21,6 +21,7 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
+Route::get('/result/ajax/{post}', 'PostsController@getData');
 
 Route::group(['prefix' => 'users/{user}'], function() {    
     Route::get('followings', 'UsersController@followings')->name('users.followings');
