@@ -27,6 +27,8 @@ class MessagesController extends Controller
 
         $message->user_id = Auth::id();
         $message->post_id = $post->id;
+        $message->user_name = Auth::user()->name;
+        $message->user_profile_image = Auth::user()->profile_image;
         $message->content = $request->content;
 
         $message->save();
