@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<title>GATHER! ~Let's play baseball~</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">		

@@ -58,13 +58,15 @@ $(function() {
 });
 
 function get_data() {
+    $.ajaxSetup({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
     const id = $('.ajax').data('id');
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: "/result/ajax/" + id,
         dataType: "json",
         success: data => {
-            console.log(data);
             $('.message-list').remove();
             for (let i = 0; i < data.messages.length; i++) {
                 if (data.messages[i].user_profile_image != undefined) {
