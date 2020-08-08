@@ -75,14 +75,11 @@ function get_data() {
                     `;
                     let created_at = new Date(data.messages[i].created_at);
                     let year = created_at.getFullYear();
-                    let month = created_at.getMonth() + 1;
-                    let monthNumber = Number(month);
+                    let month = created_at.getMonth() + 1;                    
                     let date = created_at.getDate();
-                    let dateNumber = Number(date);
                     let hour = created_at.getHours();
-                    let hourNumber = Number(hour);
-                    let minute = created_at.getMinutes();
-                    let created_atFormat = `${year}/${monthNumber}/${dateNumber} ${hourNumber}:${minute}`;
+                    let minute = ("0" + created_at.getMinutes()).slice(-2);
+                    let created_atFormat = `${year}/${month}/${date} ${hour}:${minute}`;
                     console.log(created_atFormat);
                     let html = `
                         <div class="list-border message-list">
@@ -113,13 +110,10 @@ function get_data() {
                         let created_at = new Date(data.messages[i].created_at);
                         let year = created_at.getFullYear();
                         let month = created_at.getMonth() + 1;
-                        let monthNumber = Number(month);
                         let date = created_at.getDate();
-                        let dateNumber = Number(date);
                         let hour = created_at.getHours();
-                        let hourNumber = Number(hour);
-                        let minute = created_at.getMinutes();
-                        let created_atFormat = `${year}/${monthNumber}/${dateNumber} ${hourNumber}:${minute}`;
+                        let minute = ("0" + created_at.getMinutes()).slice(-2);
+                        let created_atFormat = `${year}/${month}/${date} ${hour}:${minute}`;
                         console.log(created_atFormat);
                         let html = `
                         <div class="list-border message-list">
