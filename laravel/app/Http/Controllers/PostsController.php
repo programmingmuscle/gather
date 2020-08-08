@@ -137,6 +137,14 @@ class PostsController extends Controller
         ]);
     }
 
+    public function getData($id)
+    {
+        $post = Post::find($id);
+        $messages = $post->messages()->orderBy('id', 'desc')->get();
+        $json = ["messages" => $messages];
+        return response()->json($json);
+    }
+
     public function deleteWindow($id) {
         $post = Post::find($id);
 
