@@ -63,4 +63,8 @@
 
     {{ $users->links('pagination::bootstrap-4') }}
 
+    @section('js')
+        <script src="{{ asset('/assets/js/users-index.js') }}"></script>
+    @endsection
+
 @endsection

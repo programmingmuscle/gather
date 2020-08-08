@@ -97,4 +97,9 @@
             </div>
         </div>
     </div>
+
+    @section
+        <script src="{{ asset('/assets/js/posts-create.js') }}"></script>
+    @endsection
+    
 @endsection

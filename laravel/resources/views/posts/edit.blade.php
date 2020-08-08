@@ -104,4 +104,9 @@
             </div>
         </div>
     </div>
+
+    @section('js')
+        <script src="{{ asset('/assets/js/posts-edit.js') }}"></script>
+    @endsection
+    
 @endsection

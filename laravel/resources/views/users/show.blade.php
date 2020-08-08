@@ -597,4 +597,8 @@
         </section>
     </section>
 
+    @section('js')
+        <script src="{{ asset('/assets/js/users-show.js') }}"></script>
+    @endsection
+
 @endsection

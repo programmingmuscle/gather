@@ -43,4 +43,9 @@
             </div>
         </div>
     </div>
+
+    @section ('js')
+        <script src="{{ asset('/assets/js/signup.js') }}"></script>
+    @endsection
+
 @endsection

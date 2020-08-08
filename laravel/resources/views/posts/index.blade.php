@@ -61,4 +61,8 @@
 
     {{ $posts->links('pagination::bootstrap-4') }}
 
+    @section('js')
+        <script src="{{ asset('/assets/js/posts-index.js') }}"></script>
+    @endsection
+
 @endsection

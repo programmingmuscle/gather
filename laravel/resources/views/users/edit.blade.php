@@ -155,4 +155,9 @@
             </div>
         </div>
     </div>
+
+    @section('js')
+        <script src="{{ asset('/assets/js/users-edit.js') }}"></script>
+    @endsection
+    
 @endsection
