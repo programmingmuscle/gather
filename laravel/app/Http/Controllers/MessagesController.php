@@ -25,10 +25,10 @@ class MessagesController extends Controller
         $message = new Message;
         $post = Post::find($id);
 
-        $message->user_id = Auth::id();
-        $message->post_id = $post->id;
-        $message->user_name = Auth::user()->name;
-        $message->user_profile_image = Auth::user()->profile_image;
+        $message->user_id = $request->user_id;
+        $message->post_id = $request->post_id;
+        $message->user_name = $request->user_name;
+        $message->user_profile_image = $request->user_profile_image;
         $message->content = $request->content;
 
         $message->save();
