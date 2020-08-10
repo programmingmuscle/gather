@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::resource('posts', 'PostsController', ['only' => ['store', 'update', 'destroy', 'edit']]);
     Route::get('posts/{post}/deleteWindow', 'PostsController@deleteWindow')->name('posts.deleteWindow');
     Route::get('posts/{user}/create', 'PostsController@create')->name('posts.create');
+    Route::post('/result/ajax/{post}/store', 'MessagesController@store')->name('messages.store');
 
     Route::group(['prefix' => 'users/{user}'], function() {
         Route::post('follow', 'UserFollowController@store')->name('user.follow');
@@ -49,6 +50,5 @@ Route::group(['middleware' => 'auth'],function() {
         Route::delete('unconcern', 'ConcernsController@destroy')->name('concerns.unconcern');
         Route::post('participate', 'ParticipationsController@store')->name('participations.participate');
         Route::delete('cancel', 'ParticipationsController@destroy')->name('participations.cancel');
-        Route::post('messages', 'MessagesController@store')->name('messages.store');
     });
 });
