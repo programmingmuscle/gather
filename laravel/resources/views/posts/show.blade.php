@@ -114,7 +114,7 @@
                         @endif
                         <textarea name="content" id="messageContent" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！">{{ old('content') }}</textarea>
                         <div class="message-button">
-                            <input type="submit" value="送信" class="btn btn-success">
+                            <input type="submit" value="送信" class="btn btn-success" id="ajaxPost" data-user_id="{{ Auth::id() }}" data-post_id="{{ $post->id }}" data-user_name="{{ Auth::user()->name }}" data-user_profile_image="{{ Auth::user()->profile_image }}">
                         </div>
                     </div>
             </div>
@@ -126,7 +126,7 @@
     </form>
 
     @if (count($messages) > 0)
-        <ul class="list-unstyled message-data ajax"  data-id="{{ $post->id }}">
+        <ul class="list-unstyled message-data" id="ajaxGet" data-post_id="{{ $post->id }}">
         </ul>
     @else
         <p class="message_content">メッセージはこちらに表示されます</p>
