@@ -124,19 +124,8 @@
             </div>
         @endif
     </form>
-
-    
     <ul class="list-unstyled message-data" id="ajaxGet" data-post_id="{{ $post->id }}">
-
-        @if (!(count($messages) > 0))
-            <p class="message_content message-list">メッセージはこちらに表示されます</p>
-        @endif
-
     </ul>
-
-    
-
-    {{ $messages->links('pagination::bootstrap-4') }}
 
     @section ('js')
         <script src="{{ asset('/assets/js/posts-show.js') }}"></script>
