@@ -149,7 +149,14 @@ function get_data() {
             console.log("URL            : " + url);
         }
     });
-    setTimeout("get_data()", 5000);
+}
+
+$(function() {
+    load_data();
+});
+
+function load_data() {
+    setInterval("get_data()", 5000);
 }
 
 $(function() {
@@ -169,14 +176,6 @@ function post_data() {
         const user_profile_image = $('#ajaxPost').data('user_profile_image');
         const content = $('#messageContent').val();
 
-        $('#messageContent').val("");
-
-        console.log(user_id);
-        console.log(post_id);
-        console.log(user_name);
-        console.log(user_profile_image);
-        console.log(content);
-
         $.ajax({
             type: 'POST',
             url: "/result/ajax/" + post_id + "message/store",
@@ -188,7 +187,13 @@ function post_data() {
                 content: content,
             },
             success: () => {
-                console.log('成功');
+                console.log(user_id);
+                console.log(post_id);
+                console.log(user_name);
+                console.log(user_profile_image);
+                console.log(content);
+                $('#messageContent').val("");
+                get_data();
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 alert("データの取得に失敗しました。");
