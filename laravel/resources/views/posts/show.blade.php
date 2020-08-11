@@ -125,12 +125,16 @@
         @endif
     </form>
 
-    @if (count($messages) > 0)
-        <ul class="list-unstyled message-data" id="ajaxGet" data-post_id="{{ $post->id }}">
-        </ul>
-    @else
-        <p class="message_content">メッセージはこちらに表示されます</p>
-    @endif
+    
+    <ul class="list-unstyled message-data" id="ajaxGet" data-post_id="{{ $post->id }}">
+
+        @if (!(count($messages) > 0))
+            <p class="message_content message-list">メッセージはこちらに表示されます</p>
+        @endif
+
+    </ul>
+
+    
 
     {{ $messages->links('pagination::bootstrap-4') }}
 
