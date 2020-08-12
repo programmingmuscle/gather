@@ -193,6 +193,7 @@ function post_data() {
                 console.log(user_profile_image);
                 console.log(content);
                 $('#messageContent').val("");
+                $('#messageZero').remove();
                 get_data();
             },
             error: (jqXHR, textStatus, errorThrown) => {
