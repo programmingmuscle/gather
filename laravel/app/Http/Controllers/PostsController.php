@@ -38,7 +38,7 @@ class PostsController extends Controller
             $posts = Post::orderBy('updated_at', 'disc')->paginate(10);
         }
 
-        $now = date('Y/n/d G:i');
+        $now = date('Y/n/j G:i');
 
         return view('posts.index', [
             'posts' => $posts,
@@ -126,7 +126,7 @@ class PostsController extends Controller
         $users = $post->participate_users()->orderBy('id', 'desc')->get();
         $messages = $post->messages()->orderBy('id', 'desc')->paginate(10);
         $count_participate_users = $post->participate_users()->count();
-        $now = date('Y/n/d G:i');
+        $now = date('Y/n/j G:i');
 
         return view('posts.show', [
             'post' => $post,
