@@ -124,12 +124,41 @@
             </div>
         @endif
     </form>
-
-        @if (!(count($messages) > 0))
-            <p class="message_content" id="messageZero">メッセージはこちらに表示されます</p>
-        @endif
-
     <ul class="list-unstyled message-data" id="ajaxGet" data-post_id="{{ $post->id }}">
+
+        @if (count($messages) > 0)
+            @foreach ($messages as $message)
+                <div class="list-border message-list">
+                    <li class="media list">
+                        <a href="{{ route('users.show', ['id' => $message->user->id]) }}">
+
+                            @if ($message->user->profile_image != '')
+                                <figure>
+                                    <img src="/storage/profile_images/{{ $message->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @else
+                                <figure>
+                                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                </figure>
+                            @endif
+
+                        </a>
+                        <div class="media-body">              
+                        <a href="/users/${data.messages[i].user_id}" class="message-position d-inline-block">{{ $message->user_name }}</a>
+                            <p class="message-word-break">
+                                {{ $message->content }}
+                            </p>
+                            <div class="message-time-float d-inline-block message-color">
+                                {{ $message->created_at->format('Y/n/j G:i') }}
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            @endforeach
+        @else
+            <p class="message_content" id="messageZero">メッセージはこちらに表示されます</p>
+        @endif 
+ 
     </ul>
 
     @section ('js')

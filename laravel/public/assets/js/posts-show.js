@@ -178,7 +178,7 @@ function post_data() {
 
         $.ajax({
             type: 'POST',
-            url: "/result/ajax/" + post_id + "message/store",
+            url: "/result/ajax/" + post_id + "/store",
             data: {
                 user_id: user_id,
                 post_id: post_id,
@@ -208,3 +208,52 @@ function post_data() {
         
     });
 }
+/*
+$(function() {
+    update_data();
+});
+
+function update_data() {
+    $.ajaxSetup({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
+    $('#ajaxPost').on('click', (e) => {
+        e.preventDefault();
+
+        const user_id = $('#ajaxPost').data('user_id');
+        const post_id = $('#ajaxPost').data('post_id');
+        const user_name = $('#ajaxPost').data('user_name');
+        const user_profile_image = $('#ajaxPost').data('user_profile_image');
+        const content = $('#messageContent').val();
+
+        $.ajax({
+            type: 'POST',
+            url: "/result/ajax/" + post_id + "message/store",
+            data: {
+                user_id: user_id,
+                post_id: post_id,
+                user_name: user_name,
+                user_profile_image: user_profile_image,
+                content: content,
+            },
+            success: () => {
+                console.log(user_id);
+                console.log(post_id);
+                console.log(user_name);
+                console.log(user_profile_image);
+                console.log(content);
+                $('#messageContent').val("");
+                get_data();
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                alert("データの取得に失敗しました。");
+                console.log("ajax通信に失敗しました");
+                console.log("jqXHR          : " + jqXHR.status);
+                console.log("textStatus     : " + textStatus);
+                console.log("errorThrown    : " + errorThrown.message);
+                console.log("URL            : " + url);
+            }
+        });
+        
+    });
+}*/
