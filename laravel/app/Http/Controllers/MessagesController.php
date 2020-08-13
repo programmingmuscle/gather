@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MessagesController extends Controller
 {
-    public function store(Request $request, $id) {
+    public function store(Request $request) {
         $this->validate($request, [
             'content' => 'required|string|max:191',
         ], 
@@ -23,7 +23,6 @@ class MessagesController extends Controller
         ]);
 
         $message = new Message;
-        $post = Post::find($id);
 
         $message->user_id = $request->user_id;
         $message->post_id = $request->post_id;
@@ -35,4 +34,6 @@ class MessagesController extends Controller
         
         return back();
     }
+
+    
 }
