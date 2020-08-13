@@ -19,5 +19,5 @@
     </li>
 </ul>
 <p class="mt-3">    
-    {{ $user->introduction }}
+    {!! nl2br(e($user->introduction)) !!}
 </p>

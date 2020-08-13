@@ -118,7 +118,7 @@
                                         </div>
                                     </ul>
                                     <p class="ml-3 mt-3">
-                                        {{ $timeline->remarks }}
+                                        {!! nl2br(e($timeline->remarks)) !!}
                                     </p>
 
                                     @if ($timeline->user->id != Auth::id()) 
@@ -276,7 +276,7 @@
                                         </div>
                                     </ul>
                                     <p class="ml-3 mt-3">
-                                        {{ $post->remarks }}
+                                        {!! nl2br(e($post->remarks)) !!}
                                     </p>
                                     
                                         @include ('participations.participate_button')
@@ -358,7 +358,7 @@
                                         </div>
                                     </ul>
                                     <p class="ml-3 mt-3">
-                                        {{ $participation->remarks }}
+                                        {!! nl2br(e($participation->remarks)) !!}
                                     </p>
 
                                     @if ($participation->user->id != Auth::id()) 
@@ -509,7 +509,7 @@
                                         </div>
                                     </ul>
                                     <p class="ml-3 mt-3">
-                                        {{ $concern->remarks }}
+                                        {!! nl2br(e($concern->remarks)) !!}
                                     </p>
                                     
                                     @if ($concern->user->id != Auth::id()) 

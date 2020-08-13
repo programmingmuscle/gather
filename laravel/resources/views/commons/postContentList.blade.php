@@ -39,5 +39,5 @@
     </div>
 </ul>
 <p class="ml-3 mt-3">
-    {{ $post->remarks }}
+    {!! nl2br(e($post->remarks)) !!}
 </p>
