@@ -364,10 +364,6 @@ footer {
     word-break: break-all;
 }
 
-.message-position-float {
-    float: left;
-}
-
 .name-float {
     float:left;
 }
@@ -401,10 +397,35 @@ footer {
     word-break: break-all;
 }
 
-.message-time-float {
+.message-float {
     float:right;
 }
 
+.message-edit-color {    
+    color: #557F95;
+    text-decoration: none;
+    transition: all .15s;
+}
+
+.message-edit-color:hover {
+    border-bottom: 1px solid #999;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.message-delete-color {    
+    color: #721c24;
+    text-decoration: none;
+    transition: all .15s;
+    cursor: pointer;
+}
+
+.message-delete-color:hover {
+    border-bottom: 1px solid #999;
+    text-decoration: none;
+    background-color: #f0f0f0;
+}
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;

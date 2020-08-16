@@ -13,7 +13,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title">参加しました</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -100,35 +100,36 @@
 
         @if (Auth::check())
             <div class="media message-box">
-                    <a href="{{ route('users.show', ['id' => Auth::id()]) }}">
-                        @if (Auth::user()->profile_image != '')
-                            <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                        @else
-                        <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                        @endif
-                    </a>
-                    <div class="media-body">
-                        <div id="messageContent-error"></div>
-                        @if ($errors->has('content'))
-                            <div class="error-target">{{ $errors->first('content') }}</div>
-                        @endif
-                        <textarea name="content" id="messageContent" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！">{{ old('content') }}</textarea>
-                        <div class="message-button">
-                            <input type="submit" value="送信" class="btn btn-success" id="ajaxPost" data-user_id="{{ Auth::id() }}" data-post_id="{{ $post->id }}" data-user_name="{{ Auth::user()->name }}" data-user_profile_image="{{ Auth::user()->profile_image }}">
-                        </div>
+                <a href="{{ route('users.show', ['id' => Auth::id()]) }}">
+                    @if (Auth::user()->profile_image != '')
+                        <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                    @else
+                    <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                    @endif
+                </a>
+                <div class="media-body">
+                    <div id="messageContent-error"></div>
+                    @if ($errors->has('content'))
+                        <div class="error-target">{{ $errors->first('content') }}</div>
+                    @endif
+                    <textarea name="content" id="messageContent" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！">{{ old('content') }}</textarea>
+                    <div class="message-button">
+                        <input type="submit" value="送信" class="btn btn-success" id="ajaxPost" data-user_id="{{ Auth::id() }}" data-post_id="{{ $post->id }}" data-user_name="{{ Auth::user()->name }}" data-user_profile_image="{{ Auth::user()->profile_image }}">
                     </div>
+                </div>
             </div>
         @else
             <div class="message-box">
                 <p class="text-center mb-0"><a href="{{ route('login') }}">ログイン</a>してメッセージを送信</p>
             </div>
         @endif
+        
     </form>
     <ul class="list-unstyled message-data" id="ajaxGet" data-post_id="{{ $post->id }}">
 
         @if (count($messages) > 0)
             @foreach ($messages as $message)
-                <div class="list-border message-list">
+                <div class="list-border message-list" data-messageId="{{ $message->id }}">
                     <li class="media list">
                         <a href="{{ route('users.show', ['id' => $message->user->id]) }}">
 
@@ -144,12 +145,25 @@
 
                         </a>
                         <div class="media-body">              
-                        <a href="/users/${data.messages[i].user_id}" class="message-position d-inline-block">{{ $message->user_name }}</a>
+                            <a href="{{ route('users.show', ['id' => $message->user->id]) }}" class="message-position d-inline-block">{{ $message->user_name }}</a>
                             <p class="message-word-break">
-                                {{ $message->content }}
+                                {!! nl2br(e($message->content)) !!}
                             </p>
-                            <div class="message-time-float d-inline-block message-color">
-                                {{ $message->created_at->format('Y/n/j G:i') }}
+                            <div class="message-float">
+
+                                @if ($message->created_at != $message->updated_at)
+                                    <p class="message_content text-right mr-0">編集済み</p>
+                                @endif
+
+                                @if ($message->user->id == Auth::id())
+                                    <div class="text-right">
+                                        <span class="message-edit-color">編集</span>|<span class="message-delete-color">削除</span>
+                                    </div>
+                                @endif
+
+                                <div class="message-color">
+                                    {{ $message->created_at->format('Y/n/j G:i') }}
+                                </div>
                             </div>
                         </div>
                     </li>

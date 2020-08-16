@@ -21,7 +21,7 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
-Route::post('/result/ajax/{post}', 'PostsController@getData');
+Route::post('/result/ajax/{post}', 'PostsController@getData')->name('posts.getData');
 
 Route::group(['prefix' => 'users/{user}'], function() {    
     Route::get('followings', 'UsersController@followings')->name('users.followings');
@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('posts/{post}/deleteWindow', 'PostsController@deleteWindow')->name('posts.deleteWindow');
     Route::get('posts/{user}/create', 'PostsController@create')->name('posts.create');
     Route::post('/result/ajax/{post}/store', 'MessagesController@store')->name('messages.store');
+    Route::post('/result/ajax/{message}/update', 'MessagesController@update')->name('messages.update');
+    Route::post('/result/ajax/{message}/destroy', 'MessagesController@destroy')->name('messages.destroy');
 
     Route::group(['prefix' => 'users/{user}'], function() {
         Route::post('follow', 'UserFollowController@store')->name('user.follow');
