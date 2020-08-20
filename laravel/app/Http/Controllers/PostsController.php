@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Hash;
 class PostsController extends Controller
 {
     public function index(Request $request) {
-        $query = Post::query();
-
+        
         $keyword = $request->input('keyword');
 
         if (!empty($keyword)) {
-            $posts = $query
+            $posts = Post::
+                    join('users', 'posts.user_id', 'users.id')
                     ->where('title', 'like', '%' . $keyword . '%')
                     ->orwhere('date_time', 'like', '%' . $keyword . '%')
                     ->orwhere('place', 'like', '%' . $keyword . '%')
@@ -28,13 +28,9 @@ class PostsController extends Controller
                     ->orwhere('ball', 'like', '%' . $keyword . '%')
                     ->orwhere('people', 'like', '%' . $keyword . '%')
                     ->orwhere('remarks', 'like', '%' . $keyword . '%')
-                    ->orderBy('id', 'desc')
-                    ->paginate(10);
-                    
-            $posts = Post::whereHas('user', function ($query) use ($keyword) {
-                $query->where('name', 'like', '%' . $keyword . '%');
-            })->orderBy('id', 'desc')->paginate(10);
-            
+                    ->orwhere('name', 'like', '%' . $keyword . '%')
+                    ->orderBy('posts.updated_at', 'desc')
+                    ->paginate(10);     
         } else {
             $posts = Post::orderBy('updated_at', 'desc')->paginate(10);
         }
