@@ -28,14 +28,15 @@ class PostsController extends Controller
                     ->orwhere('ball', 'like', '%' . $keyword . '%')
                     ->orwhere('people', 'like', '%' . $keyword . '%')
                     ->orwhere('remarks', 'like', '%' . $keyword . '%')
-                    ->orderBy('id', 'disc')
+                    ->orderBy('id', 'desc')
                     ->paginate(10);
+                    
             $posts = Post::whereHas('user', function ($query) use ($keyword) {
                 $query->where('name', 'like', '%' . $keyword . '%');
-            })->orderBy('id', 'disc')->paginate(10);
+            })->orderBy('id', 'desc')->paginate(10);
             
         } else {
-            $posts = Post::orderBy('updated_at', 'disc')->paginate(10);
+            $posts = Post::orderBy('updated_at', 'desc')->paginate(10);
         }
 
         $now = date('Y/n/j G:i');
@@ -82,7 +83,7 @@ class PostsController extends Controller
             'address.required' => '住所を入力して下さい。',
             'address.string' => '住所は文字列として下さい。',
             'address.max' => '住所は191文字以内として下さい。',
-            'reservation.required' => '場所予約は文字列として下さい。',
+            'reservation.required' => '場所予約を入力して下さい。',
             'reservation.stirng' => '場所予約は文字列として下さい。',
             'reservation.max' => '場所予約は191文字以内として下さい。',
             'expense.required' => '参加費用を入力して下さい。',
@@ -217,7 +218,7 @@ class PostsController extends Controller
             'address.required' => '住所を入力して下さい。',
             'address.string' => '住所は文字列として下さい。',
             'address.max' => '住所は191文字以内として下さい。',
-            'reservation.required' => '場所予約は文字列として下さい。',
+            'reservation.required' => '場所予約を入力して下さい。',
             'reservation.stirng' => '場所予約は文字列として下さい。',
             'reservation.max' => '場所予約は191文字以内として下さい。',
             'expense.required' => '参加費用を入力して下さい。',
