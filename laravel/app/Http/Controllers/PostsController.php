@@ -17,8 +17,9 @@ class PostsController extends Controller
         $keyword = $request->input('keyword');
 
         if (!empty($keyword)) {
-            $posts = Post::
-                    join('users', 'posts.user_id', 'users.id')
+            $posts = Post::            
+                    join('users',  'users.id' , 'posts.user_id')
+                    ->select(['users.id as userId', 'users.name', 'users.profile_image', 'users.created_at as usersCreated_at', 'users.updated_at as usersUpdated_at', 'posts.id', 'posts.title', 'posts.date_time', 'posts.end_time', 'posts.place', 'posts.address', 'posts.reservation', 'posts.expense', 'posts.ball', 'posts.deadline', 'posts.people', 'posts.remarks', 'posts.created_at', 'posts.updated_at'])
                     ->where('title', 'like', '%' . $keyword . '%')
                     ->orwhere('date_time', 'like', '%' . $keyword . '%')
                     ->orwhere('place', 'like', '%' . $keyword . '%')
@@ -32,7 +33,11 @@ class PostsController extends Controller
                     ->orderBy('posts.updated_at', 'desc')
                     ->paginate(10);     
         } else {
-            $posts = Post::orderBy('updated_at', 'desc')->paginate(10);
+            $posts = Post::         
+                    join('users',  'users.id' , 'posts.user_id')
+                    ->select(['users.id as userId', 'users.name', 'users.profile_image', 'users.created_at as usersCreated_at', 'users.updated_at as usersUpdated_at', 'posts.id', 'posts.title', 'posts.date_time', 'posts.end_time', 'posts.place', 'posts.address', 'posts.reservation', 'posts.expense', 'posts.ball', 'posts.deadline', 'posts.people', 'posts.remarks', 'posts.created_at', 'posts.updated_at'])
+                    ->orderBy('posts.updated_at', 'desc')
+                    ->paginate(10); 
         }
 
         $now = date('Y/n/j G:i');
