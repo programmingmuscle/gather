@@ -32,4 +32,9 @@
             </div>
         </div>
     </div>
+
+    @section('js')
+        <script src="{{ asset('/assets/js/login.js') }}"></script>
+    @endsection
+
 @endsection

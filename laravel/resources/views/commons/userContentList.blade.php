@@ -18,6 +18,6 @@
         ポジション：{{ $user->position }}
     </li>
 </ul>
-<p>
-    {{ $user->introduction }}
+<p class="mt-3">    
+    {!! nl2br(e($user->introduction)) !!}
 </p>

@@ -15,13 +15,13 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function concern_users()
+    public function messages()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(Message::class);
     }
 
     public function participate_users()
     {
-        return $this->belongToMany(User::class);
+        return $this->belongsToMany(User::class, 'participations', 'post_id', 'user_id')->withTimestamps();
     }
 }

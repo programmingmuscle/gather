@@ -24,37 +24,74 @@
                 <div class="list-border detail">
                     <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
                     <li class="media list">
-                        <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
-                            @if ($post->user->profile_image != '')
+                        <a href="{{ route('users.show', ['id' => $post->userId]) }}">
+                            @if ($post->profile_image != '')
                                 <figure>
-                                    <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                    <img src="/storage/profile_images/{{ $post->userId }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
                                 </figure>
                             @else
-                                <figure id="remove_profile_images">
+                                <figure>
                                     <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                 </figure>
                             @endif
                         </a>
                         <div class="media-body">
                             <div class="clearfix">              
-                                <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position name-float d-inline-block">{{ $post->user->name }}</a>
+                                <a href="{{ route('users.show', ['id' => $post->userId]) }}" class="name-position name-float d-inline-block">{{ $post->name }}</a>
 
-                                @if ($post->user->id == Auth::id())
+                                @if ($post->userId == Auth::id())
                                     <div class="button-position button-float">
                                         <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
                                     </div>
                                 @endif               
                             </div>
 
-                            @include ('commons.postContentList')
-                            
-                            @if (Auth::check() && !($post->user->id == Auth::id()))
+                            @include ('commons.postContentList')                            
+
+                            @if ($post->userId != Auth::id()) 
                                 <div class="button-position ml-3">
-                                    @include ('participations.participate_button')
-                                    @include ('concerns.concern_button')
+
+                                    @if(Auth::check())
+                                        @if (Auth::user()->is_participating($post->id))
+                                            <form method="POST" action="{{ route('participations.cancel', ['id' => $post->id]) }}" class="d-inline-block">
+                                                {!! method_field('delete') !!}
+                                                {{ csrf_field() }}
+                                                <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
+                                            </form>
+                                        @else
+                                            @include ('participations.common')
+                                        @endif
+                                    @else
+                                        @include ('participations.common')
+                                    @endif
+                                    
                                 </div>
                             @endif
 
+                            @if ($post->userId != Auth::id())
+                                <div class="button-position ml-3">
+                                    @if (Auth::check())
+                                        @if (Auth::user()->is_concerned($post->id))
+                                            <form method="POST" action="{{ route('concerns.unconcern', ['id' => $post->id]) }}" class="d-inline-block">
+                                                {!! method_field('delete') !!}
+                                                {{ csrf_field() }}
+                                                <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{ route('concerns.concern', ['id' => $post->id]) }}" class="d-inline-block">
+                                                {{ csrf_field() }}
+                                                <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                            </form>
+                                        @endif
+                                    @else
+                                        <form method="POST" action="{{ route('concerns.concern', ['id' => $post->id]) }}" class="d-inline-block">
+                                            {{ csrf_field() }}
+                                            <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                        </form>
+                                    @endif
+                                </div>
+                            @endif
+                            
                         </div>
                     </li>
                 </div>
@@ -63,5 +100,9 @@
     @endif
 
     {{ $posts->links('pagination::bootstrap-4') }}
+
+    @section('js')
+        <script src="{{ asset('/assets/js/posts-index.js') }}"></script>
+    @endsection
 
 @endsection

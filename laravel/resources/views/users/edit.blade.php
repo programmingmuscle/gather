@@ -18,11 +18,11 @@
                         <label for="profile_image">プロフィール画像</label>
                         
                             @if ($user->profile_image != '')
-                                <figure id="remove_profile_images">
+                                <figure>
                                     <img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
                                 </figure>
                             @else
-                                <figure id="remove_profile_images">
+                                <figure>
                                     <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                 </figure>
                             @endif
@@ -155,4 +155,9 @@
             </div>
         </div>
     </div>
+
+    @section('js')
+        <script src="{{ asset('/assets/js/users-edit.js') }}"></script>
+    @endsection
+    
 @endsection

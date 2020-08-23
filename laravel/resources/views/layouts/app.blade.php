@@ -4,9 +4,10 @@
 		<meta charset="utf-8">
 		<title>GATHER! ~Let's play baseball~</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
-		<link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
+		<link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">		
 	</head>
 	<body>
 
@@ -63,15 +64,10 @@
 		@yield ('/top_body&/top_wrapper')	
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="{{ asset('/assets/js/top.js') }}"></script>
-		<script src="{{ asset('/assets/js/signup.js') }}"></script>
-		<script src="{{ asset('/assets/js/login.js') }}"></script>
-		<script src="{{ asset('/assets/js/users-index.js') }}"></script>
-		<script src="{{ asset('/assets/js/users-show.js') }}"></script>
-		<script src="{{ asset('/assets/js/users-edit.js') }}"></script>
-		<script src="{{ asset('/assets/js/posts-index.js') }}"></script>
-		<script src="{{ asset('/assets/js/posts-create.js') }}"></script>
-		<script src="{{ asset('/assets/js/posts-show.js') }}"></script>
+		<script src="{{ asset('/assets/js/flash_message.js') }}"></script>		
+		
+		@yield ('js')
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>

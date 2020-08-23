@@ -107,7 +107,24 @@ footer {
     margin-right: 1rem;
 }
 
+.message_content {
+    padding-top: .5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    color: #696969;
+    text-align: center;
+}
+
+.message-color {
+    color:#696969;
+}
+
 .complete-button {
+    padding-top: 1rem;
+    text-align: right;
+}
+
+.message-button {
     padding-top: 1rem;
     text-align: right;
 }
@@ -147,6 +164,21 @@ footer {
     padding: .25rem 1rem;
     margin-right: 1rem;
     border-radius: 15px 15px 15px 15px;
+}
+
+.participate-button-full {
+    color: #6c757d;
+    background-color: white;
+    border: 1px solid #6c757d;
+    padding: .25rem 1rem;
+    margin-right: 1rem;
+    border-radius: 15px 15px 15px 15px;
+    text-decoration: line-through;
+}
+
+.full-note , .deadline-note {
+    color: #721c24;
+    margin-bottom: 0;
 }
 
 .concern-button {
@@ -326,6 +358,12 @@ footer {
     word-break: break-all;
 }
 
+.message-position {
+    padding-top: 13px;
+    padding-bottom: 13px;
+    word-break: break-all;
+}
+
 .name-float {
     float:left;
 }
@@ -334,6 +372,60 @@ footer {
     margin-left: 3rem;
 }
 
+.accordion-title {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.accordion-title:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.accordion-content {
+    display: none;
+}
+
+.message-box {
+    padding: .5rem 1rem;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.message-word-break {
+    word-break: break-all;
+}
+
+.message-float {
+    float:right;
+}
+
+.message-edit-color {    
+    color: #557F95;
+    text-decoration: none;
+    transition: all .15s;
+}
+
+.message-edit-color:hover {
+    border-bottom: 1px solid #999;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.message-delete-color {    
+    color: #721c24;
+    text-decoration: none;
+    transition: all .15s;
+    cursor: pointer;
+}
+
+.message-delete-color:hover {
+    border-bottom: 1px solid #999;
+    text-decoration: none;
+    background-color: #f0f0f0;
+}
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;
@@ -430,16 +522,17 @@ footer {
         margin-top: 120px;
     }
 
-    .search-box {
-        padding-left: 1rem;
-    }
-
     .list {
         margin-left: 1rem;
         margin-right: 1rem;
     }
 
     .show_content {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .message_content {
         margin-left: 1rem;
         margin-right: 1rem;
     }
@@ -478,12 +571,22 @@ footer {
         padding-left: 2rem;
     }
 
+    .message-box {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
     .list {
         margin-left: 2rem;
         margin-right: 2rem;
     }
 
     .show_content {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .message_content {
         margin-left: 2rem;
         margin-right: 2rem;
     }

@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Hash;
 class PostsController extends Controller
 {
     public function index(Request $request) {
-        $query = Post::query();
-
+        
         $keyword = $request->input('keyword');
 
         if (!empty($keyword)) {
-            $posts = $query
+            $posts = Post::            
+                    join('users',  'users.id' , 'posts.user_id')
+                    ->select(['users.id as userId', 'users.name', 'users.profile_image', 'users.created_at as usersCreated_at', 'users.updated_at as usersUpdated_at', 'posts.id', 'posts.title', 'posts.date_time', 'posts.end_time', 'posts.place', 'posts.address', 'posts.reservation', 'posts.expense', 'posts.ball', 'posts.deadline', 'posts.people', 'posts.remarks', 'posts.created_at', 'posts.updated_at'])
                     ->where('title', 'like', '%' . $keyword . '%')
                     ->orwhere('date_time', 'like', '%' . $keyword . '%')
                     ->orwhere('place', 'like', '%' . $keyword . '%')
@@ -28,19 +29,23 @@ class PostsController extends Controller
                     ->orwhere('ball', 'like', '%' . $keyword . '%')
                     ->orwhere('people', 'like', '%' . $keyword . '%')
                     ->orwhere('remarks', 'like', '%' . $keyword . '%')
-                    ->orderBy('id', 'disc')
-                    ->paginate(10);
-            $posts = Post::whereHas('user', function ($query) use ($keyword) {
-                $query->where('name', 'like', '%' . $keyword . '%');
-            })->orderBy('id', 'disc')->paginate(10);
-            
+                    ->orwhere('name', 'like', '%' . $keyword . '%')
+                    ->orderBy('posts.updated_at', 'desc')
+                    ->paginate(10);     
         } else {
-            $posts = Post::orderBy('id', 'disc')->paginate(10);
+            $posts = Post::         
+                    join('users',  'users.id' , 'posts.user_id')
+                    ->select(['users.id as userId', 'users.name', 'users.profile_image', 'users.created_at as usersCreated_at', 'users.updated_at as usersUpdated_at', 'posts.id', 'posts.title', 'posts.date_time', 'posts.end_time', 'posts.place', 'posts.address', 'posts.reservation', 'posts.expense', 'posts.ball', 'posts.deadline', 'posts.people', 'posts.remarks', 'posts.created_at', 'posts.updated_at'])
+                    ->orderBy('posts.updated_at', 'desc')
+                    ->paginate(10); 
         }
+
+        $now = date('Y/n/j G:i');
 
         return view('posts.index', [
             'posts' => $posts,
             'keyword' => $keyword,
+            'now' => $now,
     ]);
     }
 
@@ -51,28 +56,14 @@ class PostsController extends Controller
     public function store(Request $request) {
         $this->validate($request, [
             'title' => 'required|string|max:191',
-            'year' => 'required|string|max:191',
-            'month' => 'required|string|max:191',
-            'day' => 'required|string|max:191',
-            'from_hour' => 'required|string|max:191',
-            'from_minute' => 'required|string|max:191',
-            'from_hour' => 'required|string|max:191',
-            'from_minute' => 'required|string|max:191',
-            'to_year' => 'required|string|max:191',
-            'to_month' => 'required|string|max:191',
-            'to_day' => 'required|string|max:191',
-            'to_hour' => 'required|string|max:191',
-            'to_minute' => 'required|string|max:191',
+            'date_time' => 'required|date|max:191',
+            'end_time' => 'required|date|after:date_time|max:191',
             'place' => 'required|string|max:191',
             'address' => 'required|string|max:191',
             'reservation' => 'required|string|max:191',
             'expense' => 'required|string|max:191',
             'ball' => 'required|string|max:191',
-            'deadlineYear' => 'required|string|max:191',
-            'deadlineMonth' => 'required|string|max:191',
-            'deadlineDay' => 'required|string|max:191',
-            'deadlineHour' => 'required|string|max:191',
-            'deadlineMinute' => 'required|string|max:191',
+            'deadline' => 'required|date|before:date_time|max:191',
             'people' => 'required|string|max:191',
             'remarks' => 'string|nullable|max:191',
         ], 
@@ -80,36 +71,13 @@ class PostsController extends Controller
             'title.required' => 'タイトルを入力して下さい。',
             'title.string' => 'タイトルは文字列として下さい。',
             'title.max' => 'タイトルは191文字以内として下さい。',
-            'year.required' => '開催年を入力して下さい。',
-            'year.string' => '開催年は文字列として下さい。',
-            'year.max' => '開催年は191文字以内として下さい。',
-            'month.required' => '開催月を入力して下さい。',
-            'month.string' => '開催月は文字列として下さい。',
-            'month.max' => '開催月は191文字以内として下さい。',
-            'day.required' => '開催日を入力して下さい。',
-            'day.string' => '開催日は文字列として下さい。',
-            'day.max' => '開催日は191文字以内として下さい。',
-            'from_hour.required' => '開始時間を入力して下さい。',
-            'from_hour.string' => '開始時間は文字列として下さい。',
-            'from_hour.max' => '開始時間は191文字以内として下さい。',
-            'from_minute.required' => '開始時間（分）を入力して下さい。',
-            'from_minute.string' => '開始時間（分）は文字列として下さい。',
-            'from_minute.max' => '開始時間（分）は191文字以内として下さい。',
-            'to_year.required' => '終了年を入力して下さい。',
-            'to_year.string' => '終了年は文字列として下さい。',
-            'to_year.max' => '終了年は191文字以内として下さい。',
-            'to_month.required' => '終了月を入力して下さい。',
-            'to_month.string' => '終了月は文字列として下さい。',
-            'to_month.max' => '終了月は191文字以内として下さい。',
-            'to_day.required' => '終了日を入力して下さい。',
-            'to_day.string' => '終了日は文字列として下さい。',
-            'to_day.max' => '終了日は191文字以内として下さい。',
-            'to_hour.required' => '終了時間を入力して下さい。',
-            'to_hour.string' => '終了時間は文字列として下さい。',
-            'to_hour.max' => '終了時間は191文字以内として下さい。',
-            'to_minute.required' => '終了時間（分）を入力して下さい。',
-            'to_minute.string' => '終了時間（分）は文字列として下さい。',
-            'to_minute.max' => '終了時間（分）は191文字以内として下さい。',
+            'date_time.required' => '開始日時を入力して下さい。',
+            'date_time.date' => '開始日時は日付の文字列として下さい。',
+            'date_time.max' => '開始日時は191文字以内として下さい。',
+            'end_time.required' => '終了日時を入力して下さい。',
+            'end_time.date' => '終了日時は日付の文字列として下さい。',
+            'end_time.after' => '終了日時は開始日時より後の日時として下さい。',
+            'end_time.max' => '終了日時は191文字以内として下さい。',
             'place.required' => '場所を入力して下さい。',
             'place.string' => '場所は文字列として下さい。',
             'place.max' => '場所は191文字以内として下さい。',
@@ -125,21 +93,10 @@ class PostsController extends Controller
             'ball.required' => '使用球を入力して下さい。',
             'ball.string' => '使用球は文字列として下さい。',
             'ball.max' => '使用球は191文字以内として下さい。',  
-            'deadlineYear.required' => '締切年を入力して下さい。',
-            'deadlineYear.string' => '締切年は文字列として下さい。',
-            'deadlineYear.max' => '締切年は191文字以内として下さい。',
-            'deadlineMonth.required' => '締切月を入力して下さい。',
-            'deadlineMonth.string' => '締切月は文字列として下さい。',
-            'deadlineMonth.max' => '締切月は191文字以内として下さい。',
-            'deadlineDay.required' => '締切日を入力して下さい。',
-            'deadlineDay.string' => '締切日は文字列として下さい。',
-            'deadlineDay.max' => '締切日は191文字以内として下さい。',
-            'deadlineHour.required' => '締切時間を入力して下さい。',
-            'deadlineHour.string' => '締切時間は文字列として下さい。',
-            'deadlineHour.max' => '締切時間は191文字以内として下さい。',
-            'deadlineMinute.required' => '締切時間（分）を入力して下さい。',
-            'deadlineMinute.string' => '締切時間（分）は文字列として下さい。',
-            'deadlineMinute.max' => '締切時間（分）は191文字以内として下さい。',
+            'deadline.required' => '締切日時を入力して下さい。',
+            'deadline.date' => '締切日時は日付の文字列として下さい。',
+            'deadline.before' => '締切日時は開始日時より前の日時として下さい。',
+            'deadline.max' => '締切日時は191文字以内として下さい。',
             'people.required' => '募集人数を入力して下さい。',
             'people.string' => '募集人数は文字列として下さい。',
             'people.max' => '募集人数は191文字以内として下さい。',
@@ -149,14 +106,14 @@ class PostsController extends Controller
 
         $request->user()->posts()->create([
             'title' => $request->title,
-            'date_time' => $request->year . '/' .  $request->month . '/' .  $request->day . ' ' . $request->from_hour . ':' . $request->from_minute,
-            'end_time' => $request->to_year . '/' . $request->to_month . '/' . $request->to_day . ' ' . $request->to_hour . ':' . $request->to_minute,
+            'date_time' => $request->date_time,
+            'end_time' => $request->end_time,
             'place' => $request->place,
             'address' => $request->address,
             'reservation' => $request->reservation,
             'expense' => $request->expense,
             'ball' => $request->ball,
-            'deadline' => $request->deadlineYear . '/' . $request->deadlineMonth . '/' . $request->deadlineDay . ' ' . $request->deadlineHour . ':' . $request->deadlineMinute,
+            'deadline' => $request->deadline,
             'people' => $request->people,
             'remarks' => $request->remarks,
         ]);
@@ -168,10 +125,26 @@ class PostsController extends Controller
 
     public function show($id) {
         $post = Post::find($id);
+        $users = $post->participate_users()->orderBy('id', 'desc')->get();
+        $messages = $post->messages()->orderBy('id', 'desc')->get();
+        $count_participate_users = $post->participate_users()->count();
+        $now = date('Y/n/j G:i');
 
         return view('posts.show', [
             'post' => $post,
+            'users' => $users,
+            'messages' => $messages,
+            'count_participate_users' => $count_participate_users,
+            'now' => $now,
         ]);
+    }
+
+    public function getData($id)
+    {
+        $post = Post::find($id);
+        $messages = $post->messages()->orderBy('id', 'desc')->get();
+        $json = ["messages" => $messages];
+        return response()->json($json);
     }
 
     public function deleteWindow($id) {
@@ -208,41 +181,24 @@ class PostsController extends Controller
 
     public function edit($id) {
         $post = Post::find($id);
-        $postDateTimeArray = preg_split("{[/\s:]}", $post->date_time);
-        $postEndTimeArray = preg_split("{[/\s:]}", $post->end_time);
-        $postDeadlineArray = preg_split("{[/\s:]}", $post->deadline);
 
         return view('posts.edit', [
             'post' => $post,
-            'postDateTimeArray' => $postDateTimeArray,
-            'postEndTimeArray' => $postEndTimeArray,
-            'postDeadlineArray' => $postDeadlineArray,
         ]);
     }
 
     public function update(Request $request, $id) {
+
         $this->validate($request, [
             'title' => 'required|string|max:191',
-            'year' => 'required|string|max:191',
-            'month' => 'required|string|max:191',
-            'day' => 'required|string|max:191',
-            'from_hour' => 'required|string|max:191',
-            'from_minute' => 'required|string|max:191',
-            'to_year' => 'required|string|max:191',
-            'to_month' => 'required|string|max:191',
-            'to_day' => 'required|string|max:191',
-            'to_hour' => 'required|string|max:191',
-            'to_minute' => 'required|string|max:191',
+            'date_time' => 'required|date|max:191',
+            'end_time' => 'required|date|after:date_time|max:191',
             'place' => 'required|string|max:191',
             'address' => 'required|string|max:191',
             'reservation' => 'required|string|max:191',
             'expense' => 'required|string|max:191',
             'ball' => 'required|string|max:191',
-            'deadlineYear' => 'required|string|max:191',
-            'deadlineMonth' => 'required|string|max:191',
-            'deadlineDay' => 'required|string|max:191',
-            'deadlineHour' => 'required|string|max:191',
-            'deadlineMinute' => 'required|string|max:191',
+            'deadline' => 'required|date|before:date_time|max:191',
             'people' => 'required|string|max:191',
             'remarks' => 'string|nullable|max:191',
         ], 
@@ -250,43 +206,20 @@ class PostsController extends Controller
             'title.required' => 'タイトルを入力して下さい。',
             'title.string' => 'タイトルは文字列として下さい。',
             'title.max' => 'タイトルは191文字以内として下さい。',
-            'year.required' => '開催年を入力して下さい。',
-            'year.string' => '開催年は文字列として下さい。',
-            'year.max' => '開催年は191文字以内として下さい。',
-            'month.required' => '開催月を入力して下さい。',
-            'month.string' => '開催月は文字列として下さい。',
-            'month.max' => '開催月は191文字以内として下さい。',
-            'day.required' => '開催日を入力して下さい。',
-            'day.string' => '開催日は文字列として下さい。',
-            'day.max' => '開催日は191文字以内として下さい。',
-            'from_hour.required' => '開始時間を入力して下さい。',
-            'from_hour.string' => '開始時間は文字列として下さい。',
-            'from_hour.max' => '開始時間は191文字以内として下さい。',
-            'from_minute.required' => '開始時間（分）を入力して下さい。',
-            'from_minute.string' => '開始時間（分）は文字列として下さい。',
-            'from_minute.max' => '開始時間（分）は191文字以内として下さい。',
-            'to_year.required' => '開催年を入力して下さい。',
-            'to_year.string' => '開催年は文字列として下さい。',
-            'to_year.max' => '開催年は191文字以内として下さい。',
-            'to_month.required' => '開催月を入力して下さい。',
-            'to_month.string' => '開催月は文字列として下さい。',
-            'to_month.max' => '開催月は191文字以内として下さい。',
-            'to_day.required' => '開催日を入力して下さい。',
-            'to_day.string' => '開催日は文字列として下さい。',
-            'to_day.max' => '開催日は191文字以内として下さい。',
-            'to_hour.required' => '終了時間を入力して下さい。',
-            'to_hour.string' => '終了時間は文字列として下さい。',
-            'to_hour.max' => '終了時間は191文字以内として下さい。',
-            'to_minute.required' => '終了時間（分）を入力して下さい。',
-            'to_minute.string' => '終了時間（分）は文字列として下さい。',
-            'to_minute.max' => '終了時間（分）は191文字以内として下さい。',
+            'date_time.required' => '開始日時を入力して下さい。',
+            'date_time.date' => '開始日時は日付の文字列として下さい。',
+            'date_time.max' => '開始日時は191文字以内として下さい。',
+            'end_time.required' => '終了日時を入力して下さい。',
+            'end_time.date' => '終了日時は日付の文字列として下さい。',
+            'end_time.after' => '終了日時は開始日時より後の日時として下さい。',
+            'end_time.max' => '終了日時は191文字以内として下さい。',
             'place.required' => '場所を入力して下さい。',
             'place.string' => '場所は文字列として下さい。',
             'place.max' => '場所は191文字以内として下さい。',
             'address.required' => '住所を入力して下さい。',
             'address.string' => '住所は文字列として下さい。',
             'address.max' => '住所は191文字以内として下さい。',
-            'reservation.required' => '場所予約は文字列として下さい。',
+            'reservation.required' => '場所予約を入力して下さい。',
             'reservation.stirng' => '場所予約は文字列として下さい。',
             'reservation.max' => '場所予約は191文字以内として下さい。',
             'expense.required' => '参加費用を入力して下さい。',
@@ -295,21 +228,10 @@ class PostsController extends Controller
             'ball.required' => '使用球を入力して下さい。',
             'ball.string' => '使用球は文字列として下さい。',
             'ball.max' => '使用球は191文字以内として下さい。',  
-            'deadlineYear.required' => '締切年を入力して下さい。',
-            'deadlineYear.string' => '締切年は文字列として下さい。',
-            'deadlineYear.max' => '締切年は191文字以内として下さい。',
-            'deadlineMonth.required' => '締切月を入力して下さい。',
-            'deadlineMonth.string' => '締切月は文字列として下さい。',
-            'deadlineMonth.max' => '締切月は191文字以内として下さい。',
-            'deadlineDay.required' => '締切日を入力して下さい。',
-            'deadlineDay.string' => '締切日は文字列として下さい。',
-            'deadlineDay.max' => '締切日は191文字以内として下さい。',
-            'deadlineHour.required' => '締切時間を入力して下さい。',
-            'deadlineHour.string' => '締切時間は文字列として下さい。',
-            'deadlineHour.max' => '締切時間は191文字以内として下さい。',
-            'deadlineMinute.required' => '締切時間（分）を入力して下さい。',
-            'deadlineMinute.string' => '締切時間（分）は文字列として下さい。',
-            'deadlineMinute.max' => '締切時間（分）は191文字以内として下さい。',
+            'deadline.required' => '締切日時を入力して下さい。',
+            'deadline.date' => '締切日時は日付の文字列として下さい。',
+            'deadline.before' => '締切日時は開始日時より前の日時として下さい。',
+            'deadline.max' => '締切日時は191文字以内として下さい。',
             'people.required' => '募集人数を入力して下さい。',
             'people.string' => '募集人数は文字列として下さい。',
             'people.max' => '募集人数は191文字以内として下さい。',
@@ -319,18 +241,28 @@ class PostsController extends Controller
         
         $post = Post::find($id);
         $post->title = $request->title;
-        $post->date_time = $request->year . '/' . $request->month . '/' . $request->day . ' ' . $request->from_hour . ':' . $request->from_minute;
-        $post->end_time = $request->to_year . '/' . $request->to_month . '/' . $request->to_day . ' ' . $request->to_hour . ':'. $request->to_minute;
+        $post->date_time = $request->date_time;
+        $post->end_time = $request->end_time;
         $post->place = $request->place;
         $post->address = $request->address;
         $post->reservation = $request->reservation;
         $post->expense = $request->expense;
         $post->ball = $request->ball;
-        $post->deadline = $request->deadlineYear . '/' . $request->deadlineMonth . '/' . $request->deadlineDay . ' ' . $request->deadlineHour . ':' . $request->deadlineMinute;
+        $post->deadline = $request->deadline;
         $post->people = $request->people;
         $post->remarks = $request->remarks;
         $post->save();
 
         return redirect()->route('posts.show', ['id' => $post->id])->with('success', '投稿を編集しました。');
+    }
+
+    public function participateUsers($id)
+    {
+        $post = Post::find($id);
+        $users = $post->participate_users()->orderBy('id', 'desc')->paginate(10);
+
+        return view('posts.participate_users', [
+            'users' => $users,
+        ]);
     }
 }

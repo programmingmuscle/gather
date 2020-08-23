@@ -46,4 +46,36 @@ class ConcernTest extends TestCase
             'post_id' => $post->id,
         ]);
     }
+
+    // 投稿削除時に該当する投稿への気になるが取り止められていることを確認
+    public function testConcernDeleteAccount()
+    {        
+        // 気になる対象とする投稿を作成
+        $post = factory(Post::class)->create();
+
+        // ユーザを作成
+        $user = factory(User::class)->create([
+            'password' => bcrypt('testConcernDeletePost'),
+        ]);
+
+        // $userでログインして気になる機能を実行
+        $this->actingAs($user)->post(route('concerns.concern', ['id' => $post->id]));
+
+        // concernsテーブルにて気になる機能の対象としたidの有無を確認することで気になる機能実行の成否を判定
+        $this->assertDatabaseHas('concerns', [
+            'post_id' => $post->id,
+        ]);
+
+        $postId = $post->id;
+
+        // 投稿を削除
+        $this->delete("/posts/{$postId}", [
+            'password' => 'testConcernDeletePost',
+        ]);
+
+        // concernsテーブルにて気になる機能の対象としたidの有無を確認することで気になる機能が取り止められていることを確認
+        $this->assertDatabaseMissing('concerns', [
+            'post_id' => $post->id,
+        ]);
+    }
 }
