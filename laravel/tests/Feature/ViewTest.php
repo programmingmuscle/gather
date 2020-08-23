@@ -72,7 +72,10 @@ class ViewTest extends TestCase
         // フォロワー一覧画面
         $response = $this->get(route('users.followers', ['id' => $user->id]));
         $response->assertStatus(200);
-        
+
+        // 参加者一覧画面
+        $response = $this->get(route('posts.participateUsers', ['id' => $post->id]));
+        $response->assertStatus(200);        
 
         // 投稿削除画面(未ログインの場合はログイン画面にリダイレクト)
         $response = $this->get(route('posts.deleteWindow', ['id' => $post->id]));
