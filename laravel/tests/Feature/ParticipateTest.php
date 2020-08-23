@@ -39,10 +39,11 @@ class ParticipateTest extends TestCase
         // ログイン状態をチェック ログイン状態であることを確認
         $this->assertTrue(Auth::check());
         
-        // 参加する機能を実行
-        $this->post(route('participations.participate', ['id' => $post->id]));
+        // 参加する機能を実行 実行後は投稿詳細へ画面遷移する
+        $response = $this->post(route('participations.participate', ['id' => $post->id]));
+        $response->assertRedirect(route('posts.show', ['id' => $post->id]));
 
-        // participationsテーブルにて気になる機能の対象としたidの有無を確認することで気になる機能実行の成否を判定
+        // participationsテーブルにて参加する機能の対象としたidの有無を確認することで気になる機能実行の成否を判定
         $this->assertDatabaseHas('participations', [
             'post_id' => $post->id,
         ]);
@@ -51,6 +52,38 @@ class ParticipateTest extends TestCase
         $this->delete(route('participations.cancel', ['id' => $post->id]));
 
         // participationsテーブルにて参加する機能の対象としたidの有無を確認することで参加取り止め機能実行の成否を判定
+        $this->assertDatabaseMissing('participations', [
+            'post_id' => $post->id,
+        ]);
+    }
+
+    // 投稿削除時に該当する投稿への参加が取り止められていることを確認
+    public function testParticipationDeleteAccount()
+    {        
+        // 参加対象とする投稿を作成
+        $post = factory(Post::class)->create();
+
+        // ユーザを作成
+        $user = factory(User::class)->create([
+            'password' => bcrypt('testParticipationDeletePost'),
+        ]);
+
+        // $userでログインして参加機能を実行
+        $this->actingAs($user)->post(route('participations.participate', ['id' => $post->id]));
+
+        // participationsテーブルにて参加機能の対象としたidの有無を確認することで参加機能実行の成否を判定
+        $this->assertDatabaseHas('participations', [
+            'post_id' => $post->id,
+        ]);
+
+        $postId = $post->id;
+
+        // 投稿を削除
+        $this->delete("/posts/{$postId}", [
+            'password' => 'testParticipationDeletePost',
+        ]);
+
+        // participationsテーブルにて参加機能の対象としたidの有無を確認することで参加機能が取り止められていることを確認
         $this->assertDatabaseMissing('participations', [
             'post_id' => $post->id,
         ]);
