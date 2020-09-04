@@ -170,7 +170,7 @@ class UsersController extends Controller
         $posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(10);
         $participations = $user->participations()->orderBy('updated_at', 'desc')->paginate(10);
         $concerns = $user->concerns()->orderBy('updated_at', 'desc')->paginate(10);
-        $now = date('Y/n/d G:i');
+        $now = date('Y-m-d H:i:s');
 
         $data = [
             'user' => $user,
