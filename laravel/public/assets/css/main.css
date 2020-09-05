@@ -281,6 +281,10 @@ footer {
     height: 3rem;
 }
 
+.Profile_imageLink:hover {
+    text-decoration: none;
+}
+
 .error-message {
     padding-left: 15px;
     padding-right: 15px;

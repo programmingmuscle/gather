@@ -69,19 +69,17 @@
                             @foreach ($users as $user)
                                 <li class="mb-1">
 
-                                        @if ($user->profile_image != '')
-                                            <a href="{{ route('users.show', ['id' => $user->id]) }}">
-                                                <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                            </a>
-                                            <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
-                                            <br>
-                                        @else
-                                            <a href="{{ route('users.show', ['id' => $user->id]) }}">
-                                                <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
-                                            </a>
-                                            <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
-                                            <br>
-                                        @endif
+                                    @if ($user->profile_image != '')
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}" class="Profile_imageLink">
+                                            <img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </a>
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>                                        
+                                    @else
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}" class="Profile_imageLink">
+                                            <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
+                                        </a>
+                                        <a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>                                        
+                                    @endif
 
                                 </li>
                             @endforeach
@@ -89,8 +87,8 @@
                         </ul>
                         <a href="{{ route('posts.participateUsers', ['id' => $post->id]) }}" class="d-inline-block pt-3 mb-3">参加者一覧</a>へ
                     </div>
-
                 @endif
+
             </div>
             
         </div>
