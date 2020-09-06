@@ -9,6 +9,9 @@
     @if (session('success'))
         <div class="alert alert-success flash_message" role="alert">
             {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
     <div class="top_content text-center">
