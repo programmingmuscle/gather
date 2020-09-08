@@ -8,6 +8,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
+                <form method="POST" action="{{ route('login.post') }}">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input type="hidden" name="email" value="guest@gmail.com">    
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="password" value="guestguest">    
+                    </div>
+                    <label for="testLogin" class="testLoginLabel">※ゲストユーザーとして<a class="testLoginLink">ログイン</a>する</label>
+                    <input type="submit" class="d-none" id="testLogin">
+                </form>
                 <form method="POST" action="{{ route('signup.post') }}" class="signup-form">
                     {{ csrf_field() }}
                     <div class="form-group">

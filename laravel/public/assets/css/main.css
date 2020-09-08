@@ -439,6 +439,24 @@ footer {
     text-decoration: none;
     background-color: #f0f0f0;
 }
+
+.testLoginLabel {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.testLoginLink {
+    color: #007bff!important;
+    text-decoration: none!important;
+    background-color: transparent;
+}
+
+.testLoginLink:hover {
+    color: #0056b3!important;
+    text-decoration: underline!important;
+    cursor: pointer;
+}
+
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;
