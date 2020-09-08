@@ -27,7 +27,7 @@
         <div class="media-body">
             <div class="clearfix">
                 <div class="name-position name-float d-inline-block">{{ $user->name }}</div>
-                <div class="button-position button-float">
+                <div class="button-position button-float" data-userId="{{ $user->id }}" id="ajax">
 
                     @include ('user_follow.follow_button')
 
@@ -38,18 +38,18 @@
 
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center ">
 
         @if (empty($count_followings))
-            <span class="noneFollow">フォロー中：0</span>
+            <span class="noneFollow ajaxTargetAdd">フォロー中：0</span>
         @else
-            <a href="{{ route('users.followings', ['id' => $user->id]) }}">フォロー中：{{ $count_followings }}</a>
+            <a href="{{ route('users.followings', ['id' => $user->id]) }}" class="ajaxTargetAdd">フォロー中：{{ $count_followings }}</a>
         @endif
 
         @if (empty($count_followers))
-            <span class="noneFollow">フォロワー：0</span>
+            <span class="noneFollow ajaxTargetRemove">フォロワー：0</span>
         @else
-            <a href="{{ route('users.followers', ['id' => $user->id]) }}">フォロー中：{{ $count_followers }}</a>
+            <a href="{{ route('users.followers', ['id' => $user->id]) }}" class="ajaxTargetRemove">フォロワー：{{ $count_followers }}</a>
         @endif
 
     </div>

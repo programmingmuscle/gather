@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class UserFollowController extends Controller
 {
@@ -17,5 +18,13 @@ class UserFollowController extends Controller
     {
         Auth::user()->unfollow($id);
         return back();
+    }
+
+    public function getData($id)
+    {
+        $user = User::find($id);
+        $count_followers = $user->followers()->count();
+        $json = ["count_followers" => $count_followers];
+        return response()->json($json);
     }
 }

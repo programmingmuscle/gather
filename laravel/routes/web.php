@@ -41,15 +41,13 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/result/ajax/{post}/store', 'MessagesController@store')->name('messages.store');
     Route::post('/result/ajax/{message}/update', 'MessagesController@update')->name('messages.update');
     Route::post('/result/ajax/{message}/destroy', 'MessagesController@destroy')->name('messages.destroy');
-
-    Route::group(['prefix' => 'users/{user}'], function() {
-        Route::post('follow', 'UserFollowController@store')->name('user.follow');
-        Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
-    });
+    Route::post('/result/ajax/{user}/follow', 'UserFollowController@store')->name('user.follow');
+    Route::post('/result/ajax/{user}/unfollow', 'UserFollowController@destroy')->name('user.unfollow');
+    Route::get('/result/ajax/{user}', 'UserFollowController@getData')->name('user.getData');
+    Route::post('/result/ajax/{post}/concern', 'ConcernsController@store')->name('concerns.concern');
+    Route::post('/result/ajax/{post}/unconcern', 'ConcernsController@destroy')->name('concerns.unconcern');
 
     Route::group(['prefix' => 'posts/{post}'], function() {
-        Route::post('concern', 'ConcernsController@store')->name('concerns.concern');
-        Route::delete('unconcern', 'ConcernsController@destroy')->name('concerns.unconcern');
         Route::post('participate', 'ParticipationsController@store')->name('participations.participate');
         Route::delete('cancel', 'ParticipationsController@destroy')->name('participations.cancel');
     });
