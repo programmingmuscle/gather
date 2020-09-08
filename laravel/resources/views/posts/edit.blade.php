@@ -100,7 +100,7 @@
                     <div class="explain-link">※<a href="{{ route('posts.deleteWindow', ['id' => $post->id]) }}" class="explain-link-destroy">投稿削除</a></div>
                 @endif
 
-                <div class="explain-link"><a href="{{ route('posts.show', ['id' => $post->id]) }}">投稿詳細</a>に戻る</div>
+                <div class="explain-link"><a href="javascript:history.back()">投稿詳細</a>に戻る</div>
             </div>
         </div>
     </div>
