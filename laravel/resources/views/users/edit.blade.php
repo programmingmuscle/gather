@@ -151,7 +151,6 @@
                     <div class="explain-link">※<a href="{{ route('users.deleteWindow', ['id' => Auth::id()]) }}" class="explain-link-destroy">アカウント削除</a></div>
                 @endif
 
-                <div class="explain-link"><a href="{{ route('users.show', ['id' => Auth::id()]) }}">マイアカウント</a>に戻る</div>
             </div>
         </div>
     </div>
