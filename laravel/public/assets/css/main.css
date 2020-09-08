@@ -463,6 +463,10 @@ footer {
     padding-top: .5rem;
 }
 
+.noneFollow {
+    color: #696969;
+}
+
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;

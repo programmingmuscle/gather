@@ -39,8 +39,19 @@
         </div>
     </div>
     <div class="text-center">
-        <a href="{{ route('users.followings', ['id' => $user->id]) }}">フォロー中：{{ $count_followings }}</a>
-        <a href="{{ route('users.followers', ['id' => $user->id]) }}">フォロワー：{{ $count_followers }}</a>
+
+        @if (empty($count_followings))
+            <span class="noneFollow">フォロー中：0</span>
+        @else
+            <a href="{{ route('users.followings', ['id' => $user->id]) }}">フォロー中：{{ $count_followings }}</a>
+        @endif
+
+        @if (empty($count_followers))
+            <span class="noneFollow">フォロワー：0</span>
+        @else
+            <a href="{{ route('users.followers', ['id' => $user->id]) }}">フォロー中：{{ $count_followers }}</a>
+        @endif
+
     </div>
     <ul class="tabs-menu list-unstyled">
         <li class="timelines"><a href="#tabs-timelines">タイムライン</a></li>
