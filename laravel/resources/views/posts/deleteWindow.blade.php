@@ -1,7 +1,7 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
-    投稿削除
+    <a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">投稿削除</div>
 @endsection
 
 @section ('mainArea_content')

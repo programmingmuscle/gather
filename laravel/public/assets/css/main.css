@@ -274,6 +274,11 @@ footer {
     float: right;
 }
 
+.back {
+    margin-right: .5rem;
+    display: inline-block;
+}
+
 .profile_image {
     border-radius: 50%;
     margin-right: .5rem;

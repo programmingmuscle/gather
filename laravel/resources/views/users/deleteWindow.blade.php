@@ -1,7 +1,7 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
-    アカウント削除
+<a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">アカウント削除</div>
 @endsection
 
 @section ('mainArea_content')

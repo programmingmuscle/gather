@@ -1,7 +1,7 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
-    フォロー一覧
+    <a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">フォロー一覧</div>
 @endsection
 
 @section ('mainArea_content')

@@ -5,7 +5,7 @@
     @if ($user->id === Auth::id())
         マイアカウント
     @else
-        選手詳細
+        <a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">選手詳細</div>
     @endif
 
 @endsection
