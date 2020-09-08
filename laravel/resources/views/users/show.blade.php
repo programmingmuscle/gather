@@ -200,6 +200,8 @@
                     @endforeach
                 </ul>
                 {{ $timelines->links('pagination::bootstrap-4') }}
+            @else
+                <p class="countZero">自身とフォロー中ユーザの投稿が表示されます。</p>
             @endif
         </section>
         <section id="tabs-posts">
@@ -290,6 +292,8 @@
 
                 </ul>
                 {{ $posts->links('pagination::bootstrap-4') }}
+            @else
+                <p class="countZero">投稿するとこちらに表示されます。</p>
             @endif
 
         </section>
@@ -441,6 +445,8 @@
 
                 </ul>
                 {{ $participations->links('pagination::bootstrap-4') }}
+            @else
+                <p class="countZero">"参加"した投稿がこちらに表示されます。</p>
             @endif
 
         </section>
@@ -592,6 +598,8 @@
 
                 </ul>
                 {{ $concerns->links('pagination::bootstrap-4') }}
+            @else
+                <p class="countZero">"気になる"した投稿がこちらに表示されます。</p>
             @endif 
 
         </section>

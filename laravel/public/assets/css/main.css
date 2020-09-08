@@ -457,6 +457,12 @@ footer {
     cursor: pointer;
 }
 
+.countZero {
+    color:#696969;
+    text-align: center;
+    padding-top: .5rem;
+}
+
 @media (min-width: 375px) {
     .top_app-title {
         font-size: 2.5rem;
