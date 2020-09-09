@@ -53,7 +53,9 @@
 
             @include ('participations.participate_button')
 
-            @include ('concerns.concern_button')
+            @if ($post->user->id != Auth::id())
+                @include ('concerns.concern_button')
+            @endif
 
             <div class="accordion">
                 @if (count($users) > 0)

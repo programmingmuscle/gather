@@ -182,24 +182,20 @@
                                         </div>
                                     @endif
                                     @if ($timeline->user->id != Auth::id())
-                                        <div class="button-position ml-3">
+                                        <div class="button-position ml-3" data-postId="{{ $timeline->id }}">
                                             @if (Auth::check())
                                                 @if (Auth::user()->is_concerned($timeline->id))
-                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $timeline->id]) }}" class="d-inline-block">
-                                                        {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
+                                                    <form class="d-inline-block">
+                                                        <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
                                                     </form>
                                                 @else
-                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}" class="d-inline-block">
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                    <form class="d-inline-block">
+                                                        <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                     </form>
                                                 @endif
                                             @else
-                                                <form method="POST" action="{{ route('concerns.concern', ['id' => $timeline->id]) }}" class="d-inline-block">
-                                                    {{ csrf_field() }}
-                                                    <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                <form class="d-inline-block">
+                                                    <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                 </form>
                                             @endif
                                         </div>
@@ -426,24 +422,20 @@
                                         </div>
                                     @endif
                                     @if ($participation->user->id != Auth::id())
-                                        <div class="button-position ml-3">
+                                        <div class="button-position ml-3" data-postId="{{ $participation->id }}">
                                             @if (Auth::check())
                                                 @if (Auth::user()->is_concerned($participation->id))
-                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $participation->id]) }}" class="d-inline-block">
-                                                        {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
+                                                    <form class="d-inline-block">
+                                                        <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
                                                     </form>
                                                 @else
-                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $participation->id]) }}" class="d-inline-block">
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                    <form class="d-inline-block">
+                                                        <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                     </form>
                                                 @endif
                                             @else
-                                                <form method="POST" action="{{ route('concerns.concern', ['id' => $participation->id]) }}" class="d-inline-block">
-                                                    {{ csrf_field() }}
-                                                    <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                <form class="d-inline-block">                                            
+                                                    <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                 </form>
                                             @endif
                                         </div>
@@ -579,24 +571,20 @@
                                         </div>
                                     @endif
                                     @if ($concern->user->id != Auth::id())
-                                        <div class="button-position ml-3">
+                                        <div class="button-position ml-3" data-postId="{{ $concern->id }}">
                                             @if (Auth::check())
                                                 @if (Auth::user()->is_concerned($concern->id))
-                                                    <form method="POST" action="{{ route('concerns.unconcern', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                        {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="気になる" class="btn unconcern-button d-inline-block">
+                                                    <form class="d-inline-block">
+                                                        <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
                                                     </form>
                                                 @else
-                                                    <form method="POST" action="{{ route('concerns.concern', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                    <form class="d-inline-block">
+                                                        <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                     </form>
                                                 @endif
                                             @else
-                                                <form method="POST" action="{{ route('concerns.concern', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                    {{ csrf_field() }}
-                                                    <input type="submit" value="気になる" class="btn concern-button d-inline-block">
+                                                <form class="d-inline-block">                                            
+                                                    <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                 </form>
                                             @endif
                                         </div>
