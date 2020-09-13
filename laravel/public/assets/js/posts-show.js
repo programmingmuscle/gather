@@ -57,7 +57,7 @@ function get_data() {
         type: 'POST',
         url: "/result/ajax/" + post_id,
         dataType: "json",
-        success: data => {
+    }).done(function(data) {
             $('.message-list').remove();
             for (let i = 0; i < data.messages.length; i++) {
                 if ((data.messages[i].user_profile_image != undefined) && data.messages[i].user_id == user_id) {
@@ -316,16 +316,17 @@ function get_data() {
                     $('.message-data').append(html);
                 }
             }
-        },
-        error: (jqXHR, textStatus, errorThrown) => {
+        }).fail(function(jqXHR, textStatus, errorThrown) {
             alert("データの取得に失敗しました。");
             console.log("ajax通信に失敗しました");
             console.log("jqXHR          : " + jqXHR.status);
             console.log("textStatus     : " + textStatus);
             console.log("errorThrown    : " + errorThrown.message);
             console.log("URL            : " + url);
-        }
-    });
+        }).always(function() {
+            canAjax = true;
+        });
+
 }
 
 
@@ -342,11 +343,19 @@ $(function() {
 });
 
 function post_data() {
+    let canAjax = true;
+
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
     });
+    
     $('#ajaxPost').on('click', (e) => {
         e.preventDefault();
+
+        if (!canAjax) {
+            return;
+        }
+        canAjax = false;
 
         const user_id = $('#ajaxPost').data('user_id');
         const post_id = $('#ajaxPost').data('post_id');
@@ -364,7 +373,7 @@ function post_data() {
                 'user_profile_image': user_profile_image,
                 'content': content,
             },
-            success: () => {
+        }).done(function() {
                 console.log(user_id);
                 console.log(post_id);
                 console.log(user_name);
@@ -373,17 +382,16 @@ function post_data() {
                 $('#messageContent').val("");
                 $('#messageZero').remove();
                 get_data();
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
+        }).fail(function(jqXHR, textStatus, errorThrown) {
                 alert("データの取得に失敗しました。");
                 console.log("ajax通信に失敗しました");
                 console.log("jqXHR          : " + jqXHR.status);
                 console.log("textStatus     : " + textStatus);
                 console.log("errorThrown    : " + errorThrown.message);
                 console.log("URL            : " + url);
-            }
-        });
-        
+        }).always(function() {
+            canAjax = true;
+        });        
     });
 }
 
@@ -407,7 +415,7 @@ $(document).on('click', '.message-edit-color', (e) => {
                     </div>
                     <div class="modal-body">
                         <form class="message-form w-auto">        
-                            <div class="media messageUpdate-box">
+                            <div class="messageUpdate-box">
                                 <div id="messageContentEdit-error"></div>   
                                 <textarea name="content" id="messageContentEdit" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！">${contentReplace}</textarea>
                             </div>    
@@ -473,12 +481,19 @@ $(function() {
 });
 
 function update_data() {
+    let canAjax = true;
+
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
     });
     
     $(document).on('click', '#ajaxUpdate', (e) => {
         e.preventDefault();
+
+        if (!canAjax) {
+            return;
+        }
+        canAjax = false;
 
         const user_id = $('#ajaxPost').data('user_id');
         const post_id = $('#ajaxPost').data('post_id');
@@ -499,24 +514,22 @@ function update_data() {
                 'user_profile_image': user_profile_image,
                 'content': content,
             },
-            success: () => {
-                console.log(content);
+        }).done(function() {
+            console.log(content);
                 $('#messageContentEdit').val("");
                 $('#remove-error-content').remove();
                 $('#updateModal').remove();
                 get_data();
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                $('#remove-error-content').remove();
-                alert("データの取得に失敗しました。");
-                console.log("ajax通信に失敗しました");
-                console.log("jqXHR          : " + jqXHR.status);
-                console.log("textStatus     : " + textStatus);
-                console.log("errorThrown    : " + errorThrown.message);
-                console.log("URL            : " + url);
-            }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert("データの取得に失敗しました。");
+            console.log("ajax通信に失敗しました");
+            console.log("jqXHR          : " + jqXHR.status);
+            console.log("textStatus     : " + textStatus);
+            console.log("errorThrown    : " + errorThrown.message);
+            console.log("URL            : " + url);
+        }).always(function() {
+            canAjax = true;
         });
-        
     });
 }
 
@@ -525,31 +538,38 @@ $(function() {
 });
 
 function delete_data() {
+    let canAjax = true;
+
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
     });
     
     $(document).on('click', '.message-delete-color', (e) => {
         e.preventDefault();
+
+        if (!canAjax) {
+            return;
+        }
+        canAjax = false;
+
         let messageId = $(e.currentTarget).parent().parent().parent().parent().parent().attr('data-messageId');
         console.log(messageId);
 
         $.ajax({
             type: 'POST',
             url: "/result/ajax/" + messageId + "/destroy",
-            success: () => {
+        }).done(function() {
                 get_data();
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
+        }).fail(function(jqXHR, textStatus, errorThrown) {
                 alert("データの取得に失敗しました。");
                 console.log("ajax通信に失敗しました");
                 console.log("jqXHR          : " + jqXHR.status);
                 console.log("textStatus     : " + textStatus);
                 console.log("errorThrown    : " + errorThrown.message);
                 console.log("URL            : " + url);
-            }
-        });
-        
+        }).always(function(){
+            canAjax = true;
+        });        
     });
 }
 
@@ -558,6 +578,8 @@ $(function() {
 });
 
 function concern_data() {
+    let canAjax = true;
+
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
     });
@@ -565,6 +587,12 @@ function concern_data() {
     $('.concern-button-ajax').on('click', (e) => {
         e.stopPropagation();
         e.preventDefault();
+
+        if (!canAjax) {
+            return;
+        }
+        canAjax = false;
+
         let postId = $(e.currentTarget).parent().parent().attr('data-postId');
         console.log(postId);
         console.log(e.currentTarget);
@@ -577,24 +605,30 @@ function concern_data() {
         $.ajax({
             type: 'POST',
             url: "/result/ajax/" + postId + "/concern",
-            success: () => {
-                $(e.currentTarget).parent().parent().prepend(html);
-                $(e.currentTarget).parent().remove();
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                alert("データの取得に失敗しました。");
-                console.log("ajax通信に失敗しました");
-                console.log("jqXHR          : " + jqXHR.status);
-                console.log("textStatus     : " + textStatus);
-                console.log("errorThrown    : " + errorThrown.message);
-                console.log("URL            : " + url);
-            }
-        });        
+        }).done(function() {
+            $(e.currentTarget).parent().parent().prepend(html);
+            $(e.currentTarget).parent().remove();
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert("データの取得に失敗しました。");
+            console.log("ajax通信に失敗しました");
+            console.log("jqXHR          : " + jqXHR.status);
+            console.log("textStatus     : " + textStatus);
+            console.log("errorThrown    : " + errorThrown.message);
+            console.log("URL            : " + url);
+        }).always(function() {
+            canAjax = true;
+        });      
     });
 
     $('.button-position').on('click', '.concern-button-ajax-document', (e) => {
         e.stopPropagation();
         e.preventDefault();
+
+        if (!canAjax) {
+            return;
+        }
+        canAjax = false;
+
         let postId = $(e.currentTarget).parent().parent().attr('data-postId');
         let eCurrentTargetParent = $(e.currentTarget).parent();
         let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
@@ -608,19 +642,19 @@ function concern_data() {
         $.ajax({
             type: 'POST',
             url: "/result/ajax/" + postId + "/concern",
-            success: () => {
-                console.log(e.currentTarget);
-                $(eCurrentTargetParentParent).prepend(htmlDocument);
-                $(eCurrentTargetParent).remove();
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                alert("データの取得に失敗しました。");
-                console.log("ajax通信に失敗しました");
-                console.log("jqXHR          : " + jqXHR.status);
-                console.log("textStatus     : " + textStatus);
-                console.log("errorThrown    : " + errorThrown.message);
-                console.log("URL            : " + url);
-            }
+        }).done(function() {
+            console.log(e.currentTarget);
+            $(eCurrentTargetParentParent).prepend(htmlDocument);
+            $(eCurrentTargetParent).remove();
+        }).fail(function() {
+            alert("データの取得に失敗しました。");
+            console.log("ajax通信に失敗しました");
+            console.log("jqXHR          : " + jqXHR.status);
+            console.log("textStatus     : " + textStatus);
+            console.log("errorThrown    : " + errorThrown.message);
+            console.log("URL            : " + url);
+        }).always(function() {
+            canAjax = true;
         });
     });
 }
@@ -630,6 +664,8 @@ $(function() {
 });
 
 function unconcern_data() {
+    let canAjax = true;
+
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
     });
@@ -637,6 +673,12 @@ function unconcern_data() {
     $('.unconcern-button-ajax').on('click', (e) => {
         e.stopPropagation();
         e.preventDefault();
+
+        if (!canAjax) {
+            return;
+        }
+        canAjax = false;
+
         let postId = $(e.currentTarget).parent().parent().attr('data-postId');
         console.log(postId);
         console.log(e.currentTarget);
@@ -649,25 +691,31 @@ function unconcern_data() {
         $.ajax({
             type: 'POST',
             url: "/result/ajax/" + postId + "/unconcern",
-            success: () => {
-                console.log(e.currentTarget);
-                $(e.currentTarget).parent().parent().prepend(html);
-                $(e.currentTarget).parent().remove();
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                alert("データの取得に失敗しました。");
-                console.log("ajax通信に失敗しました");
-                console.log("jqXHR          : " + jqXHR.status);
-                console.log("textStatus     : " + textStatus);
-                console.log("errorThrown    : " + errorThrown.message);
-                console.log("URL            : " + url);
-            }
+        }).done(function() {
+            console.log(e.currentTarget);
+            $(e.currentTarget).parent().parent().prepend(html);
+            $(e.currentTarget).parent().remove();
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert("データの取得に失敗しました。");
+            console.log("ajax通信に失敗しました");
+            console.log("jqXHR          : " + jqXHR.status);
+            console.log("textStatus     : " + textStatus);
+            console.log("errorThrown    : " + errorThrown.message);
+            console.log("URL            : " + url);
+        }).always(function() {
+            canAjax = true;
         });
     });
 
     $('.button-position').on('click', '.unconcern-button-ajax-document', (e) => {
         e.stopPropagation();
         e.preventDefault();
+
+        if (!canAjax) {
+            return;
+        }
+        canAjax = false;
+
         let postId = $(e.currentTarget).parent().parent().attr('data-postId');
         let eCurrentTargetParent = $(e.currentTarget).parent();
         let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
@@ -682,19 +730,19 @@ function unconcern_data() {
         $.ajax({
             type: 'POST',
             url: "/result/ajax/" + postId + "/unconcern",
-            success: () => {
-                console.log(eCurrentTargetParentParent);
-                $(eCurrentTargetParentParent).prepend(htmlDocument);
-                $(eCurrentTargetParent).remove();
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
+        }).done(function() {
+            console.log(eCurrentTargetParentParent);
+            $(eCurrentTargetParentParent).prepend(htmlDocument);
+            $(eCurrentTargetParent).remove();
+        }).fail(function(jqXHR, textStatus, errorThrown) {
                 alert("データの取得に失敗しました。");
                 console.log("ajax通信に失敗しました");
                 console.log("jqXHR          : " + jqXHR.status);
                 console.log("textStatus     : " + textStatus);
                 console.log("errorThrown    : " + errorThrown.message);
                 console.log("URL            : " + url);
-            }
+        }).always(function() {
+            canAjax = true;
         });
     });
 }
