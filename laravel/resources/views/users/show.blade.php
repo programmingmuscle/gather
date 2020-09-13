@@ -140,7 +140,7 @@
                                                     <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}" class="d-inline-block">
                                                         {!! method_field('delete') !!}
                                                         {{ csrf_field() }}
-                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
+                                                        <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
                                                     </form>
                                                 @else
                                                     @if (($timeline->people > $timeline->participate_users()->count()) && ($timeline->deadline > $now))
@@ -290,7 +290,9 @@
                                     
                                         @include ('participations.participate_button')
 
-                                        @include ('concerns.concern_button')
+                                        @if ($post->user->id != Auth::id())
+                                            @include ('concerns.concern_button')
+                                        @endif
 
                                 </div>
                             </li>
@@ -380,7 +382,7 @@
                                                     <form method="POST" action="{{ route('participations.cancel', ['id' => $participation->id]) }}" class="d-inline-block">
                                                         {!! method_field('delete') !!}
                                                         {{ csrf_field() }}
-                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
+                                                        <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
                                                     </form>
                                                 @else
                                                     @if (($participation->people > $participation->participate_users()->count()) && ($participation->deadline > $now))
@@ -529,7 +531,7 @@
                                                     <form method="POST" action="{{ route('participations.cancel', ['id' => $concern->id]) }}" class="d-inline-block">
                                                         {!! method_field('delete') !!}
                                                         {{ csrf_field() }}
-                                                        <input type="submit" value="参加する" class="btn cancel-button d-inline-block">
+                                                        <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
                                                     </form>
                                                 @else
                                                     @if (($concern->people > $concern->participate_users()->count()) && ($concern->deadline > $now))
