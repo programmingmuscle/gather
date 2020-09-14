@@ -4,6 +4,18 @@ $('.detail').on('click', (e) => {
     window.location.href = url;
 });
 
+$('.button-position').on('click', (e) => {
+    e.stopPropagation();
+});
+
+$('.profile_image').on('click', (e) => {
+    e.stopPropagation();
+});
+
+$('.name-position').on('click', (e) => {
+    e.stopPropagation();
+});
+
 $(function() {
     follow_data();
 });

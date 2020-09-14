@@ -4,7 +4,15 @@ $('.detail').on('click', (e) => {
     window.location.href = url;
 });
 
-$('.participate-button-full').on('click', (e) => {
+$('.button-position').on('click', (e) => {
+    e.stopPropagation();
+});
+
+$('.profile_image').on('click', (e) => {
+    e.stopPropagation();
+});
+
+$('.name-position').on('click', (e) => {
     e.stopPropagation();
 });
 
