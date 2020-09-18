@@ -810,7 +810,7 @@ function get_data_participateUsers() {
                         </li>
                     `;
 
-                    $('.accordion-content').child('.list-unstyled').append(participateUsers);
+                    $('.accordion-content').children('.list-unstyled').append(participateUsers);
                 } else {
                     let participateUsers = `
                         <li class="mb-1 participate_users_data">
@@ -820,7 +820,7 @@ function get_data_participateUsers() {
                             <a href="/users/${data.participate_users[i].id}">${data.participate_users[i].name}</a>
                         </li>
                     `;
-                    $('.accordion-content').child('.list-unstyled').append(participateUsers);
+                    $('.accordion-content').children('.list-unstyled').append(participateUsers);
                 }
             }
             let countParticipateUsers = `
