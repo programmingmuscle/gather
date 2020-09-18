@@ -64,10 +64,9 @@
                     <div class="ml-3 mb-3 mt-3 ajaxTargetRemove">参加者<span class="badge badge-secondary badge-pill">{{ $count_participate_users }}</span></div>
                 @endif
 
-                @if (count($users) > 0)
-                    <div class="ml-3 accordion-content">
-                        <ul class="list-unstyled">
-
+                <div class="ml-3 accordion-content">
+                    <ul class="list-unstyled">
+                        @if (count($users) > 0)
                             @foreach ($users as $user)
                                 <li class="mb-1 participate_users_data">
 
@@ -85,14 +84,11 @@
 
                                 </li>
                             @endforeach
-
-                        </ul>
-                        <a href="{{ route('posts.participateUsers', ['id' => $post->id]) }}" class="d-inline-block pt-3 mb-3">参加者一覧</a>へ
-                    </div>
-                @endif
-
+                        @endif
+                    </ul>
+                    <a href="{{ route('posts.participateUsers', ['id' => $post->id]) }}" class="d-inline-block pt-3 mb-3">参加者一覧</a>へ
+                </div>
             </div>
-            
         </div>
     </div>
     <form method="POST" action="{{ route('messages.store', ['id' => $post->id]) }}" class="message-form">
