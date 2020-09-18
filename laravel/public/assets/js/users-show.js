@@ -47,22 +47,21 @@ function get_data() {
         type: 'GET',
         url:"/result/ajax/" + userId,
         dataType: "json",
-        success: data => {
-            if (data.count_followers != 0) {
-                let followers = `
-                    <a href="/users/${userId}/followers" class="ajaxTargetRemove">フォロワー：${data.count_followers}</a>
-                `;
-                $('.ajaxTargetRemove').remove();
-                $('.ajaxTargetAdd').after(followers);
-                console.log(data.count_followers);
-            } else {
-                followers = `
-                    <span class="noneFollow ajaxTargetRemove">フォロワー：0</span>
-                `;
-                $('.ajaxTargetRemove').remove();
-                $('.ajaxTargetAdd').after(followers);
-                console.log(data.count_followers);
-            }
+    }).done(function(data) {
+        if (data.count_followers != 0) {
+            let followers = `
+                <a href="/users/${userId}/followers" class="ajaxTargetRemove">フォロワー：${data.count_followers}</a>
+            `;
+            $('.ajaxTargetRemove').remove();
+            $('.ajaxTargetAdd').after(followers);
+            console.log(data.count_followers);
+        } else {
+            followers = `
+                <span class="noneFollow ajaxTargetRemove">フォロワー：0</span>
+            `;
+            $('.ajaxTargetRemove').remove();
+            $('.ajaxTargetAdd').after(followers);
+            console.log(data.count_followers);
         }
     });
 }
