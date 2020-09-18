@@ -57,11 +57,11 @@
                 @include ('concerns.concern_button')
             @endif
 
-            <div class="accordion">
+            <div class="accordion ajaxTargetAdd">
                 @if (count($users) > 0)
-                    <div class="ml-3 mb-3 mt-3 accordion-title dropdown-toggle">参加者<span class="badge badge-primary badge-pill">{{ $count_participate_users }}</span></div>
+                    <div class="ml-3 mb-3 mt-3 accordion-title dropdown-toggle ajaxTargetRemove">参加者<span class="badge badge-primary badge-pill">{{ $count_participate_users }}</span></div>
                 @else
-                    <div class="ml-3 mb-3 mt-3">参加者<span class="badge badge-secondary badge-pill">{{ $count_participate_users }}</span></div>
+                    <div class="ml-3 mb-3 mt-3 ajaxTargetRemove">参加者<span class="badge badge-secondary badge-pill">{{ $count_participate_users }}</span></div>
                 @endif
 
                 @if (count($users) > 0)
@@ -69,7 +69,7 @@
                         <ul class="list-unstyled">
 
                             @foreach ($users as $user)
-                                <li class="mb-1">
+                                <li class="mb-1 participate_users_data">
 
                                     @if ($user->profile_image != '')
                                         <a href="{{ route('users.show', ['id' => $user->id]) }}" class="Profile_imageLink">

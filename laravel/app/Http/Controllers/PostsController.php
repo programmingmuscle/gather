@@ -139,7 +139,19 @@ class PostsController extends Controller
         ]);
     }
 
-    public function getData($id)
+    public function getDataParticipateUsers($id)
+    {
+        $post = Post::find($id);
+        $participate_users = $post->participate_users()->orderBy('id', 'desc')->get();
+        $count_participate_users = $post->participate_users()->count();
+        $json = [
+            "participate_users" => $participate_users,
+            "count_participate_users" => $count_participate_users,
+        ];
+        return response()->json($json);
+    }
+
+    public function getDataMessages($id)
     {
         $post = Post::find($id);
         $messages = $post->messages()->orderBy('id', 'desc')->get();
