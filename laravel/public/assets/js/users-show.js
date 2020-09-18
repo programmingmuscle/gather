@@ -98,9 +98,9 @@ function follow_data() {
             type: 'POST',
             url: "/result/ajax/" + userId + "/follow",
         }).done(function() {
-                $(e.currentTarget).parent().parent().prepend(html);
-                $(e.currentTarget).parent().remove();
-                get_data();
+            $(e.currentTarget).parent().parent().prepend(html);
+            $(e.currentTarget).parent().remove();
+            get_data();
         }).fail(function(jqXHR, textStatus, errorThrown) {
             alert("データの取得に失敗しました。");
             console.log("ajax通信に失敗しました");
@@ -113,7 +113,7 @@ function follow_data() {
         });        
     });
 
-    $(document).on('click', '.follow-button-ajax-document', (e) => {
+    $('.button-position').on('click', '.follow-button-ajax-document', (e) => {
         e.preventDefault();
 
         if (!canAjax) {
@@ -200,7 +200,7 @@ function unfollow_data() {
         });        
     });
 
-    $(document).on('click', '.unfollow-button-ajax-document', (e) => {
+    $('.button-position').on('click', '.unfollow-button-ajax-document', (e) => {
         e.preventDefault();
 
         if (!canAjax) {
