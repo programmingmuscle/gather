@@ -2,7 +2,7 @@
     <li>
         【{{ $post->title }}】
     </li>
-    <div class="ml-3">
+    <div class="ml-3 ajaxTargetAddContentList">
         <li class="end_time-float">
             日時：{{ date('Y/n/j G:i', strtotime($post->date_time)) }}
         </li>
@@ -33,7 +33,7 @@
         <li>
             応募締切：{{ date('Y/n/j G:i', strtotime($post->deadline)) }}
         </li>
-        <li>
+        <li class="ajaxTargetRemove">
             募集人数：{{ $post->participate_users()->count() . '/' . $post->people }}人
         </li>
     </div>

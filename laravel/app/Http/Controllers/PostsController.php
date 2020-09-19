@@ -145,6 +145,7 @@ class PostsController extends Controller
         $participate_users = $post->participate_users()->orderBy('id', 'desc')->get();
         $count_participate_users = $post->participate_users()->count();
         $json = [
+            "post" => $post,
             "participate_users" => $participate_users,
             "count_participate_users" => $count_participate_users,
         ];

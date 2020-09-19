@@ -795,8 +795,14 @@ function get_data_participateUsers() {
             let countParticipateUsers = `
                 <div class="ml-3 mb-3 mt-3 accordion-title accordion-title-document dropdown-toggle ajaxTargetRemove">参加者<span class="badge badge-primary badge-pill">${data.count_participate_users}</span></div>
             `;
+            let countParticipateUsersContentList = `
+                <li class="ajaxTargetRemove">
+                    募集人数：${data.count_participate_users}/${data.post.people}人
+                </li>
+            `;
             $('.ajaxTargetRemove').remove();
             $('.ajaxTargetAdd').prepend(countParticipateUsers);
+            $('.ajaxTargetAddContentList').append(countParticipateUsersContentList);
             console.log(data.count_participate_users);
         } else {
             for (let i = 0; i < data.count_participate_users; i++) {
@@ -826,8 +832,14 @@ function get_data_participateUsers() {
             let countParticipateUsers = `
                 <div class="ml-3 mb-3 mt-3 ajaxTargetRemove">参加者<span class="badge badge-secondary badge-pill">${data.count_participate_users}</span></div>
             `;
+            let countParticipateUsersContentList = `
+                <li class="ajaxTargetRemove">
+                    募集人数：${data.count_participate_users}/${data.post.people}人
+                </li>
+            `;
             $('.ajaxTargetRemove').remove();
             $('.ajaxTargetAdd').prepend(countParticipateUsers);
+            $('.ajaxTargetAddContentList').append(countParticipateUsersContentList);
             console.log(data.count_participate_users);
         }
     });
