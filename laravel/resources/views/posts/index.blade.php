@@ -19,7 +19,7 @@
         </div>
     </form>
     @if (count($posts) > 0)
-        <ul class="list-unstyled">
+        <ul class="list-unstyled under-search-box">
             @foreach ($posts as $post)
                 <div class="list-border detail">
                     <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>

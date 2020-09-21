@@ -21,7 +21,7 @@
     </form>
                 
     @if (count($users) > 0)
-        <ul class="list-unstyled">
+        <ul class="list-unstyled under-search-box">
 
             @foreach ($users as $user)
                 <div class="list-border detail">

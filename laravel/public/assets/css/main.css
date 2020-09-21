@@ -75,8 +75,30 @@ footer {
 
 .title {
     padding: 0 15px;
-    border-top: 1px solid #EEEEEE;
     border-bottom: 1px solid #EEEEEE;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    z-index: 9;
+}
+
+.content {
+    padding-top: 1.5rem;
+}
+
+.search-box {
+    padding-left: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #EEEEEE;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    z-index: 8;
+}
+
+.under-search-box {
+    padding-top: 3.5rem;
 }
 
 .list-border {
@@ -85,13 +107,6 @@ footer {
 
 .list-unstyled {
     margin-bottom: 0;
-}
-
-.search-box {
-    padding-left: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    border-bottom: 1px solid #EEEEEE;
 }
 
 .list {
@@ -539,6 +554,20 @@ footer {
         margin-right: auto;
     }
 
+    .title {
+        width: 80%;
+        left: 10%;
+        border-left: 1px solid #EEEEEE;
+        border-right: 1px solid #EEEEEE;
+    }
+
+    .search-box {
+        width: 80%;
+        left: 10%;
+        border-left: 1px solid #EEEEEE;
+        border-right: 1px solid #EEEEEE;
+    }
+
     .main-area {
         min-height: calc(100vh - 96px);
         border-left: 1px solid #EEEEEE;
@@ -601,6 +630,8 @@ footer {
 
     .title {
         padding: 0 2rem;
+        width: 60%;
+        left: 20%;
     }
 
     .error-message {
@@ -609,7 +640,9 @@ footer {
     }
 
     .search-box {
+        width: 60%;
         padding-left: 2rem;
+        left: 20%;
     }
 
     .message-box {
