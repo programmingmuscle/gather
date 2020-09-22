@@ -10,6 +10,9 @@
             <div class="col-md-8 offset-md-2">
                 <form method="POST" action="{{ route('login.post') }}">
                     {{ csrf_field() }}
+                    <div class="required-note">
+                        <span class="required">*</span>が付いている欄は必須項目
+                    </div>
                     <div class="form-group">
                         <input type="hidden" name="email" value="guest@gmail.com">    
                     </div>
@@ -22,14 +25,14 @@
                 <form method="POST" action="{{ route('login.post') }}" class="login-form">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="email" id="email-error">メールアドレス</label> 
+                        <label for="email" id="email-error">メールアドレス<span class="required">*</span></label> 
                         @if ($errors->has('email'))
                             <div class="error-target">{{ $errors->first('email') }}</div>
                         @endif
                         <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control">    
                     </div>
                     <div class="form-group">
-                        <label for="password" id="password-error">パスワード</label>
+                        <label for="password" id="password-error">パスワード<span class="required">*</span></label>
                         @if ($errors->has('password'))
                             <div class="error-target">{{ $errors->first('password') }}</div>
                         @endif

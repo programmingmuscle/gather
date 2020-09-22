@@ -320,6 +320,7 @@ footer {
 
 .required-note {
     color: #7b7e82;
+    margin-top: .5rem;
 }
 
 .timelines {
@@ -456,7 +457,6 @@ footer {
 }
 
 .testLoginLabel {
-    padding-top: 1rem;
     margin-bottom: 1rem;
 }
 
