@@ -1,7 +1,11 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
-    投稿一覧
+    @if (Auth::check())
+        投稿一覧
+    @else
+        <div class="d-inline-block">投稿一覧</div><span class="title-note">※ログイン後に"参加"できます。</span>
+    @endif
 @endsection
 
 @section ('mainArea_content')
@@ -48,10 +52,9 @@
 
                             @include ('commons.postContentList')                            
 
-                            @if ($post->userId != Auth::id()) 
+                            @if (Auth::check() && ($post->userId != Auth::id())) 
                                 <div class="button-position ml-3">
 
-                                    @if(Auth::check())
                                         @if (Auth::user()->is_participating($post->id))
                                             <form method="POST" action="{{ route('participations.cancel', ['id' => $post->id]) }}" class="d-inline-block">
                                                 {!! method_field('delete') !!}
@@ -61,15 +64,24 @@
                                         @else
                                             @include ('participations.common')
                                         @endif
-                                    @else
-                                        @include ('participations.common')
-                                    @endif
                                     
                                 </div>
                             @endif
 
-                            @if ($post->userId != Auth::id())
-                                @include('concerns.concern_button')
+                            @if (Auth::check() && ($post->userId != Auth::id()))
+                                <div class="button-position ml-3" data-postId="{{ $post->id }}">
+
+                                    @if (Auth::user()->is_concerned($post->id))
+                                        <form class="d-inline-block">
+                                            <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
+                                        </form>
+                                    @else
+                                        <form class="d-inline-block">
+                                            <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
+                                        </form>
+                                    @endif
+
+                                </div>
                             @endif
                             
                         </div>

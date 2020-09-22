@@ -132,34 +132,14 @@
                                         {!! nl2br(e($timeline->remarks)) !!}
                                     </p>
 
-                                    @if ($timeline->user->id != Auth::id()) 
-                                        <div class="button-position ml-3">
-
-                                            @if(Auth::check())
-                                                @if (Auth::user()->is_participating($timeline->id))
-                                                    <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}" class="d-inline-block">
-                                                        {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
-                                                    </form>
-                                                @else
-                                                    @if (($timeline->people > $timeline->participate_users()->count()) && ($timeline->deadline > $now))
-                                                        <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}" class="d-inline-block">
-                                                            {{ csrf_field() }}
-                                                            <input type="submit" value="参加する" class="btn participate-button d-inline-block">
-                                                        </form>
-                                                    @elseif (($timeline->people <= $timeline->participate_users()->count()) && ($timeline->deadline <= $now))
-                                                        <p class="full-note">・定員到達</p>
-                                                        <p class="deadline-note">・応募期間終了</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @elseif (($timeline->people <= $timeline->participate_users()->count()) && ($timeline->deadline > $now))
-                                                        <p class="full-note">・定員到達</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @else
-                                                        <p class="deadline-note">・応募期間終了</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @endif
-                                                @endif
+                                    @if (Auth::check() && ($timeline->user->id != Auth::id())) 
+                                        <div class="button-position ml-3">                          
+                                            @if (Auth::user()->is_participating($timeline->id))
+                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $timeline->id]) }}" class="d-inline-block">
+                                                    {!! method_field('delete') !!}
+                                                    {{ csrf_field() }}
+                                                    <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
+                                                </form>
                                             @else
                                                 @if (($timeline->people > $timeline->participate_users()->count()) && ($timeline->deadline > $now))
                                                     <form method="POST" action="{{ route('participations.participate', ['id' => $timeline->id]) }}" class="d-inline-block">
@@ -177,27 +157,22 @@
                                                     <p class="deadline-note">・応募期間終了</p>
                                                     <button class="participate-button-full">参加する</button>
                                                 @endif
-                                            @endif
-                                            
+                                            @endif                                           
                                         </div>
                                     @endif
-                                    @if ($timeline->user->id != Auth::id())
+                                    @if (Auth::check() && ($timeline->user->id != Auth::id()))
                                         <div class="button-position ml-3" data-postId="{{ $timeline->id }}">
-                                            @if (Auth::check())
-                                                @if (Auth::user()->is_concerned($timeline->id))
-                                                    <form class="d-inline-block">
-                                                        <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
-                                                    </form>
-                                                @else
-                                                    <form class="d-inline-block">
-                                                        <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
-                                                    </form>
-                                                @endif
+                                            
+                                            @if (Auth::user()->is_concerned($timeline->id))
+                                                <form class="d-inline-block">
+                                                    <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
+                                                </form>
                                             @else
                                                 <form class="d-inline-block">
                                                     <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                 </form>
                                             @endif
+                                            
                                         </div>
                                     @endif
                                     
@@ -374,34 +349,15 @@
                                         {!! nl2br(e($participation->remarks)) !!}
                                     </p>
 
-                                    @if ($participation->user->id != Auth::id()) 
+                                    @if (Auth::check() && ($participation->user->id != Auth::id())) 
                                         <div class="button-position ml-3">
 
-                                            @if(Auth::check())
-                                                @if (Auth::user()->is_participating($participation->id))
-                                                    <form method="POST" action="{{ route('participations.cancel', ['id' => $participation->id]) }}" class="d-inline-block">
-                                                        {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
-                                                    </form>
-                                                @else
-                                                    @if (($participation->people > $participation->participate_users()->count()) && ($participation->deadline > $now))
-                                                        <form method="POST" action="{{ route('participations.participate', ['id' => $participation->id]) }}" class="d-inline-block">
-                                                            {{ csrf_field() }}
-                                                            <input type="submit" value="参加する" class="btn participate-button d-inline-block">
-                                                        </form>
-                                                    @elseif (($participation->people <= $participation->participate_users()->count()) && ($participation->deadline <= $now))
-                                                        <p class="full-note">・定員到達</p>
-                                                        <p class="deadline-note">・応募期間終了</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @elseif (($participation->people <= $participation->participate_users()->count()) && ($participation->deadline > $now))
-                                                        <p class="full-note">・定員到達</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @else
-                                                        <p class="deadline-note">・応募期間終了</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @endif
-                                                @endif
+                                            @if (Auth::user()->is_participating($participation->id))
+                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $participation->id]) }}" class="d-inline-block">
+                                                    {!! method_field('delete') !!}
+                                                    {{ csrf_field() }}
+                                                    <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
+                                                </form>
                                             @else
                                                 @if (($participation->people > $participation->participate_users()->count()) && ($participation->deadline > $now))
                                                     <form method="POST" action="{{ route('participations.participate', ['id' => $participation->id]) }}" class="d-inline-block">
@@ -423,20 +379,14 @@
                                             
                                         </div>
                                     @endif
-                                    @if ($participation->user->id != Auth::id())
+                                    @if (Auth::check() && ($participation->user->id != Auth::id()))
                                         <div class="button-position ml-3" data-postId="{{ $participation->id }}">
-                                            @if (Auth::check())
-                                                @if (Auth::user()->is_concerned($participation->id))
-                                                    <form class="d-inline-block">
-                                                        <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
-                                                    </form>
-                                                @else
-                                                    <form class="d-inline-block">
-                                                        <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
-                                                    </form>
-                                                @endif
+                                            @if (Auth::user()->is_concerned($participation->id))
+                                                <form class="d-inline-block">
+                                                    <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
+                                                </form>
                                             @else
-                                                <form class="d-inline-block">                                            
+                                                <form class="d-inline-block">
                                                     <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                 </form>
                                             @endif
@@ -523,34 +473,15 @@
                                         {!! nl2br(e($concern->remarks)) !!}
                                     </p>
                                     
-                                    @if ($concern->user->id != Auth::id()) 
+                                    @if (Auth::check() &&($concern->user->id != Auth::id())) 
                                         <div class="button-position ml-3">
 
-                                            @if(Auth::check())
-                                                @if (Auth::user()->is_participating($concern->id))
-                                                    <form method="POST" action="{{ route('participations.cancel', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                        {!! method_field('delete') !!}
-                                                        {{ csrf_field() }}
-                                                        <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
-                                                    </form>
-                                                @else
-                                                    @if (($concern->people > $concern->participate_users()->count()) && ($concern->deadline > $now))
-                                                        <form method="POST" action="{{ route('participations.participate', ['id' => $concern->id]) }}" class="d-inline-block">
-                                                            {{ csrf_field() }}
-                                                            <input type="submit" value="参加する" class="btn participate-button d-inline-block">
-                                                        </form>
-                                                    @elseif (($concern->people <= $concern->participate_users()->count()) && ($concern->deadline <= $now))
-                                                        <p class="full-note">・定員到達</p>
-                                                        <p class="deadline-note">・応募期間終了</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @elseif (($concern->people <= $concern->participate_users()->count()) && ($concern->deadline > $now))
-                                                        <p class="full-note">・定員到達</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @else
-                                                        <p class="deadline-note">・応募期間終了</p>
-                                                        <button class="participate-button-full">参加する</button>
-                                                    @endif
-                                                @endif
+                                            @if (Auth::user()->is_participating($concern->id))
+                                                <form method="POST" action="{{ route('participations.cancel', ['id' => $concern->id]) }}" class="d-inline-block">
+                                                    {!! method_field('delete') !!}
+                                                    {{ csrf_field() }}
+                                                    <input type="submit" value="参加中" class="btn cancel-button d-inline-block">
+                                                </form>
                                             @else
                                                 @if (($concern->people > $concern->participate_users()->count()) && ($concern->deadline > $now))
                                                     <form method="POST" action="{{ route('participations.participate', ['id' => $concern->id]) }}" class="d-inline-block">
@@ -572,23 +503,19 @@
                                         
                                         </div>
                                     @endif
-                                    @if ($concern->user->id != Auth::id())
+                                    @if (Auth::check() && ($concern->user->id != Auth::id()))
                                         <div class="button-position ml-3" data-postId="{{ $concern->id }}">
-                                            @if (Auth::check())
-                                                @if (Auth::user()->is_concerned($concern->id))
-                                                    <form class="d-inline-block">
-                                                        <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
-                                                    </form>
-                                                @else
-                                                    <form class="d-inline-block">
-                                                        <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
-                                                    </form>
-                                                @endif
+                                            
+                                            @if (Auth::user()->is_concerned($concern->id))
+                                                <form class="d-inline-block">
+                                                    <input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax d-inline-block">
+                                                </form>
                                             @else
-                                                <form class="d-inline-block">                                            
+                                                <form class="d-inline-block">
                                                     <input type="submit" value="気になる" class="btn concern-button concern-button-ajax d-inline-block">
                                                 </form>
                                             @endif
+                
                                         </div>
                                     @endif
 

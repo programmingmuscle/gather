@@ -82,6 +82,11 @@ footer {
     z-index: 9;
 }
 
+.title-note {
+    color: #7b7e82;
+    float: right;
+}
+
 .content {
     padding-top: 1.5rem;
 }
@@ -427,7 +432,7 @@ footer {
 }
 
 .message-float {
-    float:right;
+    float: right;
 }
 
 .message-edit-color {    

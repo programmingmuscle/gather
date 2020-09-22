@@ -1,7 +1,11 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
-    <a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">投稿詳細</div>
+    @if (Auth::check())
+        <a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">投稿詳細</div>
+    @else
+        <a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">投稿詳細</div><span class="title-note">※ログイン後に"参加"できます。</span>
+    @endif
 @endsection
 
 @section ('mainArea_content')
@@ -53,9 +57,7 @@
 
             @include ('participations.participate_button')
 
-            @if ($post->user->id != Auth::id())
-                @include ('concerns.concern_button')
-            @endif
+            @include ('concerns.concern_button')
 
             <div class="accordion ajaxTargetAdd">
                 @if (count($users) > 0)
