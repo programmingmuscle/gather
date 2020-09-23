@@ -118,7 +118,7 @@ class PostsController extends Controller
             'remarks' => $request->remarks,
         ]);
 
-        $post = Post::orderBy('id', 'disc')->first();
+        $post = Post::orderBy('id', 'desc')->first();
 
         return redirect()->route('posts.show', ['id' => $post->id])->with('success', '投稿を作成しました。');
     }
