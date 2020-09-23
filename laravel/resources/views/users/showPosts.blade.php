@@ -59,16 +59,14 @@
         <li class="participations"><a href="{{ route('users.showParticipations', ['id' => $user->id]) }}">参加</a></li>
         <li class="concerns"><a href="{{ route('users.showConcerns', ['id' => $user->id]) }}">気になる</a></li>
     </ul>
-    <div class="tabs-content">
+    <div class="tabs-content">   
         @if (count($posts) > 0)
-            <ul class="list-unstyled">
-
+            <ul class="list-unstyled infiniteScroll">
                 @foreach ($posts as $post)
-                    <div class="list-border detail">
+                    <div class="list-border detail result_infiniteScroll">
                         <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
                         <li class="media list">
                             <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
-
                                 @if ($post->user->profile_image != '')
                                     <figure>
                                         <img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
@@ -78,23 +76,21 @@
                                         <img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
                                     </figure>
                                 @endif
-
                             </a>
                             <div class="media-body">
                                 <div class="clearfix">
                                     <a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position name-float d-inline-block">{{ $post->user->name }}</a>
-                                    
+
                                     @if ($post->user->id == Auth::id())
                                         <div class="button-position button-float">
                                             <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
                                         </div>
-                                    @endif
-
+                                    @endif 
                                 </div>
                                 <ul class="list-unstyled">
                                     <li>
                                         【{{ $post->title }}】
-                                    </li>
+                                    </li>      
                                     <div class="ml-3">
                                         <li class="end_time-float">
                                             日時：{{ date('Y/n/j G:i', strtotime($post->date_time)) }}
@@ -133,27 +129,30 @@
                                 </ul>
                                 <p class="ml-3 mt-3">
                                     {!! nl2br(e($post->remarks)) !!}
-                                </p>
-                                
-                                    @include ('participations.participate_button')
-
-                                    @if ($post->user->id != Auth::id())
-                                        @include ('concerns.concern_button')
-                                    @endif
-
+                                </p>                              
                             </div>
                         </li>
-                    </div>
+                    </div>                               
                 @endforeach
-
             </ul>
-            {{ $posts->links('pagination::bootstrap-4') }}
+            @if ($posts->hasMorePages())
+                <p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $posts->nextPageUrl() }}">もっと見る</a></p>
+            @endif
         @else
             <p class="countZero">投稿するとこちらに表示されます。</p>
         @endif
     </div>
 
     @section('js')
+        <script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
+        <script>
+            var infScroll = new InfiniteScroll ('.infiniteScroll', {
+                path : ".more a",
+                append : ".result_infiniteScroll",
+                button : ".more a",
+                loadOnScroll : false,
+            });
+        </script>
         <script src="{{ asset('/assets/js/users-show.js') }}"></script>
     @endsection
 

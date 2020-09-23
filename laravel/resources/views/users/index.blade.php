@@ -21,10 +21,10 @@
     </form>
                 
     @if (count($users) > 0)
-        <ul class="list-unstyled under-search-box">
+        <ul class="list-unstyled under-search-box infiniteScroll">
 
             @foreach ($users as $user)
-                <div class="list-border detail">
+                <div class="list-border detail result_infiniteScroll">
                     <a href="{{ route('users.show', ['id' => $user->id]) }}" style="display:none"></a>
                     <li class="media list">
                         <a href="{{ route('users.show', ['id' => $user->id]) }}">
@@ -61,9 +61,20 @@
         </ul>
     @endif
 
-    {{ $users->links('pagination::bootstrap-4') }}
+    @if ($users->hasMorePages())
+        <p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $users->nextPageUrl() }}">もっと見る</a></p>
+    @endif
 
     @section('js')
+        <script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
+        <script>
+            var infScroll = new InfiniteScroll ('.infiniteScroll', {
+                path : ".more a",
+                append : ".result_infiniteScroll",
+                button : ".more a",
+                loadOnScroll : false,
+            });
+        </script>
         <script src="{{ asset('/assets/js/users-index.js') }}"></script>
     @endsection
 

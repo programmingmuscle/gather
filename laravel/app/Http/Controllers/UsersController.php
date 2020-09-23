@@ -31,9 +31,9 @@ class UsersController extends Controller
                     ->orWhere('position', 'like' , '%' . $keyword . '%')
                     ->orWhere('introduction', 'like', '%' . $keyword . '%')
                     ->orderBy('id', 'desc')
-                    ->paginate(10);
+                    ->paginate(1);
         } else {
-            $users = User::orderBy('id', 'desc')->paginate(10);
+            $users = User::orderBy('id', 'desc')->paginate(1);
         }
 
         return view('users.index', [

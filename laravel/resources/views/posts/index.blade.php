@@ -23,9 +23,9 @@
         </div>
     </form>
     @if (count($posts) > 0)
-        <ul class="list-unstyled under-search-box">
+        <ul class="list-unstyled under-search-box infiniteScroll">
             @foreach ($posts as $post)
-                <div class="list-border detail">
+                <div class="list-border detail result_infiniteScroll">
                     <a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
                     <li class="media list">
                         <a href="{{ route('users.show', ['id' => $post->userId]) }}">
@@ -91,9 +91,20 @@
         </ul>
     @endif
 
-    {{ $posts->links('pagination::bootstrap-4') }}
+    @if ($posts->hasMorePages())
+        <p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $posts->nextPageUrl() }}">もっと見る</a></p>
+    @endif
 
     @section('js')
+        <script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
+        <script>
+            var infScroll = new InfiniteScroll ('.infiniteScroll', {
+                path : ".more a",
+                append : ".result_infiniteScroll",
+                button : ".more a",
+                loadOnScroll : false,
+            });
+        </script>
         <script src="{{ asset('/assets/js/posts-index.js') }}"></script>
     @endsection
 
