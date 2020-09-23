@@ -53,7 +53,7 @@
                         <input type="submit" value="完了" class="btn btn-success">
                     </div>
                 </form>
-                <div class="explain-link">サインアップがお済みの方は<a href="{{ route('login') }}">ログイン</a>へ</div>
+                <div class="explain-link">サインアップがお済みの方は<a href="{{ route('login.showLoginForm') }}">ログイン</a>へ</div>
             </div>
         </div>
     </div>

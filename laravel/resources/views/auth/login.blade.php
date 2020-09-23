@@ -42,7 +42,7 @@
                         <input type="submit" value="完了" class="btn btn-success">
                     </div>
                 </form>
-                <div class="explain-link"><a href="{{ route('signup.get') }}">サインアップ</a>はお済みですか？</div>
+                <div class="explain-link"><a href="{{ route('signup.showRegistrationForm') }}">サインアップ</a>はお済みですか？</div>
             </div>
         </div>
     </div>
