@@ -166,23 +166,68 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $timelines = $user->feed_posts()->orderBy('updated_at', 'desc')->paginate(10);
-        $posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(10);
-        $participations = $user->participations()->orderBy('updated_at', 'desc')->paginate(10);
-        $concerns = $user->concerns()->orderBy('updated_at', 'desc')->paginate(10);
+        $posts = $user->feed_posts()->orderBy('updated_at', 'desc')->paginate(10);
         $now = date('Y-m-d H:i:s');
 
         $data = [
             'user' => $user,
-            'timelines' => $timelines,
             'posts' => $posts,
-            'participations' => $participations,
-            'concerns' => $concerns,
             'now' => $now,
         ];
 
         $data += $this->counts($user);
 
         return view('users.show', $data);
+    }
+
+    public function showPosts($id)
+    {
+        $user = User::find($id);
+        $posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(10);
+        $now = date('Y-m-d H:i:s');
+
+        $data = [
+            'user' => $user,
+            'posts' => $posts,
+            'now' => $now,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.showPosts', $data);
+    }
+
+    public function showParticipations($id)
+    {
+        $user = User::find($id);
+        $posts = $user->participations()->orderBy('updated_at', 'desc')->paginate(10);
+        $now = date('Y-m-d H:i:s');
+
+        $data = [
+            'user' => $user,
+            'posts' => $posts,
+            'now' => $now,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.showParticipations', $data);
+    }
+
+    public function showConcerns($id)
+    {
+        $user = User::find($id);
+        $posts = $user->concerns()->orderBy('updated_at', 'desc')->paginate(10);
+        $now = date('Y-m-d H:i:s');
+
+        $data = [
+            'user' => $user,
+            'posts' => $posts,
+            'now' => $now,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.showConcerns', $data);
     }
 }

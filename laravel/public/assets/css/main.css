@@ -377,10 +377,6 @@ footer {
     clear: both;
 }
 
-.tabs-content section {
-    display: none;
-}
-
 .detail:hover {
     background-color: #f0f0f0;
     cursor: pointer;

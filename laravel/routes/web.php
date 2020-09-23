@@ -19,11 +19,15 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+Route::get('users', 'UsersController@index')->name('users.index');
 Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
 Route::get('/result/ajax/{post}/messages', 'PostsController@getDataMessages')->name('posts.getDataMessages');
 
-Route::group(['prefix' => 'users/{user}'], function() {    
+Route::group(['prefix' => 'users/{user}'], function() {
+    Route::get('showPosts', 'UsersController@showPosts')->name('users.showPosts');
+    Route::get('showParticipations', 'UsersController@showParticipations')->name('users.showParticipations');
+    Route::get('showConcerns', 'UsersController@showConcerns')->name('users.showConcerns');      
     Route::get('followings', 'UsersController@followings')->name('users.followings');
     Route::get('followers', 'UsersController@followers')->name('users.followers');
 });
