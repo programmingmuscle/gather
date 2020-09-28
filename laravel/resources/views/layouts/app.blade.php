@@ -7,7 +7,7 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
-		<link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">		
+		<link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
 	</head>
 	<body>
 
@@ -16,7 +16,7 @@
 				<div class="wrapper">
 					<header class="bg-success">
 						<nav class="navbar navbar-expand-sm navbar-dark">
-							
+
 							@if (Auth::check())
 								<a href="{{ route('users.show', ['id' => Auth::id()]) }}" class="navbar-brand">GATHER!</a>
 							@else
@@ -43,7 +43,7 @@
 										</li>
 									@else
 										<li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link">投稿一覧</a></li>
-										<li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">選手一覧</a></li>										
+										<li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">選手一覧</a></li>
 										<li class="nav-item"><a href="{{ route('signup.showRegistrationForm') }}" class="nav-link">サインアップ</a></li>
 										<li class="nav-item"><a href="{{ route('login.showLoginForm') }}" class="nav-link nav-link-login">ログイン</a></li>
 									@endif
@@ -52,7 +52,7 @@
 						</nav>
 					</header>
 					<div class="main">
-												
+
 						@yield ('content')
 
 					</div>
@@ -61,11 +61,11 @@
 					</footer>
 				</div>
 
-		@yield ('/top_body&/top_wrapper')	
+		@yield ('/top_body&/top_wrapper')
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="{{ asset('/assets/js/flash_message.js') }}"></script>		
-		
+		<script src="{{ asset('/assets/js/flash_message.js') }}"></script>
+
 		@yield ('js')
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
