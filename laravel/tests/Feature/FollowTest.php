@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 
-class FollowTest extends TestCase {
+class FollowTest extends TestCase
+{
 	/**
 	 * A basic test example.
 	 *
@@ -20,7 +21,8 @@ class FollowTest extends TestCase {
 	use RefreshDatabase;
 
 	// フォロー機能実行後にフォロー取り止め機能を行い成功するテスト
-	public function testFollow() {
+	public function testFollow()
+	{
 		// サインアップする
 		$this->post(route('signup.post', [
 			'name' => 'test',
@@ -53,7 +55,8 @@ class FollowTest extends TestCase {
 	}
 
 	// アカウント削除時に該当アカウントへのフォローが取り止められていることを確認
-	public function testFollowDeleteAccount() {
+	public function testFollowDeleteAccount()
+	{
 		// サインアップする
 		$this->post(route('signup.post', [
 			'name' => 'test',

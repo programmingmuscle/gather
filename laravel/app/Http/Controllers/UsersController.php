@@ -16,22 +16,23 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
-	public function index(Request $request) {
+	public function index(Request $request)
+	{
 		$query = User::query();
 
 		$keyword = $request->input('keyword');
 
 		if (!empty($keyword)) {
 			$users = $query
-					->where('name', 'like', '%' . $keyword . '%')
-					->orWhere('residence', 'like', '%' . $keyword . '%')
-					->orWhere('gender', 'like' , '%' . $keyword . '%')
-					->orWhere('age', 'like' , '%' . $keyword . '%')
-					->orWhere('experience', 'like' , '%' . $keyword . '%')
-					->orWhere('position', 'like' , '%' . $keyword . '%')
-					->orWhere('introduction', 'like', '%' . $keyword . '%')
-					->orderBy('id', 'desc')
-					->paginate(1);
+				->where('name', 'like', '%' . $keyword . '%')
+				->orWhere('residence', 'like', '%' . $keyword . '%')
+				->orWhere('gender', 'like', '%' . $keyword . '%')
+				->orWhere('age', 'like', '%' . $keyword . '%')
+				->orWhere('experience', 'like', '%' . $keyword . '%')
+				->orWhere('position', 'like', '%' . $keyword . '%')
+				->orWhere('introduction', 'like', '%' . $keyword . '%')
+				->orderBy('id', 'desc')
+				->paginate(1);
 		} else {
 			$users = User::orderBy('id', 'desc')->paginate(1);
 		}
@@ -42,7 +43,8 @@ class UsersController extends Controller
 		]);
 	}
 
-	public function edit() {
+	public function edit()
+	{
 		$user = Auth::user();
 
 		return view('users.edit', [
@@ -50,7 +52,8 @@ class UsersController extends Controller
 		]);
 	}
 
-	public function update(Request $request) {
+	public function update(Request $request)
+	{
 		$this->validate($request, [
 			'name' => 'required|string|max:191',
 			'email' => [
@@ -62,7 +65,7 @@ class UsersController extends Controller
 			],
 			'password' => [
 				'required',
-				function($attribute, $value, $fail) {
+				function ($attribute, $value, $fail) {
 					if (!Hash::check($value, Auth::user()->password)) {
 						$fail('パスワードが間違っています。');
 					}
@@ -111,19 +114,19 @@ class UsersController extends Controller
 
 			return redirect()->route('users.show', ['id' => Auth::id()])->with('success', 'アカウントを編集しました。');
 		}
-
-
 	}
 
-	public function deleteWindow() {
+	public function deleteWindow()
+	{
 		return view('users.deleteWindow');
 	}
 
-	public function destroy(Request $request) {
+	public function destroy(Request $request)
+	{
 		$this->validate($request, [
 			'password' => [
 				'required',
-				function($attribute, $value, $fail) {
+				function ($attribute, $value, $fail) {
 					if (!Hash::check($value, Auth::user()->password)) {
 						$fail('パスワードが間違っています。');
 					}
@@ -141,7 +144,8 @@ class UsersController extends Controller
 		}
 	}
 
-	public function followers($id) {
+	public function followers($id)
+	{
 		$user = User::find($id);
 		$users = $user->followers()->orderBy('id', 'desc')->paginate(10);
 
@@ -150,7 +154,8 @@ class UsersController extends Controller
 		]);
 	}
 
-	public function followings($id) {
+	public function followings($id)
+	{
 		$user = User::find($id);
 		$users = $user->followings()->orderBy('id', 'desc')->paginate(10);
 
@@ -159,7 +164,8 @@ class UsersController extends Controller
 		]);
 	}
 
-	public function show($id) {
+	public function show($id)
+	{
 		$user = User::find($id);
 		$posts = $user->feed_posts()->orderBy('updated_at', 'desc')->paginate(10);
 		$now = date('Y-m-d H:i:s');
@@ -175,7 +181,8 @@ class UsersController extends Controller
 		return view('users.show', $data);
 	}
 
-	public function showPosts($id) {
+	public function showPosts($id)
+	{
 		$user = User::find($id);
 		$posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(10);
 		$now = date('Y-m-d H:i:s');
@@ -191,7 +198,8 @@ class UsersController extends Controller
 		return view('users.showPosts', $data);
 	}
 
-	public function showParticipations($id) {
+	public function showParticipations($id)
+	{
 		$user = User::find($id);
 		$posts = $user->participations()->orderBy('updated_at', 'desc')->paginate(10);
 		$now = date('Y-m-d H:i:s');
@@ -207,7 +215,8 @@ class UsersController extends Controller
 		return view('users.showParticipations', $data);
 	}
 
-	public function showConcerns($id) {
+	public function showConcerns($id)
+	{
 		$user = User::find($id);
 		$posts = $user->concerns()->orderBy('updated_at', 'desc')->paginate(10);
 		$now = date('Y-m-d H:i:s');

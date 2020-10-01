@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
 	/*
 	|--------------------------------------------------------------------------
 	| Login Controller
@@ -28,12 +29,14 @@ class LoginController extends Controller {
 	 *
 	 * @var string
 	 */
-	protected function redirectTo() {
+	protected function redirectTo()
+	{
 		session()->flash('success', 'ログインしました。');
 		return route('users.show', ['id' => Auth::id()]);
 	}
 
-	public function logout() {
+	public function logout()
+	{
 		Auth::logout();
 		session()->flash('success', 'ログアウトしました。');
 		return redirect('/');
@@ -44,11 +47,13 @@ class LoginController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		$this->middleware('guest')->except('logout');
 	}
 
-	protected function validateLogin(Request $request) {
+	protected function validateLogin(Request $request)
+	{
 		$this->validate($request, [
 			'email' => 'required',
 			'password' => 'required',

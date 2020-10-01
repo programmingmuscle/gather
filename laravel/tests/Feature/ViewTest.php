@@ -9,7 +9,8 @@ use App\User;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 
-class ViewTest extends TestCase {
+class ViewTest extends TestCase
+{
 	/**
 	 * A basic test example.
 	 *
@@ -20,7 +21,8 @@ class ViewTest extends TestCase {
 	use RefreshDatabase;
 
 	// 未ログイン状態における各ページへのアクセスをテスト
-	public function testView() {
+	public function testView()
+	{
 		// ユーザ及び投稿を作成
 		$user = factory(User::class)->create();
 		$post = factory(Post::class)->create();
@@ -48,12 +50,12 @@ class ViewTest extends TestCase {
 		// アカウント削除画面(未ログインの場合はログイン画面にリダイレクト)
 		$response = $this->get(route('users.deleteWindow', ['id' => $user->id]));
 		$response->assertStatus(302)
-				 ->assertRedirect('login');
+			->assertRedirect('login');
 
 		// アカウント編集画面(未ログインの場合はログイン画面にリダイレクト)
 		$response = $this->get(route('users.edit', ['id' => $user->id]));
 		$response->assertStatus(302)
-				 ->assertRedirect('login');
+			->assertRedirect('login');
 
 		// 投稿一覧画面
 		$response = $this->get(route('posts.index'));
@@ -78,17 +80,17 @@ class ViewTest extends TestCase {
 		// 投稿削除画面(未ログインの場合はログイン画面にリダイレクト)
 		$response = $this->get(route('posts.deleteWindow', ['id' => $post->id]));
 		$response->assertStatus(302)
-				 ->assertRedirect('login');
+			->assertRedirect('login');
 
 		// 投稿編集画面(未ログインの場合はログイン画面にリダイレクト)
 		$response = $this->get(route('posts.edit', ['id' => $post->id]));
 		$response->assertStatus(302)
-				 ->assertRedirect('login');
+			->assertRedirect('login');
 
 		// 投稿作成画面(未ログインの場合はログイン画面にリダイレクト)
 		$response = $this->get(route('posts.create', ['id' => $user->id]));
 		$response->assertStatus(302)
-				 ->assertRedirect('login');
+			->assertRedirect('login');
 
 		// 存在しないページへのアクセスには404表示
 		$response = $this->get('/no_route');
@@ -96,7 +98,8 @@ class ViewTest extends TestCase {
 	}
 
 	// ログイン状態におけるログインを要するページへのアクセスをテスト
-	public function testViewAuth() {
+	public function testViewAuth()
+	{
 		// ユーザ及び投稿を作成
 		$user = factory(User::class)->create();
 		$post = factory(Post::class)->create();

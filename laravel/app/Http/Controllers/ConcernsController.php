@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-class ConcernsController extends Controller {
-	public function store($id) {
+class ConcernsController extends Controller
+{
+	public function store($id)
+	{
 		Auth::user()->concern($id);
 		return back();
 	}
 
-	public function destroy($id) {
+	public function destroy($id)
+	{
 		Auth::user()->unconcern($id);
 		return back();
 	}

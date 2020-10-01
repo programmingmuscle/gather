@@ -8,7 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class AuthTest extends TestCase {
+class AuthTest extends TestCase
+{
 	/**
 	 * A basic test example.
 	 *
@@ -19,7 +20,8 @@ class AuthTest extends TestCase {
 	use RefreshDatabase;
 
 	// サインアップ実行 成功し画面遷移するまでの挙動をテスト
-	public function testSignup() {
+	public function testSignup()
+	{
 		// ログイン状態をチェック 未ログインであることを確認
 		$this->assertFalse(Auth::check());
 
@@ -39,7 +41,8 @@ class AuthTest extends TestCase {
 	}
 
 	// サインアップを実行 失敗し対応するエラーメッセージが表示されるまでの挙動をテスト
-	public function testSignupError() {
+	public function testSignupError()
+	{
 		// 全て空欄でサインアップ実行
 		$response = $this->post('signup', [
 			'name' => '',
@@ -55,12 +58,18 @@ class AuthTest extends TestCase {
 		$response->assertSessionHasErrors(['name', 'email', 'password']);
 
 		// 意図したエラーメッセージが表示されているか確認
-		$this->assertEquals('選手名を入力して下さい。',
-			session('errors')->first('name'));
-		$this->assertEquals('メールアドレスを入力して下さい。',
-			session('errors')->first('email'));
-		$this->assertEquals('パスワードを入力して下さい。',
-			session('errors')->first('password'));
+		$this->assertEquals(
+			'選手名を入力して下さい。',
+			session('errors')->first('name')
+		);
+		$this->assertEquals(
+			'メールアドレスを入力して下さい。',
+			session('errors')->first('email')
+		);
+		$this->assertEquals(
+			'パスワードを入力して下さい。',
+			session('errors')->first('password')
+		);
 
 		// 成立していないメールアドレスでサインアップ実行
 		$response = $this->post('signup', [
@@ -77,8 +86,10 @@ class AuthTest extends TestCase {
 		$response->assertSessionHasErrors(['email']);
 
 		// 意図したエラーメッセージが表示されているか確認
-		$this->assertEquals('メールアドレスに「@」を挿入して下さい。',
-			session('errors')->first('email'));
+		$this->assertEquals(
+			'メールアドレスに「@」を挿入して下さい。',
+			session('errors')->first('email')
+		);
 
 		// パスワードが確認用と一致しない状態でサインアップ実行
 		$response = $this->post('signup', [
@@ -95,8 +106,10 @@ class AuthTest extends TestCase {
 		$response->assertSessionHasErrors(['password']);
 
 		// 意図したエラーメッセージが表示されているか確認
-		$this->assertEquals('確認用パスワードと一致していません。',
-			session('errors')->first('password'));
+		$this->assertEquals(
+			'確認用パスワードと一致していません。',
+			session('errors')->first('password')
+		);
 
 		// ユーザ作成
 		$user = factory(User::class)->create([
@@ -118,12 +131,15 @@ class AuthTest extends TestCase {
 		$response->assertSessionHasErrors(['email']);
 
 		// 意図したエラーメッセージが表示されているか確認
-		$this->assertEquals('入力されたメールアドレスは既に使用されています。',
-			session('errors')->first('email'));
+		$this->assertEquals(
+			'入力されたメールアドレスは既に使用されています。',
+			session('errors')->first('email')
+		);
 	}
 
 	// ログイン実行 成功し画面遷移するまでの挙動をテスト
-	public function testLogin() {
+	public function testLogin()
+	{
 		// ログインパスワードが'test12'のユーザ作成
 		$user = factory(User::class)->create([
 			'password' => bcrypt('test12')
@@ -146,7 +162,8 @@ class AuthTest extends TestCase {
 	}
 
 	// ログイン実行 失敗し対応するエラーメッセージが表示されるまでの挙動をテスト
-	public function testLoginError() {
+	public function testLoginError()
+	{
 		// ログインパスワードが'test12'のユーザ作成
 		$user = factory(User::class)->create([
 			'password' => bcrypt('test12')
@@ -168,8 +185,10 @@ class AuthTest extends TestCase {
 		$response->assertSessionHasErrors(['email']);
 
 		// 意図したエラーメッセージが表示されているか確認
-		$this->assertEquals('メールアドレスかパスワードが間違っています。',
-			session('errors')->first('email'));
+		$this->assertEquals(
+			'メールアドレスかパスワードが間違っています。',
+			session('errors')->first('email')
+		);
 
 		// メールアドレスとパスワードともに空欄でログインを試みる
 		$response = $this->post('login', [
@@ -184,14 +203,19 @@ class AuthTest extends TestCase {
 		$response->assertSessionHasErrors(['email', 'password']);
 
 		// 意図したエラーメッセージが表示されているか確認
-		$this->assertEquals('メールアドレスを入力して下さい。',
-			session('errors')->first('email'));
-		$this->assertEquals('パスワードを入力して下さい。',
-			session('errors')->first('password'));
+		$this->assertEquals(
+			'メールアドレスを入力して下さい。',
+			session('errors')->first('email')
+		);
+		$this->assertEquals(
+			'パスワードを入力して下さい。',
+			session('errors')->first('password')
+		);
 	}
 
 	// ログアウトを実行し画面が遷移するまでの挙動をテスト
-	public function testLogout() {
+	public function testLogout()
+	{
 		// ユーザを作成
 		$user = factory(User::class)->create();
 

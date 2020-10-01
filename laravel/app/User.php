@@ -6,7 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
 	use Notifiable;
 
 	/**
@@ -15,7 +16,7 @@ class User extends Authenticatable {
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'email', 'password','residence','gender','age','experience','position','introduction', 'profile_image',
+		'name', 'email', 'password', 'residence', 'gender', 'age', 'experience', 'position', 'introduction', 'profile_image',
 	];
 
 	/**
@@ -27,27 +28,33 @@ class User extends Authenticatable {
 		'password', 'remember_token',
 	];
 
-	public function posts() {
+	public function posts()
+	{
 		return $this->hasMany(Post::class);
 	}
 
-	public function messages() {
+	public function messages()
+	{
 		return $this->hasMany(Message::class);
 	}
 
-	public function followings() {
+	public function followings()
+	{
 		return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'follow_id')->withTimestamps();
 	}
 
-	public function followers() {
+	public function followers()
+	{
 		return $this->belongsToMany(User::class, 'user_follow', 'follow_id', 'user_id')->withTimestamps();
 	}
 
-	public function is_following($id) {
+	public function is_following($id)
+	{
 		return $this->followings()->where('follow_id', $id)->exists();
 	}
 
-	public function follow($id) {
+	public function follow($id)
+	{
 		$exist = $this->is_following($id);
 		$its_me = $this->id == $id;
 
@@ -56,7 +63,8 @@ class User extends Authenticatable {
 		}
 	}
 
-	public function unfollow($id) {
+	public function unfollow($id)
+	{
 		$exist = $this->is_following($id);
 		$its_me = $this->id == $id;
 
@@ -65,15 +73,18 @@ class User extends Authenticatable {
 		}
 	}
 
-	public function concerns() {
+	public function concerns()
+	{
 		return $this->belongsToMany(Post::class, 'concerns', 'user_id', 'post_id')->withTimestamps();
 	}
 
-	public function is_concerned($id) {
+	public function is_concerned($id)
+	{
 		return $this->concerns()->where('post_id', $id)->exists();
 	}
 
-	public function concern($id) {
+	public function concern($id)
+	{
 		$post = Post::find($id);
 		$exist = $this->is_concerned($id);
 		$its_mine = Auth::id() == $post->user_id;
@@ -83,7 +94,8 @@ class User extends Authenticatable {
 		}
 	}
 
-	public function unconcern($id) {
+	public function unconcern($id)
+	{
 		$post = Post::find($id);
 		$exist = $this->is_concerned($id);
 		$its_mine = Auth::id() == $post->user->id;
@@ -93,15 +105,18 @@ class User extends Authenticatable {
 		}
 	}
 
-	public function participations() {
+	public function participations()
+	{
 		return $this->belongsToMany(Post::class, 'participations', 'user_id', 'post_id')->withTimestamps();
 	}
 
-	public function is_participating($id) {
+	public function is_participating($id)
+	{
 		return $this->participations()->where('post_id', $id)->exists();
 	}
 
-	public function participate($id) {
+	public function participate($id)
+	{
 		$post = Post::find($id);
 		$exist = $this->is_participating($id);
 		$its_mine = Auth::id() == $post->user->id;
@@ -111,7 +126,8 @@ class User extends Authenticatable {
 		}
 	}
 
-	public function cancel($id) {
+	public function cancel($id)
+	{
 		$post = Post::find($id);
 		$exist = $this->is_participating($id);
 		$its_mine = Auth::id() == $post->user->id;
@@ -121,7 +137,8 @@ class User extends Authenticatable {
 		}
 	}
 
-	public function feed_posts() {
+	public function feed_posts()
+	{
 		$follow_user_ids = $this->followings()->pluck('users.id')->toArray();
 		$follow_user_ids[] = $this->id;
 

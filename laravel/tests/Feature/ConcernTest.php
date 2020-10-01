@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 
-class ConcernTest extends TestCase {
+class ConcernTest extends TestCase
+{
 	/**
 	 * A basic test example.
 	 *
@@ -19,7 +20,8 @@ class ConcernTest extends TestCase {
 	use RefreshDatabase;
 
 	// 気になる機能実行後に気になる取り止め機能を行い成功するテスト
-	public function testConcern() {
+	public function testConcern()
+	{
 		// 気になる対象とする投稿を作成
 		$post = factory(Post::class)->create([
 			'title' => 'test',
@@ -46,7 +48,8 @@ class ConcernTest extends TestCase {
 	}
 
 	// 投稿削除時に該当する投稿への気になるが取り止められていることを確認
-	public function testConcernDeleteAccount() {
+	public function testConcernDeleteAccount()
+	{
 		// 気になる対象とする投稿を作成
 		$post = factory(Post::class)->create();
 

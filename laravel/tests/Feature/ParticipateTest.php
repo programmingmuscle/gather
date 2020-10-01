@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 
-class ParticipateTest extends TestCase {
+class ParticipateTest extends TestCase
+{
 	/**
 	 * A basic test example.
 	 *
@@ -19,7 +20,8 @@ class ParticipateTest extends TestCase {
 	use RefreshDatabase;
 
 	// 参加する機能実行後に参加取り止め機能を行い成功するテスト
-	public function testParticipate() {
+	public function testParticipate()
+	{
 		// ユーザを作成
 		$user = factory(User::class)->create();
 
@@ -56,7 +58,8 @@ class ParticipateTest extends TestCase {
 	}
 
 	// 投稿削除時に該当する投稿への参加が取り止められていることを確認
-	public function testParticipationDeleteAccount() {
+	public function testParticipationDeleteAccount()
+	{
 		// 参加対象とする投稿を作成
 		$post = factory(Post::class)->create();
 

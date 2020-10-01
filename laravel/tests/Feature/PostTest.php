@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 
-class PostTest extends TestCase {
+class PostTest extends TestCase
+{
 	/**
 	 * A basic test example.
 	 *
@@ -19,7 +20,8 @@ class PostTest extends TestCase {
 	use RefreshDatabase;
 
 	// 投稿作成時に係るエラー発生時の挙動をテスト
-	public function testPostError() {
+	public function testPostError()
+	{
 		// ユーザを作成
 		$user = factory(User::class)->create();
 
@@ -42,26 +44,46 @@ class PostTest extends TestCase {
 		$response->assertSessionHasErrors(['title', 'date_time', 'end_time', 'place', 'address', 'reservation', 'expense', 'ball', 'deadline', 'people']);
 
 		// 各項目のエラーに対して正しいエラーメッセージが存在していることを確認
-		$this->assertEquals('タイトルを入力して下さい。',
-			session('errors')->first('title'));
-		$this->assertEquals('開始日時を入力して下さい。',
-			session('errors')->first('date_time'));
-		$this->assertEquals('終了日時を入力して下さい。',
-			session('errors')->first('end_time'));
-		$this->assertEquals('場所を入力して下さい。',
-			session('errors')->first('place'));
-		$this->assertEquals('住所を入力して下さい。',
-			session('errors')->first('address'));
-		$this->assertEquals('場所予約を入力して下さい。',
-			session('errors')->first('reservation'));
-		$this->assertEquals('参加費用を入力して下さい。',
-			session('errors')->first('expense'));
-		$this->assertEquals('使用球を入力して下さい。',
-			session('errors')->first('ball'));
-		$this->assertEquals('締切日時を入力して下さい。',
-			session('errors')->first('deadline'));
-		$this->assertEquals('募集人数を入力して下さい。',
-			session('errors')->first('people'));
+		$this->assertEquals(
+			'タイトルを入力して下さい。',
+			session('errors')->first('title')
+		);
+		$this->assertEquals(
+			'開始日時を入力して下さい。',
+			session('errors')->first('date_time')
+		);
+		$this->assertEquals(
+			'終了日時を入力して下さい。',
+			session('errors')->first('end_time')
+		);
+		$this->assertEquals(
+			'場所を入力して下さい。',
+			session('errors')->first('place')
+		);
+		$this->assertEquals(
+			'住所を入力して下さい。',
+			session('errors')->first('address')
+		);
+		$this->assertEquals(
+			'場所予約を入力して下さい。',
+			session('errors')->first('reservation')
+		);
+		$this->assertEquals(
+			'参加費用を入力して下さい。',
+			session('errors')->first('expense')
+		);
+		$this->assertEquals(
+			'使用球を入力して下さい。',
+			session('errors')->first('ball')
+		);
+		$this->assertEquals(
+			'締切日時を入力して下さい。',
+			session('errors')->first('deadline')
+		);
+		$this->assertEquals(
+			'募集人数を入力して下さい。',
+			session('errors')->first('people')
+		);
 
 		// 上記投稿がデータベースに保存されていないことを確認
 		$this->assertDatabaseMissing('posts', [
@@ -90,8 +112,10 @@ class PostTest extends TestCase {
 		$response->assertSessionHasErrors('remarks');
 
 		// 正しいエラーメッセージが存在していることを確認
-		$this->assertEquals('備考は191文字以内として下さい。',
-			session('errors')->first('remarks'));
+		$this->assertEquals(
+			'備考は191文字以内として下さい。',
+			session('errors')->first('remarks')
+		);
 
 		// 上記投稿がデータベースに保存されていないことを確認
 		$this->assertDatabaseMissing('posts', [
@@ -100,7 +124,8 @@ class PostTest extends TestCase {
 	}
 
 	// 投稿作成に成功するテスト
-	public function testPost() {
+	public function testPost()
+	{
 		// ユーザを作成
 		$user = factory(User::class)->create();
 
@@ -144,35 +169,36 @@ class PostTest extends TestCase {
 		// 投稿詳細画面に上記投稿が表示されることを確認
 		$response = $this->get(route('posts.show', ['id' => $post->id]));
 		$response->assertSee('投稿詳細')
-				 ->assertSee('testTitle')
-				 ->assertSee('2020/2/2 0:00')
-				 ->assertSee('2020/2/2 0:30')
-				 ->assertSee('testPlace')
-				 ->assertSee('testAddress')
-				 ->assertSee('不要')
-				 ->assertSee('testExpense')
-				 ->assertSee('軟式')
-				 ->assertSee('2020/2/1 0:00')
-				 ->assertSee('1')
-				 ->assertSee('testRemarks');
+			->assertSee('testTitle')
+			->assertSee('2020/2/2 0:00')
+			->assertSee('2020/2/2 0:30')
+			->assertSee('testPlace')
+			->assertSee('testAddress')
+			->assertSee('不要')
+			->assertSee('testExpense')
+			->assertSee('軟式')
+			->assertSee('2020/2/1 0:00')
+			->assertSee('1')
+			->assertSee('testRemarks');
 
 		// 投稿一覧画面に遷移して上記投稿が表示されることを確認
 		$response = $this->get(route('posts.index'));
 		$response->assertSee('testTitle')
-				 ->assertSee('2020/2/2 0:00')
-				 ->assertSee('2020/2/2 0:30')
-				 ->assertSee('testPlace')
-				 ->assertSee('testAddress')
-				 ->assertSee('不要')
-				 ->assertSee('testExpense')
-				 ->assertSee('軟式')
-				 ->assertSee('2020/2/1 0:00')
-				 ->assertSee('1')
-				 ->assertSee('testRemarks');
+			->assertSee('2020/2/2 0:00')
+			->assertSee('2020/2/2 0:30')
+			->assertSee('testPlace')
+			->assertSee('testAddress')
+			->assertSee('不要')
+			->assertSee('testExpense')
+			->assertSee('軟式')
+			->assertSee('2020/2/1 0:00')
+			->assertSee('1')
+			->assertSee('testRemarks');
 	}
 
 	// 投稿編集時に係るエラー発生時の挙動をテスト
-	public function testPostEditError() {
+	public function testPostEditError()
+	{
 		// ユーザを作成
 		$user = factory(User::class)->create();
 
@@ -229,26 +255,46 @@ class PostTest extends TestCase {
 		$response->assertSessionHasErrors(['title', 'date_time', 'end_time', 'place', 'address', 'reservation', 'expense', 'ball', 'deadline', 'people']);
 
 		// 各項目のエラーに対して正しいエラーメッセージが存在していることを確認
-		$this->assertEquals('タイトルを入力して下さい。',
-			session('errors')->first('title'));
-		$this->assertEquals('開始日時を入力して下さい。',
-			session('errors')->first('date_time'));
-		$this->assertEquals('終了日時を入力して下さい。',
-			session('errors')->first('end_time'));
-		$this->assertEquals('場所を入力して下さい。',
-			session('errors')->first('place'));
-		$this->assertEquals('住所を入力して下さい。',
-			session('errors')->first('address'));
-		$this->assertEquals('場所予約を入力して下さい。',
-			session('errors')->first('reservation'));
-		$this->assertEquals('参加費用を入力して下さい。',
-			session('errors')->first('expense'));
-		$this->assertEquals('使用球を入力して下さい。',
-			session('errors')->first('ball'));
-		$this->assertEquals('締切日時を入力して下さい。',
-			session('errors')->first('deadline'));
-		$this->assertEquals('募集人数を入力して下さい。',
-			session('errors')->first('people'));
+		$this->assertEquals(
+			'タイトルを入力して下さい。',
+			session('errors')->first('title')
+		);
+		$this->assertEquals(
+			'開始日時を入力して下さい。',
+			session('errors')->first('date_time')
+		);
+		$this->assertEquals(
+			'終了日時を入力して下さい。',
+			session('errors')->first('end_time')
+		);
+		$this->assertEquals(
+			'場所を入力して下さい。',
+			session('errors')->first('place')
+		);
+		$this->assertEquals(
+			'住所を入力して下さい。',
+			session('errors')->first('address')
+		);
+		$this->assertEquals(
+			'場所予約を入力して下さい。',
+			session('errors')->first('reservation')
+		);
+		$this->assertEquals(
+			'参加費用を入力して下さい。',
+			session('errors')->first('expense')
+		);
+		$this->assertEquals(
+			'使用球を入力して下さい。',
+			session('errors')->first('ball')
+		);
+		$this->assertEquals(
+			'締切日時を入力して下さい。',
+			session('errors')->first('deadline')
+		);
+		$this->assertEquals(
+			'募集人数を入力して下さい。',
+			session('errors')->first('people')
+		);
 
 		// 192文字の文字列を作成
 		$badRemarksEdited = str_repeat('123', '64');
@@ -272,8 +318,10 @@ class PostTest extends TestCase {
 		$response->assertSessionHasErrors('remarks');
 
 		// 正しいエラーメッセージが存在していることを確認
-		$this->assertEquals('備考は191文字以内として下さい。',
-			session('errors')->first('remarks'));
+		$this->assertEquals(
+			'備考は191文字以内として下さい。',
+			session('errors')->first('remarks')
+		);
 
 		// 上記投稿がデータベースに保存されていないことを確認
 		$this->assertDatabaseMissing('posts', [
@@ -282,7 +330,8 @@ class PostTest extends TestCase {
 	}
 
 	// 投稿の編集に成功するテスト
-	public function testPostEdit() {
+	public function testPostEdit()
+	{
 		// ユーザを作成
 		$user = factory(User::class)->create();
 
@@ -368,7 +417,8 @@ class PostTest extends TestCase {
 	}
 
 	// アカウント削除時に該当アカウントによる投稿が削除されるテスト
-	public function testPostDeleteAccount() {
+	public function testPostDeleteAccount()
+	{
 		// ユーザを作成
 		$user = factory(User::class)->create([
 			'password' => bcrypt('testPostDeleteAccount'),

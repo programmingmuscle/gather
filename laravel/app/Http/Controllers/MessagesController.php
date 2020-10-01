@@ -10,8 +10,10 @@ use App\Message;
 
 use Illuminate\Support\Facades\Auth;
 
-class MessagesController extends Controller {
-	public function store(Request $request) {
+class MessagesController extends Controller
+{
+	public function store(Request $request)
+	{
 		$this->validate($request, [
 			'content' => 'required|string|max:191',
 		], [
@@ -33,7 +35,8 @@ class MessagesController extends Controller {
 		return back();
 	}
 
-	public function update(Request $request, $id) {
+	public function update(Request $request, $id)
+	{
 		$this->validate($request, [
 			'content' => 'required|string|max:191',
 		], [
@@ -55,7 +58,8 @@ class MessagesController extends Controller {
 		return back();
 	}
 
-	public function destroy(Request $request, $id) {
+	public function destroy(Request $request, $id)
+	{
 		$message = Message::find($id);
 
 		$message->delete();

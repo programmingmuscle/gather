@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 
-class SearchTest extends TestCase {
+class SearchTest extends TestCase
+{
 	/**
 	 * A basic test example.
 	 *
@@ -17,7 +18,8 @@ class SearchTest extends TestCase {
 	 */
 
 	// ユーザ検索に成功するテスト
-	public function testSearchUsers() {
+	public function testSearchUsers()
+	{
 		// ユーザ１を作成
 		factory(User::class)->create([
 			'introduction' => 'testSearchUsersIntroductionInvisible',
@@ -34,8 +36,8 @@ class SearchTest extends TestCase {
 
 		// ユーザ１及び２のデータが表示されていることを確認
 		$response->assertSee('testSearchUsersIntroductionInvisible')
-				 ->assertSee('testSearchUsersNameVisible')
-				 ->assertSee('testSearchUsersIntroductionVisible');
+			->assertSee('testSearchUsersNameVisible')
+			->assertSee('testSearchUsersIntroductionVisible');
 
 		// 検索キーワードを入力しサブミット
 		$response = $this->get(route('users.index', [
@@ -44,11 +46,12 @@ class SearchTest extends TestCase {
 
 		// ユーザ一覧画面にてユーザ２のデータのみが表示されていることを確認
 		$response->assertSee('testSearchUsersNameVisible')
-				 ->assertDontSee('testSearchUsersIntroductionInvisible');
+			->assertDontSee('testSearchUsersIntroductionInvisible');
 	}
 
 	// 投稿検索に成功するテスト
-	public function testSearchPosts() {
+	public function testSearchPosts()
+	{
 		// 投稿１を作成
 		factory(Post::class)->create([
 			'remarks' => 'testSearchPostsRemarksInvisible',
@@ -65,8 +68,8 @@ class SearchTest extends TestCase {
 
 		// 投稿１及び２のデータが表示されていることを確認
 		$response->assertSee('testSearchPostsRemarksInvisible')
-				 ->assertSee('testSearchPostsTitleVisible')
-				 ->assertSee('testSearchPostsRemarksVisible');
+			->assertSee('testSearchPostsTitleVisible')
+			->assertSee('testSearchPostsRemarksVisible');
 
 		// 検索キーワードを入力しサブミット
 		$response = $this->get(route('posts.index', [
@@ -75,6 +78,6 @@ class SearchTest extends TestCase {
 
 		// 投稿一覧画面にて投稿２のデータのみが表示されていることを確認
 		$response->assertSee('testSearchPostsTitleVisible')
-				 ->assertDontSee('testSearchPostsRemarksInvisible');
+			->assertDontSee('testSearchPostsRemarksInvisible');
 	}
 }
