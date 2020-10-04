@@ -32,6 +32,7 @@ class LoginController extends Controller
 	protected function redirectTo()
 	{
 		session()->flash('success', 'ログインしました。');
+
 		return route('users.show', ['id' => Auth::id()]);
 	}
 
@@ -39,6 +40,7 @@ class LoginController extends Controller
 	{
 		Auth::logout();
 		session()->flash('success', 'ログアウトしました。');
+
 		return redirect('/');
 	}
 
@@ -55,10 +57,10 @@ class LoginController extends Controller
 	protected function validateLogin(Request $request)
 	{
 		$this->validate($request, [
-			'email' => 'required',
+			'email'    => 'required',
 			'password' => 'required',
 		], [
-			'email.required' => 'メールアドレスを入力して下さい。',
+			'email.required'    => 'メールアドレスを入力して下さい。',
 			'password.required' => 'パスワードを入力して下さい。',
 		]);
 	}

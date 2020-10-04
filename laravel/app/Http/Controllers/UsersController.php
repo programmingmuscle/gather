@@ -25,16 +25,18 @@ class UsersController extends Controller
 		if (!empty($keyword)) {
 			$users = $query
 				->where('name', 'like', '%' . $keyword . '%')
-				->orWhere('residence', 'like', '%' . $keyword . '%')
-				->orWhere('gender', 'like', '%' . $keyword . '%')
-				->orWhere('age', 'like', '%' . $keyword . '%')
-				->orWhere('experience', 'like', '%' . $keyword . '%')
-				->orWhere('position', 'like', '%' . $keyword . '%')
+
+				->orWhere('residence',    'like', '%' . $keyword . '%')
+				->orWhere('gender',       'like', '%' . $keyword . '%')
+				->orWhere('age',          'like', '%' . $keyword . '%')
+				->orWhere('experience',   'like', '%' . $keyword . '%')
+				->orWhere('position',     'like', '%' . $keyword . '%')
 				->orWhere('introduction', 'like', '%' . $keyword . '%')
+
 				->orderBy('id', 'desc')
-				->paginate(1);
+				->paginate(10);
 		} else {
-			$users = User::orderBy('id', 'desc')->paginate(1);
+			$users = User::orderBy('id', 'desc')->paginate(10);
 		}
 
 		return view('users.index', [

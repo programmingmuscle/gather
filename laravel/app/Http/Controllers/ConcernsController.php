@@ -11,12 +11,14 @@ class ConcernsController extends Controller
 	public function store($id)
 	{
 		Auth::user()->concern($id);
+
 		return back();
 	}
 
 	public function destroy($id)
 	{
 		Auth::user()->unconcern($id);
+
 		return back();
 	}
 }
