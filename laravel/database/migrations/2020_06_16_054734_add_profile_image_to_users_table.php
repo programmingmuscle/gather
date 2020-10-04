@@ -6,27 +6,27 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddProfileImageToUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_image')->nullable();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::table('users', function (Blueprint $table) {
+			$table->string('profile_image')->nullable();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('profile_image');
-        });
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::table('users', function (Blueprint $table) {
+			$table->dropColumn('profile_image');
+		});
+	}
 }

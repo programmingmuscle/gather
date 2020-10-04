@@ -8,15 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ConcernsController extends Controller
 {
-    public function store($id)
-    {
-        Auth::user()->concern($id);
-        return back();
-    }
+	public function store($id)
+	{
+		Auth::user()->concern($id);
 
-    public function destroy($id)
-    {
-        Auth::user()->unconcern($id);
-        return back();
-    }
+		return back();
+	}
+
+	public function destroy($id)
+	{
+		Auth::user()->unconcern($id);
+
+		return back();
+	}
 }

@@ -1,14 +1,11 @@
 @if (Auth::check() && ($user->id != Auth::id()))
-    @if (Auth::user()->is_following($user->id))
-        <form method="POST" action="{{ route('user.unfollow', ['id' => $user->id]) }}" class="d-inline-block">
-            {!! method_field('delete') !!}
-            {{ csrf_field() }}
-            <input type="submit" value="フォロー" class="btn unfollow-button d-inline-block">
-        </form>
-    @else
-        <form method="POST" action="{{ route('user.follow', ['id' => $user->id]) }}" class="d-inline-block">
-            {{ csrf_field() }}
-            <input type="submit" value="フォロー" class="btn follow-button d-inline-block">
-        </form>
-    @endif
+	@if (Auth::user()->is_following($user->id))
+		<form class="d-inline-block">
+			<input type="submit" value="フォロー中" class="btn unfollow-button unfollow-button-ajax d-inline-block">
+		</form>
+	@else
+		<form class="d-inline-block">
+			<input type="submit" value="フォロー" class="btn follow-button follow-button-ajax d-inline-block">
+		</form>
+	@endif
 @endif

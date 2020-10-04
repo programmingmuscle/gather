@@ -12,57 +12,58 @@ use Illuminate\Support\Facades\Auth;
 
 class MessagesController extends Controller
 {
-    public function store(Request $request) {
-        $this->validate($request, [
-            'content' => 'required|string|max:191',
-        ], 
-        [
-            'content.required' => '空のメッセージは送信できません。',
-            'content.string' => 'メッセージは文字列として下さい。',
-            'content.max' => 'メッセージは191文字以内として下さい。',
-        ]);
+	public function store(Request $request)
+	{
+		$this->validate($request, [
+			'content' => 'required|string|max:191',
+		], [
+			'content.required' => '空のメッセージは送信できません。',
+			'content.string'   => 'メッセージは文字列として下さい。',
+			'content.max'      => 'メッセージは191文字以内として下さい。',
+		]);
 
-        $message = new Message;
+		$message = new Message;
 
-        $message->user_id = $request->user_id;
-        $message->post_id = $request->post_id;
-        $message->user_name = $request->user_name;
-        $message->user_profile_image = $request->user_profile_image;
-        $message->content = $request->content;
+		$message->user_id            = $request->user_id;
+		$message->post_id            = $request->post_id;
+		$message->user_name          = $request->user_name;
+		$message->user_profile_image = $request->user_profile_image;
+		$message->content            = $request->content;
 
-        $message->save();
-        
-        return back();
-    }
+		$message->save();
 
-    public function update(Request $request, $id) {
-        $this->validate($request, [
-            'content' => 'required|string|max:191',
-        ], 
-        [
-            'content.required' => '空のメッセージは送信できません。',
-            'content.string' => 'メッセージは文字列として下さい。',
-            'content.max' => 'メッセージは191文字以内として下さい。',
-        ]);
+		return back();
+	}
 
-        $message = Message::find($id);
+	public function update(Request $request, $id)
+	{
+		$this->validate($request, [
+			'content' => 'required|string|max:191',
+		], [
+			'content.required' => '空のメッセージは送信できません。',
+			'content.string'   => 'メッセージは文字列として下さい。',
+			'content.max'      => 'メッセージは191文字以内として下さい。',
+		]);
 
-        $message->user_id = $request->user_id;
-        $message->post_id = $request->post_id;
-        $message->user_name = $request->user_name;
-        $message->user_profile_image = $request->user_profile_image;
-        $message->content = $request->content;
+		$message = Message::find($id);
 
-        $message->save();
-        
-        return back();
-    }
+		$message->user_id            = $request->user_id;
+		$message->post_id            = $request->post_id;
+		$message->user_name          = $request->user_name;
+		$message->user_profile_image = $request->user_profile_image;
+		$message->content            = $request->content;
 
-    public function destroy(Request $request, $id) {
-        $message = Message::find($id);
+		$message->save();
 
-        $message->delete();
-        
-        return back();
-    }
+		return back();
+	}
+
+	public function destroy($id)
+	{
+		$message = Message::find($id);
+
+		$message->delete();
+
+		return back();
+	}
 }

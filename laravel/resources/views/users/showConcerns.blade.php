@@ -54,10 +54,10 @@
 
 	</div>
 	<ul class="tabs-menu list-unstyled">
-		<li class="timelines active"><a href="{{ route('users.show', ['id' => $user->id]) }}">タイムライン</a></li>
+		<li class="timelines"><a href="{{ route('users.show', ['id' => $user->id]) }}">タイムライン</a></li>
 		<li class="posts"><a href="{{ route('users.showPosts', ['id' => $user->id]) }}">投稿</a></li>
 		<li class="participations"><a href="{{ route('users.showParticipations', ['id' => $user->id]) }}">参加</a></li>
-		<li class="concerns"><a href="{{ route('users.showConcerns', ['id' => $user->id]) }}">気になる</a></li>
+		<li class="concerns active"><a href="{{ route('users.showConcerns', ['id' => $user->id]) }}">気になる</a></li>
 	</ul>
 	<div class="tabs-content">
 		@if (count($posts) > 0)
@@ -184,7 +184,7 @@
 				<p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $posts->nextPageUrl() }}">もっと見る</a></p>
 			@endif
 		@else
-			<p class="countZero">自身とフォロー中ユーザの投稿が表示されます。</p>
+			<p class="countZero">"気になる"した投稿がこちらに表示されます。</p>
 		@endif
 	</div>
 

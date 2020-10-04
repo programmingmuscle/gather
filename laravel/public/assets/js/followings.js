@@ -17,17 +17,17 @@ $(".name-position").on("click", (e) => {
 });
 
 $(function () {
-	concern_data();
+	follow_data();
 });
 
-function concern_data() {
+function follow_data() {
 	let canAjax = true;
 
 	$.ajaxSetup({
 		headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
 	});
 
-	$(".concern-button-ajax").on("click", (e) => {
+	$(".follow-button-ajax").on("click", (e) => {
 		e.stopPropagation();
 		e.preventDefault();
 
@@ -36,18 +36,18 @@ function concern_data() {
 		}
 		canAjax = false;
 
-		let postId = $(e.currentTarget).parent().parent().attr("data-postId");
-		console.log(postId);
+		let userId = $(e.currentTarget).parent().parent().attr("data-userId");
+		console.log(userId);
 		console.log(e.currentTarget);
 		let html = `
 						<form class="d-inline-block">
-								<input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax-document d-inline-block">
+								<input type="submit" value="フォロー中" class="btn unfollow-button unfollow-button-ajax-document d-inline-block">
 						</form>
 				`;
 
 		$.ajax({
 			type: "POST",
-			url: "/result/ajax/" + postId + "/concern",
+			url: "/result/ajax/" + userId + "/follow",
 		})
 			.done(function () {
 				$(e.currentTarget).parent().parent().prepend(html);
@@ -66,7 +66,7 @@ function concern_data() {
 			});
 	});
 
-	$(".button-position").on("click", ".concern-button-ajax-document", (e) => {
+	$(".button-position").on("click", ".follow-button-ajax-document", (e) => {
 		e.stopPropagation();
 		e.preventDefault();
 
@@ -75,19 +75,19 @@ function concern_data() {
 		}
 		canAjax = false;
 
-		let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+		let userId = $(e.currentTarget).parent().parent().attr("data-userId");
 		let eCurrentTargetParent = $(e.currentTarget).parent();
 		let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
 		let htmlDocument = `
 						<form class="d-inline-block">
-								<input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax-document d-inline-block">
+								<input type="submit" value="フォロー中" class="btn unfollow-button unfollow-button-ajax-document d-inline-block">
 						</form>
 				`;
 		console.log(htmlDocument);
 
 		$.ajax({
 			type: "POST",
-			url: "/result/ajax/" + postId + "/concern",
+			url: "/result/ajax/" + userId + "/follow",
 		})
 			.done(function () {
 				console.log(e.currentTarget);
@@ -109,17 +109,17 @@ function concern_data() {
 }
 
 $(function () {
-	unconcern_data();
+	unfollow_data();
 });
 
-function unconcern_data() {
+function unfollow_data() {
 	let canAjax = true;
 
 	$.ajaxSetup({
 		headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
 	});
 
-	$(".unconcern-button-ajax").on("click", (e) => {
+	$(".unfollow-button-ajax").on("click", (e) => {
 		e.stopPropagation();
 		e.preventDefault();
 
@@ -128,18 +128,18 @@ function unconcern_data() {
 		}
 		canAjax = false;
 
-		let postId = $(e.currentTarget).parent().parent().attr("data-postId");
-		console.log(postId);
+		let userId = $(e.currentTarget).parent().parent().attr("data-userId");
+		console.log(userId);
 		console.log(e.currentTarget);
 		let html = `
-						<form class="d-inline-block">
-								<input type="submit" value="気になる" class="btn concern-button concern-button-ajax-document d-inline-block">
+						<form method="POST" class="d-inline-block">
+								<input type="submit" value="フォロー" class="btn follow-button follow-button-ajax-document d-inline-block">
 						</form>
 				`;
 
 		$.ajax({
 			type: "POST",
-			url: "/result/ajax/" + postId + "/unconcern",
+			url: "/result/ajax/" + userId + "/unfollow",
 		})
 			.done(function () {
 				console.log(e.currentTarget);
@@ -159,7 +159,7 @@ function unconcern_data() {
 			});
 	});
 
-	$(".button-position").on("click", ".unconcern-button-ajax-document", (e) => {
+	$(".button-position").on("click", ".unfollow-button-ajax-document", (e) => {
 		e.stopPropagation();
 		e.preventDefault();
 
@@ -168,20 +168,20 @@ function unconcern_data() {
 		}
 		canAjax = false;
 
-		let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+		let userId = $(e.currentTarget).parent().parent().attr("data-userId");
 		let eCurrentTargetParent = $(e.currentTarget).parent();
 		let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
-		console.log(postId);
+		console.log(userId);
 		let htmlDocument = `
 						<form class="d-inline-block">
-								<input type="submit" value="気になる" class="btn concern-button concern-button-ajax-document d-inline-block">
+								<input type="submit" value="フォロー" class="btn follow-button follow-button-ajax-document d-inline-block">
 						</form>
 				`;
 		console.log(htmlDocument);
 
 		$.ajax({
 			type: "POST",
-			url: "/result/ajax/" + postId + "/unconcern",
+			url: "/result/ajax/" + userId + "/unfollow",
 		})
 			.done(function () {
 				console.log(eCurrentTargetParentParent);

@@ -6,33 +6,33 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateConcernsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('concerns', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('post_id')->unsigned()->index();
-            $table->timestamps();
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('concerns', function (Blueprint $table) {
+			$table->increments('id');
+			$table->integer('user_id')->unsigned()->index();
+			$table->integer('post_id')->unsigned()->index();
+			$table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 
-            $table->unique(['user_id', 'post_id']);
-        });
-    }
+			$table->unique(['user_id', 'post_id']);
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('concerns');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('concerns');
+	}
 }
