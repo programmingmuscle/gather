@@ -108,9 +108,13 @@ class UsersController extends Controller
 			$form = $request->except(['password', 'profile_image']);
 			unset($form['_token']);
 			$user->fill($form)->save();
+
+			$profile_image = $request->file('profile_image');
+
 			if ($request->profile_image != '') {
-				$path = $request->profile_image->storeAs('public/profile_images', Auth::id() . '.jpg');
-				$user->profile_image = $path;
+				$path = Storage::disk('s3')->putFile('profile_images', $profile_image, 'public');
+				$user->profile_image = Storage::disk('s3')->url($path);
+
 				$user->save();
 			}
 

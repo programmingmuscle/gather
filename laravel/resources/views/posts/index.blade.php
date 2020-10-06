@@ -31,7 +31,7 @@
 						<a href="{{ route('users.show', ['id' => $post->userId]) }}">
 							@if ($post->profile_image != '')
 								<figure>
-									<img src="/storage/profile_images/{{ $post->userId }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+									<img src="{{ $post->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 								</figure>
 							@else
 								<figure>

@@ -35,7 +35,7 @@
 		<a href="{{ route('users.show', ['id' => $post->user->id]) }}">
 
 			@if ($post->user->profile_image != '')
-				<img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+				<img src="{{ $post->user->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 			@else
 				<img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 			@endif
@@ -74,7 +74,7 @@
 
 									@if ($user->profile_image != '')
 										<a href="{{ route('users.show', ['id' => $user->id]) }}" class="Profile_imageLink">
-											<img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+											<img src="{{ $user->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 										</a>
 										<a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
 									@else
@@ -100,7 +100,7 @@
 			<div class="media message-box">
 				<a href="{{ route('users.show', ['id' => Auth::id()]) }}">
 					@if (Auth::user()->profile_image != '')
-						<img src="/storage/profile_images/{{ Auth::id() }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+						<img src="{{ Auth::user()->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 					@else
 					<img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 					@endif
@@ -133,7 +133,7 @@
 
 							@if ($message->user->profile_image != '')
 								<figure>
-									<img src="/storage/profile_images/{{ $message->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+									<img src="{{ $message->user->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 								</figure>
 							@else
 								<figure>

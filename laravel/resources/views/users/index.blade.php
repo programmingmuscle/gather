@@ -31,7 +31,7 @@
 
 							@if ($user->profile_image != '')
 								<figure>
-									<img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+									<img src="{{ $user->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 								</figure>
 							@else
 								<figure>

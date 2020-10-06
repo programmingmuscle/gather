@@ -16,7 +16,7 @@
 
 		@if ($user->profile_image != '')
 			<figure>
-				<img src="/storage/profile_images/{{ $user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+				<img src="{{ $user->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 			</figure>
 		@else
 			<figure>
@@ -69,7 +69,7 @@
 							<a href="{{ route('users.show', ['id' => $post->user->id]) }}">
 								@if ($post->user->profile_image != '')
 									<figure>
-										<img src="/storage/profile_images/{{ $post->user->id }}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+										<img src="{{ $post->user->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 									</figure>
 								@else
 									<figure>
