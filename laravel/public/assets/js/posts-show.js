@@ -68,7 +68,7 @@ function get_data_messages() {
 				) {
 					let user_profile_image = `
 												<figure>
-														<img src="/storage/profile_images/${data.messages[i].user_id}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+														<img src="${data.messages[i].user_profile_image}" class="profile_image" alt="ユーザのプロフィール画像です。">
 												</figure>
 										`;
 					let content = data.messages[i].content;
@@ -140,7 +140,7 @@ function get_data_messages() {
 				) {
 					let user_profile_image = `
 												<figure>
-														<img src="/storage/profile_images/${data.messages[i].user_id}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+														<img src="${data.messages[i].user_profile_image}" class="profile_image" alt="ユーザのプロフィール画像です。">
 												</figure>
 										`;
 					let content = data.messages[i].content;
@@ -829,7 +829,7 @@ function get_data_participateUsers() {
 					let participateUsers = `
 												<li class="mb-1 participate_users_data">
 														<a href="/users/${data.participate_users[i].id}" class="Profile_imageLink">
-																<img src="/storage/profile_images/${data.participate_users[i].id}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+																<img src="${data.participate_users[i].profile_image}" class="profile_image" alt="ユーザのプロフィール画像です。">
 														</a>
 														<a href="/users/${data.participate_users[i].id}">${data.participate_users[i].name}</a>
 												</li>
@@ -871,7 +871,7 @@ function get_data_participateUsers() {
 					let participateUsers = `
 												<li class="mb-1 participate_users_data">
 														<a href="/users/${data.participate_users[i].id}" class="Profile_imageLink">
-																<img src="/storage/profile_images/${data.participate_users[i].id}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
+																<img src="${data.participate_users[i].profile_image}.jpg" class="profile_image" alt="ユーザのプロフィール画像です。">
 														</a>
 														<a href="/users/${data.participate_users[i].id}">${data.participate_users[i].name}</a>
 												</li>
