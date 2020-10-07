@@ -278,6 +278,15 @@ footer {
   width: calc(100% - 3rem);
 }
 
+.expense {
+  width: 5rem;
+  float: left;
+}
+
+.expense-content {
+  width: calc(100% - 5rem);
+}
+
 .explain {
   margin-top: 2rem;
   text-align: center;
@@ -489,7 +498,7 @@ footer {
   color: #696969;
 }
 
-@media (max-width: 374px) {
+@media (max-width: 340px) {
   body {
     font-size: 0.8rem !important;
   }
@@ -527,9 +536,17 @@ footer {
     width: 2.4rem;
   }
 
+  .expense {
+    width: 4rem;
+  }
+
   .place-content,
   .address-content {
     width: calc(100% - 2.4rem);
+  }
+
+  .expense-content {
+    width: calc(100% - 4rem);
   }
 
   .residence {
