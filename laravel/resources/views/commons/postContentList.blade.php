@@ -24,8 +24,11 @@
 		<li>
 			場所予約：{{ $post->reservation }}
 		</li>
-		<li>
-			参加費用：{{ $post->expense }}
+		<li class="d-inline-block expense">
+			参加費用：
+		</li>
+		<li class="d-inline-block expense-content">
+			{{ $post->expense }}
 		</li>
 		<li>
 			使用球：{{ $post->ball }}
