@@ -1,11 +1,13 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
+
 	@if (Auth::check())
 		<a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">投稿詳細</div>
 	@else
 		<a href="javascript:history.back()" class="back">←</a><div class="d-inline-block">投稿詳細</div><span class="title-note">※ログイン後に"参加"できます。</span>
 	@endif
+
 @endsection
 
 @section ('mainArea_content')
@@ -60,6 +62,7 @@
 			@include ('concerns.concern_button')
 
 			<div class="accordion ajaxTargetAdd">
+
 				@if (count($users) > 0)
 					<div class="ml-3 mb-3 mt-3 accordion-title dropdown-toggle ajaxTargetRemove">参加者<span class="badge badge-primary badge-pill">{{ $count_participate_users }}</span></div>
 				@else
@@ -68,7 +71,9 @@
 
 				<div class="ml-3 accordion-content">
 					<ul class="list-unstyled">
+
 						@if (count($users) > 0)
+
 							@foreach ($users as $user)
 								<li class="mb-1 participate_users_data">
 
@@ -86,7 +91,9 @@
 
 								</li>
 							@endforeach
+
 						@endif
+
 					</ul>
 					<a href="{{ route('posts.participateUsers', ['id' => $post->id]) }}" class="d-inline-block pt-3 mb-3">参加者一覧</a>へ
 				</div>
@@ -99,17 +106,21 @@
 		@if (Auth::check())
 			<div class="media message-box">
 				<a href="{{ route('users.show', ['id' => Auth::id()]) }}">
+
 					@if (Auth::user()->profile_image != '')
 						<img src="{{ Auth::user()->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 					@else
 					<img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 					@endif
+
 				</a>
 				<div class="media-body">
 					<div id="messageContent-error"></div>
+
 					@if ($errors->has('content'))
 						<div class="error-target">{{ $errors->first('content') }}</div>
 					@endif
+
 					<textarea name="content" id="messageContent" class="form-control" placeholder="メッセージを送信して連絡を取り合いましょう！">{{ old('content') }}</textarea>
 					<div class="message-button">
 						<input type="submit" value="送信" class="btn btn-success" id="ajaxPost" data-user_id="{{ Auth::id() }}" data-post_id="{{ $post->id }}" data-user_name="{{ Auth::user()->name }}" data-user_profile_image="{{ Auth::user()->profile_image }}">
@@ -126,6 +137,7 @@
 	<ul class="list-unstyled message-data" id="ajaxGet" data-post_id="{{ $post->id }}">
 
 		@if (count($messages) > 0)
+
 			@foreach ($messages as $message)
 				<div class="list-border message-list" data-messageId="{{ $message->id }}">
 					<li class="media list">
@@ -167,14 +179,14 @@
 					</li>
 				</div>
 			@endforeach
+
 		@else
 			<p class="message_content" id="messageZero">メッセージはこちらに表示されます</p>
 		@endif
 
 	</ul>
+@endsection
 
-	@section ('js')
-		<script src="{{ asset('/assets/js/posts-show.js') }}"></script>
-	@endsection
-
+@section ('js')
+	<script src="{{ asset('/assets/js/posts-show.js') }}"></script>
 @endsection

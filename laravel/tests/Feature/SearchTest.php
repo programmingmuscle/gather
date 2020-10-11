@@ -27,7 +27,7 @@ class SearchTest extends TestCase
 
 		// ユーザ２を作成
 		factory(User::class)->create([
-			'name' => 'testSearchUsersNameVisible',
+			'name'         => 'testSearchUsersNameVisible',
 			'introduction' => 'testSearchUsersIntroductionVisible',
 		]);
 
@@ -59,7 +59,7 @@ class SearchTest extends TestCase
 
 		// 投稿２を作成
 		factory(Post::class)->create([
-			'title' => 'testSearchPostsTitleVisible',
+			'title'   => 'testSearchPostsTitleVisible',
 			'remarks' => 'testSearchPostsRemarksVisible',
 		]);
 

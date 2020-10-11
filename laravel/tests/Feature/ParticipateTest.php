@@ -30,9 +30,9 @@ class ParticipateTest extends TestCase
 
 		// サインアップする
 		$this->post(route('signup.post', [
-			'name' => 'test',
-			'email' => 'aaa@bbb.com',
-			'password' => 'testPassword',
+			'name'                  => 'test',
+			'email'                 => 'aaa@bbb.com',
+			'password'              => 'testPassword',
 			'password_confirmation' => 'testPassword',
 		]));
 

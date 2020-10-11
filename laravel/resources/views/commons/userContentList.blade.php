@@ -1,7 +1,14 @@
 <ul class="list-unstyled">
 
 	@if (!(isset($user->residence)) && !(isset($user->gender)) && !(isset($user->age)) && !(isset($user->experience)) && !(isset($user->position)) && !(isset($user->introduction)))
-		<p class="profile-color">プロフィール未登録 @if ($user->id == Auth::id())(<a href="{{ route('users.edit', ['id' => $user->id]) }}">アカウント編集</a>にて設定できます) @endif</p>
+		<p class="profile-color">
+			プロフィール未登録
+
+			@if ($user->id == Auth::id())
+				(<a href="{{ route('users.edit', ['id' => $user->id]) }}">アカウント編集</a>にて設定できます)
+			@endif
+
+		</p>
 	@endif
 
 	@if (isset($user->residence))

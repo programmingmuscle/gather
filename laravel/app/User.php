@@ -55,7 +55,7 @@ class User extends Authenticatable
 
 	public function follow($id)
 	{
-		$exist = $this->is_following($id);
+		$exist  = $this->is_following($id);
 		$its_me = $this->id == $id;
 
 		if (!$exist && !$its_me) {
@@ -65,7 +65,7 @@ class User extends Authenticatable
 
 	public function unfollow($id)
 	{
-		$exist = $this->is_following($id);
+		$exist  = $this->is_following($id);
 		$its_me = $this->id == $id;
 
 		if ($exist && !$its_me) {
@@ -85,8 +85,8 @@ class User extends Authenticatable
 
 	public function concern($id)
 	{
-		$post = Post::find($id);
-		$exist = $this->is_concerned($id);
+		$post     = Post::find($id);
+		$exist    = $this->is_concerned($id);
 		$its_mine = Auth::id() == $post->user_id;
 
 		if (!$exist && !$its_mine) {
@@ -96,8 +96,8 @@ class User extends Authenticatable
 
 	public function unconcern($id)
 	{
-		$post = Post::find($id);
-		$exist = $this->is_concerned($id);
+		$post     = Post::find($id);
+		$exist    = $this->is_concerned($id);
 		$its_mine = Auth::id() == $post->user->id;
 
 		if ($exist && !$its_mine) {
@@ -117,8 +117,8 @@ class User extends Authenticatable
 
 	public function participate($id)
 	{
-		$post = Post::find($id);
-		$exist = $this->is_participating($id);
+		$post     = Post::find($id);
+		$exist    = $this->is_participating($id);
 		$its_mine = Auth::id() == $post->user->id;
 
 		if (!$exist && !$its_mine) {
@@ -128,8 +128,8 @@ class User extends Authenticatable
 
 	public function cancel($id)
 	{
-		$post = Post::find($id);
-		$exist = $this->is_participating($id);
+		$post     = Post::find($id);
+		$exist    = $this->is_participating($id);
 		$its_mine = Auth::id() == $post->user->id;
 
 		if ($exist && !$its_mine) {
@@ -139,7 +139,7 @@ class User extends Authenticatable
 
 	public function feed_posts()
 	{
-		$follow_user_ids = $this->followings()->pluck('users.id')->toArray();
+		$follow_user_ids   = $this->followings()->pluck('users.id')->toArray();
 		$follow_user_ids[] = $this->id;
 
 		return Post::whereIn('user_id', $follow_user_ids);
