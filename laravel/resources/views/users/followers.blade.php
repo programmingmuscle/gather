@@ -54,13 +54,5 @@
 
 @section('js')
 	<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
-	<script>
-		var infScroll = new InfiniteScroll ('.infiniteScroll', {
-			path         : ".more a",
-			append       : ".result_infiniteScroll",
-			button       : ".more a",
-			loadOnScroll : false,
-		});
-	</script>
 	<script src="{{ asset('/assets/js/followers.js') }}"></script>
 @endsection

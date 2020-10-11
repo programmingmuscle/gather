@@ -221,3 +221,10 @@ function unfollow_data() {
       });
   });
 }
+
+let infScroll = new InfiniteScroll ('.infiniteScroll', {
+  path         : ".more a",
+  append       : ".result_infiniteScroll",
+  button       : ".more a",
+  loadOnScroll : false,
+});
