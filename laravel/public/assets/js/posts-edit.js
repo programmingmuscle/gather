@@ -1,192 +1,183 @@
 $(".p-create-form").on("submit", (e) => {
-	const title = $("#title").val();
-	const place = $("#place").val();
-	const address = $("#address").val();
-	const expense = $("#expense").val();
-	const date_time = $("#date_time").val();
-	const end_time = $("#end_time").val();
-	const deadline = $("#deadline").val();
-	const date = new Date(date_time);
-	const end = new Date(end_time);
-	const dDate = new Date(deadline);
+  const title     = $("#title").val();
+  const place     = $("#place").val();
+  const address   = $("#address").val();
+  const expense   = $("#expense").val();
+  const date_time = $("#date_time").val();
+  const end_time  = $("#end_time").val();
+  const deadline  = $("#deadline").val();
+  const date      = new Date(date_time);
+  const end       = new Date(end_time);
+  const dDate     = new Date(deadline);
 
-	if (date >= end) {
-		e.preventDefault();
+  if (date >= end) {
+    e.preventDefault();
 
-		$("#remove-error-content").remove();
+    $("#remove-error-content").remove();
+    $(".remove-error-dateEnd").remove();
 
-		$(".remove-error-dateEnd").remove();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $(
+      '<div class="error-target remove-error-dateEnd">終了日時は開始日時より後の日時として下さい。</div>'
+    ).insertAfter("#end_time-error");
 
-		$(
-			'<div class="error-target remove-error-dateEnd">終了日時は開始日時より後の日時として下さい。</div>'
-		).insertAfter("#end_time-error");
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-dateEnd").remove();
+  }
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-dateEnd").remove();
-	}
+  if (date <= dDate) {
+    e.preventDefault();
 
-	if (date <= dDate) {
-		e.preventDefault();
+    $("#remove-error-content").remove();
+    $(".remove-error-dateDeadline").remove();
 
-		$("#remove-error-content").remove();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(".remove-error-dateDeadline").remove();
+    $(
+      '<div class="error-target remove-error-dateDeadline">締切日時は開始日時より前の日時として下さい。</div>'
+    ).insertAfter("#deadline-error");
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-dateDeadline").remove();
+  }
 
-		$(
-			'<div class="error-target remove-error-dateDeadline">締切日時は開始日時より前の日時として下さい。</div>'
-		).insertAfter("#deadline-error");
+  if (date_time === "") {
+    e.preventDefault();
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-dateDeadline").remove();
-	}
+    $("#remove-error-content").remove();
+    $(".remove-error-date_time").remove();
 
-	if (date_time === "") {
-		e.preventDefault();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$("#remove-error-content").remove();
+    $(
+      '<div class="error-target remove-error-date_time">開始日時を入力して下さい。</div>'
+    ).insertAfter("#date_time-error");
 
-		$(".remove-error-date_time").remove();
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-date_time").remove();
+  }
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+  if (end_time === "") {
+    e.preventDefault();
 
-		$(
-			'<div class="error-target remove-error-date_time">開始日時を入力して下さい。</div>'
-		).insertAfter("#date_time-error");
+    $("#remove-error-content").remove();
+    $(".remove-error-end_time").remove();
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-date_time").remove();
-	}
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-	if (end_time === "") {
-		e.preventDefault();
+    $(
+      '<div class="error-target remove-error-end_time">終了日時を入力して下さい。</div>'
+    ).insertAfter("#end_time-error");
 
-		$("#remove-error-content").remove();
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-end_time").remove();
+  }
 
-		$(".remove-error-end_time").remove();
+  if (deadline === "") {
+    e.preventDefault();
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $("#remove-error-content").remove();
+    $(".remove-error-deadline").remove();
 
-		$(
-			'<div class="error-target remove-error-end_time">終了日時を入力して下さい。</div>'
-		).insertAfter("#end_time-error");
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-end_time").remove();
-	}
+    $(
+      '<div class="error-target remove-error-deadline">締切日時を入力して下さい。</div>'
+    ).insertAfter("#deadline-error");
 
-	if (deadline === "") {
-		e.preventDefault();
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-deadline").remove();
+  }
 
-		$("#remove-error-content").remove();
+  if (title === "") {
+    e.preventDefault();
 
-		$(".remove-error-deadline").remove();
+    $("#remove-error-content").remove();
+    $(".remove-error-title").remove();
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(
-			'<div class="error-target remove-error-deadline">締切日時を入力して下さい。</div>'
-		).insertAfter("#deadline-error");
+    $(
+      '<div class="error-target remove-error-title">タイトルを入力して下さい。</div>'
+    ).insertAfter("#title-error");
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-deadline").remove();
-	}
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-title").remove();
+  }
 
-	if (title === "") {
-		e.preventDefault();
+  if (place === "") {
+    e.preventDefault();
 
-		$("#remove-error-content").remove();
+    $("#remove-error-content").remove();
+    $(".remove-error-place").remove();
 
-		$(".remove-error-title").remove();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $(
+      '<div class="error-target remove-error-place">場所を入力して下さい。</div>'
+    ).insertAfter("#place-error");
 
-		$(
-			'<div class="error-target remove-error-title">タイトルを入力して下さい。</div>'
-		).insertAfter("#title-error");
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-place").remove();
+  }
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-title").remove();
-	}
+  if (address === "") {
+    e.preventDefault();
 
-	if (place === "") {
-		e.preventDefault();
+    $("#remove-error-content").remove();
+    $(".remove-error-address").remove();
 
-		$("#remove-error-content").remove();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(".remove-error-place").remove();
+    $(
+      '<div class="error-target remove-error-address">住所を入力して下さい。</div>'
+    ).insertAfter("#address-error");
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-address").remove();
+  }
 
-		$(
-			'<div class="error-target remove-error-place">場所を入力して下さい。</div>'
-		).insertAfter("#place-error");
+  if (expense === "") {
+    e.preventDefault();
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-place").remove();
-	}
+    $("#remove-error-content").remove();
+    $(".remove-error-expense").remove();
 
-	if (address === "") {
-		e.preventDefault();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$("#remove-error-content").remove();
+    $(
+      '<div class="error-target remove-error-expense">参加費用を入力して下さい。</div>'
+    ).insertAfter("#expense-error");
 
-		$(".remove-error-address").remove();
-
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
-
-		$(
-			'<div class="error-target remove-error-address">住所を入力して下さい。</div>'
-		).insertAfter("#address-error");
-
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-address").remove();
-	}
-
-	if (expense === "") {
-		e.preventDefault();
-
-		$("#remove-error-content").remove();
-
-		$(".remove-error-expense").remove();
-
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
-
-		$(
-			'<div class="error-target remove-error-expense">参加費用を入力して下さい。</div>'
-		).insertAfter("#expense-error");
-
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-expense").remove();
-	}
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-expense").remove();
+  }
 });

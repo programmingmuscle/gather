@@ -5,7 +5,6 @@
 @endsection
 
 @section ('mainArea_content')
-
 	<form>
 		{{ csrf_field() }}
 		<div class="container search-box">
@@ -65,17 +64,9 @@
 		<p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $users->nextPageUrl() }}">もっと見る</a></p>
 	@endif
 
-	@section('js')
-		<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
-		<script>
-			var infScroll = new InfiniteScroll ('.infiniteScroll', {
-				path : ".more a",
-				append : ".result_infiniteScroll",
-				button : ".more a",
-				loadOnScroll : false,
-			});
-		</script>
-		<script src="{{ asset('/assets/js/users-index.js') }}"></script>
-	@endsection
+@endsection
 
+@section('js')
+	<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/users-index.js') }}"></script>
 @endsection

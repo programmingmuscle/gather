@@ -26,16 +26,20 @@
 					{{ csrf_field() }}
 					<div class="form-group">
 						<label for="email" id="email-error">メールアドレス<span class="required">*</span></label>
+
 						@if ($errors->has('email'))
 							<div class="error-target">{{ $errors->first('email') }}</div>
 						@endif
+
 						<input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="password" id="password-error">パスワード<span class="required">*</span></label>
+
 						@if ($errors->has('password'))
 							<div class="error-target">{{ $errors->first('password') }}</div>
 						@endif
+
 						<input type="password" name="password" id="password" class="form-control">
 					</div>
 					<div class="complete-button form-group">
@@ -46,9 +50,8 @@
 			</div>
 		</div>
 	</div>
+@endsection
 
-	@section('js')
-		<script src="{{ asset('/assets/js/login.js') }}"></script>
-	@endsection
-
+@section('js')
+	<script src="{{ asset('/assets/js/login.js') }}"></script>
 @endsection

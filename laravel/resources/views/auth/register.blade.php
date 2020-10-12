@@ -1,7 +1,7 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
-	サインアップ
+サインアップ
 @endsection
 
 @section ('mainArea_content')
@@ -26,23 +26,29 @@
 					{{ csrf_field() }}
 					<div class="form-group">
 						<label for="name" id="name-error">選手名<span class="required">*</span></label>
+
 						@if ($errors->has('name'))
 							<div class="error-target">{{ $errors->first('name') }}</div>
 						@endif
+
 						<input type="text" name="name" value="{{ old('name') }}" id="name" class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="email" id="email-error">メールアドレス<span class="required">*</span></label>
+
 						@if ($errors->has('email'))
 							<div class="error-target">{{ $errors->first('email') }}</div>
 						@endif
+
 						<input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="password" id="password-error" class="passwordLength-error">パスワード（６文字以上）<span class="required">*</span></label>
+
 						@if ($errors->has('password'))
 							<div class="error-target">{{ $errors->first('password') }}</div>
 						@endif
+
 						<input type="password" name="password" id="password" class="form-control">
 					</div>
 					<div class="form-group">
@@ -57,9 +63,8 @@
 			</div>
 		</div>
 	</div>
+@endsection
 
-	@section ('js')
-		<script src="{{ asset('/assets/js/signup.js') }}"></script>
-	@endsection
-
+@section ('js')
+	<script src="{{ asset('/assets/js/signup.js') }}"></script>
 @endsection

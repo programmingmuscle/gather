@@ -60,13 +60,16 @@
 		<li class="concerns active"><a href="{{ route('users.showConcerns', ['id' => $user->id]) }}">気になる</a></li>
 	</ul>
 	<div class="tabs-content">
+
 		@if (count($posts) > 0)
 			<ul class="list-unstyled infiniteScroll">
+
 				@foreach ($posts as $post)
 					<div class="list-border detail result_infiniteScroll">
 						<a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
 						<li class="media list">
 							<a href="{{ route('users.show', ['id' => $post->user->id]) }}">
+
 								@if ($post->user->profile_image != '')
 									<figure>
 										<img src="{{ $post->user->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
@@ -76,6 +79,7 @@
 										<img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 									</figure>
 								@endif
+
 							</a>
 							<div class="media-body">
 								<div class="clearfix">
@@ -86,53 +90,14 @@
 											<a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="edit-button btn">投稿を編集</a>
 										</div>
 									@endif
+									
 								</div>
-								<ul class="list-unstyled">
-									<li>
-										【{{ $post->title }}】
-									</li>
-									<div class="ml-3">
-										<li class="end_time-float">
-											日時：{{ date('Y/n/j G:i', strtotime($post->date_time)) }}
-										</li>
-										<li class="end_time">
-											{{ '~' . ' ' . date('Y/n/j G:i', strtotime($post->end_time)) }}
-										</li>
-										<li class="d-inline-block place">
-											場所：
-										</li>
-										<li class="d-inline-block place-content">
-											{{ $post->place }}
-										</li>
-										<li class="d-inline-block address">
-											住所：
-										</li>
-										<li class="d-inline-block address-content">
-											{{ $post->address }}
-										</li>
-										<li>
-											場所予約：{{ $post->reservation }}
-										</li>
-										<li>
-											参加費用：{{ $post->expense }}
-										</li>
-										<li>
-											使用球：{{ $post->ball }}
-										</li>
-										<li>
-											応募締切：{{ date('Y/n/j G:i', strtotime($post->deadline)) }}
-										</li>
-										<li>
-											募集人数：{{ $post->participate_users()->count() . '/' . $post->people }}人
-										</li>
-									</div>
-								</ul>
-								<p class="ml-3 mt-3">
-									{!! nl2br(e($post->remarks)) !!}
-								</p>
+
+								@include ('commons.postContentList')
 
 								@if (Auth::check() && ($post->user->id != Auth::id()))
 									<div class="button-position ml-3">
+
 										@if (Auth::user()->is_participating($post->id))
 											<form method="POST" action="{{ route('participations.cancel', ['id' => $post->id]) }}" class="d-inline-block">
 												{!! method_field('delete') !!}
@@ -140,6 +105,7 @@
 												<input type="submit" value="参加中" class="btn cancel-button d-inline-block">
 											</form>
 										@else
+										
 											@if (($post->people > $post->participate_users()->count()) && ($post->deadline > $now))
 												<form method="POST" action="{{ route('participations.participate', ['id' => $post->id]) }}" class="d-inline-block">
 													{{ csrf_field() }}
@@ -156,9 +122,12 @@
 												<p class="deadline-note">・応募期間終了</p>
 												<button class="participate-button-full">参加する</button>
 											@endif
+										
 										@endif
+
 									</div>
 								@endif
+
 								@if (Auth::check() && ($post->user->id != Auth::id()))
 									<div class="button-position ml-3" data-postId="{{ $post->id }}">
 
@@ -179,26 +148,21 @@
 						</li>
 					</div>
 				@endforeach
+
 			</ul>
+
 			@if ($posts->hasMorePages())
 				<p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $posts->nextPageUrl() }}">もっと見る</a></p>
 			@endif
+
 		@else
 			<p class="countZero">"気になる"した投稿がこちらに表示されます。</p>
 		@endif
+		
 	</div>
+@endsection
 
-	@section('js')
-		<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
-		<script>
-			var infScroll = new InfiniteScroll ('.infiniteScroll', {
-				path : ".more a",
-				append : ".result_infiniteScroll",
-				button : ".more a",
-				loadOnScroll : false,
-			});
-		</script>
-		<script src="{{ asset('/assets/js/users-show.js') }}"></script>
-	@endsection
-
+@section('js')
+	<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/users-show.js') }}"></script>
 @endsection

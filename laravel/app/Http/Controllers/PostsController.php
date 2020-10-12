@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Post;
-
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Hash;
 
 class PostsController extends Controller
@@ -21,15 +18,15 @@ class PostsController extends Controller
 			$posts = Post::join('users',  'users.id', 'posts.user_id')
 				->select(['users.id as userId', 'users.name', 'users.profile_image', 'users.created_at as usersCreated_at', 'users.updated_at as usersUpdated_at', 'posts.id', 'posts.title', 'posts.date_time', 'posts.end_time', 'posts.place', 'posts.address', 'posts.reservation', 'posts.expense', 'posts.ball', 'posts.deadline', 'posts.people', 'posts.remarks', 'posts.created_at', 'posts.updated_at'])
 				->where('title', 'like', '%' . $keyword . '%')
-				->orwhere('date_time', 'like', '%' . $keyword . '%')
-				->orwhere('place', 'like', '%' . $keyword . '%')
-				->orwhere('address', 'like', '%' . $keyword . '%')
-				->orwhere('reservation', 'like', '%' . $keyword . '%')
-				->orwhere('expense', 'like', '%' . $keyword . '%')
-				->orwhere('ball', 'like', '%' . $keyword . '%')
-				->orwhere('people', 'like', '%' . $keyword . '%')
-				->orwhere('remarks', 'like', '%' . $keyword . '%')
-				->orwhere('name', 'like', '%' . $keyword . '%')
+				->orwhere('date_time',    'like', '%' . $keyword . '%')
+				->orwhere('place',        'like', '%' . $keyword . '%')
+				->orwhere('address',      'like', '%' . $keyword . '%')
+				->orwhere('reservation',  'like', '%' . $keyword . '%')
+				->orwhere('expense',      'like', '%' . $keyword . '%')
+				->orwhere('ball',         'like', '%' . $keyword . '%')
+				->orwhere('people',       'like', '%' . $keyword . '%')
+				->orwhere('remarks',      'like', '%' . $keyword . '%')
+				->orwhere('name',         'like', '%' . $keyword . '%')
 				->orderBy('posts.updated_at', 'desc')
 				->paginate(10);
 		} else {
@@ -125,15 +122,11 @@ class PostsController extends Controller
 
 	public function show($id)
 	{
-		$post = Post::find($id);
-
-		$users = $post->participate_users()->orderBy('id', 'desc')->get();
-
-		$messages = $post->messages()->orderBy('id', 'desc')->get();
-
+		$post                    = Post::find($id);
+		$users                   = $post->participate_users()->orderBy('id', 'desc')->get();
+		$messages                = $post->messages()->orderBy('id', 'desc')->get();
 		$count_participate_users = $post->participate_users()->count();
-
-		$now = date('Y-m-d H:i:s');
+		$now                     = date('Y-m-d H:i:s');
 
 		return view('posts.show', [
 			'post'                    => $post,
@@ -146,10 +139,8 @@ class PostsController extends Controller
 
 	public function getDataParticipateUsers($id)
 	{
-		$post = Post::find($id);
-
-		$participate_users = $post->participate_users()->orderBy('id', 'desc')->get();
-
+		$post                    = Post::find($id);
+		$participate_users       = $post->participate_users()->orderBy('id', 'desc')->get();
 		$count_participate_users = $post->participate_users()->count();
 
 		$json = [
@@ -163,8 +154,7 @@ class PostsController extends Controller
 
 	public function getDataMessages($id)
 	{
-		$post = Post::find($id);
-
+		$post     = Post::find($id);
 		$messages = $post->messages()->orderBy('id', 'desc')->get();
 
 		$json = ["messages" => $messages];
@@ -216,7 +206,6 @@ class PostsController extends Controller
 
 	public function update(Request $request, $id)
 	{
-
 		$this->validate($request, [
 			'title'       => 'required|string|max:191',
 			'date_time'   => 'required|date|max:191',
@@ -287,8 +276,7 @@ class PostsController extends Controller
 
 	public function participateUsers($id)
 	{
-		$post = Post::find($id);
-
+		$post  = Post::find($id);
 		$users = $post->participate_users()->orderBy('id', 'desc')->paginate(10);
 
 		return view('posts.participate_users', [

@@ -24,8 +24,7 @@ class UserFollowController extends Controller
 
 	public function getData($id)
 	{
-		$user = User::find($id);
-
+		$user            = User::find($id);
 		$count_followers = $user->followers()->count();
 
 		$json = ["count_followers" => $count_followers];

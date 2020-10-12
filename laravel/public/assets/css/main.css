@@ -498,7 +498,7 @@ footer {
   color: #696969;
 }
 
-@media (max-width: 340px) {
+@media (max-width: 374px) {
   body {
     font-size: 0.8rem !important;
   }

@@ -1,11 +1,13 @@
 @extends ('layouts.mainArea')
 
 @section ('title')
+
 	@if (Auth::check())
 		投稿一覧
 	@else
 		<div class="d-inline-block">投稿一覧</div><span class="title-note">※ログイン後に"参加"できます。</span>
 	@endif
+
 @endsection
 
 @section ('mainArea_content')
@@ -22,13 +24,16 @@
 			</div>
 		</div>
 	</form>
+
 	@if (count($posts) > 0)
 		<ul class="list-unstyled under-search-box infiniteScroll">
+		
 			@foreach ($posts as $post)
 				<div class="list-border detail result_infiniteScroll">
 					<a href="{{ route('posts.show', ['id' => $post->id]) }}" style="display:none"></a>
 					<li class="media list">
 						<a href="{{ route('users.show', ['id' => $post->userId]) }}">
+
 							@if ($post->profile_image != '')
 								<figure>
 									<img src="{{ $post->profile_image }}" class="profile_image" alt="ユーザのプロフィール画像です。">
@@ -38,6 +43,7 @@
 									<img src="{{ asset('/assets/images/noimage.jpeg') }}" class="profile_image" alt="ユーザのプロフィール画像です。">
 								</figure>
 							@endif
+
 						</a>
 						<div class="media-body">
 							<div class="clearfix">
@@ -88,6 +94,7 @@
 					</li>
 				</div>
 			@endforeach
+
 		</ul>
 	@endif
 
@@ -95,17 +102,9 @@
 		<p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $posts->nextPageUrl() }}">もっと見る</a></p>
 	@endif
 
-	@section('js')
-		<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
-		<script>
-			var infScroll = new InfiniteScroll ('.infiniteScroll', {
-				path : ".more a",
-				append : ".result_infiniteScroll",
-				button : ".more a",
-				loadOnScroll : false,
-			});
-		</script>
-		<script src="{{ asset('/assets/js/posts-index.js') }}"></script>
-	@endsection
+@endsection
 
+@section('js')
+	<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/posts-index.js') }}"></script>
 @endsection

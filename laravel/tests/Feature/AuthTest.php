@@ -27,9 +27,9 @@ class AuthTest extends TestCase
 
 		// サインアップを実行
 		$response = $this->post('signup', [
-			'name' => 'test',
-			'email' => 'aaa@bbb.com',
-			'password' => 'testPassword',
+			'name'                  => 'test',
+			'email'                 => 'aaa@bbb.com',
+			'password'              => 'testPassword',
 			'password_confirmation' => 'testPassword',
 		]);
 
@@ -45,9 +45,9 @@ class AuthTest extends TestCase
 	{
 		// 全て空欄でサインアップ実行
 		$response = $this->post('signup', [
-			'name' => '',
-			'email' => '',
-			'password' => '',
+			'name'                  => '',
+			'email'                 => '',
+			'password'              => '',
 			'password_confirmation' => '',
 		]);
 
@@ -73,9 +73,9 @@ class AuthTest extends TestCase
 
 		// 成立していないメールアドレスでサインアップ実行
 		$response = $this->post('signup', [
-			'name' => 'test',
-			'email' => 'aaabbb.com',
-			'password' => 'test12',
+			'name'                  => 'test',
+			'email'                 => 'aaabbb.com',
+			'password'              => 'test12',
 			'password_confirmation' => 'test12',
 		]);
 
@@ -93,9 +93,9 @@ class AuthTest extends TestCase
 
 		// パスワードが確認用と一致しない状態でサインアップ実行
 		$response = $this->post('signup', [
-			'name' => 'test',
-			'email' => 'aaa@bbb.com',
-			'password' => 'test12',
+			'name'                  => 'test',
+			'email'                 => 'aaa@bbb.com',
+			'password'              => 'test12',
 			'password_confirmation' => 'Test12',
 		]);
 
@@ -118,9 +118,9 @@ class AuthTest extends TestCase
 
 		// すでに使用されているメールアドレスにてサインアップ実行
 		$response = $this->post('signup', [
-			'name' => 'test',
-			'email' => 'aaa@bbb.com',
-			'password' => 'test12',
+			'name'                  => 'test',
+			'email'                 => 'aaa@bbb.com',
+			'password'              => 'test12',
 			'password_confirmation' => 'test12',
 		]);
 
@@ -150,7 +150,7 @@ class AuthTest extends TestCase
 
 		// メールアドレスとパスワードでログイン
 		$response = $this->post('login', [
-			'email' => $user->email,
+			'email'    => $user->email,
 			'password' => 'test12',
 		]);
 
@@ -174,7 +174,7 @@ class AuthTest extends TestCase
 
 		// 誤ったパスワードでログインを試みる
 		$response = $this->post('login', [
-			'email' => $user->email,
+			'email'    => $user->email,
 			'password' => 'Test12',
 		]);
 
@@ -192,7 +192,7 @@ class AuthTest extends TestCase
 
 		// メールアドレスとパスワードともに空欄でログインを試みる
 		$response = $this->post('login', [
-			'email' => '',
+			'email'    => '',
 			'password' => '',
 		]);
 

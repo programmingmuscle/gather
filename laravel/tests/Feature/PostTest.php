@@ -27,17 +27,17 @@ class PostTest extends TestCase
 
 		// $userでログインして投稿作成
 		$response = $this->actingAs($user)->post(route('posts.store', [
-			'title' => '',
-			'date_time' => '',
-			'end_time' => '',
-			'place' => '',
-			'address' => '',
+			'title'       => '',
+			'date_time'   => '',
+			'end_time'    => '',
+			'place'       => '',
+			'address'     => '',
 			'reservation' => '',
-			'expense' => '',
-			'ball' => '',
-			'deadline' => '',
-			'people' => '',
-			'remarks' => 'nullError'
+			'expense'     => '',
+			'ball'        => '',
+			'deadline'    => '',
+			'people'      => '',
+			'remarks'     => 'nullError'
 		]));
 
 		// 上記投稿作成時の入力必須項目において空欄となっていたものについてセッションにエラーデータが存在していることを確認
@@ -95,17 +95,17 @@ class PostTest extends TestCase
 
 		// 再度投稿作成
 		$response = $this->post(route('posts.store', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => $badRemarks,
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => $badRemarks,
 		]));
 
 		// 上記投稿作成時のremarksカラムにおいて191文字を超えたことによりセッションにエラーデータが存在していることを確認
@@ -131,37 +131,37 @@ class PostTest extends TestCase
 
 		// $userでログインして投稿作成
 		$response = $this->actingAs($user)->post(route('posts.store', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarks',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarks',
 		]));
 
 		// データベースに上記投稿が保存されていることを確認
 		$this->assertDatabaseHas('posts', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarks',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarks',
 		]);
 
 		// 上記投稿を選択して変数に代入
 		$posts = new Post;
-		$post = $posts->where('remarks', 'testRemarks')->first();
+		$post  = $posts->where('remarks', 'testRemarks')->first();
 
 		// 投稿作成後に投稿詳細画面にリダイレクトされていることを確認
 		$response->assertRedirect(route('posts.show', ['id' => $post->id]));
@@ -204,51 +204,51 @@ class PostTest extends TestCase
 
 		// $userでログインして投稿作成
 		$response = $this->actingAs($user)->post(route('posts.store', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarksEditError',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarksEditError',
 		]));
 
 		// データベースに上記投稿が保存されていることを確認
 		$this->assertDatabaseHas('posts', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarksEditError',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarksEditError',
 		]);
 
 		// 上記投稿を選択して変数にidを代入
-		$posts = new Post;
-		$post = $posts->where('remarks', 'testRemarksEditError')->first();
+		$posts  = new Post;
+		$post   = $posts->where('remarks', 'testRemarksEditError')->first();
 		$postId = $post->id;
 
 		// 上記投稿を編集する('remarks'を編集)
 		$response = $this->put("/posts/{$postId}", [
-			'title' => '',
-			'date_time' => '',
-			'end_time' => '',
-			'place' => '',
-			'address' => '',
+			'title'       => '',
+			'date_time'   => '',
+			'end_time'    => '',
+			'place'       => '',
+			'address'     => '',
 			'reservation' => '',
-			'expense' => '',
-			'ball' => '',
-			'deadline' => '',
-			'people' => '',
+			'expense'     => '',
+			'ball'        => '',
+			'deadline'    => '',
+			'people'      => '',
 		]);
 
 		// 投稿編集時の入力必須項目において空欄となっていたものについてセッションにエラーデータが存在していることを確認
@@ -301,17 +301,17 @@ class PostTest extends TestCase
 
 		// 再度投稿編集
 		$response = $this->put("/posts/{$postId}", [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => $badRemarksEdited,
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => $badRemarksEdited,
 		]);
 
 		// 上記投稿編集時のremarksカラムにおいて191文字を超えたことによりセッションにエラーデータが存在していることを確認
@@ -337,32 +337,32 @@ class PostTest extends TestCase
 
 		// $userでログインして投稿作成
 		$response = $this->actingAs($user)->post(route('posts.store', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarksEdit',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarksEdit',
 		]));
 
 		// データベースに上記投稿が保存されていることを確認
 		$this->assertDatabaseHas('posts', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarksEdit',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarksEdit',
 		]);
 
 		// 上記投稿を選択して変数にidを代入
@@ -372,47 +372,47 @@ class PostTest extends TestCase
 
 		// 上記投稿を編集する('remarks'を編集)
 		$response = $this->put("/posts/{$postId}", [
-			'title' => 'testTitleEdited',
-			'date_time' => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlaceEdited',
-			'address' => 'testAddressEdited',
+			'title'       => 'testTitleEdited',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlaceEdited',
+			'address'     => 'testAddressEdited',
 			'reservation' => '予約済み',
-			'expense' => 'testExpenseEdited',
-			'ball' => '硬式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '2',
-			'remarks' => 'testRemarksEdited',
+			'expense'     => 'testExpenseEdited',
+			'ball'        => '硬式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '2',
+			'remarks'     => 'testRemarksEdited',
 		]);
 
 		// 編集後の投稿がデータベースに保存されていることを確認
 		$this->assertDatabaseHas('posts', [
-			'title' => 'testTitleEdited',
-			'date_time' => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlaceEdited',
-			'address' => 'testAddressEdited',
+			'title'       => 'testTitleEdited',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '03' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlaceEdited',
+			'address'     => 'testAddressEdited',
 			'reservation' => '予約済み',
-			'expense' => 'testExpenseEdited',
-			'ball' => '硬式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '2',
-			'remarks' => 'testRemarksEdited',
+			'expense'     => 'testExpenseEdited',
+			'ball'        => '硬式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '2',
+			'remarks'     => 'testRemarksEdited',
 		]);
 
 		// 編集前の投稿がデータベースに存在しないことを確認
 		$this->assertDatabaseMissing('posts', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarksEdit',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarksEdit',
 		]);
 	}
 
@@ -426,37 +426,37 @@ class PostTest extends TestCase
 
 		// $userでログインして投稿作成
 		$response = $this->actingAs($user)->post(route('posts.store', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarksPostDeleteAccount',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarksPostDeleteAccount',
 		]));
 
 		// データベースに上記投稿が保存されていることを確認
 		$this->assertDatabaseHas('posts', [
-			'title' => 'testTitle',
-			'date_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'end_time' => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
-			'place' => 'testPlace',
-			'address' => 'testAddress',
+			'title'       => 'testTitle',
+			'date_time'   => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'end_time'    => date('Y') . '-' . '02' . '-' . '02' . ' ' . '00' . ':' . '30' . ':' . '00',
+			'place'       => 'testPlace',
+			'address'     => 'testAddress',
 			'reservation' => '不要',
-			'expense' => 'testExpense',
-			'ball' => '軟式',
-			'deadline' => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
-			'people' => '1',
-			'remarks' => 'testRemarksPostDeleteAccount',
+			'expense'     => 'testExpense',
+			'ball'        => '軟式',
+			'deadline'    => date('Y') . '-' . '02' . '-' . '01' . ' ' . '00' . ':' . '00' . ':' . '00',
+			'people'      => '1',
+			'remarks'     => 'testRemarksPostDeleteAccount',
 		]);
 
 		// 上記投稿を選択して変数にidを代入
-		$posts = new Post;
-		$post = $posts->where('remarks', 'testRemarksPostDeleteAccount')->first();
+		$posts  = new Post;
+		$post   = $posts->where('remarks', 'testRemarksPostDeleteAccount')->first();
 		$userId = $post->user->id;
 
 		// アカウントを削除

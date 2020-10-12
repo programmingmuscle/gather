@@ -1,108 +1,105 @@
 $(".signup-form").on("submit", (e) => {
-	const name = $("#name").val();
-	const email = $("#email").val();
-	const password = $("#password").val();
-	const passwordLength = password.length;
-	console.log(passwordLength);
-	const password_confirmation = $("#password_confirmation").val();
+  const name           = $("#name").val();
+  const email          = $("#email").val();
+  const password       = $("#password").val();
+  const passwordLength = password.length;
 
-	if (name === "") {
-		e.preventDefault();
+  console.log(passwordLength);
 
-		$("#remove-error-content").remove();
+  const password_confirmation = $("#password_confirmation").val();
 
-		$(".remove-error-name").remove();
+  if (name === "") {
+    e.preventDefault();
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $("#remove-error-content").remove();
+    $(".remove-error-name").remove();
 
-		$(
-			'<div class="error-target remove-error-name">選手名を入力して下さい。</div>'
-		).insertAfter("#name-error");
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-name").remove();
-	}
+    $(
+      '<div class="error-target remove-error-name">選手名を入力して下さい。</div>'
+    ).insertAfter("#name-error");
 
-	if (email === "") {
-		e.preventDefault();
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-name").remove();
+  }
 
-		$("#remove-error-content").remove();
+  if (email === "") {
+    e.preventDefault();
 
-		$(".remove-error-email").remove();
+    $("#remove-error-content").remove();
+    $(".remove-error-email").remove();
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(
-			'<div class="error-target remove-error-email">メールアドレスを入力して下さい。</div>'
-		).insertAfter("#email-error");
+    $(
+      '<div class="error-target remove-error-email">メールアドレスを入力して下さい。</div>'
+    ).insertAfter("#email-error");
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-email").remove();
-	}
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-email").remove();
+  }
 
-	if (password === "") {
-		e.preventDefault();
+  if (password === "") {
+    e.preventDefault();
 
-		$("#remove-error-content").remove();
+    $("#remove-error-content").remove();
+    $(".remove-error-password").remove();
 
-		$(".remove-error-password").remove();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $(
+      '<div class="error-target remove-error-password">パスワードを入力して下さい。</div>'
+    ).insertAfter("#password-error");
 
-		$(
-			'<div class="error-target remove-error-password">パスワードを入力して下さい。</div>'
-		).insertAfter("#password-error");
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-password").remove();
+  }
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-password").remove();
-	}
+  if (passwordLength <= 5 && password !== "") {
+    e.preventDefault();
 
-	if (passwordLength <= 5 && password !== "") {
-		e.preventDefault();
+    $("#remove-error-content").remove();
+    $(".remove-error-passwordLength").remove();
 
-		$("#remove-error-content").remove();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$(".remove-error-passwordLength").remove();
+    $(
+      '<div class="error-target remove-error-passwordLength">パスワードは６文字以上として下さい。</div>'
+    ).insertAfter(".passwordLength-error");
 
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-passwordLength").remove();
+  }
 
-		$(
-			'<div class="error-target remove-error-passwordLength">パスワードは６文字以上として下さい。</div>'
-		).insertAfter(".passwordLength-error");
+  if (password_confirmation === "") {
+    e.preventDefault();
 
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-passwordLength").remove();
-	}
+    $("#remove-error-content").remove();
+    $(".remove-error-password_confirmation").remove();
 
-	if (password_confirmation === "") {
-		e.preventDefault();
+    $(
+      '<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
+    ).prependTo("#content");
 
-		$("#remove-error-content").remove();
+    $(
+      '<div class="error-target remove-error-password_confirmation">確認用パスワードを入力して下さい。</div>'
+    ).insertAfter("#password_confirmation-error");
 
-		$(".remove-error-password_confirmation").remove();
-
-		$(
-			'<p class="error-message alert alert-danger list-unstyled" id="remove-error-content" role="alert">入力に問題があります。再入力して下さい。</p>'
-		).prependTo("#content");
-
-		$(
-			'<div class="error-target remove-error-password_confirmation">確認用パスワードを入力して下さい。</div>'
-		).insertAfter("#password_confirmation-error");
-
-		$("html, body").animate({ scrollTop: 0 }, 600);
-	} else {
-		$(".remove-error-password_confirmation").remove();
-	}
+    $("html, body").animate({ scrollTop: 0 }, 600);
+  } else {
+    $(".remove-error-password_confirmation").remove();
+  }
 });
