@@ -1,9 +1,13 @@
-$(".detail").on("click", (e) => {
+$('.under-search-box').on("click", ".detail", (e) => {
   const url = $(e.currentTarget).children("a").attr("href");
 
   console.log(url);
 
   window.location.href = url;
+});
+
+$(".under-search-box").on("click", ".participate-button-full", (e) => {
+  e.stopImmediatePropagation();
 });
 
 $(".button-position").on("click", (e) => {
@@ -29,8 +33,8 @@ function concern_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $(".concern-button-ajax").on("click", (e) => {
-    e.stopPropagation();
+  $('.under-search-box').on("click", ".concern-button-ajax", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -72,8 +76,8 @@ function concern_data() {
       });
   });
 
-  $(".button-position").on("click", ".concern-button-ajax-document", (e) => {
-    e.stopPropagation();
+  $(".under-search-box").on("click", ".concern-button-ajax-document", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -128,8 +132,8 @@ function unconcern_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $(".unconcern-button-ajax").on("click", (e) => {
-    e.stopPropagation();
+  $('.under-search-box').on("click", ".unconcern-button-ajax", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -173,8 +177,8 @@ function unconcern_data() {
       });
   });
 
-  $(".button-position").on("click", ".unconcern-button-ajax-document", (e) => {
-    e.stopPropagation();
+  $(".under-search-box").on("click", ".unconcern-button-ajax-document", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -222,9 +226,13 @@ function unconcern_data() {
   });
 }
 
-let infScroll = new InfiniteScroll ('.infiniteScroll', {
-  path         : ".more a",
-  append       : ".result_infiniteScroll",
-  button       : ".more a",
-  loadOnScroll : false,
+$('.more').on('click', (e) => {
+  e.preventDefault();
+});
+
+let ias = new InfiniteAjaxScroll ('.infiniteScroll', {
+  item         : ".result_infiniteScroll",
+  next         : ".next",
+  trigger      : ".more",
+  
 });

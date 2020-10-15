@@ -64,7 +64,7 @@
 			</div>
 
 		@yield ('/top_body&/top_wrapper')
-
+		<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="{{ asset('/assets/js/flash_message.js') }}"></script>
 

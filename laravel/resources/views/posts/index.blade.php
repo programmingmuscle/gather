@@ -99,12 +99,11 @@
 	@endif
 
 	@if ($posts->hasMorePages())
-		<p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $posts->nextPageUrl() }}">もっと見る</a></p>
+		<p class="text-center pt-2 pb-2 mb-0"><a href="{{ $posts->nextPageUrl() }}" class="next more">もっと見る</a></p>
 	@endif
 
 @endsection
 
 @section('js')
-	<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/posts-index.js') }}"></script>
 @endsection
