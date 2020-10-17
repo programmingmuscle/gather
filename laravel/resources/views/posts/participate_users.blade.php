@@ -24,7 +24,9 @@
 						</a>
 						<div class="media-body">
 							<div class="clearfix">
-								<a href="{{ route('users.show', ['id' => $user->id]) }}" class="name-position name-float d-inline-block">{{ $user->name }}</a>
+								<div class="name-position name-float d-inline-block">
+									<a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
+								</div>
 								<div class="button-position button-float" data-userId="{{ $user->id }}">
 
 									@include ('user_follow.follow_button')

@@ -83,7 +83,9 @@
 							</a>
 							<div class="media-body">
 								<div class="clearfix">
-									<a href="{{ route('users.show', ['id' => $post->user->id]) }}" class="name-position name-float d-inline-block">{{ $post->user->name }}</a>
+									<div class="name-position d-inline-block">
+										<a href="{{ route('users.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
+									</div>
 
 									@if ($post->user->id == Auth::id())
 										<div class="button-position button-float">
