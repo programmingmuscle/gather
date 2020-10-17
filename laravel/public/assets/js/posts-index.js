@@ -10,16 +10,16 @@ $(".under-search-box").on("click", ".participate-button-full", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".button-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "button-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".profile_image").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "profile_image", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".name-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "name-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
 $(function () {

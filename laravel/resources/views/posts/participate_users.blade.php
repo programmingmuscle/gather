@@ -44,12 +44,11 @@
 	@endif
 
 	@if ($users->hasMorePages())
-		<p class="more text-center pt-2 pb-2 mb-0"><a href="{{ $users->nextPageUrl() }}">もっと見る</a></p>
+		<p class="text-center pt-2 pb-2 mb-0"><a href="{{ $users->nextPageUrl() }}" class="next more">もっと見る</a></p>
 	@endif
 
 @endsection
 
 @section('js')
-	<script src="{{ asset('/assets/js/infinite-scroll.pkgd.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/participate_users.js') }}"></script>
 @endsection
