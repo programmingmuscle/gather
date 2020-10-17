@@ -1,4 +1,4 @@
-$('.under-search-box').on("click", ".detail", (e) => {
+$('.infiniteScroll').on("click", ".detail", (e) => {
   const url = $(e.currentTarget).children("a").attr("href");
 
   console.log(url);
@@ -6,16 +6,16 @@ $('.under-search-box').on("click", ".detail", (e) => {
   window.location.href = url;
 });
 
-$(".button-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "button-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".profile_image").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "profile_image", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".name-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "name-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
 $(function () {
@@ -29,7 +29,7 @@ function follow_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $('.under-search-box').on("click", ".follow-button-ajax", (e) => {
+  $('.infiniteScroll').on("click", ".follow-button-ajax", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 
@@ -71,7 +71,7 @@ function follow_data() {
       });
   });
 
-  $('.under-search-box').on("click", ".follow-button-ajax-document", (e) => {
+  $('.infiniteScroll').on("click", ".follow-button-ajax-document", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 
@@ -129,7 +129,7 @@ function unfollow_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $('.under-search-box').on("click", ".unfollow-button-ajax", (e) => {
+  $('.infiniteScroll').on("click", ".unfollow-button-ajax", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 
@@ -173,7 +173,7 @@ function unfollow_data() {
       });
   });
 
-  $('.under-search-box').on("click", ".unfollow-button-ajax-document", (e) => {
+  $('.infiniteScroll').on("click", ".unfollow-button-ajax-document", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 

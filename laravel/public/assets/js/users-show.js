@@ -16,16 +16,20 @@ $(".infiniteScroll").on("click", ".participate-button", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".button-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", ".cancel-button", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".profile_image").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "button-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".name-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "profile_image", (e) => {
+  e.stopImmediatePropagation();
+});
+
+$(".infiniteScroll").on("click", "name-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
 function get_data() {
@@ -383,7 +387,7 @@ function unconcern_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $('.infiniteScroll').on("click", ".unconcern-button-ajax", (e) => {
+  $(".infiniteScroll").on("click", ".unconcern-button-ajax", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 

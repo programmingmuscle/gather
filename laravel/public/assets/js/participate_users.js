@@ -1,4 +1,4 @@
-$(".detail").on("click", (e) => {
+$('.infiniteScroll').on("click", ".detail", (e) => {
   const url = $(e.currentTarget).children("a").attr("href");
 
   console.log(url);
@@ -6,16 +6,16 @@ $(".detail").on("click", (e) => {
   window.location.href = url;
 });
 
-$(".button-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "button-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".profile_image").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "profile_image", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".name-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "name-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
 $(function () {
@@ -29,8 +29,8 @@ function follow_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $(".follow-button-ajax").on("click", (e) => {
-    e.stopPropagation();
+  $('.infiniteScroll').on("click", ".follow-button-ajax", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -71,8 +71,8 @@ function follow_data() {
       });
   });
 
-  $(".button-position").on("click", ".follow-button-ajax-document", (e) => {
-    e.stopPropagation();
+  $('.infiniteScroll').on("click", ".follow-button-ajax-document", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -127,8 +127,8 @@ function unfollow_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $(".unfollow-button-ajax").on("click", (e) => {
-    e.stopPropagation();
+  $('.infiniteScroll').on("click", ".unfollow-button-ajax", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -172,8 +172,8 @@ function unfollow_data() {
       });
   });
 
-  $(".button-position").on("click", ".unfollow-button-ajax-document", (e) => {
-    e.stopPropagation();
+  $('.infiniteScroll').on("click", ".unfollow-button-ajax-document", (e) => {
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     if (!canAjax) {
@@ -221,10 +221,13 @@ function unfollow_data() {
   });
 }
 
+$('.more').on('click', (e) => {
+  e.preventDefault();
+});
 
-let infScroll = new InfiniteScroll ('.infiniteScroll', {
-  path         : ".more a",
-  append       : ".result_infiniteScroll",
-  button       : ".more a",
-  loadOnScroll : false,
+let ias = new InfiniteAjaxScroll ('.infiniteScroll', {
+  item         : ".result_infiniteScroll",
+  next         : ".next",
+  trigger      : ".more",
+  
 });

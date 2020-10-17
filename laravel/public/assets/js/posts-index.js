@@ -1,4 +1,4 @@
-$('.under-search-box').on("click", ".detail", (e) => {
+$(".infiniteScroll").on("click", ".detail", (e) => {
   const url = $(e.currentTarget).children("a").attr("href");
 
   console.log(url);
@@ -6,20 +6,20 @@ $('.under-search-box').on("click", ".detail", (e) => {
   window.location.href = url;
 });
 
-$(".under-search-box").on("click", ".participate-button-full", (e) => {
+$(".infiniteScroll").on("click", ".participate-button-full", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".button-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "button-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".profile_image").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "profile_image", (e) => {
+  e.stopImmediatePropagation();
 });
 
-$(".name-position").on("click", (e) => {
-  e.stopPropagation();
+$(".infiniteScroll").on("click", "name-position", (e) => {
+  e.stopImmediatePropagation();
 });
 
 $(function () {
@@ -33,7 +33,7 @@ function concern_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $('.under-search-box').on("click", ".concern-button-ajax", (e) => {
+  $(".infiniteScroll").on("click", ".concern-button-ajax", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 
@@ -76,7 +76,7 @@ function concern_data() {
       });
   });
 
-  $(".under-search-box").on("click", ".concern-button-ajax-document", (e) => {
+  $(".infiniteScroll").on("click", ".concern-button-ajax-document", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 
@@ -132,7 +132,7 @@ function unconcern_data() {
     headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content") },
   });
 
-  $('.under-search-box').on("click", ".unconcern-button-ajax", (e) => {
+  $('.infiniteScroll').on("click", ".unconcern-button-ajax", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 
@@ -177,7 +177,7 @@ function unconcern_data() {
       });
   });
 
-  $(".under-search-box").on("click", ".unconcern-button-ajax-document", (e) => {
+  $(".infiniteScroll").on("click", ".unconcern-button-ajax-document", (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 
