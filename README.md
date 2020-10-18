@@ -29,22 +29,22 @@ http://gatherbaseball.work
  	* ユーザー、投稿をフリーワードで検索
 
 # 使用技術
-フロントエンド
+## フロントエンド
 * JavaScript
 * jQuery 3.4.1
 
-バックエンド
+## バックエンド
 * PHP 7.3.19
 * Laravel 5.5.49
 * PHPUnit 6.5.14
 
-インフラストラクチャー
+## インフラストラクチャー
 * MySQL
 * Apache
 * Docker
 * CircleCI
 
-AWS
+## AWS
 * EC2
 * RDS
 * Route53
