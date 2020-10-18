@@ -39,8 +39,8 @@ http://gatherbaseball.work
 * PHPUnit 6.5.14
 
 ## インフラストラクチャー
-* MySQL
-* Apache
+* MySQL 8.0.19
+* Apache 2.4.43
 * Docker
 * CircleCI
 
