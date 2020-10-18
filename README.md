@@ -1,1 +1,1 @@
-# GATHER! ~Let's play baseball~
+# GATHER! Let's play baseball
