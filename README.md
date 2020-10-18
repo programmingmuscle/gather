@@ -30,25 +30,25 @@ http://gatherbaseball.work
 
 # 使用技術
 フロントエンド
-	* JavaScript
-	* jQuery 3.4.1
+* JavaScript
+* jQuery 3.4.1
 
 バックエンド
-	* PHP 7.3.19
-	* Laravel 5.5.49
-	* PHPUnit 6.5.14
+* PHP 7.3.19
+* Laravel 5.5.49
+* PHPUnit 6.5.14
 
 インフラストラクチャー
-	* MySQL
-	* Apache
-	* Docker
-	* CircleCI
+* MySQL
+* Apache
+* Docker
+* CircleCI
 
 AWS
-	* EC2
-	* RDS
-	* Route53
-	* S3
-	* VPC
+* EC2
+* RDS
+* Route53
+* S3
+* VPC
 
 
