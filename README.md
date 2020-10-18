@@ -1,58 +1,13 @@
 # GATHER! Let's play baseball
 
 # アプリ概要
-野球の練習相手や試合の助っ人を募るアプリです。
+野球の練習相手を募るアプリです。
  
-# DEMO
+# 作成した経緯
+自身が毎年、職場の野球大会に参加しているのですが、練習不足のまま参加する年がほとんどでした。
+チームとして練習をする機会はほとんどなく、身近な友人に練習相手を頼むにしても自分の都合で野球のためだけに呼び出したうえに、練習が終わればすぐ解散というのも申し訳なく感じるため声をかけることができなかったからです。
+簡単に、気兼ねなく、自分が指定した時間帯に野球の練習をする機会を作りたい。そんな思いから"GATHER!"を作成しました。
+
+# リンク
+http://gatherbaseball.work
  
-"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
- 
-# Features
- 
-"hoge"のセールスポイントや差別化などを説明する
- 
-# Requirement
- 
-"hoge"を動かすのに必要なライブラリなどを列挙する
- 
-* huga 3.5.2
-* hogehuga 1.0.2
- 
-# Installation
- 
-Requirementで列挙したライブラリなどのインストール方法を説明する
- 
-```bash
-pip install huga_package
-```
- 
-# Usage
- 
-DEMOの実行方法など、"hoge"の基本的な使い方を説明する
- 
-```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
-```
- 
-# Note
- 
-注意点などがあれば書く
- 
-# Author
- 
-作成情報を列挙する
- 
-* 作成者
-* 所属
-* E-mail
- 
-# License
-ライセンスを明示する
- 
-"hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
- 
-社内向けなら社外秘であることを明示してる
- 
-"hoge" is Confidential.
