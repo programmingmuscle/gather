@@ -1,4 +1,4 @@
-/*$(".u-edit-form").on("submit", (e) => {
+$(".u-edit-form").on("submit", (e) => {
   const name     = $("#name").val();
   const email    = $("#email").val();
   const password = $("#password").val();
@@ -78,4 +78,3 @@ function previewFile() {
     reader.readAsDataURL(file);
   }
 }
-*/
