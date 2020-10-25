@@ -4,19 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use App\Http\Requests\MessageRequest;
 
 class MessagesController extends Controller
 {
-	public function store(Request $request)
+	public function store(MessageRequest $request)
 	{
-		$this->validate($request, [
-			'content' => 'required|string|max:191',
-		], [
-			'content.required' => '空のメッセージは送信できません。',
-			'content.string'   => 'メッセージは文字列として下さい。',
-			'content.max'      => 'メッセージは191文字以内として下さい。',
-		]);
-
 		$message = new Message;
 
 		$message->user_id            = $request->user_id;
