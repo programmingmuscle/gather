@@ -42,8 +42,13 @@
 						@if ($errors->has('name'))
 							<div class="error-target">{{ $errors->first('name') }}</div>
 						@endif
+						
+						@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password'))
+							<input type="text" name="name" value="{{ old('name') }}" id="name" class="form-control">
+						@else
+							<input type="text" name="name" value="{{ $user->name }}" id="name" class="form-control">
+						@endif
 
-						<input type="text" name="name" value="{{ $user->name }}" id="name" class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="email" id="email-error">メールアドレス<span class="required">*</span></label>
@@ -52,7 +57,12 @@
 							<div class="error-target">{{ $errors->first('email') }}</div>
 						@endif
 
-						<input type="email" name="email" value="{{ $user->email }}" id="email" class="form-control">
+						@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password'))
+							<input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control">
+						@else
+							<input type="email" name="email" value="{{ $user->email }}" id="email" class="form-control">
+						@endif
+
 					</div>
 					<div class="form-group">
 						<label for="residence">居住地</label>
@@ -61,7 +71,12 @@
 							<div class="error-target">{{ $errors->first('residence') }}</div>
 						@endif
 
-						<input type="text" name="residence" placeholder="※地名までとして下さい。" value="{{ $user->residence }}" id="residence" class="form-control">
+						@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password'))
+							<input type="text" name="residence" placeholder="※地名までとして下さい。" value="{{ old('residence') }}" id="residence" class="form-control">
+						@else
+							<input type="text" name="residence" placeholder="※地名までとして下さい。" value="{{ $user->residence }}" id="residence" class="form-control">
+						@endif
+
 					</div>
 					<div class="form-group">
 						<label for="gender">性別</label>
@@ -72,7 +87,9 @@
 
 						<select name="gender" id="gender" class="form-control">
 
-							@if ($user->gender != null)
+							@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password')) 
+								<option value="{{ old('gender') }}">{{ old('gender') }}</option>
+							@elseif ($user->gender != null)
 								<option value="{{ $user->gender }}">{{ $user->gender }}</option>
 							@endif
 
@@ -90,7 +107,9 @@
 
 						<select name="age" id="age" class="form-control">
 
-							@if ($user->age != null)
+							@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password')) 
+								<option value="{{ old('age') }}" class="option-border">{{ old('age') }}</option>
+							@elseif ($user->age != null)
 								<option value="{{ $user->age }}" class="option-border">{{ $user->age }}</option>
 							@endif
 
@@ -112,7 +131,9 @@
 
 						<select name="experience" id="experience" class="form-control">
 
-							@if ($user->experience != null)
+							@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password')) 
+								<option value="{{ old('experience') }}">{{ old('experience') }}</option>
+							@elseif ($user->experience != null)
 								<option value="{{ $user->experience }}">{{ $user->experience }}</option>
 							@endif
 
@@ -131,7 +152,9 @@
 						
 						<select name="position" id="position" class="form-control">
 
-							@if ($user->position != null)
+							@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password')) 
+								<option value="{{ old('position') }}">{{ old('position') }}</option>
+							@elseif ($user->position != null)
 								<option value="{{ $user->position }}">{{ $user->position }}</option>
 							@endif
 
@@ -156,7 +179,12 @@
 							<div class="error-target">{{ $errors->first('introduction') }}</div>
 						@endif
 
-						<textarea name="introduction" id="introduction" class="form-control">{{ $user->introduction }}</textarea>
+						@if ($errors->has('profile_image') || $errors->has('name') || $errors->has('email') || $errors->has('residence') || $errors->has('gender') || $errors->has('age') || $errors->has('experience') || $errors->has('position') || $errors->has('introduction') || $errors->has('password'))
+							<textarea name="introduction" id="introduction" class="form-control">{{ old('introduction') }}</textarea>
+						@else
+							<textarea name="introduction" id="introduction" class="form-control">{{ $user->introduction }}</textarea>
+						@endif
+
 					</div>
 					<div class="explain">上記内容に変更してよろしいでしょうか？</div>
 					<div class="form-group">

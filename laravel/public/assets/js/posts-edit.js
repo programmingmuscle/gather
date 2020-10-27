@@ -1,4 +1,4 @@
-$(".p-create-form").on("submit", (e) => {
+$(".p-edit-form").on("submit", (e) => {
   const title     = $("#title").val();
   const place     = $("#place").val();
   const address   = $("#address").val();

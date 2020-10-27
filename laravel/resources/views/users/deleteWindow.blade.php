@@ -25,7 +25,7 @@
 						<input type="submit" value="削除" class="btn btn-danger">
 					</div>
 				</form>
-				<div class="explain-link"><a href="javascript:history.back()">アカウント編集</a>に戻る</div>
+				<div class="explain-link"><a href="{{ route('users.edit', ['id' => Auth::id()]) }}">アカウント編集</a>に戻る</div>
 			</div>
 		</div>
 	</div>
