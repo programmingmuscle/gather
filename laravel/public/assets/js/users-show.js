@@ -20,15 +20,15 @@ $(".infiniteScroll").on("click", ".cancel-button", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "button-position", (e) => {
+$(".infiniteScroll").on("click", ".button-position", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "profile_image", (e) => {
+$(".infiniteScroll").on("click", ".profile_image", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "name-position", (e) => {
+$(".infiniteScroll").on("click", ".name-position", (e) => {
   e.stopImmediatePropagation();
 });
 
