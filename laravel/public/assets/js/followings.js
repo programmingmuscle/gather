@@ -38,7 +38,7 @@ function follow_data() {
     }
     canAjax = false;
 
-    let userId = $(e.currentTarget).parent().parent().attr("data-userId");
+    let userId = $(e.currentTarget).parents(".button-position").attr("data-userId");
 
     console.log(userId);
     console.log(e.currentTarget);
@@ -54,7 +54,7 @@ function follow_data() {
       url: "/result/ajax/" + userId + "/follow",
     })
       .done(function () {
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -80,9 +80,9 @@ function follow_data() {
     }
     canAjax = false;
 
-    let userId                     = $(e.currentTarget).parent().parent().attr("data-userId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let userId                     = $(eCurrentTargetParentParent).attr("data-userId");
 
     let htmlDocument = `
 			<form class="d-inline-block">
@@ -137,7 +137,7 @@ function unfollow_data() {
     }
     canAjax = false;
 
-    let userId = $(e.currentTarget).parent().parent().attr("data-userId");
+    let userId = $(e.currentTarget).parents(".button-position").attr("data-userId");
 
     console.log(userId);
     console.log(e.currentTarget);
@@ -155,7 +155,7 @@ function unfollow_data() {
       .done(function () {
         console.log(e.currentTarget);
 
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -181,9 +181,9 @@ function unfollow_data() {
     }
     canAjax = false;
 
-    let userId                     = $(e.currentTarget).parent().parent().attr("data-userId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let userId                     = $(eCurrentTargetParentParent).attr("data-userId");
 
     console.log(userId);
 

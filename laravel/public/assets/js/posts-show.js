@@ -139,7 +139,7 @@ function get_data_messages() {
           $(".message-data").append(html);
         } else if (
           data.messages[i].user_profile_image != undefined &&
-          data.messages[i].user_id != user_id
+          data.messages[i].user_id            != user_id
         ) {
           let user_profile_image = `
 						<figure>
@@ -435,17 +435,10 @@ function post_data() {
 
 $(document).on("click", ".message-edit-color", (e) => {
   let messageId = $(e.currentTarget)
-    .parent()
-    .parent()
-    .parent()
-    .parent()
-    .parent()
+    .parents(".message-list")
     .attr("data-messageId");
   let content = $(e.currentTarget)
-    .parent()
-    .parent()
-    .parent()
-    .find("p.message-word-break")
+    .parents(".message-word-break")
     .html();
   let trimContent = content.trim();
   let contentReplace = trimContent.replace(/<br>/g, "\n");
@@ -612,11 +605,7 @@ function delete_data() {
     canAjax = false;
 
     let messageId = $(e.currentTarget)
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
+      .parents(".message-list")
       .attr("data-messageId");
 
     console.log(messageId);
@@ -663,7 +652,7 @@ function concern_data() {
     }
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -679,7 +668,7 @@ function concern_data() {
       url : "/result/ajax/" + postId + "/concern",
     })
       .done(function () {
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -706,9 +695,9 @@ function concern_data() {
 
     canAjax = false;
 
-    let postId                     = $(e.currentTarget).parent().parent().attr("data-postId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let postId                     = $(eCurrentTargetParentParent).attr("data-postId");
 
     let htmlDocument = `
 			<form class="d-inline-block">
@@ -764,7 +753,7 @@ function unconcern_data() {
 
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -782,7 +771,7 @@ function unconcern_data() {
       .done(function () {
         console.log(e.currentTarget);
 
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -809,9 +798,9 @@ function unconcern_data() {
 
     canAjax = false;
 
-    let postId                     = $(e.currentTarget).parent().parent().attr("data-postId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let postId                     = $(eCurrentTargetParentParent).attr("data-postId");
 
     console.log(postId);
 
@@ -992,7 +981,7 @@ function participate_data() {
 
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -1029,7 +1018,7 @@ function participate_data() {
       url : "/result/ajax/" + postId + "/participate",
     })
       .done(function () {
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
         $(".show_content").before(participateModal);
         $("#participateModal").fadeIn();
@@ -1063,9 +1052,9 @@ function participate_data() {
 
       canAjax = false;
 
-      let postId                     = $(e.currentTarget).parent().parent().attr("data-postId");
       let eCurrentTargetParent       = $(e.currentTarget).parent();
-      let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+      let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+      let postId                     = $(eCurrentTargetParentParent).attr("data-postId");
 
       let htmlDocument = `
 				<form class="d-inline-block">
@@ -1152,7 +1141,7 @@ function cancel_data() {
 
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -1170,7 +1159,7 @@ function cancel_data() {
       .done(function () {
         console.log(e.currentTarget);
 
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
 
         get_data_participateUsers();
@@ -1201,9 +1190,9 @@ function cancel_data() {
 
     canAjax = false;
 
-    let postId                     = $(e.currentTarget).parent().parent().attr("data-postId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let postId                     = $(eCurrentTargetParentParent).attr("data-postId");
 
     console.log(postId);
 
