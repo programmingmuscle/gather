@@ -20,15 +20,15 @@ $(".infiniteScroll").on("click", ".cancel-button", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "button-position", (e) => {
+$(".infiniteScroll").on("click", ".button-position", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "profile_image", (e) => {
+$(".infiniteScroll").on("click", ".profile_image", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "name-position", (e) => {
+$(".infiniteScroll").on("click", ".name-position", (e) => {
   e.stopImmediatePropagation();
 });
 
@@ -85,7 +85,7 @@ function follow_data() {
 
     canAjax = false;
 
-    let userId = $(e.currentTarget).parent().parent().attr("data-userId");
+    let userId = $(e.currentTarget).parents(".button-position").attr("data-userId");
 
     console.log(userId);
     console.log(e.currentTarget);
@@ -101,7 +101,7 @@ function follow_data() {
       url : "/result/ajax/" + userId + "/follow",
     })
       .done(function () {
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
 
         get_data();
@@ -129,9 +129,9 @@ function follow_data() {
 
     canAjax = false;
 
-    let userId                     = $(e.currentTarget).parent().parent().attr("data-userId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let userId                     = $(eCurrentTargetParentParent).attr("data-userId");
 
     let htmlDocument = `
 			<form class="d-inline-block">
@@ -188,7 +188,7 @@ function unfollow_data() {
 
     canAjax = false;
 
-    let userId = $(e.currentTarget).parent().parent().attr("data-userId");
+    let userId = $(e.currentTarget).parents(".button-position").attr("data-userId");
 
     console.log(userId);
     console.log(e.currentTarget);
@@ -206,7 +206,7 @@ function unfollow_data() {
       .done(function () {
         console.log(e.currentTarget);
 
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
 
         get_data();
@@ -234,9 +234,9 @@ function unfollow_data() {
 
     canAjax = false;
 
-    let userId                     = $(e.currentTarget).parent().parent().attr("data-userId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let userId                     = $(eCurrentTargetParentParent).attr("data-userId");
 
     console.log(userId);
 
@@ -296,7 +296,7 @@ function concern_data() {
 
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -312,7 +312,7 @@ function concern_data() {
       url : "/result/ajax/" + postId + "/concern",
     })
       .done(function () {
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -339,9 +339,9 @@ function concern_data() {
 
     canAjax = false;
 
-    let postId                     = $(e.currentTarget).parent().parent().attr("data-postId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let postId                     = $(eCurrentTargetParentParent).attr("data-postId");
 
     let htmlDocument = `
 			<form class="d-inline-block">
@@ -397,7 +397,7 @@ function unconcern_data() {
 
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -415,7 +415,7 @@ function unconcern_data() {
       .done(function () {
         console.log(e.currentTarget);
 
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -442,9 +442,9 @@ function unconcern_data() {
 
     canAjax = false;
 
-    let postId                     = $(e.currentTarget).parent().parent().attr("data-postId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents();
+    let postId                     = $(eCurrentTargetParentParent).attr("data-postId");
 
     console.log(postId);
 

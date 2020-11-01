@@ -10,15 +10,15 @@ $(".infiniteScroll").on("click", ".participate-button-full", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "button-position", (e) => {
+$(".infiniteScroll").on("click", ".button-position", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "profile_image", (e) => {
+$(".infiniteScroll").on("click", ".profile_image", (e) => {
   e.stopImmediatePropagation();
 });
 
-$(".infiniteScroll").on("click", "name-position", (e) => {
+$(".infiniteScroll").on("click", ".name-position", (e) => {
   e.stopImmediatePropagation();
 });
 
@@ -43,7 +43,7 @@ function concern_data() {
 
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -59,7 +59,7 @@ function concern_data() {
       url: "/result/ajax/" + postId + "/concern",
     })
       .done(function () {
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -85,9 +85,10 @@ function concern_data() {
     }
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
     let eCurrentTargetParent = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let postId = $(eCurrentTargetParentParent).attr("data-postId");
+
     let htmlDocument = `
 			<form class="d-inline-block">
 				<input type="submit" value="気になる" class="btn unconcern-button unconcern-button-ajax-document d-inline-block">
@@ -142,7 +143,7 @@ function unconcern_data() {
 
     canAjax = false;
 
-    let postId = $(e.currentTarget).parent().parent().attr("data-postId");
+    let postId = $(e.currentTarget).parents(".button-position").attr("data-postId");
 
     console.log(postId);
     console.log(e.currentTarget);
@@ -160,7 +161,7 @@ function unconcern_data() {
       .done(function () {
         console.log(e.currentTarget);
 
-        $(e.currentTarget).parent().parent().prepend(html);
+        $(e.currentTarget).parents(".button-position").prepend(html);
         $(e.currentTarget).parent().remove();
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -187,9 +188,9 @@ function unconcern_data() {
 
     canAjax = false;
 
-    let postId                     = $(e.currentTarget).parent().parent().attr("data-postId");
     let eCurrentTargetParent       = $(e.currentTarget).parent();
-    let eCurrentTargetParentParent = $(e.currentTarget).parent().parent();
+    let eCurrentTargetParentParent = $(e.currentTarget).parents(".button-position");
+    let postId                     = $(eCurrentTargetParentParent).attr("data-postId");
 
     console.log(postId);
 
